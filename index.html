@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>FiDemonlist</title>
+
     <style>
         body {
             margin: 0;
@@ -11,9 +13,7 @@
             background: #111111;
             color: white;
         }
-        /* ==========================================
-           HEADER
-        ========================================== */
+
         header {
             position: relative;
             background: #1b1b1b;
@@ -21,201 +21,256 @@
             text-align: center;
             border-bottom: 2px solid #333333;
         }
+
         header h1 {
             margin: 0;
             font-size: 38px;
         }
+
         header p {
             margin: 7px 0 0;
             color: #aaaaaa;
             font-size: 15px;
         }
-        /* ==========================================
-           TIME TRAVEL BUTTON
-        ========================================== */
+
         .time-travel-button {
             position: absolute;
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
+
             padding: 11px 16px;
+
             border: 1px solid #444444;
             border-radius: 8px;
+
             background: #292929;
             color: white;
+
             font-size: 14px;
             font-weight: bold;
+
             cursor: pointer;
         }
+
         .time-travel-button:hover {
             background: #383838;
         }
-        /* ==========================================
-           MAIN CONTAINER
-        ========================================== */
+
         .container {
             max-width: 900px;
             margin: 30px auto;
             padding: 0 20px;
         }
-        /* ==========================================
-           SEARCH
-        ========================================== */
+
         .search {
             width: 100%;
             box-sizing: border-box;
+
             padding: 15px;
+
             border-radius: 8px;
             border: 1px solid #333333;
+
             background: #1c1c1c;
             color: white;
+
             font-size: 16px;
+
             margin-bottom: 25px;
+
             outline: none;
         }
+
         .search::placeholder {
             color: #777777;
         }
-        /* ==========================================
-           TIME TRAVEL PANEL
-        ========================================== */
+
         .time-travel-panel {
             display: none;
+
             background: #1c1c1c;
+
             border: 1px solid #333333;
             border-radius: 12px;
+
             padding: 20px;
+
             margin-bottom: 25px;
+
             text-align: center;
         }
+
         .time-travel-panel h2 {
             margin-top: 0;
         }
+
         .time-travel-panel p {
             color: #aaaaaa;
         }
+
         .date-input {
             padding: 12px;
+
             border-radius: 7px;
             border: 1px solid #444444;
+
             background: #111111;
             color: white;
+
             font-size: 16px;
+
             margin: 10px;
         }
+
         .apply-button,
         .today-button {
             padding: 12px 18px;
+
             border-radius: 7px;
+
             font-weight: bold;
+
             cursor: pointer;
         }
+
         .apply-button {
             border: none;
             background: #444444;
             color: white;
         }
+
         .apply-button:hover {
             background: #555555;
         }
+
         .today-button {
             border: 1px solid #444444;
             background: #222222;
             color: white;
+
             margin-left: 5px;
         }
+
         .today-button:hover {
             background: #333333;
         }
-        /* ==========================================
-           TIME TRAVEL STATUS
-        ========================================== */
+
         .time-travel-status {
             display: none;
+
             text-align: center;
+
             color: #aaaaaa;
+
             margin-bottom: 20px;
+
             font-size: 14px;
         }
-        /* ==========================================
-           DEMON CARD
-        ========================================== */
+
         .demon {
             background: #1c1c1c;
+
             border: 1px solid #333333;
             border-radius: 12px;
+
             padding: 20px;
+
             margin-bottom: 20px;
+
             text-align: center;
         }
-        /* ==========================================
-           IMAGE
-        ========================================== */
+
         .image-container {
             width: 100%;
             max-width: 600px;
+
             height: 280px;
+
             margin: 0 auto 18px auto;
+
             background: #333333;
+
             border-radius: 9px;
+
             display: flex;
+
             justify-content: center;
             align-items: center;
+
             overflow: hidden;
         }
+
         .demon-image {
             width: 100%;
             height: 100%;
+
             object-fit: contain;
+
             display: block;
         }
+
         .placeholder {
             color: #aaaaaa;
+
             font-size: 24px;
             font-weight: bold;
         }
-        /* ==========================================
-           DEMON TEXT
-        ========================================== */
+
         .name {
             font-size: 25px;
+
             font-weight: bold;
+
             margin-bottom: 12px;
         }
+
         .info {
             color: #aaaaaa;
+
             font-size: 15px;
+
             margin: 6px 0;
         }
-        /* ==========================================
-           NO DEMONS
-        ========================================== */
+
         .no-demons {
             display: none;
+
             text-align: center;
+
             padding: 50px 20px;
+
             background: #1c1c1c;
+
             border: 1px solid #333333;
+
             border-radius: 12px;
+
             color: #888888;
+
             font-size: 18px;
         }
-        /* ==========================================
-           MOBILE
-        ========================================== */
+
         @media (max-width: 600px) {
+
             header h1 {
                 font-size: 30px;
             }
+
             .time-travel-button {
                 position: static;
+
                 transform: none;
+
                 margin-top: 15px;
             }
+
             .date-input {
                 width: 80%;
+
                 margin: 10px auto;
             }
+
             .apply-button,
             .today-button {
                 margin: 5px;
@@ -223,525 +278,873 @@
         }
     </style>
 </head>
+
 <body>
-    <!-- ==========================================
-         HEADER
-    ========================================== -->
-    <header>
-        <h1>FiDemonlist</h1>
+
+<header>
+
+    <h1>FiDemonlist</h1>
+
+    <p>
+        The Custom Geometry Dash Demonlist
+    </p>
+
+    <button
+        class="time-travel-button"
+        id="timeTravelButton"
+    >
+        Time Travel
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <div
+        class="time-travel-panel"
+        id="timeTravelPanel"
+    >
+
+        <h2>Time Travel</h2>
+
         <p>
-            The Custom Geometry Dash Demonlist
+            Choose a date to see the FiDemonlist from that date.
         </p>
-        <button
-            class="time-travel-button"
-            id="timeTravelButton"
-        >
-            Time Travel
-        </button>
-    </header>
-    <div class="container">
-        <!-- ==========================================
-             TIME TRAVEL PANEL
-        ========================================== -->
-        <div
-            class="time-travel-panel"
-            id="timeTravelPanel"
-        >
-            <h2>Time Travel</h2>
-            <p>
-                Choose a date to see the FiDemonlist from that date.
-            </p>
-            <input
-                type="date"
-                id="datePicker"
-                class="date-input"
-            >
-            <button
-                class="apply-button"
-                id="applyDate"
-            >
-                Travel
-            </button>
-            <button
-                class="today-button"
-                id="returnToday"
-            >
-                Today
-            </button>
-        </div>
-        <div
-            class="time-travel-status"
-            id="timeTravelStatus"
-        ></div>
-        <!-- ==========================================
-             SEARCH
-        ========================================== -->
+
         <input
-            id="search"
-            class="search"
-            type="text"
-            placeholder="Search demons..."
+            type="date"
+            id="datePicker"
+            class="date-input"
         >
-        <!-- ==========================================
-             DEMON LIST
-        ========================================== -->
-        <div id="demonList"></div>
-        <div
-            class="no-demons"
-            id="noDemons"
+
+        <button
+            class="apply-button"
+            id="applyDate"
         >
-            No demons were on the list at this date.
-        </div>
+            Travel
+        </button>
+
+        <button
+            class="today-button"
+            id="returnToday"
+        >
+            Today
+        </button>
+
     </div>
-    <script>
-        /* ==========================================
-           DEMON DATABASE
-        ========================================== */
-        const demons = [
-            {
-                name: "Bloodbath",
-                createdBy: "Riot",
-                verifiedBy: "Riot",
-                verification: "2015-08-12",
-                image: "Bloodbath.jpeg"
-            },
-            {
-                name: "The Hell Factory",
-                createdBy: "TeamN2",
-                verifiedBy: "Powerbomb",
-                verification: "2015-12-28",
-                image: "The Hell Factory.jpeg"
-            },
-            {
-                name: "Thinking Space II",
-                createdBy: "CairoX",
-                verifiedBy: "Zoink",
-                verification: "2025-05-25",
-                image: "Thinking Space II.jpeg"
-            },
-            {
-                name: "Amethyst",
-                createdBy: "iMist",
-                verifiedBy: "Wpopoff",
-                verification: "2025-05-25",
-                image: "Amethyst.jpeg"
-            },
-            {
-                name: "Society",
-                createdBy: "Neomarbilan",
-                verifiedBy: "Wpopoff",
-                verification: "2026-06-20",
-                image: "Society.jpeg"
-            },
-            {
-                name: "Flamewall",
-                createdBy: "Narwall",
-                verifiedBy: "Cuatrocientos",
-                verification: "2025-09-21",
-                image: "Flamewall.jpeg"
-            },
-            {
-                name: "Tidal Wave",
-                createdBy: "OniLink",
-                verifiedBy: "Zoink",
-                verification: "2023-09-09",
-                image: "Tidal Wave.jpeg"
-            }
-        ];
-        /* ==========================================
-           HISTORICAL RANKINGS
-        ========================================== */
-        const historicalRankings = {
-            "2015-08-12": {
+
+
+    <div
+        class="time-travel-status"
+        id="timeTravelStatus"
+    ></div>
+
+
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="Search demons..."
+    >
+
+
+    <div id="demonList"></div>
+
+
+    <div
+        class="no-demons"
+        id="noDemons"
+    >
+        No demons were on the list at this date.
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ==========================================
+       DEMON DATABASE
+    ========================================== */
+
+    const demons = [
+
+        {
+            name: "Bloodbath",
+            createdBy: "Riot",
+            verifiedBy: "Riot",
+            verification: "2015-08-12",
+
+            /*
+             * Legacy demons stop appearing
+             * after their legacy date.
+             */
+            legacyDate: "2021-01-01",
+
+            image: "Bloodbath.jpeg"
+        },
+
+        {
+            name: "The Hell Factory",
+            createdBy: "TeamN2",
+            verifiedBy: "Powerbomb",
+            verification: "2015-12-28",
+
+            legacyDate: "2021-01-01",
+
+            image: "The Hell Factory.jpeg"
+        },
+
+        {
+            name: "Tidal Wave",
+            createdBy: "OniLink",
+            verifiedBy: "Zoink",
+            verification: "2023-09-09",
+
+            image: "Tidal Wave.jpeg"
+        },
+
+        {
+            name: "Thinking Space II",
+            createdBy: "CairoX",
+            verifiedBy: "Zoink",
+            verification: "2025-05-25",
+
+            image: "Thinking Space II.jpeg"
+        },
+
+        {
+            name: "Amethyst",
+            createdBy: "iMist",
+            verifiedBy: "Wpopoff",
+            verification: "2025-05-25",
+
+            image: "Amethyst.jpeg"
+        },
+
+        {
+            name: "Flamewall",
+            createdBy: "Narwall",
+            verifiedBy: "Cuatrocientos",
+            verification: "2025-09-21",
+
+            image: "Flamewall.jpeg"
+        },
+
+        {
+            name: "Society",
+            createdBy: "Neomarbilan",
+            verifiedBy: "Wpopoff",
+            verification: "2026-06-20",
+
+            image: "Society.jpeg"
+        }
+
+    ];
+
+
+    /* ==========================================
+       RANKING SNAPSHOTS
+    ========================================== */
+
+    const historicalRankings = [
+
+        {
+            date: "2015-08-12",
+
+            rankings: {
                 "Bloodbath": 1
-            },
-            "2015-12-28": {
+            }
+        },
+
+        {
+            date: "2015-12-28",
+
+            rankings: {
                 "Bloodbath": 1,
                 "The Hell Factory": 2
-            },
-            "2025-05-25": {
+            }
+        },
+
+        {
+            date: "2023-09-09",
+
+            rankings: {
+                "Tidal Wave": 1
+            }
+        },
+
+        {
+            date: "2025-05-25",
+
+            rankings: {
                 "Thinking Space II": 1,
                 "Amethyst": 2
-            },
-            "2026-06-20": {
+            }
+        },
+
+        {
+            date: "2025-09-21",
+
+            rankings: {
+                "Thinking Space II": 1,
+                "Amethyst": 2,
+                "Tidal Wave": 3,
+                "Flamewall": 4
+            }
+        },
+
+        {
+            date: "2026-06-20",
+
+            rankings: {
                 "Society": 1,
                 "Thinking Space II": 2,
                 "Amethyst": 3,
                 "Flamewall": 4,
                 "Tidal Wave": 5
             }
-        };
-        /* ==========================================
-           IMAGE PLACEHOLDER
-        ========================================== */
-        function showPlaceholder(image) {
-            const container =
-                image.parentElement;
-            container.innerHTML =
-                '<div class="placeholder">Placeholder</div>';
         }
-        /* ==========================================
-           TIME AGO SYSTEM
-        ========================================== */
-        function getTimeAgo(date) {
-            const now = new Date();
-            const difference =
-                now - date;
-            const totalDays =
-                Math.floor(
-                    difference /
-                    (1000 * 60 * 60 * 24)
+
+    ];
+
+
+    /* ==========================================
+       PLACEHOLDER
+    ========================================== */
+
+    function showPlaceholder(image) {
+
+        const container =
+            image.parentElement;
+
+        container.innerHTML =
+            '<div class="placeholder">Placeholder</div>';
+
+    }
+
+
+    /* ==========================================
+       TIME AGO
+    ========================================== */
+
+    function getTimeAgo(date) {
+
+        const now = new Date();
+
+        const difference =
+            now - date;
+
+        const totalDays =
+            Math.floor(
+                difference /
+                (1000 * 60 * 60 * 24)
+            );
+
+        const totalWeeks =
+            Math.floor(
+                totalDays / 7
+            );
+
+        const totalMonths =
+            Math.floor(
+                totalDays / 30.4375
+            );
+
+        const totalYears =
+            Math.floor(
+                totalDays / 365.2425
+            );
+
+
+        if (totalYears >= 1) {
+
+            return totalYears +
+                (
+                    totalYears === 1
+                        ? " Year Ago"
+                        : " Years Ago"
                 );
-            const totalWeeks =
-                Math.floor(
-                    totalDays / 7
-                );
-            const totalMonths =
-                Math.floor(
-                    totalDays / 30.4375
-                );
-            const totalYears =
-                Math.floor(
-                    totalDays / 365.2425
-                );
-            if (totalYears >= 1) {
-                return totalYears +
-                    (
-                        totalYears === 1
-                            ? " Year Ago"
-                            : " Years Ago"
-                    );
-            }
-            if (totalMonths >= 1) {
-                return totalMonths +
-                    (
-                        totalMonths === 1
-                            ? " Month Ago"
-                            : " Months Ago"
-                    );
-            }
-            if (totalWeeks >= 1) {
-                return totalWeeks +
-                    (
-                        totalWeeks === 1
-                            ? " Week Ago"
-                            : " Weeks Ago"
-                    );
-            }
-            if (totalDays >= 1) {
-                return totalDays +
-                    (
-                        totalDays === 1
-                            ? " Day Ago"
-                            : " Days Ago"
-                    );
-            }
-            return "Today";
+
         }
-        /* ==========================================
-           DATE SETTINGS
-        ========================================== */
-        const firstDate =
-            "2015-01-01";
-        const today =
-            new Date();
-        const todayString =
-            today.getFullYear() +
-            "-" +
-            String(
-                today.getMonth() + 1
-            ).padStart(2, "0") +
-            "-" +
-            String(
-                today.getDate()
-            ).padStart(2, "0");
-        const datePicker =
-            document.getElementById(
-                "datePicker"
-            );
-        datePicker.min =
-            firstDate;
-        datePicker.max =
-            todayString;
-        datePicker.value =
-            todayString;
-        /* ==========================================
-           GET LIST FOR DATE
-        ========================================== */
-        function getListForDate(
-            selectedDate
-        ) {
-            let bestSnapshot = null;
-            let bestDate = null;
-            Object.keys(
-                historicalRankings
-            ).forEach(
-                function(snapshotDate) {
-                    if (
-                        snapshotDate <=
-                        selectedDate
-                    ) {
-                        if (
-                            bestDate === null ||
-                            snapshotDate >
-                            bestDate
-                        ) {
-                            bestDate =
-                                snapshotDate;
-                            bestSnapshot =
-                                historicalRankings[
-                                    snapshotDate
-                                ];
-                        }
-                    }
-                }
-            );
-            return bestSnapshot;
+
+
+        if (totalMonths >= 1) {
+
+            return totalMonths +
+                (
+                    totalMonths === 1
+                        ? " Month Ago"
+                        : " Months Ago"
+                );
+
         }
-        /* ==========================================
-           RENDER LIST
-        ========================================== */
-        function renderList(
-            selectedDate
-        ) {
-            const list =
-                document.getElementById(
-                    "demonList"
+
+
+        if (totalWeeks >= 1) {
+
+            return totalWeeks +
+                (
+                    totalWeeks === 1
+                        ? " Week Ago"
+                        : " Weeks Ago"
                 );
-            list.innerHTML = "";
-            const rankings =
-                getListForDate(
-                    selectedDate
-                );
-            const noDemons =
-                document.getElementById(
-                    "noDemons"
-                );
-            if (!rankings) {
-                noDemons.style.display =
-                    "block";
-                return;
-            }
-            noDemons.style.display =
-                "none";
-            const rankedDemons =
-                Object.keys(rankings)
-                    .map(
-                        function(name) {
-                            return {
-                                name: name,
-                                rank: rankings[name]
-                            };
-                        }
-                    )
-                    .sort(
-                        function(a, b) {
-                            return a.rank -
-                                b.rank;
-                        }
-                    );
-            rankedDemons.forEach(
-                function(rankedDemon) {
-                    const demon =
-                        demons.find(
-                            function(item) {
-                                return item.name ===
-                                    rankedDemon.name;
-                            }
-                        );
-                    if (!demon) {
-                        return;
-                    }
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
-                    card.className =
-                        "demon";
-                    card.dataset.name =
-                        demon.name;
-                    card.innerHTML = `
-                        <div class="image-container">
-                            <img
-                                class="demon-image"
-                                src="${demon.image}"
-                                alt="${demon.name}"
-                            >
-                        </div>
-                        <div class="name">
-                            #${rankedDemon.rank} - ${demon.name}
-                        </div>
-                        <div class="info">
-                            Created By: ${demon.createdBy}
-                        </div>
-                        <div class="info">
-                            Verified By: ${demon.verifiedBy}
-                        </div>
-                        <div class="info">
-                            Verified: ${getTimeAgo(
-                                new Date(
-                                    demon.verification +
-                                    "T00:00:00"
-                                )
-                            )}
-                        </div>
-                    `;
-                    const image =
-                        card.querySelector(
-                            ".demon-image"
-                        );
-                    image.onerror =
-                        function() {
-                            showPlaceholder(
-                                image
-                            );
-                        };
-                    list.appendChild(
-                        card
-                    );
-                }
-            );
+
         }
-        /* ==========================================
-           TIME TRAVEL BUTTON
-        ========================================== */
-        const timeTravelButton =
-            document.getElementById(
-                "timeTravelButton"
-            );
-        const timeTravelPanel =
-            document.getElementById(
-                "timeTravelPanel"
-            );
-        timeTravelButton.addEventListener(
-            "click",
-            function() {
+
+
+        if (totalDays >= 1) {
+
+            return totalDays +
+                (
+                    totalDays === 1
+                        ? " Day Ago"
+                        : " Days Ago"
+                );
+
+        }
+
+
+        return "Today";
+
+    }
+
+
+    /* ==========================================
+       DATE SETTINGS
+    ========================================== */
+
+    const firstDate =
+        "2015-01-01";
+
+
+    const today =
+        new Date();
+
+
+    const todayString =
+        today.getFullYear() +
+        "-" +
+        String(
+            today.getMonth() + 1
+        ).padStart(2, "0") +
+        "-" +
+        String(
+            today.getDate()
+        ).padStart(2, "0");
+
+
+    const datePicker =
+        document.getElementById(
+            "datePicker"
+        );
+
+
+    datePicker.min =
+        firstDate;
+
+    datePicker.max =
+        todayString;
+
+    datePicker.value =
+        todayString;
+
+
+    /* ==========================================
+       FIND LATEST SNAPSHOT
+    ========================================== */
+
+    function getLatestSnapshot(
+        selectedDate
+    ) {
+
+        let latest = null;
+
+
+        historicalRankings.forEach(
+            function(snapshot) {
+
                 if (
-                    timeTravelPanel.style.display ===
-                    "block"
+                    snapshot.date <=
+                    selectedDate
                 ) {
-                    timeTravelPanel.style.display =
-                        "none";
-                } else {
-                    timeTravelPanel.style.display =
-                        "block";
+
+                    if (
+                        latest === null ||
+                        snapshot.date >
+                        latest.date
+                    ) {
+
+                        latest =
+                            snapshot;
+
+                    }
+
                 }
+
             }
         );
-        /* ==========================================
-           TRAVEL TO DATE
-        ========================================== */
-        function travelToDate(
-            selectedDate
+
+
+        return latest;
+
+    }
+
+
+    /* ==========================================
+       CHECK IF DEMON SHOULD EXIST
+    ========================================== */
+
+    function demonExists(
+        demon,
+        selectedDate
+    ) {
+
+        /*
+         * It cannot exist before
+         * verification.
+         */
+
+        if (
+            selectedDate <
+            demon.verification
         ) {
-            renderList(
+
+            return false;
+
+        }
+
+
+        /*
+         * Legacy demons disappear
+         * starting on their legacy date.
+         */
+
+        if (
+            demon.legacyDate &&
+            selectedDate >=
+            demon.legacyDate
+        ) {
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+
+
+    /* ==========================================
+       RENDER LIST
+    ========================================== */
+
+    function renderList(
+        selectedDate
+    ) {
+
+        const list =
+            document.getElementById(
+                "demonList"
+            );
+
+
+        list.innerHTML = "";
+
+
+        const noDemons =
+            document.getElementById(
+                "noDemons"
+            );
+
+
+        const snapshot =
+            getLatestSnapshot(
                 selectedDate
             );
-            const status =
-                document.getElementById(
-                    "timeTravelStatus"
-                );
-            if (
-                selectedDate ===
-                todayString
-            ) {
-                status.style.display =
-                    "none";
-            } else {
-                const date =
-                    new Date(
-                        selectedDate +
-                        "T00:00:00"
-                    );
-                const formatted =
-                    date.toLocaleDateString(
-                        "en-US",
-                        {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric"
-                        }
-                    );
-                status.style.display =
-                    "block";
-                status.textContent =
-                    "Viewing the FiDemonlist from " +
-                    formatted;
-            }
-            document.getElementById(
-                "search"
-            ).value = "";
+
+
+        if (!snapshot) {
+
+            noDemons.style.display =
+                "block";
+
+            return;
+
         }
-        /* ==========================================
-           TRAVEL BUTTON
-        ========================================== */
-        document.getElementById(
-            "applyDate"
-        ).addEventListener(
-            "click",
-            function() {
-                if (
-                    datePicker.value
-                ) {
-                    travelToDate(
-                        datePicker.value
-                    );
+
+
+        /*
+         * Only show demons that:
+         *
+         * 1. Were verified already
+         * 2. Are not legacy yet
+         * 3. Exist in the snapshot
+         */
+
+        const rankedDemons =
+            Object.keys(
+                snapshot.rankings
+            )
+            .map(
+                function(name) {
+
+                    return {
+                        name: name,
+                        rank:
+                            snapshot.rankings[name]
+                    };
+
                 }
-            }
-        );
-        /* ==========================================
-           TODAY BUTTON
-        ========================================== */
-        document.getElementById(
-            "returnToday"
-        ).addEventListener(
-            "click",
-            function() {
-                datePicker.value =
-                    todayString;
-                travelToDate(
-                    todayString
-                );
-            }
-        );
-        /* ==========================================
-           SEARCH
-        ========================================== */
-        document.getElementById(
-            "search"
-        ).addEventListener(
-            "input",
-            function() {
-                const text =
-                    this.value.toLowerCase();
-                const cards =
-                    document.querySelectorAll(
-                        "#demonList .demon"
-                    );
-                cards.forEach(
-                    function(card) {
-                        const name =
-                            card.dataset.name
-                                .toLowerCase();
-                        if (
-                            name.includes(text)
-                        ) {
-                            card.style.display =
-                                "block";
-                        } else {
-                            card.style.display =
-                                "none";
+            )
+            .filter(
+                function(item) {
+
+                    const demon =
+                        demons.find(
+                            function(d) {
+
+                                return d.name ===
+                                    item.name;
+
+                            }
+                        );
+
+
+                    return demon &&
+                        demonExists(
+                            demon,
+                            selectedDate
+                        );
+
+                }
+            )
+            .sort(
+                function(a, b) {
+
+                    return a.rank -
+                        b.rank;
+
+                }
+            );
+
+
+        if (
+            rankedDemons.length === 0
+        ) {
+
+            noDemons.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        noDemons.style.display =
+            "none";
+
+
+        rankedDemons.forEach(
+            function(rankedDemon) {
+
+                const demon =
+                    demons.find(
+                        function(item) {
+
+                            return item.name ===
+                                rankedDemon.name;
+
                         }
+                    );
+
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "demon";
+
+
+                card.dataset.name =
+                    demon.name;
+
+
+                card.innerHTML = `
+
+                    <div class="image-container">
+
+                        <img
+                            class="demon-image"
+                            src="${demon.image}"
+                            alt="${demon.name}"
+                        >
+
+                    </div>
+
+                    <div class="name">
+                        #${rankedDemon.rank} - ${demon.name}
+                    </div>
+
+                    <div class="info">
+                        Created By: ${demon.createdBy}
+                    </div>
+
+                    <div class="info">
+                        Verified By: ${demon.verifiedBy}
+                    </div>
+
+                    <div class="info">
+                        Verified: ${getTimeAgo(
+                            new Date(
+                                demon.verification +
+                                "T00:00:00"
+                            )
+                        )}
+                    </div>
+
+                `;
+
+
+                const image =
+                    card.querySelector(
+                        ".demon-image"
+                    );
+
+
+                image.onerror =
+                    function() {
+
+                        showPlaceholder(
+                            image
+                        );
+
+                    };
+
+
+                list.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==========================================
+       TIME TRAVEL BUTTON
+    ========================================== */
+
+    const timeTravelButton =
+        document.getElementById(
+            "timeTravelButton"
+        );
+
+
+    const timeTravelPanel =
+        document.getElementById(
+            "timeTravelPanel"
+        );
+
+
+    timeTravelButton.addEventListener(
+        "click",
+        function() {
+
+            if (
+                timeTravelPanel.style.display ===
+                "block"
+            ) {
+
+                timeTravelPanel.style.display =
+                    "none";
+
+            } else {
+
+                timeTravelPanel.style.display =
+                    "block";
+
+            }
+
+        }
+    );
+
+
+    /* ==========================================
+       TRAVEL TO DATE
+    ========================================== */
+
+    function travelToDate(
+        selectedDate
+    ) {
+
+        renderList(
+            selectedDate
+        );
+
+
+        const status =
+            document.getElementById(
+                "timeTravelStatus"
+            );
+
+
+        if (
+            selectedDate ===
+            todayString
+        ) {
+
+            status.style.display =
+                "none";
+
+        } else {
+
+            const date =
+                new Date(
+                    selectedDate +
+                    "T00:00:00"
+                );
+
+
+            const formatted =
+                date.toLocaleDateString(
+                    "en-US",
+                    {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric"
                     }
                 );
+
+
+            status.style.display =
+                "block";
+
+
+            status.textContent =
+                "Viewing the FiDemonlist from " +
+                formatted;
+
+        }
+
+
+        document.getElementById(
+            "search"
+        ).value = "";
+
+    }
+
+
+    /* ==========================================
+       TRAVEL BUTTON
+    ========================================== */
+
+    document.getElementById(
+        "applyDate"
+    ).addEventListener(
+        "click",
+        function() {
+
+            if (
+                datePicker.value
+            ) {
+
+                travelToDate(
+                    datePicker.value
+                );
+
             }
-        );
-        /* ==========================================
-           START WITH TODAY'S LIST
-        ========================================== */
-        travelToDate(
-            todayString
-        );
-    </script>
+
+        }
+    );
+
+
+    /* ==========================================
+       TODAY BUTTON
+    ========================================== */
+
+    document.getElementById(
+        "returnToday"
+    ).addEventListener(
+        "click",
+        function() {
+
+            datePicker.value =
+                todayString;
+
+
+            travelToDate(
+                todayString
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       SEARCH
+    ========================================== */
+
+    document.getElementById(
+        "search"
+    ).addEventListener(
+        "input",
+        function() {
+
+            const text =
+                this.value.toLowerCase();
+
+
+            const cards =
+                document.querySelectorAll(
+                    "#demonList .demon"
+                );
+
+
+            cards.forEach(
+                function(card) {
+
+                    const name =
+                        card.dataset.name
+                            .toLowerCase();
+
+
+                    if (
+                        name.includes(text)
+                    ) {
+
+                        card.style.display =
+                            "block";
+
+                    } else {
+
+                        card.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ==========================================
+       START TODAY
+    ========================================== */
+
+    travelToDate(
+        todayString
+    );
+
+</script>
+
 </body>
 </html>
