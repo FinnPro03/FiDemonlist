@@ -3,497 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiDemonlist</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #111111;
-            color: white;
-        }
+<title>FiDemonlist</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #111111;
+        color: white;
+    }
+    header {
+        position: relative;
+        background: #1b1b1b;
+        padding: 25px 20px;
+        text-align: center;
+        border-bottom: 2px solid #333333;
+    }
+    header h1 {
+        margin: 0;
+        font-size: 38px;
+    }
+    header p {
+        margin: 7px 0 0;
+        color: #aaaaaa;
+        font-size: 15px;
+    }
+    .header-buttons {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 8px;
+    }
+    .header-button {
+        padding: 11px 16px;
+        border: 1px solid #444444;
+        border-radius: 8px;
+        background: #292929;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .header-button:hover {
+        background: #383838;
+    }
+    .container {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+    .search {
+        width: 100%;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #333333;
+        background: #1c1c1c;
+        color: white;
+        font-size: 16px;
+        margin-bottom: 25px;
+        outline: none;
+    }
+    .search::placeholder {
+        color: #777777;
+    }
+    .panel {
+        display: none;
+        background: #1c1c1c;
+        border: 1px solid #333333;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+    .panel h2 {
+        margin-top: 0;
+        text-align: center;
+    }
+    .panel-description {
+        color: #aaaaaa;
+        text-align: center;
+    }
+    .date-input {
+        padding: 12px;
+        border-radius: 7px;
+        border: 1px solid #444444;
+        background: #111111;
+        color: white;
+        font-size: 16px;
+        margin: 10px;
+    }
+    .panel-buttons {
+        text-align: center;
+    }
+    .apply-button,
+    .today-button {
+        padding: 12px 18px;
+        border-radius: 7px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .apply-button {
+        border: none;
+        background: #444444;
+        color: white;
+    }
+    .apply-button:hover {
+        background: #555555;
+    }
+    .today-button {
+        border: 1px solid #444444;
+        background: #222222;
+        color: white;
+        margin-left: 5px;
+    }
+    .today-button:hover {
+        background: #333333;
+    }
+    .time-travel-status {
+        display: none;
+        text-align: center;
+        color: #aaaaaa;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+    .demon {
+        background: #1c1c1c;
+        border: 1px solid #333333;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .image-container {
+        width: 100%;
+        max-width: 600px;
+        height: 280px;
+        margin: 0 auto 18px auto;
+        background: #333333;
+        border-radius: 9px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .demon-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+    .placeholder {
+        color: #aaaaaa;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .name {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+    .info {
+        color: #aaaaaa;
+        font-size: 15px;
+        margin: 6px 0;
+    }
+    .points {
+        color: white;
+        font-size: 15px;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    .button-row {
+        margin-top: 12px;
+    }
+    .victors-button {
+        margin: 5px;
+        padding: 10px 17px;
+        border: 1px solid #444444;
+        border-radius: 7px;
+        background: #292929;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .victors-button:hover {
+        background: #383838;
+    }
+    .victors-panel {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background: #151515;
+        border: 1px solid #333333;
+        border-radius: 9px;
+        text-align: left;
+    }
+    .victors-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .victor {
+        padding: 8px 0;
+        border-bottom: 1px solid #292929;
+        color: #dddddd;
+        font-size: 15px;
+    }
+    .victor:last-child {
+        border-bottom: none;
+    }
+    .leaderboard-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .player-card {
+        display: flex;
+        align-items: center;
+        background: #222222;
+        border: 1px solid #333333;
+        border-radius: 10px;
+        padding: 15px;
+    }
+    .player-rank {
+        width: 55px;
+        font-size: 23px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .player-info {
+        flex: 1;
+        margin-left: 10px;
+    }
+    .player-name {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .player-completions {
+        margin-top: 5px;
+        color: #999999;
+        font-size: 13px;
+    }
+    .player-points {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: right;
+    }
+    .no-demons {
+        display: none;
+        text-align: center;
+        padding: 50px 20px;
+        background: #1c1c1c;
+        border: 1px solid #333333;
+        border-radius: 12px;
+        color: #888888;
+        font-size: 18px;
+    }
+    /* ============================
+       MODAL
+    ============================ */
+    .history-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.75);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        z-index: 9999;
+    }
+    .history-box {
+        background: #1c1c1c;
+        border: 1px solid #444444;
+        border-radius: 14px;
+        padding: 25px;
+        width: 100%;
+        max-width: 600px;
+        max-height: 85vh;
+        overflow-y: auto;
+        text-align: center;
+    }
+    .history-box h2 {
+        margin-top: 0;
+        font-size: 28px;
+    }
+    .history-section {
+        border-top: 1px solid #333333;
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+    .history-section h3 {
+        margin-top: 0;
+    }
+    .close-history {
+        margin-top: 20px;
+        padding: 10px 18px;
+        border: 1px solid #444444;
+        border-radius: 7px;
+        background: #292929;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-history:hover {
+        background: #383838;
+    }
+    /* POSITION HISTORY */
+    .position-entry {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        margin: 8px 0;
+        background: #222222;
+        border: 1px solid #333333;
+        border-radius: 8px;
+    }
+    .position-date {
+        color: #bbbbbb;
+        text-align: left;
+    }
+    .position-rank {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    @media (max-width: 700px) {
         header {
-            position: relative;
-            background: #1b1b1b;
-            padding: 25px 20px;
-            text-align: center;
-            border-bottom: 2px solid #333333;
+            padding-bottom: 85px;
         }
         header h1 {
-            margin: 0;
-            font-size: 38px;
-        }
-        header p {
-            margin: 7px 0 0;
-            color: #aaaaaa;
-            font-size: 15px;
+            font-size: 30px;
         }
         .header-buttons {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            gap: 8px;
+            top: auto;
+            bottom: 15px;
+            right: 0;
+            left: 0;
+            transform: none;
+            justify-content: center;
         }
         .header-button {
-            padding: 11px 16px;
-            border: 1px solid #444444;
-            border-radius: 8px;
-            background: #292929;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .header-button:hover {
-            background: #383838;
-        }
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-        .search {
-            width: 100%;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #333333;
-            background: #1c1c1c;
-            color: white;
-            font-size: 16px;
-            margin-bottom: 25px;
-            outline: none;
-        }
-        .search::placeholder {
-            color: #777777;
-        }
-        .panel {
-            display: none;
-            background: #1c1c1c;
-            border: 1px solid #333333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-        .panel h2 {
-            margin-top: 0;
-            text-align: center;
-        }
-        .panel-description {
-            color: #aaaaaa;
-            text-align: center;
-        }
-        .date-input {
-            padding: 12px;
-            border-radius: 7px;
-            border: 1px solid #444444;
-            background: #111111;
-            color: white;
-            font-size: 16px;
-            margin: 10px;
-        }
-        .panel-buttons {
-            text-align: center;
-        }
-        .apply-button,
-        .today-button {
-            padding: 12px 18px;
-            border-radius: 7px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .apply-button {
-            border: none;
-            background: #444444;
-            color: white;
-        }
-        .apply-button:hover {
-            background: #555555;
-        }
-        .today-button {
-            border: 1px solid #444444;
-            background: #222222;
-            color: white;
-            margin-left: 5px;
-        }
-        .today-button:hover {
-            background: #333333;
-        }
-        .time-travel-status {
-            display: none;
-            text-align: center;
-            color: #aaaaaa;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-        .demon {
-            background: #1c1c1c;
-            border: 1px solid #333333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .image-container {
-            width: 100%;
-            max-width: 600px;
-            height: 280px;
-            margin: 0 auto 18px auto;
-            background: #333333;
-            border-radius: 9px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        .demon-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-        .placeholder {
-            color: #aaaaaa;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .name {
-            font-size: 25px;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-        .info {
-            color: #aaaaaa;
-            font-size: 15px;
-            margin: 6px 0;
-        }
-        .points {
-            color: white;
-            font-size: 15px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .victors-button {
-            margin: 5px;
-            padding: 10px 17px;
-            border: 1px solid #444444;
-            border-radius: 7px;
-            background: #292929;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .victors-button:hover {
-            background: #383838;
-        }
-        .victors-panel {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background: #151515;
-            border: 1px solid #333333;
-            border-radius: 9px;
-            text-align: left;
-        }
-        .victors-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        .victor {
-            padding: 8px 0;
-            border-bottom: 1px solid #292929;
-            color: #dddddd;
-            font-size: 15px;
-        }
-        .victor:last-child {
-            border-bottom: none;
-        }
-        .leaderboard-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            padding: 10px 13px;
         }
         .player-card {
-            display: flex;
-            align-items: center;
-            background: #222222;
-            border: 1px solid #333333;
-            border-radius: 10px;
-            padding: 15px;
-        }
-        .player-rank {
-            width: 55px;
-            font-size: 23px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .player-info {
-            flex: 1;
-            margin-left: 10px;
-        }
-        .player-name {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .player-completions {
-            margin-top: 5px;
-            color: #999999;
-            font-size: 13px;
+            padding: 12px;
         }
         .player-points {
-            font-size: 18px;
-            font-weight: bold;
-            text-align: right;
+            font-size: 15px;
         }
-        .no-demons {
-            display: none;
-            text-align: center;
-            padding: 50px 20px;
-            background: #1c1c1c;
-            border: 1px solid #333333;
-            border-radius: 12px;
-            color: #888888;
-            font-size: 18px;
-        }
-        /* ============================
-           DEMON HISTORY
-        ============================ */
-        .history-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 9999;
-        }
-        .history-box {
-            background: #1c1c1c;
-            border: 1px solid #444444;
-            border-radius: 14px;
-            padding: 25px;
-            width: 100%;
-            max-width: 700px;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: center;
-        }
-        .history-box h2 {
-            margin-top: 0;
-            font-size: 28px;
-        }
-        .history-section {
-            border-top: 1px solid #333333;
-            margin-top: 20px;
-            padding-top: 20px;
-        }
-        .history-section h3 {
-            margin-top: 0;
-        }
-        .close-history {
-            margin-top: 20px;
-            padding: 10px 18px;
-            border: 1px solid #444444;
-            border-radius: 7px;
-            background: #292929;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-history:hover {
-            background: #383838;
-        }
-        /* ============================
-           PLACEMENT GRAPH
-        ============================ */
-        .graph-container {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            margin-top: 20px;
-            background: #111111;
-            border: 1px solid #333333;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .graph-y-axis {
-            position: absolute;
-            left: 10px;
-            top: 15px;
-            bottom: 35px;
-            width: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: #888888;
-            font-size: 11px;
-        }
-        .graph-area {
-            position: absolute;
-            left: 55px;
-            right: 15px;
-            top: 15px;
-            bottom: 35px;
-            border-left: 1px solid #444444;
-            border-bottom: 1px solid #444444;
-        }
-        .graph-line {
-            position: absolute;
-            height: 3px;
-            background: white;
-            transform-origin: left center;
-            border-radius: 3px;
-        }
-        .graph-point {
-            position: absolute;
-            width: 9px;
-            height: 9px;
-            background: white;
-            border-radius: 50%;
-            transform: translate(-50%, 50%);
-        }
-        .graph-label {
-            position: absolute;
-            bottom: -28px;
-            transform: translateX(-50%);
-            font-size: 10px;
-            color: #999999;
-            white-space: nowrap;
-        }
-        .graph-note {
-            margin-top: 10px;
-            color: #777777;
-            font-size: 12px;
-        }
-        @media (max-width: 700px) {
-            header {
-                padding-bottom: 85px;
-            }
-            header h1 {
-                font-size: 30px;
-            }
-            .header-buttons {
-                top: auto;
-                bottom: 15px;
-                right: 0;
-                left: 0;
-                transform: none;
-                justify-content: center;
-            }
-            .header-button {
-                padding: 10px 13px;
-            }
-            .player-card {
-                padding: 12px;
-            }
-            .player-points {
-                font-size: 15px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
 <header>
-    <h1>FiDemonlist</h1>
-    <p>
-        The Custom Geometry Dash Demonlist
-    </p>
-    <div class="header-buttons">
-        <button
-            class="header-button"
-            id="timeTravelButton"
-        >
-            Time Travel
-        </button>
-        <button
-            class="header-button"
-            id="leaderboardButton"
-        >
-            Player Leaderboard
-        </button>
-    </div>
+<h1>FiDemonlist</h1>
+<p>
+    The Custom Geometry Dash Demonlist
+</p>
+<div class="header-buttons">
+    <button
+        class="header-button"
+        id="timeTravelButton"
+    >
+        Time Travel
+    </button>
+    <button
+        class="header-button"
+        id="leaderboardButton"
+    >
+        Player Leaderboard
+    </button>
+</div>
 </header>
 <div class="container">
-    <!-- ============================
-         TIME TRAVEL
-    ============================ -->
-    <div
-        class="panel"
-        id="timeTravelPanel"
-    >
-        <h2>Time Travel</h2>
-        <p class="panel-description">
-            Choose a date to see the FiDemonlist from that date.
-        </p>
-        <div class="panel-buttons">
-            <input
-                type="date"
-                id="datePicker"
-                class="date-input"
-            >
-            <button
-                class="apply-button"
-                id="applyDate"
-            >
-                Travel
-            </button>
-            <button
-                class="today-button"
-                id="returnToday"
-            >
-                Today
-            </button>
-        </div>
+<!-- TIME TRAVEL -->
+<div
+    class="panel"
+    id="timeTravelPanel"
+>
+    <h2>Time Travel</h2>
+    <p class="panel-description">
+        Choose a date to see the FiDemonlist from that date.
+    </p>
+    <div class="panel-buttons">
+        <input
+            type="date"
+            id="datePicker"
+            class="date-input"
+        >
+        <button
+            class="apply-button"
+            id="applyDate"
+        >
+            Travel
+        </button>
+        <button
+            class="today-button"
+            id="returnToday"
+        >
+            Today
+        </button>
     </div>
-    <!-- ============================
-         PLAYER LEADERBOARD
-    ============================ -->
+</div>
+<!-- PLAYER LEADERBOARD -->
+<div
+    class="panel"
+    id="leaderboardPanel"
+>
+    <h2>Player Leaderboard</h2>
+    <p class="panel-description">
+        Player rankings are based on completed FiDemonlist demons.
+    </p>
     <div
-        class="panel"
-        id="leaderboardPanel"
-    >
-        <h2>Player Leaderboard</h2>
-        <p class="panel-description">
-            Player rankings are based on completed FiDemonlist demons.
-        </p>
-        <div
-            class="leaderboard-list"
-            id="leaderboardList"
-        ></div>
-    </div>
-    <div
-        class="time-travel-status"
-        id="timeTravelStatus"
+        class="leaderboard-list"
+        id="leaderboardList"
     ></div>
-    <!-- ============================
-         SEARCH
-    ============================ -->
-    <input
-        id="search"
-        class="search"
-        type="text"
-        placeholder="Search demons..."
-    >
-    <!-- ============================
-         DEMON LIST
-    ============================ -->
-    <div id="demonList"></div>
-    <div
-        class="no-demons"
-        id="noDemons"
-    >
-        No demons were on the list at this date.
-    </div>
+</div>
+<div
+    class="time-travel-status"
+    id="timeTravelStatus"
+></div>
+<!-- SEARCH -->
+<input
+    id="search"
+    class="search"
+    type="text"
+    placeholder="Search demons..."
+>
+<!-- DEMON LIST -->
+<div id="demonList"></div>
+<div
+    class="no-demons"
+    id="noDemons"
+>
+    No demons were on the list at this date.
+</div>
 </div>
 <script>
 /* =====================================================
@@ -510,9 +462,6 @@ const demons = [
         victors: [
             { name: "Wpopoff", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" }
-        ],
-        placementHistory: [
-            { date: "2026-06-20", rank: 1 }
         ]
     },
     {
@@ -526,10 +475,6 @@ const demons = [
             { name: "Zoink", country: "🇺🇸" },
             { name: "Wpopoff", country: "🇺🇸" },
             { name: "Trick", country: "🇺🇸" }
-        ],
-        placementHistory: [
-            { date: "2025-05-25", rank: 1 },
-            { date: "2026-06-20", rank: 2 }
         ]
     },
     {
@@ -542,10 +487,6 @@ const demons = [
         victors: [
             { name: "Wpopoff", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" }
-        ],
-        placementHistory: [
-            { date: "2025-05-25", rank: 2 },
-            { date: "2026-06-20", rank: 3 }
         ]
     },
     {
@@ -559,10 +500,6 @@ const demons = [
             { name: "Cuatrocientos", country: "🇪🇸" },
             { name: "Zoink", country: "🇺🇸" },
             { name: "zLevii", country: "🇳🇿" }
-        ],
-        placementHistory: [
-            { date: "2025-09-21", rank: 1 },
-            { date: "2026-06-20", rank: 4 }
         ]
     },
     {
@@ -579,12 +516,6 @@ const demons = [
             { name: "Taiago", country: "🇵🇹" },
             { name: "Netermind", country: "🇺🇸" },
             { name: "레전드아잉몰라요", country: "🇰🇷" }
-        ],
-        placementHistory: [
-            { date: "2023-09-09", rank: 1 },
-            { date: "2025-05-25", rank: 3 },
-            { date: "2025-09-21", rank: 2 },
-            { date: "2026-06-20", rank: 5 }
         ]
     },
     {
@@ -596,10 +527,6 @@ const demons = [
         points: 253.53,
         victors: [
             { name: "Nickname09", country: "🇷🇺" }
-        ],
-        placementHistory: [
-            { date: "2026-06-16", rank: 1 },
-            { date: "2026-06-20", rank: 6 }
         ]
     },
     {
@@ -613,10 +540,6 @@ const demons = [
             { name: "Zoink", country: "🇺🇸" },
             { name: "Dovvin", country: "🇵🇱" },
             { name: "Thelifinof", country: "🇺🇸" }
-        ],
-        placementHistory: [
-            { date: "2026-02-10", rank: 1 },
-            { date: "2026-06-20", rank: 7 }
         ]
     },
     {
@@ -629,10 +552,6 @@ const demons = [
         victors: [
             { name: "Axinity", country: "🇩🇰" },
             { name: "Weyolll3", country: "🇪🇸" }
-        ],
-        placementHistory: [
-            { date: "2026-07-16", rank: 1 },
-            { date: "2026-07-16", rank: 8 }
         ]
     },
     {
@@ -651,34 +570,11 @@ const demons = [
             { name: "Cryostazz", country: "🇫🇷" },
             { name: "Benbotwyd", country: "🇺🇸" },
             { name: "SpaceRS", country: "🇷🇸" }
-        ],
-        placementHistory: [
-            { date: "2024-09-04", rank: 1 },
-            { date: "2026-06-20", rank: 9 }
         ]
     },
-    {
-        name: "Quanteuse Processing",
-        createdBy: "Renn241 and BlankB",
-        verifiedBy: "Zoink",
-        verification: "2024-12-31",
-        image: "Quanteuse Processing.jpeg",
-        points: 194.54,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Dovvin", country: "🇵🇱" },
-            { name: "Seregiusz", country: "🇵🇱" },
-            { name: "Sharkyga", country: "🇦🇺" },
-            { name: "Karkito", country: "🇰🇷" }
-        ],
-        placementHistory: [
-            { date: "2024-12-31", rank: 1 },
-            { date: "2026-06-20", rank: 10 }
-        ]
-    },
-    /* =================================================
-       LEGACY DEMONS
-    ================================================= */
+    /* ============================
+       LEGACY
+    ============================ */
     {
         name: "Bloodbath",
         createdBy: "Riot",
@@ -687,10 +583,7 @@ const demons = [
         legacyDate: "2017-01-01",
         image: "Bloodbath.jpeg",
         points: 18.65,
-        victors: [],
-        placementHistory: [
-            { date: "2015-08-12", rank: 1 }
-        ]
+        victors: []
     },
     {
         name: "The Hell Factory",
@@ -700,10 +593,7 @@ const demons = [
         legacyDate: "2017-01-01",
         image: "The Hell Factory.jpeg",
         points: 18.10,
-        victors: [],
-        placementHistory: [
-            { date: "2015-12-28", rank: 2 }
-        ]
+        victors: []
     },
     {
         name: "The Ultimate Phase",
@@ -713,10 +603,7 @@ const demons = [
         legacyDate: "2017-01-01",
         image: "The Ultimate Phase.jpeg",
         points: 17.50,
-        victors: [],
-        placementHistory: [
-            { date: "2016-06-21", rank: 1 }
-        ]
+        victors: []
     },
     {
         name: "Cataclysm",
@@ -726,14 +613,12 @@ const demons = [
         legacyDate: "2017-01-01",
         image: "Cataclysm.jpeg",
         points: 17.00,
-        victors: [],
-        placementHistory: [
-            { date: "2016-01-15", rank: 1 }
-        ]
+        victors: []
     }
 ];
 /* =====================================================
    MASTER ORDER
+   THIS NEVER CHANGES
 ===================================================== */
 const masterOrder = [
     "Society",
@@ -745,7 +630,6 @@ const masterOrder = [
     "Orbit",
     "Antarctic Lights",
     "Nullscapes",
-    "Quanteuse Processing",
     "Bloodbath",
     "The Hell Factory",
     "The Ultimate Phase",
@@ -763,8 +647,7 @@ const currentRankPoints = {
     6: 253.53,
     7: 236.80,
     8: 221.47,
-    9: 207.42,
-    10: 194.54
+    9: 207.42
 };
 /* =====================================================
    TIME AGO
@@ -830,6 +713,10 @@ function demonExists(
     ) {
         return false;
     }
+    /*
+       Legacy demons disappear ON their
+       legacy date.
+    */
     if (
         demon.legacyDate &&
         selectedDate >=
@@ -872,66 +759,21 @@ function getHistoricalRank(
     demon,
     selectedDate
 ) {
-    if (
-        !demon.placementHistory ||
-        demon.placementHistory.length === 0
-    ) {
-        return null;
-    }
-    let latestRank = null;
-    demon.placementHistory.forEach(
-        function(entry) {
-            if (
-                selectedDate >= entry.date
-            ) {
-                latestRank = entry.rank;
-            }
-        }
-    );
-    return latestRank;
-}
-/* =====================================================
-   GET HISTORICAL ORDER
-===================================================== */
-function getHistoricalOrder(
-    selectedDate
-) {
     const available =
         getAvailableDemons(
             selectedDate
         );
-    available.sort(
-        function(a, b) {
-            const rankA =
-                getHistoricalRank(
-                    a,
-                    selectedDate
-                );
-            const rankB =
-                getHistoricalRank(
-                    b,
-                    selectedDate
-                );
-            if (
-                rankA !== null &&
-                rankB !== null
-            ) {
-                return rankA - rankB;
+    const index =
+        available.findIndex(
+            function(item) {
+                return item.name ===
+                    demon.name;
             }
-            if (
-                rankA !== null
-            ) {
-                return -1;
-            }
-            if (
-                rankB !== null
-            ) {
-                return 1;
-            }
-            return 0;
-        }
-    );
-    return available;
+        );
+    if (index === -1) {
+        return null;
+    }
+    return index + 1;
 }
 /* =====================================================
    GET POINTS
@@ -940,6 +782,9 @@ function getDemonPoints(
     demon,
     rank
 ) {
+    /*
+       Legacy points stay fixed.
+    */
     if (
         demon.name === "Bloodbath"
     ) {
@@ -960,12 +805,34 @@ function getDemonPoints(
     ) {
         return 17.00;
     }
+    /*
+       Active demons use their current
+       list-position points.
+    */
     if (
         currentRankPoints[rank] !== undefined
     ) {
         return currentRankPoints[rank];
     }
     return demon.points || 0;
+}
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+function formatDate(
+    dateString
+) {
+    return new Date(
+        dateString +
+        "T00:00:00"
+    ).toLocaleDateString(
+        "en-US",
+        {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    );
 }
 /* =====================================================
    RENDER LIST
@@ -983,7 +850,7 @@ function renderList(
             "noDemons"
         );
     const availableDemons =
-        getHistoricalOrder(
+        getAvailableDemons(
             selectedDate
         );
     if (
@@ -1030,7 +897,8 @@ function renderList(
                     Verified By: ${demon.verifiedBy}
                 </div>
                 <div class="info">
-                    Verified: ${getTimeAgo(
+                    Verified:
+                    ${getTimeAgo(
                         new Date(
                             demon.verification +
                             "T00:00:00"
@@ -1040,18 +908,26 @@ function renderList(
                 <div class="points">
                     List Points: ${points.toFixed(2)}
                 </div>
-                <button
-                    class="victors-button"
-                    onclick="toggleVictors(this)"
-                >
-                    Victors
-                </button>
-                <button
-                    class="victors-button"
-                    onclick="showDemonHistory('${demon.name.replace(/'/g, "\\'")}')"
-                >
-                    Demon History
-                </button>
+                <div class="button-row">
+                    <button
+                        class="victors-button"
+                        onclick="toggleVictors(this)"
+                    >
+                        Victors
+                    </button>
+                    <button
+                        class="victors-button"
+                        onclick="showPositionHistory('${demon.name.replace(/'/g, "\\'")}')"
+                    >
+                        Position History
+                    </button>
+                    <button
+                        class="victors-button"
+                        onclick="showDemonHistory('${demon.name.replace(/'/g, "\\'")}')"
+                    >
+                        Demon History
+                    </button>
+                </div>
                 <div class="victors-panel">
                     <div class="victors-title">
                         Victors
@@ -1100,7 +976,8 @@ function toggleVictors(
     button
 ) {
     const panel =
-        button.nextElementSibling.nextElementSibling;
+        button.parentElement
+            .nextElementSibling;
     if (
         panel.style.display ===
         "block"
@@ -1117,151 +994,131 @@ function toggleVictors(
     }
 }
 /* =====================================================
-   GRAPH
+   POSITION HISTORY
 ===================================================== */
-function createPlacementGraph(
-    demon
+function showPositionHistory(
+    demonName
 ) {
-    if (
-        !demon.placementHistory ||
-        demon.placementHistory.length === 0
-    ) {
-        return `
-            <div class="info">
-                No placement history recorded yet.
-            </div>
-        `;
-    }
-    const history =
-        [...demon.placementHistory]
-            .sort(
-                function(a, b) {
-                    return new Date(a.date) -
-                        new Date(b.date);
-                }
-            );
-    const maxRank =
-        Math.max(
-            ...history.map(
-                function(entry) {
-                    return entry.rank;
-                }
-            ),
-            10
-        );
-    const graphWidth = 100;
-    const graphHeight = 100;
-    let pointsHTML = "";
-    let linesHTML = "";
-    let labelsHTML = "";
-    history.forEach(
-        function(entry, index) {
-            const x =
-                history.length === 1
-                    ? 50
-                    : (
-                        index /
-                        (history.length - 1)
-                    ) * graphWidth;
-            const y =
-                (
-                    1 -
-                    (
-                        (entry.rank - 1) /
-                        (maxRank - 1)
-                    )
-                ) *
-                graphHeight;
-            pointsHTML += `
-                <div
-                    class="graph-point"
-                    style="
-                        left:${x}%;
-                        bottom:${y}%;
-                    "
-                    title="#${entry.rank} — ${entry.date}"
-                ></div>
-            `;
-            if (
-                index < history.length - 1
-            ) {
-                const next =
-                    history[index + 1];
-                const nextX =
-                    (
-                        (index + 1) /
-                        (history.length - 1)
-                    ) *
-                    graphWidth;
-                const nextY =
-                    (
-                        1 -
-                        (
-                            (next.rank - 1) /
-                            (maxRank - 1)
-                        )
-                    ) *
-                    graphHeight;
-                const dx =
-                    nextX - x;
-                const dy =
-                    nextY - y;
-                const length =
-                    Math.sqrt(
-                        dx * dx +
-                        dy * dy
-                    );
-                const angle =
-                    Math.atan2(
-                        dy,
-                        dx
-                    ) *
-                    180 /
-                    Math.PI;
-                linesHTML += `
-                    <div
-                        class="graph-line"
-                        style="
-                            left:${x}%;
-                            bottom:${y}%;
-                            width:${length}%;
-                            transform:rotate(${angle}deg);
-                        "
-                    ></div>
-                `;
+    const demon =
+        demons.find(
+            function(item) {
+                return item.name ===
+                    demonName;
             }
-            labelsHTML += `
-                <div
-                    class="graph-label"
-                    style="
-                        left:${x}%;
-                    "
-                >
-                    ${entry.date}
+        );
+    if (!demon) {
+        return;
+    }
+    const existing =
+        document.getElementById(
+            "historyOverlay"
+        );
+    if (existing) {
+        existing.remove();
+    }
+    const overlay =
+        document.createElement(
+            "div"
+        );
+    overlay.id =
+        "historyOverlay";
+    overlay.className =
+        "history-overlay";
+    const history =
+        document.createElement(
+            "div"
+        );
+    history.className =
+        "history-box";
+    /*
+       Every important list-change date.
+       The position is recalculated from
+       the master order.
+    */
+    const importantDates = [
+        demon.verification,
+        "2017-01-01",
+        "2023-09-09",
+        "2024-09-04",
+        "2024-12-31",
+        "2025-05-25",
+        "2025-09-21",
+        "2026-02-10",
+        "2026-06-16",
+        "2026-06-20",
+        "2026-07-16",
+        todayString
+    ];
+    const uniqueDates =
+        [...new Set(
+            importantDates
+        )]
+        .sort();
+    let positionHTML = "";
+    uniqueDates.forEach(
+        function(date) {
+            const rank =
+                getHistoricalRank(
+                    demon,
+                    date
+                );
+            if (
+                rank === null
+            ) {
+                return;
+            }
+            positionHTML += `
+                <div class="position-entry">
+                    <div class="position-date">
+                        ${formatDate(date)}
+                    </div>
+                    <div class="position-rank">
+                        #${rank}
+                    </div>
                 </div>
             `;
         }
     );
-    return `
-        <div class="graph-container">
-            <div class="graph-y-axis">
-                <span>#1</span>
-                <span>#${Math.ceil(maxRank / 3)}</span>
-                <span>#${Math.ceil(
-                    (maxRank * 2) / 3
-                )}</span>
-                <span>#${maxRank}</span>
-            </div>
-            <div class="graph-area">
-                ${linesHTML}
-                ${pointsHTML}
-                ${labelsHTML}
-            </div>
+    history.innerHTML = `
+        <h2>
+            ${demon.name}
+        </h2>
+        <div class="info">
+            Position History
         </div>
-        <div class="graph-note">
-            Higher on the graph = better placement.
+        <div class="history-section">
+            <h3>
+                📊 List Positions
+            </h3>
+            ${positionHTML}
         </div>
+        <button
+            class="close-history"
+            id="closeHistory"
+        >
+            Close
+        </button>
     `;
+    overlay.appendChild(
+        history
+    );
+    document.body.appendChild(
+        overlay
+    );
+    document.getElementById(
+        "closeHistory"
+    ).onclick =
+        function() {
+            overlay.remove();
+        };
+    overlay.onclick =
+        function(event) {
+            if (
+                event.target === overlay
+            ) {
+                overlay.remove();
+            }
+        };
 }
 /* =====================================================
    DEMON HISTORY
@@ -1300,39 +1157,18 @@ function showDemonHistory(
         );
     history.className =
         "history-box";
-    const verificationDate =
-        new Date(
-            demon.verification +
-            "T00:00:00"
-        );
     const formattedVerification =
-        verificationDate.toLocaleDateString(
-            "en-US",
-            {
-                year: "numeric",
-                month: "long",
-                day: "numeric"
-            }
+        formatDate(
+            demon.verification
         );
     let legacyHTML = "";
     if (demon.legacyDate) {
-        const legacyDate =
-            new Date(
-                demon.legacyDate +
-                "T00:00:00"
-            );
-        const formattedLegacy =
-            legacyDate.toLocaleDateString(
-                "en-US",
-                {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric"
-                }
-            );
         legacyHTML = `
             <div class="info">
-                🏛️ Became Legacy: ${formattedLegacy}
+                🏛️ Became Legacy:
+                ${formatDate(
+                    demon.legacyDate
+                )}
             </div>
         `;
     } else {
@@ -1372,23 +1208,19 @@ function showDemonHistory(
             Verified By: ${demon.verifiedBy}
         </div>
         <div class="info">
-            📅 Verified: ${formattedVerification}
+            📅 Verified:
+            ${formattedVerification}
         </div>
         ${legacyHTML}
         <div class="points">
-            List Points: ${demon.points.toFixed(2)}
+            List Points:
+            ${demon.points.toFixed(2)}
         </div>
         <div class="history-section">
             <h3>
                 🏆 Victors
             </h3>
             ${victorsHTML}
-        </div>
-        <div class="history-section">
-            <h3>
-                📈 Placement History
-            </h3>
-            ${createPlacementGraph(demon)}
         </div>
         <div class="history-section">
             <h3>
@@ -1403,19 +1235,9 @@ function showDemonHistory(
                 ?
                 `
                 <div class="info">
-                    ${
-                        new Date(
-                            demon.legacyDate +
-                            "T00:00:00"
-                        ).toLocaleDateString(
-                            "en-US",
-                            {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric"
-                            }
-                        )
-                    }
+                    ${formatDate(
+                        demon.legacyDate
+                    )}
                     — Became Legacy
                 </div>
                 `
