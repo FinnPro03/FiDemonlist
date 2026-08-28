@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>FiDemonlist</title>
-
     <style>
         body {
             margin: 0;
@@ -13,57 +11,49 @@
             background: #111111;
             color: white;
         }
-
         header {
             background: #1b1b1b;
             padding: 25px 20px;
             text-align: center;
-            border-bottom: 2px solid #333;
+            border-bottom: 2px solid #333333;
         }
-
         header h1 {
             margin: 0;
             font-size: 38px;
         }
-
         header p {
             margin: 7px 0 0;
-            color: #aaa;
+            color: #aaaaaa;
             font-size: 15px;
         }
-
         .container {
             max-width: 900px;
             margin: 30px auto;
             padding: 0 20px;
         }
-
         .search {
             width: 100%;
             box-sizing: border-box;
             padding: 15px;
             border-radius: 8px;
-            border: 1px solid #333;
+            border: 1px solid #333333;
             background: #1c1c1c;
             color: white;
             font-size: 16px;
             margin-bottom: 25px;
             outline: none;
         }
-
         .search::placeholder {
-            color: #777;
+            color: #777777;
         }
-
         .demon {
             background: #1c1c1c;
-            border: 1px solid #333;
+            border: 1px solid #333333;
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
             text-align: center;
         }
-
         .demon-image {
             display: block;
             width: 100%;
@@ -72,119 +62,123 @@
             object-fit: cover;
             margin: 0 auto 18px auto;
             border-radius: 9px;
-            background: #333;
+            background: #333333;
         }
-
         .name {
             font-size: 25px;
             font-weight: bold;
             margin-bottom: 12px;
         }
-
         .info {
-            color: #aaa;
+            color: #aaaaaa;
             font-size: 15px;
             margin: 6px 0;
         }
     </style>
 </head>
-
 <body>
-
     <header>
         <h1>FiDemonlist</h1>
         <p>The Custom Geometry Dash Demonlist</p>
     </header>
-
     <div class="container">
-
         <input
+            id="search"
             class="search"
             type="text"
             placeholder="Search demons..."
         >
-
-        <div class="demon">
-
+        <!-- BLOODBATH -->
+        <div class="demon" data-name="Bloodbath">
             <img
                 class="demon-image"
-                src="https://placehold.co/600x280/333333/ffffff?text=Demon+Image"
-                alt="Example Demon"
+                src="Bloodbath.jpeg"
+                alt="Bloodbath"
             >
-
             <div class="name">
-                #1 - Example Demon
+                #1 - Bloodbath
             </div>
-
             <div class="info">
-                Created By: Example
+                Created By: Riot
             </div>
-
             <div class="info">
-                Verified By: ExampleVerifier
+                Verified By: Riot
             </div>
-
-            <div class="info">
-                Verified: 3 Days Ago
+            <div class="info" id="bloodbath-verified">
+                Verified: Calculating...
             </div>
-
         </div>
-
-
-        <div class="demon">
-
-            <img
-                class="demon-image"
-                src="https://placehold.co/600x280/333333/ffffff?text=Demon+Image"
-                alt="Another Demon"
-            >
-
-            <div class="name">
-                #2 - Another Demon
-            </div>
-
-            <div class="info">
-                Created By: Example2
-            </div>
-
-            <div class="info">
-                Verified By: ExampleVerifier2
-            </div>
-
-            <div class="info">
-                Verified: 1 Week Ago
-            </div>
-
-        </div>
-
-
-        <div class="demon">
-
-            <img
-                class="demon-image"
-                src="https://placehold.co/600x280/333333/ffffff?text=Demon+Image"
-                alt="Cool Demon"
-            >
-
-            <div class="name">
-                #3 - Cool Demon
-            </div>
-
-            <div class="info">
-                Created By: Example3
-            </div>
-
-            <div class="info">
-                Verified By: ExampleVerifier3
-            </div>
-
-            <div class="info">
-                Verified: 2 Weeks Ago
-            </div>
-
-        </div>
-
     </div>
-
+    <script>
+        // ==========================================
+        // VERIFICATION TIME SYSTEM
+        // ==========================================
+        const bloodbathVerificationDate = new Date("2015-08-12T00:00:00");
+        function getTimeAgo(date) {
+            const now = new Date();
+            const millisecondsPerSecond = 1000;
+            const millisecondsPerMinute = millisecondsPerSecond * 60;
+            const millisecondsPerHour = millisecondsPerMinute * 60;
+            const millisecondsPerDay = millisecondsPerHour * 24;
+            const difference = now - date;
+            const totalDays = Math.floor(
+                difference / millisecondsPerDay
+            );
+            const totalWeeks = Math.floor(
+                totalDays / 7
+            );
+            const totalMonths = Math.floor(
+                totalDays / 30.4375
+            );
+            const totalYears = Math.floor(
+                totalDays / 365.2425
+            );
+            // YEARS
+            if (totalYears >= 1) {
+                return totalYears +
+                    (totalYears === 1 ? " Year Ago" : " Years Ago");
+            }
+            // MONTHS
+            if (totalMonths >= 1) {
+                return totalMonths +
+                    (totalMonths === 1 ? " Month Ago" : " Months Ago");
+            }
+            // WEEKS
+            if (totalWeeks >= 1) {
+                return totalWeeks +
+                    (totalWeeks === 1 ? " Week Ago" : " Weeks Ago");
+            }
+            // DAYS
+            if (totalDays >= 1) {
+                return totalDays +
+                    (totalDays === 1 ? " Day Ago" : " Days Ago");
+            }
+            // LESS THAN ONE DAY
+            return "Today";
+        }
+        // ==========================================
+        // DISPLAY BLOODBATH VERIFICATION TIME
+        // ==========================================
+        document.getElementById("bloodbath-verified").textContent =
+            "Verified: " + getTimeAgo(bloodbathVerificationDate);
+        // ==========================================
+        // SEARCH SYSTEM
+        // ==========================================
+        const searchBox = document.getElementById("search");
+        const demons = document.querySelectorAll(".demon");
+        searchBox.addEventListener("input", function() {
+            const searchText =
+                searchBox.value.toLowerCase();
+            demons.forEach(function(demon) {
+                const demonName =
+                    demon.dataset.name.toLowerCase();
+                if (demonName.includes(searchText)) {
+                    demon.style.display = "block";
+                } else {
+                    demon.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
