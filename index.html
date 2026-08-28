@@ -16,19 +16,20 @@
 
         header {
             background: #1b1b1b;
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
             border-bottom: 2px solid #333;
         }
 
         header h1 {
             margin: 0;
-            font-size: 36px;
+            font-size: 38px;
         }
 
         header p {
-            margin: 6px 0 0;
+            margin: 7px 0 0;
             color: #aaa;
+            font-size: 15px;
         }
 
         .container {
@@ -40,74 +41,150 @@
         .search {
             width: 100%;
             box-sizing: border-box;
-            padding: 14px;
+            padding: 15px;
             border-radius: 8px;
-            border: none;
-            background: #222;
+            border: 1px solid #333;
+            background: #1c1c1c;
             color: white;
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            outline: none;
+        }
+
+        .search::placeholder {
+            color: #777;
         }
 
         .demon {
             background: #1c1c1c;
             border: 1px solid #333;
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 12px;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .rank {
-            font-size: 24px;
-            font-weight: bold;
+        .demon-image {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            height: 280px;
+            object-fit: cover;
+            margin: 0 auto 18px auto;
+            border-radius: 9px;
+            background: #333;
         }
 
         .name {
-            font-size: 20px;
-            margin-top: 5px;
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 12px;
         }
 
-        .creator {
-            color: #999;
-            margin-top: 5px;
+        .info {
+            color: #aaa;
+            font-size: 15px;
+            margin: 6px 0;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>FiDemonlist</h1>
-    <p>The Custom Geometry Dash Demonlist</p>
-</header>
+    <header>
+        <h1>FiDemonlist</h1>
+        <p>The Custom Geometry Dash Demonlist</p>
+    </header>
 
-<div class="container">
+    <div class="container">
 
-    <input
-        class="search"
-        type="text"
-        placeholder="Search demons..."
-    >
+        <input
+            class="search"
+            type="text"
+            placeholder="Search demons..."
+        >
 
-    <div class="demon">
-        <div class="rank">#1</div>
-        <div class="name">Example Demon</div>
-        <div class="creator">Created by Example</div>
+        <div class="demon">
+
+            <img
+                class="demon-image"
+                src="https://placehold.co/600x280/333333/ffffff?text=Demon+Image"
+                alt="Example Demon"
+            >
+
+            <div class="name">
+                #1 - Example Demon
+            </div>
+
+            <div class="info">
+                Created By: Example
+            </div>
+
+            <div class="info">
+                Verified By: ExampleVerifier
+            </div>
+
+            <div class="info">
+                Verified: 3 Days Ago
+            </div>
+
+        </div>
+
+
+        <div class="demon">
+
+            <img
+                class="demon-image"
+                src="https://placehold.co/600x280/333333/ffffff?text=Demon+Image"
+                alt="Another Demon"
+            >
+
+            <div class="name">
+                #2 - Another Demon
+            </div>
+
+            <div class="info">
+                Created By: Example2
+            </div>
+
+            <div class="info">
+                Verified By: ExampleVerifier2
+            </div>
+
+            <div class="info">
+                Verified: 1 Week Ago
+            </div>
+
+        </div>
+
+
+        <div class="demon">
+
+            <img
+                class="demon-image"
+                src="https://placehold.co/600x280/333333/ffffff?text=Demon+Image"
+                alt="Cool Demon"
+            >
+
+            <div class="name">
+                #3 - Cool Demon
+            </div>
+
+            <div class="info">
+                Created By: Example3
+            </div>
+
+            <div class="info">
+                Verified By: ExampleVerifier3
+            </div>
+
+            <div class="info">
+                Verified: 2 Weeks Ago
+            </div>
+
+        </div>
+
     </div>
-
-    <div class="demon">
-        <div class="rank">#2</div>
-        <div class="name">Another Demon</div>
-        <div class="creator">Created by Example2</div>
-    </div>
-
-    <div class="demon">
-        <div class="rank">#3</div>
-        <div class="name">Cool Demon</div>
-        <div class="creator">Created by Example3</div>
-    </div>
-
-</div>
 
 </body>
 </html>
