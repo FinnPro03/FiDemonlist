@@ -7,6 +7,11 @@
     <title>FiDemonlist</title>
 
     <style>
+
+        /* ==========================================
+           GENERAL
+        ========================================== */
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -14,10 +19,19 @@
             color: white;
         }
 
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
         header {
+            position: relative;
+
             background: #1b1b1b;
             padding: 25px 20px;
+
             text-align: center;
+
             border-bottom: 2px solid #333333;
         }
 
@@ -32,22 +46,71 @@
             font-size: 15px;
         }
 
+
+        /* ==========================================
+           TIME TRAVEL BUTTON
+        ========================================== */
+
+        .time-travel-button {
+            position: absolute;
+
+            right: 20px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            padding: 11px 16px;
+
+            border: 1px solid #444444;
+            border-radius: 8px;
+
+            background: #292929;
+            color: white;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .time-travel-button:hover {
+            background: #383838;
+        }
+
+
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
         .container {
             max-width: 900px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
+
+        /* ==========================================
+           SEARCH
+        ========================================== */
+
         .search {
             width: 100%;
             box-sizing: border-box;
+
             padding: 15px;
+
             border-radius: 8px;
             border: 1px solid #333333;
+
             background: #1c1c1c;
             color: white;
+
             font-size: 16px;
+
             margin-bottom: 25px;
+
             outline: none;
         }
 
@@ -55,25 +118,142 @@
             color: #777777;
         }
 
-        .demon {
+
+        /* ==========================================
+           TIME TRAVEL PANEL
+        ========================================== */
+
+        .time-travel-panel {
+            display: none;
+
             background: #1c1c1c;
+
             border: 1px solid #333333;
             border-radius: 12px;
+
             padding: 20px;
-            margin-bottom: 20px;
+
+            margin-bottom: 25px;
+
             text-align: center;
         }
+
+        .time-travel-panel h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .time-travel-panel p {
+            color: #aaaaaa;
+            margin-top: 0;
+        }
+
+        .date-input {
+            padding: 12px;
+
+            border-radius: 7px;
+            border: 1px solid #444444;
+
+            background: #111111;
+            color: white;
+
+            font-size: 16px;
+
+            margin: 10px;
+        }
+
+        .apply-button {
+            padding: 12px 18px;
+
+            border: none;
+            border-radius: 7px;
+
+            background: #444444;
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .apply-button:hover {
+            background: #555555;
+        }
+
+        .today-button {
+            padding: 12px 18px;
+
+            border: 1px solid #444444;
+            border-radius: 7px;
+
+            background: #222222;
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-left: 5px;
+        }
+
+        .today-button:hover {
+            background: #333333;
+        }
+
+
+        /* ==========================================
+           CURRENT DATE MESSAGE
+        ========================================== */
+
+        .time-travel-status {
+            display: none;
+
+            text-align: center;
+
+            color: #aaaaaa;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+
+        /* ==========================================
+           DEMON CARD
+        ========================================== */
+
+        .demon {
+            background: #1c1c1c;
+
+            border: 1px solid #333333;
+            border-radius: 12px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+        }
+
+
+        /* ==========================================
+           IMAGE
+        ========================================== */
 
         .image-container {
             width: 100%;
             max-width: 600px;
+
             height: 280px;
+
             margin: 0 auto 18px auto;
 
             background: #333333;
+
             border-radius: 9px;
 
             display: flex;
+
             justify-content: center;
             align-items: center;
 
@@ -83,39 +263,179 @@
         .demon-image {
             width: 100%;
             height: 100%;
+
             object-fit: contain;
+
             display: block;
         }
 
         .placeholder {
             color: #aaaaaa;
+
             font-size: 24px;
             font-weight: bold;
         }
 
+
+        /* ==========================================
+           DEMON TEXT
+        ========================================== */
+
         .name {
             font-size: 25px;
+
             font-weight: bold;
+
             margin-bottom: 12px;
         }
 
         .info {
             color: #aaaaaa;
+
             font-size: 15px;
+
             margin: 6px 0;
         }
+
+
+        /* ==========================================
+           NO DEMONS MESSAGE
+        ========================================== */
+
+        .no-demons {
+            display: none;
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            background: #1c1c1c;
+
+            border: 1px solid #333333;
+
+            border-radius: 12px;
+
+            color: #888888;
+
+            font-size: 18px;
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 30px;
+            }
+
+            .time-travel-button {
+                position: static;
+
+                transform: none;
+
+                margin-top: 15px;
+            }
+
+            .date-input {
+                width: 80%;
+                margin: 10px auto;
+            }
+
+            .apply-button,
+            .today-button {
+                margin: 5px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
     <header>
+
         <h1>FiDemonlist</h1>
+
         <p>The Custom Geometry Dash Demonlist</p>
+
+        <button
+            class="time-travel-button"
+            id="timeTravelButton"
+        >
+            Time Travel
+        </button>
+
     </header>
 
 
+
     <div class="container">
+
+
+        <!-- ==========================================
+             TIME TRAVEL PANEL
+        =========================================== -->
+
+        <div
+            class="time-travel-panel"
+            id="timeTravelPanel"
+        >
+
+            <h2>Time Travel</h2>
+
+            <p>
+                Choose a date to see what the FiDemonlist looked like.
+            </p>
+
+            <input
+                type="date"
+                id="datePicker"
+                class="date-input"
+            >
+
+            <button
+                class="apply-button"
+                id="applyDate"
+            >
+                Travel
+            </button>
+
+            <button
+                class="today-button"
+                id="returnToday"
+            >
+                Today
+            </button>
+
+        </div>
+
+
+
+        <!-- ==========================================
+             TIME TRAVEL STATUS
+        =========================================== -->
+
+        <div
+            class="time-travel-status"
+            id="timeTravelStatus"
+        ></div>
+
+
+
+        <!-- ==========================================
+             SEARCH
+        =========================================== -->
 
         <input
             id="search"
@@ -125,11 +445,16 @@
         >
 
 
+
         <!-- ==========================================
              #1 BLOODBATH
         =========================================== -->
 
-        <div class="demon" data-name="Bloodbath">
+        <div
+            class="demon"
+            data-name="Bloodbath"
+            data-verification="2015-08-12"
+        >
 
             <div class="image-container">
 
@@ -142,21 +467,25 @@
 
             </div>
 
+
             <div class="name">
                 #1 - Bloodbath
             </div>
+
 
             <div class="info">
                 Created By: Riot
             </div>
 
+
             <div class="info">
                 Verified By: Riot
             </div>
 
+
             <div
-                class="info"
-                id="bloodbath-verified"
+                class="info verification-time"
+                data-date="2015-08-12"
             >
                 Verified: Calculating...
             </div>
@@ -164,11 +493,16 @@
         </div>
 
 
+
         <!-- ==========================================
              #2 THE HELL FACTORY
         =========================================== -->
 
-        <div class="demon" data-name="The Hell Factory">
+        <div
+            class="demon"
+            data-name="The Hell Factory"
+            data-verification="2015-12-28"
+        >
 
             <div class="image-container">
 
@@ -181,35 +515,55 @@
 
             </div>
 
+
             <div class="name">
                 #2 - The Hell Factory
             </div>
+
 
             <div class="info">
                 Created By: TeamN2
             </div>
 
+
             <div class="info">
                 Verified By: Powerbomb
             </div>
 
+
             <div
-                class="info"
-                id="the-hell-factory-verified"
+                class="info verification-time"
+                data-date="2015-12-28"
             >
                 Verified: Calculating...
             </div>
 
         </div>
 
+
+
+        <!-- ==========================================
+             NO DEMONS MESSAGE
+        =========================================== -->
+
+        <div
+            class="no-demons"
+            id="noDemons"
+        >
+            No demons were on the list at this date.
+        </div>
+
+
     </div>
+
 
 
     <script>
 
-        // ==========================================
-        // IMAGE PLACEHOLDER SYSTEM
-        // ==========================================
+
+        /* ==========================================
+           IMAGE PLACEHOLDER
+        ========================================== */
 
         function showPlaceholder(image) {
 
@@ -221,9 +575,10 @@
         }
 
 
-        // ==========================================
-        // AUTOMATIC TIME AGO SYSTEM
-        // ==========================================
+
+        /* ==========================================
+           AUTOMATIC "TIME AGO" SYSTEM
+        ========================================== */
 
         function getTimeAgo(date) {
 
@@ -240,23 +595,24 @@
                     difference / millisecondsPerDay
                 );
 
+
             const totalWeeks =
                 Math.floor(
                     totalDays / 7
                 );
+
 
             const totalMonths =
                 Math.floor(
                     totalDays / 30.4375
                 );
 
+
             const totalYears =
                 Math.floor(
                     totalDays / 365.2425
                 );
 
-
-            // YEARS
 
             if (totalYears >= 1) {
 
@@ -266,10 +622,9 @@
                             ? " Year Ago"
                             : " Years Ago"
                     );
+
             }
 
-
-            // MONTHS
 
             if (totalMonths >= 1) {
 
@@ -279,10 +634,9 @@
                             ? " Month Ago"
                             : " Months Ago"
                     );
+
             }
 
-
-            // WEEKS
 
             if (totalWeeks >= 1) {
 
@@ -292,10 +646,9 @@
                             ? " Week Ago"
                             : " Weeks Ago"
                     );
+
             }
 
-
-            // DAYS
 
             if (totalDays >= 1) {
 
@@ -305,55 +658,324 @@
                             ? " Day Ago"
                             : " Days Ago"
                     );
+
             }
 
 
             return "Today";
+
         }
 
 
-        // ==========================================
-        // VERIFICATION DATES
-        // ==========================================
 
-        const bloodbathVerificationDate =
-            new Date("2015-08-12T00:00:00");
+        /* ==========================================
+           UPDATE VERIFICATION TIMES
+        ========================================== */
 
-        const theHellFactoryVerificationDate =
-            new Date("2015-12-28T00:00:00");
+        function updateVerificationTimes() {
+
+            const verificationElements =
+                document.querySelectorAll(
+                    ".verification-time"
+                );
 
 
-        // ==========================================
-        // UPDATE VERIFICATION TEXT
-        // ==========================================
+            verificationElements.forEach(
+                function(element) {
 
-        document.getElementById(
-            "bloodbath-verified"
-        ).textContent =
-            "Verified: " +
-            getTimeAgo(
-                bloodbathVerificationDate
+                    const date =
+                        new Date(
+                            element.dataset.date +
+                            "T00:00:00"
+                        );
+
+
+                    element.textContent =
+                        "Verified: " +
+                        getTimeAgo(date);
+
+                }
+            );
+
+        }
+
+
+
+        updateVerificationTimes();
+
+
+
+        /* ==========================================
+           TIME TRAVEL VARIABLES
+        ========================================== */
+
+        const firstDate =
+            "2015-01-01";
+
+
+        const today =
+            new Date();
+
+
+        const todayString =
+            today.getFullYear() +
+            "-" +
+            String(today.getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(today.getDate()).padStart(2, "0");
+
+
+
+        const datePicker =
+            document.getElementById("datePicker");
+
+
+        datePicker.min =
+            firstDate;
+
+
+        datePicker.max =
+            todayString;
+
+
+        datePicker.value =
+            todayString;
+
+
+
+        /* ==========================================
+           TIME TRAVEL BUTTON
+        ========================================== */
+
+        const timeTravelButton =
+            document.getElementById(
+                "timeTravelButton"
             );
 
 
-        document.getElementById(
-            "the-hell-factory-verified"
-        ).textContent =
-            "Verified: " +
-            getTimeAgo(
-                theHellFactoryVerificationDate
+        const timeTravelPanel =
+            document.getElementById(
+                "timeTravelPanel"
             );
 
 
-        // ==========================================
-        // SEARCH SYSTEM
-        // ==========================================
+        timeTravelButton.addEventListener(
+            "click",
+            function() {
+
+                if (
+                    timeTravelPanel.style.display ===
+                    "block"
+                ) {
+
+                    timeTravelPanel.style.display =
+                        "none";
+
+                } else {
+
+                    timeTravelPanel.style.display =
+                        "block";
+
+                }
+
+            }
+        );
+
+
+
+        /* ==========================================
+           DEMON TIME TRAVEL SYSTEM
+        ========================================== */
+
+        function travelToDate(selectedDate) {
+
+            const selected =
+                new Date(
+                    selectedDate +
+                    "T23:59:59"
+                );
+
+
+            const demons =
+                document.querySelectorAll(".demon");
+
+
+            let visibleDemons = 0;
+
+
+            demons.forEach(
+                function(demon) {
+
+                    const verificationDate =
+                        new Date(
+                            demon.dataset.verification +
+                            "T00:00:00"
+                        );
+
+
+                    /*
+                        A demon appears on the list
+                        once its verification date
+                        has been reached.
+                    */
+
+                    if (
+                        verificationDate <= selected
+                    ) {
+
+                        demon.style.display =
+                            "block";
+
+                        visibleDemons++;
+
+                    } else {
+
+                        demon.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+            const noDemons =
+                document.getElementById(
+                    "noDemons"
+                );
+
+
+            if (visibleDemons === 0) {
+
+                noDemons.style.display =
+                    "block";
+
+            } else {
+
+                noDemons.style.display =
+                    "none";
+
+            }
+
+
+            /* ======================================
+               SHOW SELECTED DATE
+            ====================================== */
+
+            const status =
+                document.getElementById(
+                    "timeTravelStatus"
+                );
+
+
+            const dateObject =
+                new Date(
+                    selectedDate +
+                    "T00:00:00"
+                );
+
+
+            const formattedDate =
+                dateObject.toLocaleDateString(
+                    "en-US",
+                    {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric"
+                    }
+                );
+
+
+            if (selectedDate === todayString) {
+
+                status.style.display =
+                    "none";
+
+            } else {
+
+                status.style.display =
+                    "block";
+
+                status.textContent =
+                    "Viewing the FiDemonlist from " +
+                    formattedDate;
+
+            }
+
+
+            /*
+                Clear search when traveling.
+            */
+
+            document.getElementById(
+                "search"
+            ).value = "";
+
+        }
+
+
+
+        /* ==========================================
+           TRAVEL BUTTON
+        ========================================== */
+
+        document.getElementById(
+            "applyDate"
+        ).addEventListener(
+            "click",
+            function() {
+
+                const selectedDate =
+                    datePicker.value;
+
+
+                if (!selectedDate) {
+
+                    return;
+
+                }
+
+
+                travelToDate(
+                    selectedDate
+                );
+
+            }
+        );
+
+
+
+        /* ==========================================
+           RETURN TO TODAY
+        ========================================== */
+
+        document.getElementById(
+            "returnToday"
+        ).addEventListener(
+            "click",
+            function() {
+
+                datePicker.value =
+                    todayString;
+
+
+                travelToDate(
+                    todayString
+                );
+
+            }
+        );
+
+
+
+        /* ==========================================
+           SEARCH SYSTEM
+        ========================================== */
 
         const searchBox =
-            document.getElementById("search");
-
-        const demons =
-            document.querySelectorAll(".demon");
+            document.getElementById(
+                "search"
+            );
 
 
         searchBox.addEventListener(
@@ -364,15 +986,40 @@
                     searchBox.value.toLowerCase();
 
 
+                const demons =
+                    document.querySelectorAll(
+                        ".demon"
+                    );
+
+
                 demons.forEach(
                     function(demon) {
 
+                        /*
+                            Don't bring back demons
+                            that didn't exist yet.
+                        */
+
+                        if (
+                            demon.style.display ===
+                            "none" &&
+                            searchText === ""
+                        ) {
+
+                            return;
+
+                        }
+
+
                         const demonName =
-                            demon.dataset.name.toLowerCase();
+                            demon.dataset.name
+                                .toLowerCase();
 
 
                         if (
-                            demonName.includes(searchText)
+                            demonName.includes(
+                                searchText
+                            )
                         ) {
 
                             demon.style.display =
@@ -390,6 +1037,14 @@
 
             }
         );
+
+
+
+        /* ==========================================
+           START ON TODAY
+        ========================================== */
+
+        travelToDate(todayString);
 
     </script>
 
