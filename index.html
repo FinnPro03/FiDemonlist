@@ -468,6 +468,36 @@ const demons = [
             { name: "Thelifinof", country: "🇺🇸" }
         ]
     },
+    {
+        name: "Antarctic Lights",
+        createdBy: "declanlc",
+        verifiedBy: "Axinity",
+        verification: "2026-07-16",
+        image: "Antarctic Lights.jpeg",
+        points: 221.47,
+        victors: [
+            { name: "Axinity", country: "🇩🇰" },
+            { name: "Weyolll3", country: "🇪🇸" }
+        ]
+    },
+    {
+        name: "Nullscapes",
+        createdBy: "Kiba",
+        verifiedBy: "Zoink",
+        verification: "2024-09-04",
+        image: "Nullscapes.jpeg",
+        points: 207.42,
+        victors: [
+            { name: "Zoink", country: "🇺🇸" },
+            { name: "Spookkd", country: "🇺🇸" },
+            { name: "whfyre", country: "🇺🇦" },
+            { name: "Hover", country: "🇦🇹" },
+            { name: "Theitha", country: "🇵🇦" },
+            { name: "Cryostazz", country: "🇫🇷" },
+            { name: "Benbotwyd", country: "🇺🇸" },
+            { name: "SpaceRS", country: "🇷🇸" }
+        ]
+    },
     /* =================================================
        LEGACY DEMONS
     ================================================= */
@@ -476,7 +506,7 @@ const demons = [
         createdBy: "Riot",
         verifiedBy: "Riot",
         verification: "2015-08-12",
-        legacyDate: "2021-01-01",
+        legacyDate: "2017-01-01",
         image: "Bloodbath.jpeg",
         points: 18.65,
         victors: [
@@ -488,7 +518,7 @@ const demons = [
         createdBy: "TeamN2",
         verifiedBy: "Powerbomb",
         verification: "2015-12-28",
-        legacyDate: "2021-01-01",
+        legacyDate: "2017-01-01",
         image: "The Hell Factory.jpeg",
         points: 18.10,
         victors: []
@@ -498,7 +528,7 @@ const demons = [
         createdBy: "Andromeda",
         verifiedBy: "Andromeda",
         verification: "2016-06-21",
-        legacyDate: "2021-01-01",
+        legacyDate: "2017-01-01",
         image: "The Ultimate Phase.jpeg",
         points: 17.50,
         victors: []
@@ -508,7 +538,7 @@ const demons = [
         createdBy: "Ggb0y",
         verifiedBy: "Riot",
         verification: "2016-01-15",
-        legacyDate: "2021-01-01",
+        legacyDate: "2017-01-01",
         image: "Cataclysm.jpeg",
         points: 17.00,
         victors: []
@@ -525,14 +555,15 @@ const masterOrder = [
     "Tidal Wave",
     "Green Bullet",
     "Orbit",
-    /* Legacy */
+    "Antarctic Lights",
+    "Nullscapes",
     "Bloodbath",
     "The Hell Factory",
     "The Ultimate Phase",
     "Cataclysm"
 ];
 /* =====================================================
-   POINTERCRATE-STYLE POINTS
+   CURRENT POINTS
 ===================================================== */
 const currentRankPoints = {
     1: 350.00,
@@ -541,7 +572,9 @@ const currentRankPoints = {
     4: 291.70,
     5: 271.78,
     6: 253.53,
-    7: 236.80
+    7: 236.80,
+    8: 221.47,
+    9: 207.42
 };
 /* =====================================================
    TIME AGO
@@ -643,7 +676,7 @@ function getAvailableDemons(
         );
 }
 /* =====================================================
-   GET DEMON POINTS
+   GET POINTS
 ===================================================== */
 function getDemonPoints(
     demon,
@@ -797,7 +830,7 @@ function renderList(
     );
 }
 /* =====================================================
-   VICTORS BUTTON
+   VICTORS
 ===================================================== */
 function toggleVictors(
     button
@@ -820,7 +853,7 @@ function toggleVictors(
     }
 }
 /* =====================================================
-   GET ALL PLAYERS
+   GET PLAYERS
 ===================================================== */
 function getAllPlayers() {
     const playerMap =
@@ -879,18 +912,16 @@ function calculatePlayerPoints(
                 masterOrder.indexOf(
                     demon.name
                 ) + 1;
-            const points =
-                getDemonPoints(
-                    demon,
-                    currentRank
-                );
-            total += points;
+            total += getDemonPoints(
+                demon,
+                currentRank
+            );
         }
     );
     return total;
 }
 /* =====================================================
-   RENDER PLAYER LEADERBOARD
+   LEADERBOARD
 ===================================================== */
 function renderLeaderboard() {
     const leaderboard =
@@ -1089,7 +1120,7 @@ function travelToDate(
     ).value = "";
 }
 /* =====================================================
-   TRAVEL BUTTON
+   TRAVEL
 ===================================================== */
 document.getElementById(
     "applyDate"
@@ -1106,7 +1137,7 @@ document.getElementById(
     }
 );
 /* =====================================================
-   TODAY BUTTON
+   TODAY
 ===================================================== */
 document.getElementById(
     "returnToday"
