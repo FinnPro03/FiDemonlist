@@ -262,7 +262,7 @@
         font-size: 18px;
     }
     /* ============================
-       HISTORY
+       DEMON HISTORY
     ============================ */
     .history-overlay {
         position: fixed;
@@ -283,7 +283,7 @@
         border-radius: 14px;
         padding: 25px;
         width: 100%;
-        max-width: 650px;
+        max-width: 700px;
         max-height: 85vh;
         overflow-y: auto;
         text-align: center;
@@ -300,20 +300,6 @@
     .history-section h3 {
         margin-top: 0;
     }
-    .history-entry {
-        padding: 12px;
-        margin: 8px 0;
-        background: #151515;
-        border: 1px solid #292929;
-        border-radius: 8px;
-    }
-    .history-entry-date {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    .history-entry-rank {
-        color: #aaaaaa;
-    }
     .close-history {
         margin-top: 20px;
         padding: 10px 18px;
@@ -326,6 +312,58 @@
     }
     .close-history:hover {
         background: #383838;
+    }
+    /* ============================
+       POSITION HISTORY
+    ============================ */
+    .position-history {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 15px;
+    }
+    .position-entry {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr 80px;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #151515;
+        border: 1px solid #292929;
+    }
+    .position-entry.higher {
+        border-left: 4px solid #35c759;
+    }
+    .position-entry.lower {
+        border-left: 4px solid #ff453a;
+    }
+    .position-reason {
+        text-align: left;
+        color: #dddddd;
+        font-size: 14px;
+    }
+    .position-date {
+        text-align: center;
+        color: #aaaaaa;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    .position-number {
+        text-align: right;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .position-entry.higher .position-number {
+        color: #35c759;
+    }
+    .position-entry.lower .position-number {
+        color: #ff453a;
+    }
+    .no-history {
+        color: #777777;
+        font-size: 14px;
+        padding: 10px;
     }
     @media (max-width: 700px) {
         header {
@@ -351,6 +389,15 @@
         .player-points {
             font-size: 15px;
         }
+        .position-entry {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+        .position-reason,
+        .position-date,
+        .position-number {
+            text-align: center;
+        }
     }
 </style>
 </head>
@@ -361,26 +408,17 @@
     The Custom Geometry Dash Demonlist
 </p>
 <div class="header-buttons">
-    <button
-        class="header-button"
-        id="timeTravelButton"
-    >
+    <button class="header-button" id="timeTravelButton">
         Time Travel
     </button>
-    <button
-        class="header-button"
-        id="leaderboardButton"
-    >
+    <button class="header-button" id="leaderboardButton">
         Player Leaderboard
     </button>
 </div>
 </header>
 <div class="container">
 <!-- TIME TRAVEL -->
-<div
-    class="panel"
-    id="timeTravelPanel"
->
+<div class="panel" id="timeTravelPanel">
     <h2>Time Travel</h2>
     <p class="panel-description">
         Choose a date to see the FiDemonlist from that date.
@@ -391,38 +429,23 @@
             id="datePicker"
             class="date-input"
         >
-        <button
-            class="apply-button"
-            id="applyDate"
-        >
+        <button class="apply-button" id="applyDate">
             Travel
         </button>
-        <button
-            class="today-button"
-            id="returnToday"
-        >
+        <button class="today-button" id="returnToday">
             Today
         </button>
     </div>
 </div>
 <!-- PLAYER LEADERBOARD -->
-<div
-    class="panel"
-    id="leaderboardPanel"
->
+<div class="panel" id="leaderboardPanel">
     <h2>Player Leaderboard</h2>
     <p class="panel-description">
         Player rankings are based on completed FiDemonlist demons.
     </p>
-    <div
-        class="leaderboard-list"
-        id="leaderboardList"
-    ></div>
+    <div class="leaderboard-list" id="leaderboardList"></div>
 </div>
-<div
-    class="time-travel-status"
-    id="timeTravelStatus"
-></div>
+<div class="time-travel-status" id="timeTravelStatus"></div>
 <!-- SEARCH -->
 <input
     id="search"
@@ -432,10 +455,7 @@
 >
 <!-- DEMON LIST -->
 <div id="demonList"></div>
-<div
-    class="no-demons"
-    id="noDemons"
->
+<div class="no-demons" id="noDemons">
     No demons were on the list at this date.
 </div>
 </div>
@@ -447,12 +467,12 @@ const demons = [
     {
         name: "Society",
         createdBy: "Neomarbilan",
-        verifiedBy: "wpopoff",
+        verifiedBy: "Wpopoff",
         verification: "2026-06-20",
         image: "Society.jpeg",
         points: 350.00,
         victors: [
-            { name: "wpopoff", country: "🇺🇸" },
+            { name: "Wpopoff", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" }
         ]
     },
@@ -465,19 +485,19 @@ const demons = [
         points: 331.71,
         victors: [
             { name: "Zoink", country: "🇺🇸" },
-            { name: "wpopoff", country: "🇺🇸" },
+            { name: "Wpopoff", country: "🇺🇸" },
             { name: "Trick", country: "🇺🇸" }
         ]
     },
     {
         name: "Amethyst",
         createdBy: "iMist",
-        verifiedBy: "wpopoff",
+        verifiedBy: "Wpopoff",
         verification: "2025-05-25",
         image: "Amethyst.jpeg",
         points: 313.42,
         victors: [
-            { name: "wpopoff", country: "🇺🇸" },
+            { name: "Wpopoff", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" }
         ]
     },
@@ -504,7 +524,7 @@ const demons = [
         victors: [
             { name: "Zoink", country: "🇺🇸" },
             { name: "Trick", country: "🇺🇸" },
-            { name: "wpopoff", country: "🇺🇸" },
+            { name: "Wpopoff", country: "🇺🇸" },
             { name: "Taiago", country: "🇵🇹" },
             { name: "Netermind", country: "🇺🇸" },
             { name: "레전드아잉몰라요", country: "🇰🇷" }
@@ -591,7 +611,7 @@ const demons = [
             { name: "Agonom", country: "🇰🇷" },
             { name: "Cbrem", country: "🇬🇧" },
             { name: "Zoink", country: "🇺🇸" },
-            { name: "wpopoff", country: "🇺🇸" }
+            { name: "wPopoff", country: "🇺🇸" }
         ]
     },
     {
@@ -625,7 +645,7 @@ const demons = [
             { name: "Bims", country: "🇩🇪" },
             { name: "dovvin", country: "🇵🇱" },
             { name: "Seturan", country: "🇰🇷" },
-            { name: "wpopoff", country: "🇺🇸" },
+            { name: "wPopoff", country: "🇺🇸" },
             { name: "Forewa", country: "🇷🇺" },
             { name: "Brumik", country: "🇨🇿" },
             { name: "Hamsoo", country: "🇰🇷" },
@@ -661,7 +681,7 @@ const demons = [
             { name: "Trick", country: "🇺🇸" },
             { name: "Seturan", country: "🇰🇷" },
             { name: "zVision", country: "🇺🇸" },
-            { name: "wpopoff", country: "🇺🇸" },
+            { name: "wPopoff", country: "🇺🇸" },
             { name: "Adri420", country: "🇪🇸" },
             { name: "Litoks", country: "🇫🇷" },
             { name: "Aless50", country: "🇻🇪" },
@@ -747,6 +767,9 @@ const demons = [
 ];
 /* =====================================================
    MASTER ORDER
+   This is TODAY'S order.
+   Historical rankings are calculated from
+   which demons existed on that date.
 ===================================================== */
 const masterOrder = [
     "Society",
@@ -764,14 +787,13 @@ const masterOrder = [
     "Every End",
     "Penumbral",
     "Silent Clubstep",
-    /* Legacy order */
     "Bloodbath",
     "The Hell Factory",
     "The Ultimate Phase",
     "Cataclysm"
 ];
 /* =====================================================
-   CURRENT POINTS
+   CURRENT LIST POINTS
 ===================================================== */
 const currentRankPoints = {
     1: 350.00,
@@ -791,15 +813,14 @@ const currentRankPoints = {
     15: 144.56
 };
 /* =====================================================
-   TIME AGO
+   DATE HELPERS
 ===================================================== */
 function getTimeAgo(date) {
     const now = new Date();
     const difference = now - date;
     const totalDays =
         Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
+            difference / (1000 * 60 * 60 * 24)
         );
     const totalWeeks =
         Math.floor(totalDays / 7);
@@ -842,33 +863,12 @@ function getTimeAgo(date) {
     return "Today";
 }
 /* =====================================================
-   DATE COMPARISON
+   CHECK EXISTENCE
 ===================================================== */
-function dateIsBefore(
-    date1,
-    date2
-) {
-    return date1 < date2;
-}
-/* =====================================================
-   CHECK IF DEMON EXISTS
-===================================================== */
-function demonExists(
-    demon,
-    selectedDate
-) {
-    if (
-        dateIsBefore(
-            selectedDate,
-            demon.verification
-        )
-    ) {
+function demonExists(demon, selectedDate) {
+    if (selectedDate < demon.verification) {
         return false;
     }
-    /*
-       Legacy disappears at legacyDate.
-       Therefore it is visible only before that date.
-    */
     if (
         demon.legacyDate &&
         selectedDate >= demon.legacyDate
@@ -878,80 +878,237 @@ function demonExists(
     return true;
 }
 /* =====================================================
-   GET AVAILABLE DEMONS
+   AVAILABLE DEMONS
 ===================================================== */
-function getAvailableDemons(
-    selectedDate
-) {
+function getAvailableDemons(selectedDate) {
     return masterOrder
-        .map(
-            function(name) {
-                return demons.find(
-                    function(demon) {
-                        return demon.name === name;
-                    }
+        .map(function(name) {
+            return demons.find(function(demon) {
+                return demon.name === name;
+            });
+        })
+        .filter(function(demon) {
+            return demon &&
+                demonExists(
+                    demon,
+                    selectedDate
                 );
-            }
-        )
-        .filter(
-            function(demon) {
-                return demon &&
-                    demonExists(
-                        demon,
-                        selectedDate
-                    );
-            }
-        );
+        });
 }
 /* =====================================================
-   GET DEMON POINTS
+   POINTS
 ===================================================== */
-function getDemonPoints(
-    demon,
-    rank
-) {
-    /*
-       Active demons use the point value
-       corresponding to their current list position.
-    */
+function getDemonPoints(demon, rank) {
+    if (demon.legacyDate) {
+        return demon.points;
+    }
     if (
-        !demon.legacyDate &&
         currentRankPoints[rank] !== undefined
     ) {
         return currentRankPoints[rank];
     }
-    /*
-       Legacy demons use their fixed lowered
-       legacy points.
-    */
-    if (
-        demon.name === "Bloodbath"
-    ) {
-        return 18.65;
-    }
-    if (
-        demon.name === "The Hell Factory"
-    ) {
-        return 18.10;
-    }
-    if (
-        demon.name === "The Ultimate Phase"
-    ) {
-        return 17.50;
-    }
-    if (
-        demon.name === "Cataclysm"
-    ) {
-        return 17.00;
-    }
     return demon.points || 0;
+}
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+function formatDate(dateString) {
+    return new Date(
+        dateString + "T00:00:00"
+    ).toLocaleDateString(
+        "en-US",
+        {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    );
+}
+/* =====================================================
+   POSITION HISTORY
+===================================================== */
+/*
+   Important:
+   We calculate a demon's historical position from
+   the demons that existed on each verification date.
+   A history entry is ONLY created if its placement
+   actually changes.
+   Example:
+   May 25, 2025
+   Amethyst placed above
+   #8
+   The "reason" is the demon that caused the position
+   to move.
+*/
+function getPositionHistory(demon) {
+    const history = [];
+    const allDates = demons
+        .filter(function(item) {
+            return item.verification >=
+                demon.verification;
+        })
+        .map(function(item) {
+            return item.verification;
+        });
+    allDates.sort();
+    let previousPosition = null;
+    let previousAvailable = false;
+    for (
+        let i = 0;
+        i < allDates.length;
+        i++
+    ) {
+        const date = allDates[i];
+        if (date < demon.verification) {
+            continue;
+        }
+        const available =
+            getAvailableDemons(date);
+        const position =
+            available.findIndex(function(item) {
+                return item.name === demon.name;
+            }) + 1;
+        if (position <= 0) {
+            continue;
+        }
+        if (previousPosition === null) {
+            previousPosition = position;
+            previousAvailable = true;
+            continue;
+        }
+        if (position === previousPosition) {
+            continue;
+        }
+        /*
+           Find the demon that caused the movement.
+           If position increased:
+           another demon was placed above it.
+           If position decreased:
+           this demon moved higher because something
+           before it disappeared from the list.
+        */
+        let reason = "Placement changed";
+        if (position > previousPosition) {
+            const currentAbove =
+                available[position - 2];
+            if (currentAbove) {
+                reason =
+                    currentAbove.name +
+                    " placed above";
+            }
+        } else {
+            const previousList =
+                getAvailableDemons(
+                    getPreviousDate(date)
+                );
+            const currentList =
+                available;
+            const previousAbove =
+                previousList
+                    .slice(
+                        0,
+                        previousPosition - 1
+                    )
+                    .map(function(item) {
+                        return item.name;
+                    });
+            const currentAbove =
+                currentList
+                    .slice(
+                        0,
+                        position - 1
+                    )
+                    .map(function(item) {
+                        return item.name;
+                    });
+            const removed =
+                previousAbove.find(function(name) {
+                    return !currentAbove.includes(name);
+                });
+            if (removed) {
+                reason =
+                    removed +
+                    " removed from list";
+            }
+        }
+        history.push({
+            date: date,
+            reason: reason,
+            position: position,
+            direction:
+                position < previousPosition
+                    ? "higher"
+                    : "lower"
+        });
+        previousPosition = position;
+    }
+    return history;
+}
+/* =====================================================
+   GET PREVIOUS DATE
+===================================================== */
+function getPreviousDate(dateString) {
+    const date =
+        new Date(
+            dateString + "T00:00:00"
+        );
+    date.setDate(
+        date.getDate() - 1
+    );
+    return (
+        date.getFullYear() +
+        "-" +
+        String(
+            date.getMonth() + 1
+        ).padStart(2, "0") +
+        "-" +
+        String(
+            date.getDate()
+        ).padStart(2, "0")
+    );
+}
+/* =====================================================
+   RENDER POSITION HISTORY
+===================================================== */
+function renderPositionHistory(demon) {
+    const history =
+        getPositionHistory(demon);
+    if (history.length === 0) {
+        return `
+            <div class="no-history">
+                No placement changes recorded.
+            </div>
+        `;
+    }
+    return history
+        .map(function(entry) {
+            const arrow =
+                entry.direction === "higher"
+                    ? "▲"
+                    : "▼";
+            return `
+                <div class="
+                    position-entry
+                    ${entry.direction}
+                ">
+                    <div class="position-reason">
+                        ${arrow} ${entry.reason}
+                    </div>
+                    <div class="position-date">
+                        ${formatDate(entry.date)}
+                    </div>
+                    <div class="position-number">
+                        #${entry.position}
+                    </div>
+                </div>
+            `;
+        })
+        .join("");
 }
 /* =====================================================
    RENDER LIST
 ===================================================== */
-function renderList(
-    selectedDate
-) {
+function renderList(selectedDate) {
     const list =
         document.getElementById(
             "demonList"
@@ -1027,7 +1184,12 @@ function renderList(
                 </button>
                 <button
                     class="victors-button"
-                    onclick="showDemonHistory('${escapeForAttribute(demon.name)}')"
+                    onclick="showDemonHistory(
+                        '${demon.name.replace(
+                            /'/g,
+                            "\\'"
+                        )}'
+                    )"
                 >
                     Demon History
                 </button>
@@ -1042,16 +1204,16 @@ function renderList(
                             No recorded victors.
                         </div>`
                         :
-                        demon.victors.map(
-                            function(victor) {
+                        demon.victors
+                            .map(function(victor) {
                                 return `
                                     <div class="victor">
                                         ${victor.country}
                                         ${victor.name}
                                     </div>
                                 `;
-                            }
-                        ).join("")
+                            })
+                            .join("")
                     }
                 </div>
             `;
@@ -1073,21 +1235,9 @@ function renderList(
     );
 }
 /* =====================================================
-   ESCAPE TEXT FOR ONCLICK
-===================================================== */
-function escapeForAttribute(
-    text
-) {
-    return text
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
-}
-/* =====================================================
    VICTORS
 ===================================================== */
-function toggleVictors(
-    button
-) {
+function toggleVictors(button) {
     const panel =
         button.nextElementSibling
             .nextElementSibling;
@@ -1107,174 +1257,14 @@ function toggleVictors(
     }
 }
 /* =====================================================
-   FORMAT DATE
-===================================================== */
-function formatDate(
-    dateString
-) {
-    return new Date(
-        dateString +
-        "T00:00:00"
-    ).toLocaleDateString(
-        "en-US",
-        {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        }
-    );
-}
-/* =====================================================
-   GET LIST POSITION ON A DATE
-===================================================== */
-function getDemonRankOnDate(
-    demonName,
-    date
-) {
-    const available =
-        getAvailableDemons(
-            date
-        );
-    const index =
-        available.findIndex(
-            function(demon) {
-                return demon.name ===
-                    demonName;
-            }
-        );
-    if (index === -1) {
-        return null;
-    }
-    return index + 1;
-}
-/* =====================================================
-   POSITION HISTORY
-=====================================================
-   IMPORTANT:
-   A new entry is only created when the demon's
-   placement actually changes.
-   Example:
-   #4 -> #4 -> #4
-   only creates ONE entry.
-   But:
-   #4 -> #3 -> #3 -> #2
-   creates entries for #4, #3 and #2.
-===================================================== */
-function getPositionHistory(
-    demon
-) {
-    const startDate =
-        new Date(
-            demon.verification +
-            "T00:00:00"
-        );
-    const endDate =
-        new Date(
-            todayString +
-            "T00:00:00"
-        );
-    const dates = [];
-    /*
-       Important dates are verification dates,
-       legacy dates and dates where another demon
-       enters the list.
-       These are the only dates capable of changing
-       the ranking.
-    */
-    demons.forEach(
-        function(other) {
-            const verificationDate =
-                new Date(
-                    other.verification +
-                    "T00:00:00"
-                );
-            if (
-                verificationDate >= startDate &&
-                verificationDate <= endDate
-            ) {
-                dates.push(
-                    other.verification
-                );
-            }
-            if (
-                other.legacyDate
-            ) {
-                const legacyDate =
-                    new Date(
-                        other.legacyDate +
-                        "T00:00:00"
-                    );
-                if (
-                    legacyDate >= startDate &&
-                    legacyDate <= endDate
-                ) {
-                    dates.push(
-                        other.legacyDate
-                    );
-                }
-            }
-        }
-    );
-    if (
-        demon.legacyDate
-    ) {
-        dates.push(
-            demon.legacyDate
-        );
-    }
-    dates.push(
-        demon.verification
-    );
-    dates.sort();
-    const uniqueDates =
-        [...new Set(dates)];
-    let previousRank =
-        null;
-    const history = [];
-    uniqueDates.forEach(
-        function(date) {
-            const rank =
-                getDemonRankOnDate(
-                    demon.name,
-                    date
-                );
-            if (
-                rank === null
-            ) {
-                return;
-            }
-            /*
-               Only save an entry if the position
-               is different from the previous position.
-            */
-            if (
-                previousRank === null ||
-                rank !== previousRank
-            ) {
-                history.push({
-                    date: date,
-                    rank: rank
-                });
-                previousRank =
-                    rank;
-            }
-        }
-    );
-    return history;
-}
-/* =====================================================
    DEMON HISTORY
 ===================================================== */
-function showDemonHistory(
-    demonName
-) {
+function showDemonHistory(demonName) {
     const demon =
-        demons.find(
-            function(item) {
-                return item.name ===
-                    demonName;
-            }
-        );
+        demons.find(function(item) {
+            return item.name ===
+                demonName;
+        });
     if (!demon) {
         return;
     }
@@ -1299,21 +1289,35 @@ function showDemonHistory(
         );
     history.className =
         "history-box";
-    const legacyHTML =
-        demon.legacyDate
-        ?
-        `
+    const verificationDate =
+        new Date(
+            demon.verification +
+            "T00:00:00"
+        );
+    const formattedVerification =
+        verificationDate.toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
+    let legacyHTML = "";
+    if (demon.legacyDate) {
+        legacyHTML = `
             <div class="info">
                 🏛️ Became Legacy:
                 ${formatDate(demon.legacyDate)}
             </div>
-        `
-        :
-        `
+        `;
+    } else {
+        legacyHTML = `
             <div class="info">
                 🟢 Currently Active
             </div>
         `;
+    }
     const victorsHTML =
         demon.victors.length === 0
         ?
@@ -1323,43 +1327,20 @@ function showDemonHistory(
             </div>
         `
         :
-        demon.victors.map(
-            function(victor) {
+        demon.victors
+            .map(function(victor) {
                 return `
                     <div class="victor">
                         ${victor.country}
                         ${victor.name}
                     </div>
                 `;
-            }
-        ).join("");
-    const positionHistory =
-        getPositionHistory(
+            })
+            .join("");
+    const positionHistoryHTML =
+        renderPositionHistory(
             demon
         );
-    const positionHistoryHTML =
-        positionHistory.length === 0
-        ?
-        `
-            <div class="info">
-                No position history recorded.
-            </div>
-        `
-        :
-        positionHistory.map(
-            function(entry) {
-                return `
-                    <div class="history-entry">
-                        <div class="history-entry-date">
-                            ${formatDate(entry.date)}
-                        </div>
-                        <div class="history-entry-rank">
-                            Position: #${entry.rank}
-                        </div>
-                    </div>
-                `;
-            }
-        ).join("");
     history.innerHTML = `
         <h2>
             ${demon.name}
@@ -1371,13 +1352,11 @@ function showDemonHistory(
             Verified By: ${demon.verifiedBy}
         </div>
         <div class="info">
-            📅 Verified:
-            ${formatDate(demon.verification)}
+            📅 Verified: ${formattedVerification}
         </div>
         ${legacyHTML}
         <div class="points">
-            List Points:
-            ${demon.points.toFixed(2)}
+            List Points: ${demon.points.toFixed(2)}
         </div>
         <div class="history-section">
             <h3>
@@ -1387,19 +1366,18 @@ function showDemonHistory(
         </div>
         <div class="history-section">
             <h3>
-                📈 Position History
+                📍 Position History
             </h3>
-            <div class="info">
-                Only actual placement changes are shown.
+            <div class="position-history">
+                ${positionHistoryHTML}
             </div>
-            ${positionHistoryHTML}
         </div>
         <div class="history-section">
             <h3>
                 📜 Timeline
             </h3>
             <div class="info">
-                ${formatDate(demon.verification)}
+                ${formattedVerification}
                 — Demon verified
             </div>
             ${
@@ -1407,7 +1385,9 @@ function showDemonHistory(
                 ?
                 `
                 <div class="info">
-                    ${formatDate(demon.legacyDate)}
+                    ${formatDate(
+                        demon.legacyDate
+                    )}
                     — Became Legacy
                 </div>
                 `
@@ -1448,25 +1428,24 @@ function showDemonHistory(
         };
 }
 /* =====================================================
-   NORMALIZE PLAYER NAMES
-=====================================================
-   This prevents:
-   wpopoff
-   Wpopoff
-   WPOPOFF
-   from becoming separate players.
-   The displayed/canonical name is taken from
-   the latest supplied victor entry.
+   PLAYER NAME NORMALIZATION
 ===================================================== */
-function normalizePlayerName(
-    name
-) {
-    return name
-        .trim()
-        .toLowerCase();
+/*
+   Capitalization does NOT create a new player.
+   wPopoff = Wpopoff
+   dovvin = Dovvin
+*/
+function normalizePlayerName(name) {
+    const lower =
+        name.toLowerCase();
+    const canonicalNames = {
+        "wpopoff": "wPopoff",
+        "dovvin": "dovvin"
+    };
+    return canonicalNames[lower] || name;
 }
 /* =====================================================
-   GET ALL PLAYERS
+   GET PLAYERS
 ===================================================== */
 function getAllPlayers() {
     const playerMap =
@@ -1475,32 +1454,17 @@ function getAllPlayers() {
         function(demon) {
             demon.victors.forEach(
                 function(victor) {
-                    const key =
+                    const canonicalName =
                         normalizePlayerName(
                             victor.name
                         );
-                    /*
-                       Explicit canonical names.
-                    */
-                    let canonicalName =
-                        victor.name;
                     if (
-                        key === "wpopoff"
-                    ) {
-                        canonicalName =
-                            "wpopoff";
-                    }
-                    if (
-                        key === "dovvin"
-                    ) {
-                        canonicalName =
-                            "dovvin";
-                    }
-                    if (
-                        !playerMap.has(key)
+                        !playerMap.has(
+                            canonicalName
+                        )
                     ) {
                         playerMap.set(
-                            key,
+                            canonicalName,
                             {
                                 name:
                                     canonicalName,
@@ -1512,11 +1476,9 @@ function getAllPlayers() {
                         );
                     }
                     const player =
-                        playerMap.get(key);
-                    /*
-                       Avoid duplicate completion
-                       entries for the same demon.
-                    */
+                        playerMap.get(
+                            canonicalName
+                        );
                     if (
                         !player.completions.includes(
                             demon.name
@@ -1525,21 +1487,6 @@ function getAllPlayers() {
                         player.completions.push(
                             demon.name
                         );
-                    }
-                    /*
-                       Keep canonical capitalization.
-                    */
-                    if (
-                        key === "wpopoff"
-                    ) {
-                        player.name =
-                            "wpopoff";
-                    }
-                    if (
-                        key === "dovvin"
-                    ) {
-                        player.name =
-                            "dovvin";
                     }
                 }
             );
@@ -1552,9 +1499,7 @@ function getAllPlayers() {
 /* =====================================================
    PLAYER POINTS
 ===================================================== */
-function calculatePlayerPoints(
-    player
-) {
+function calculatePlayerPoints(player) {
     let total = 0;
     player.completions.forEach(
         function(completionName) {
@@ -1568,29 +1513,14 @@ function calculatePlayerPoints(
             if (!demon) {
                 return;
             }
-            /*
-               Player points are based on the
-               demon's CURRENT list position.
-               This means a player's total updates
-               naturally when the current list changes.
-            */
             const currentRank =
-                getDemonRankOnDate(
-                    demon.name,
-                    todayString
-                );
-            if (
-                currentRank !== null
-            ) {
-                total +=
-                    getDemonPoints(
-                        demon,
-                        currentRank
-                    );
-            } else {
-                total +=
-                    demon.points || 0;
-            }
+                masterOrder.indexOf(
+                    demon.name
+                ) + 1;
+            total += getDemonPoints(
+                demon,
+                currentRank
+            );
         }
     );
     return total;
@@ -1606,47 +1536,24 @@ function renderLeaderboard() {
     leaderboard.innerHTML = "";
     const rankedPlayers =
         getAllPlayers()
-            .map(
-                function(player) {
-                    return {
-                        name:
-                            player.name,
-                        country:
-                            player.country,
-                        completions:
-                            player.completions,
-                        points:
-                            calculatePlayerPoints(
-                                player
-                            )
-                    };
-                }
-            )
-            .sort(
-                function(a, b) {
-                    if (
-                        b.points !==
-                        a.points
-                    ) {
-                        return b.points -
-                            a.points;
-                    }
-                    /*
-                       If points are tied,
-                       more completions wins.
-                    */
-                    if (
-                        b.completions.length !==
-                        a.completions.length
-                    ) {
-                        return b.completions.length -
-                            a.completions.length;
-                    }
-                    return a.name.localeCompare(
-                        b.name
-                    );
-                }
-            );
+            .map(function(player) {
+                return {
+                    name:
+                        player.name,
+                    country:
+                        player.country,
+                    completions:
+                        player.completions,
+                    points:
+                        calculatePlayerPoints(
+                            player
+                        )
+                };
+            })
+            .sort(function(a, b) {
+                return b.points -
+                    a.points;
+            });
     rankedPlayers.forEach(
         function(player, index) {
             const rank =
@@ -1772,9 +1679,7 @@ leaderboardButton.addEventListener(
 /* =====================================================
    TRAVEL TO DATE
 ===================================================== */
-function travelToDate(
-    selectedDate
-) {
+function travelToDate(selectedDate) {
     renderList(
         selectedDate
     );
