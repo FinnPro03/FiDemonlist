@@ -1,486 +1,626 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>FiDemonlist</title>
-
-<style>
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111111;
-    color: white;
-}
-
-header {
-    position: relative;
-    background: #1b1b1b;
-    padding: 25px 20px;
-    text-align: center;
-    border-bottom: 2px solid #333333;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 38px;
-}
-
-header p {
-    margin: 7px 0 0;
-    color: #aaaaaa;
-    font-size: 15px;
-}
-
-.header-buttons {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    gap: 8px;
-}
-
-.header-button {
-    padding: 11px 16px;
-    border: 1px solid #444444;
-    border-radius: 8px;
-    background: #292929;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.header-button:hover {
-    background: #383838;
-}
-
-.container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.search {
-    width: 100%;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #333333;
-    background: #1c1c1c;
-    color: white;
-    font-size: 16px;
-    margin-bottom: 25px;
-    outline: none;
-}
-
-.search::placeholder {
-    color: #777777;
-}
-
-.panel {
-    display: none;
-    background: #1c1c1c;
-    border: 1px solid #333333;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 25px;
-}
-
-.panel h2 {
-    margin-top: 0;
-    text-align: center;
-}
-
-.panel-description {
-    color: #aaaaaa;
-    text-align: center;
-}
-
-.date-input {
-    padding: 12px;
-    border-radius: 7px;
-    border: 1px solid #444444;
-    background: #111111;
-    color: white;
-    font-size: 16px;
-    margin: 10px;
-}
-
-.panel-buttons {
-    text-align: center;
-}
-
-.apply-button,
-.today-button {
-    padding: 12px 18px;
-    border-radius: 7px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.apply-button {
-    border: none;
-    background: #444444;
-    color: white;
-}
-
-.apply-button:hover {
-    background: #555555;
-}
-
-.today-button {
-    border: 1px solid #444444;
-    background: #222222;
-    color: white;
-    margin-left: 5px;
-}
-
-.today-button:hover {
-    background: #333333;
-}
-
-.time-travel-status {
-    display: none;
-    text-align: center;
-    color: #aaaaaa;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.demon {
-    background: #1c1c1c;
-    border: 1px solid #333333;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.image-container {
-    width: 100%;
-    max-width: 600px;
-    height: 280px;
-    margin: 0 auto 18px auto;
-    background: #333333;
-    border-radius: 9px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.demon-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
-.placeholder {
-    color: #aaaaaa;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.name {
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-.info {
-    color: #aaaaaa;
-    font-size: 15px;
-    margin: 6px 0;
-}
-
-.points {
-    color: white;
-    font-size: 15px;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.victors-button {
-    margin: 5px;
-    padding: 10px 17px;
-    border: 1px solid #444444;
-    border-radius: 7px;
-    background: #292929;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.victors-button:hover {
-    background: #383838;
-}
-
-.victors-panel {
-    display: none;
-    margin-top: 15px;
-    padding: 15px;
-    background: #151515;
-    border: 1px solid #333333;
-    border-radius: 9px;
-    text-align: left;
-}
-
-.victors-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.victor {
-    padding: 8px 0;
-    border-bottom: 1px solid #292929;
-    color: #dddddd;
-    font-size: 15px;
-}
-
-.victor:last-child {
-    border-bottom: none;
-}
-
-.leaderboard-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.player-card {
-    display: flex;
-    align-items: center;
-    background: #222222;
-    border: 1px solid #333333;
-    border-radius: 10px;
-    padding: 15px;
-}
-
-.player-rank {
-    width: 55px;
-    font-size: 23px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.player-info {
-    flex: 1;
-    margin-left: 10px;
-}
-
-.player-name {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.player-completions {
-    margin-top: 5px;
-    color: #999999;
-    font-size: 13px;
-}
-
-.player-points {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: right;
-}
-
-.no-demons {
-    display: none;
-    text-align: center;
-    padding: 50px 20px;
-    background: #1c1c1c;
-    border: 1px solid #333333;
-    border-radius: 12px;
-    color: #888888;
-    font-size: 18px;
-}
-
-/* ============================
-   HISTORY
-============================ */
-
-.history-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.75);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    z-index: 9999;
-}
-
-.history-box {
-    background: #1c1c1c;
-    border: 1px solid #444444;
-    border-radius: 14px;
-    padding: 25px;
-    width: 100%;
-    max-width: 650px;
-    max-height: 85vh;
-    overflow-y: auto;
-    text-align: center;
-}
-
-.history-box h2 {
-    margin-top: 0;
-    font-size: 28px;
-}
-
-.history-section {
-    border-top: 1px solid #333333;
-    margin-top: 20px;
-    padding-top: 20px;
-}
-
-.history-section h3 {
-    margin-top: 0;
-}
-
-.history-event {
-    background: #151515;
-    border: 1px solid #333333;
-    border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 12px;
-}
-
-.history-date {
-    text-align: center;
-    font-weight: bold;
-    color: #dddddd;
-    margin-bottom: 12px;
-}
-
-.history-event-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 15px;
-    align-items: center;
-}
-
-.history-reason {
-    text-align: left;
-    color: #dddddd;
-    font-size: 14px;
-}
-
-.history-position {
-    min-width: 75px;
-    text-align: right;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.history-placed {
-    border-left: 4px solid #e6c84f;
-}
-
-.history-placed .history-position {
-    color: #e6c84f;
-}
-
-.history-higher {
-    border-left: 4px solid #4caf50;
-}
-
-.history-higher .history-position {
-    color: #4caf50;
-}
-
-.history-lower {
-    border-left: 4px solid #e53935;
-}
-
-.history-lower .history-position {
-    color: #e53935;
-}
-
-.close-history {
-    margin-top: 20px;
-    padding: 10px 18px;
-    border: 1px solid #444444;
-    border-radius: 7px;
-    background: #292929;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-history:hover {
-    background: #383838;
-}
-
-@media (max-width: 700px) {
-
-    header {
-        padding-bottom: 85px;
-    }
-
-    header h1 {
-        font-size: 30px;
-    }
-
-    .header-buttons {
-        top: auto;
-        bottom: 15px;
-        right: 0;
-        left: 0;
-        transform: none;
-        justify-content: center;
-    }
-
-    .header-button {
-        padding: 10px 13px;
-    }
-
-    .player-card {
-        padding: 12px;
-    }
-
-    .player-points {
-        font-size: 15px;
-    }
-
-    .history-event-row {
-        grid-template-columns: 1fr 65px;
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FiDemonlist</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111111;
+            color: white;
+        }
+
+        header {
+            position: relative;
+            background: #1b1b1b;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 2px solid #333333;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        header p {
+            margin: 7px 0 0;
+            color: #aaaaaa;
+            font-size: 15px;
+        }
+
+        .header-buttons {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-button {
+            padding: 11px 16px;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            background: #292929;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .header-button:hover {
+            background: #383838;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+            background: #1c1c1c;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 25px;
+            outline: none;
+        }
+
+        .search::placeholder {
+            color: #777777;
+        }
+
+        .panel {
+            display: none;
+            background: #1c1c1c;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .panel-description {
+            color: #aaaaaa;
+            text-align: center;
+        }
+
+        .date-input {
+            padding: 12px;
+            border-radius: 7px;
+            border: 1px solid #444444;
+            background: #111111;
+            color: white;
+            font-size: 16px;
+            margin: 10px;
+        }
+
+        .panel-buttons {
+            text-align: center;
+        }
+
+        .apply-button,
+        .today-button {
+            padding: 12px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .apply-button {
+            border: none;
+            background: #444444;
+            color: white;
+        }
+
+        .apply-button:hover {
+            background: #555555;
+        }
+
+        .today-button {
+            border: 1px solid #444444;
+            background: #222222;
+            color: white;
+            margin-left: 5px;
+        }
+
+        .today-button:hover {
+            background: #333333;
+        }
+
+        .time-travel-status {
+            display: none;
+            text-align: center;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .demon {
+            background: #1c1c1c;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 600px;
+            height: 280px;
+            margin: 0 auto 18px auto;
+            background: #333333;
+            border-radius: 9px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .demon-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .placeholder {
+            color: #aaaaaa;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .name {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .info {
+            color: #aaaaaa;
+            font-size: 15px;
+            margin: 6px 0;
+        }
+
+        .points {
+            color: white;
+            font-size: 15px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .victors-button {
+            margin: 5px;
+            padding: 10px 17px;
+            border: 1px solid #444444;
+            border-radius: 7px;
+            background: #292929;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .victors-button:hover {
+            background: #383838;
+        }
+
+        .victors-panel {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #151515;
+            border: 1px solid #333333;
+            border-radius: 9px;
+            text-align: left;
+        }
+
+        .victors-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .victor {
+            padding: 8px 0;
+            border-bottom: 1px solid #292929;
+            color: #dddddd;
+            font-size: 15px;
+        }
+
+        .victor:last-child {
+            border-bottom: none;
+        }
+
+        .victor-player {
+            cursor: pointer;
+        }
+
+        .victor-player:hover {
+            text-decoration: underline;
+        }
+
+        .leaderboard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .player-card {
+            display: flex;
+            align-items: center;
+            background: #222222;
+            border: 1px solid #333333;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .player-rank {
+            width: 55px;
+            font-size: 23px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .player-info {
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        .player-name {
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .player-name:hover {
+            text-decoration: underline;
+        }
+
+        .player-completions {
+            margin-top: 5px;
+            color: #999999;
+            font-size: 13px;
+        }
+
+        .player-points {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .no-demons {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            background: #1c1c1c;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            color: #888888;
+            font-size: 18px;
+        }
+
+        /* ============================
+           DEMON HISTORY
+        ============================ */
+
+        .history-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        .history-box {
+            background: #1c1c1c;
+            border: 1px solid #444444;
+            border-radius: 14px;
+            padding: 25px;
+            width: 100%;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+        .history-box h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .history-section {
+            border-top: 1px solid #333333;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .history-section h3 {
+            margin-top: 0;
+        }
+
+        .close-history {
+            margin-top: 20px;
+            padding: 10px 18px;
+            border: 1px solid #444444;
+            border-radius: 7px;
+            background: #292929;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-history:hover {
+            background: #383838;
+        }
+
+        /* ============================
+           POSITION HISTORY
+        ============================ */
+
+        .position-history {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .position-event {
+            background: #222222;
+            border: 1px solid #333333;
+            border-radius: 9px;
+            padding: 14px;
+        }
+
+        .position-date {
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .position-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .position-reason {
+            flex: 1;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .position-number {
+            width: 70px;
+            text-align: right;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .position-higher {
+            color: #55d66b;
+        }
+
+        .position-lower {
+            color: #ff5555;
+        }
+
+        .position-placed {
+            color: #e5c84b;
+        }
+
+        /* ============================
+           PLAYER PROFILE
+        ============================ */
+
+        .profile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 10000;
+        }
+
+        .profile-box {
+            width: 100%;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background: #1c1c1c;
+            border: 1px solid #444444;
+            border-radius: 14px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .profile-box h2 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .profile-country {
+            color: #cccccc;
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .profile-stat {
+            background: #222222;
+            border: 1px solid #333333;
+            border-radius: 10px;
+            padding: 15px 8px;
+        }
+
+        .profile-stat-number {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .profile-stat-label {
+            margin-top: 5px;
+            color: #999999;
+            font-size: 12px;
+        }
+
+        .profile-section {
+            border-top: 1px solid #333333;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .profile-demon {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 5px;
+            border-bottom: 1px solid #292929;
+            text-align: left;
+        }
+
+        .profile-demon:last-child {
+            border-bottom: none;
+        }
+
+        .profile-demon-name {
+            font-weight: bold;
+        }
+
+        .profile-demon-points {
+            color: #bbbbbb;
+            font-size: 14px;
+        }
+
+        .close-profile {
+            margin-top: 22px;
+            padding: 10px 18px;
+            border: 1px solid #444444;
+            border-radius: 7px;
+            background: #292929;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-profile:hover {
+            background: #383838;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding-bottom: 85px;
+            }
+
+            header h1 {
+                font-size: 30px;
+            }
+
+            .header-buttons {
+                top: auto;
+                bottom: 15px;
+                right: 0;
+                left: 0;
+                transform: none;
+                justify-content: center;
+            }
+
+            .header-button {
+                padding: 10px 13px;
+            }
+
+            .player-card {
+                padding: 12px;
+            }
+
+            .player-points {
+                font-size: 15px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .position-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .position-number {
+                width: auto;
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
+
 
 <header>
 
     <h1>FiDemonlist</h1>
 
-    <p>The Custom Geometry Dash Demonlist</p>
+    <p>
+        The Custom Geometry Dash Demonlist
+    </p>
 
     <div class="header-buttons">
 
-        <button class="header-button" id="timeTravelButton">
+        <button
+            class="header-button"
+            id="timeTravelButton"
+        >
             Time Travel
         </button>
 
-        <button class="header-button" id="leaderboardButton">
+        <button
+            class="header-button"
+            id="leaderboardButton"
+        >
             Player Leaderboard
         </button>
 
@@ -488,9 +628,18 @@ header p {
 
 </header>
 
+
 <div class="container">
 
-    <div class="panel" id="timeTravelPanel">
+
+    <!-- ============================
+         TIME TRAVEL
+    ============================ -->
+
+    <div
+        class="panel"
+        id="timeTravelPanel"
+    >
 
         <h2>Time Travel</h2>
 
@@ -506,11 +655,17 @@ header p {
                 class="date-input"
             >
 
-            <button class="apply-button" id="applyDate">
+            <button
+                class="apply-button"
+                id="applyDate"
+            >
                 Travel
             </button>
 
-            <button class="today-button" id="returnToday">
+            <button
+                class="today-button"
+                id="returnToday"
+            >
                 Today
             </button>
 
@@ -518,19 +673,40 @@ header p {
 
     </div>
 
-    <div class="panel" id="leaderboardPanel">
+
+    <!-- ============================
+         PLAYER LEADERBOARD
+    ============================ -->
+
+    <div
+        class="panel"
+        id="leaderboardPanel"
+    >
 
         <h2>Player Leaderboard</h2>
 
         <p class="panel-description">
             Player rankings are based on completed FiDemonlist demons.
+            Click a player to open their profile.
         </p>
 
-        <div class="leaderboard-list" id="leaderboardList"></div>
+        <div
+            class="leaderboard-list"
+            id="leaderboardList"
+        ></div>
 
     </div>
 
-    <div class="time-travel-status" id="timeTravelStatus"></div>
+
+    <div
+        class="time-travel-status"
+        id="timeTravelStatus"
+    ></div>
+
+
+    <!-- ============================
+         SEARCH
+    ============================ -->
 
     <input
         id="search"
@@ -539,15 +715,26 @@ header p {
         placeholder="Search demons..."
     >
 
+
+    <!-- ============================
+         DEMON LIST
+    ============================ -->
+
     <div id="demonList"></div>
 
-    <div class="no-demons" id="noDemons">
+
+    <div
+        class="no-demons"
+        id="noDemons"
+    >
         No demons were on the list at this date.
     </div>
 
 </div>
 
+
 <script>
+
 
 /* =====================================================
    DEMON DATABASE
@@ -562,11 +749,13 @@ const demons = [
         verification: "2026-06-20",
         image: "Society.jpeg",
         points: 350.00,
+
         victors: [
-            { name: "wPopoff", country: "🇺🇸" },
+            { name: "Wpopoff", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" }
         ]
     },
+
 
     {
         name: "Thinking Space II",
@@ -575,12 +764,14 @@ const demons = [
         verification: "2025-05-25",
         image: "Thinking Space II.jpeg",
         points: 331.71,
+
         victors: [
             { name: "Zoink", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
+            { name: "Wpopoff", country: "🇺🇸" },
             { name: "Trick", country: "🇺🇸" }
         ]
     },
+
 
     {
         name: "Amethyst",
@@ -589,11 +780,13 @@ const demons = [
         verification: "2025-05-25",
         image: "Amethyst.jpeg",
         points: 313.42,
+
         victors: [
-            { name: "wPopoff", country: "🇺🇸" },
+            { name: "Wpopoff", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" }
         ]
     },
+
 
     {
         name: "Flamewall",
@@ -602,12 +795,14 @@ const demons = [
         verification: "2025-09-21",
         image: "Flamewall.jpeg",
         points: 291.70,
+
         victors: [
             { name: "Cuatrocientos", country: "🇪🇸" },
             { name: "Zoink", country: "🇺🇸" },
             { name: "zLevii", country: "🇳🇿" }
         ]
     },
+
 
     {
         name: "Tidal Wave",
@@ -616,15 +811,17 @@ const demons = [
         verification: "2023-09-09",
         image: "Tidal Wave.jpeg",
         points: 271.78,
+
         victors: [
             { name: "Zoink", country: "🇺🇸" },
             { name: "Trick", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
+            { name: "Wpopoff", country: "🇺🇸" },
             { name: "Taiago", country: "🇵🇹" },
             { name: "Netermind", country: "🇺🇸" },
             { name: "레전드아잉몰라요", country: "🇰🇷" }
         ]
     },
+
 
     {
         name: "Green Bullet",
@@ -633,10 +830,12 @@ const demons = [
         verification: "2026-06-16",
         image: "Green Bullet.jpeg",
         points: 253.53,
+
         victors: [
             { name: "Nickname09", country: "🇷🇺" }
         ]
     },
+
 
     {
         name: "Orbit",
@@ -645,12 +844,14 @@ const demons = [
         verification: "2026-02-10",
         image: "Orbit.jpeg",
         points: 236.80,
+
         victors: [
             { name: "Zoink", country: "🇺🇸" },
             { name: "dovvin", country: "🇵🇱" },
             { name: "Thelifinof", country: "🇺🇸" }
         ]
     },
+
 
     {
         name: "Antarctic Lights",
@@ -659,11 +860,13 @@ const demons = [
         verification: "2026-07-16",
         image: "Antarctic Lights.jpeg",
         points: 221.47,
+
         victors: [
             { name: "Axinity", country: "🇩🇰" },
             { name: "Weyolll3", country: "🇪🇸" }
         ]
     },
+
 
     {
         name: "Nullscapes",
@@ -672,6 +875,7 @@ const demons = [
         verification: "2024-09-04",
         image: "Nullscapes.jpeg",
         points: 207.42,
+
         victors: [
             { name: "Zoink", country: "🇺🇸" },
             { name: "Spookkd", country: "🇺🇸" },
@@ -684,6 +888,7 @@ const demons = [
         ]
     },
 
+
     {
         name: "Quanteuse Processing",
         createdBy: "Renn241 and BlankB",
@@ -691,6 +896,7 @@ const demons = [
         verification: "2024-12-31",
         image: "Quanteuse Processing.jpeg",
         points: 194.54,
+
         victors: [
             { name: "Zoink", country: "🇺🇸" },
             { name: "dovvin", country: "🇵🇱" },
@@ -700,6 +906,7 @@ const demons = [
         ]
     },
 
+
     {
         name: "BOOBAWAMBA",
         createdBy: "Akunakunn",
@@ -707,6 +914,7 @@ const demons = [
         verification: "2024-10-05",
         image: "BOOBAWAMBA.jpeg",
         points: 182.73,
+
         victors: [
             { name: "Eastshark", country: "🇪🇸" },
             { name: "Agonom", country: "🇰🇷" },
@@ -716,6 +924,7 @@ const demons = [
         ]
     },
 
+
     {
         name: "The Bloop",
         createdBy: "murkkat",
@@ -723,10 +932,12 @@ const demons = [
         verification: "2026-03-15",
         image: "The Bloop.jpeg",
         points: 171.91,
+
         victors: [
             { name: "Zoink", country: "🇺🇸" }
         ]
     },
+
 
     {
         name: "Every End",
@@ -735,6 +946,7 @@ const demons = [
         verification: "2025-03-16",
         image: "Every End.jpeg",
         points: 161.99,
+
         victors: [
             { name: "Hqmy", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" },
@@ -757,6 +969,7 @@ const demons = [
         ]
     },
 
+
     {
         name: "Penumbral",
         createdBy: "nxhtrise",
@@ -764,6 +977,7 @@ const demons = [
         verification: "2026-03-05",
         image: "Penumbral.jpeg",
         points: 152.89,
+
         victors: [
             { name: "w3rty", country: "🇷🇺" },
             { name: "dovvin", country: "🇵🇱" },
@@ -772,6 +986,7 @@ const demons = [
         ]
     },
 
+
     {
         name: "Silent Clubstep",
         createdBy: "Sailent",
@@ -779,6 +994,7 @@ const demons = [
         verification: "2022-07-12",
         image: "Silent Clubstep.jpeg",
         points: 144.56,
+
         victors: [
             { name: "paqoe", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" },
@@ -826,10 +1042,11 @@ const demons = [
         ]
     },
 
-    /* ============================
-       LEGACY
-       DISAPPEARS IN 2021
-    ============================ */
+
+    /* =================================================
+       LEGACY DEMONS
+       LEGACY CUTOFF: 2021
+    ================================================= */
 
     {
         name: "Bloodbath",
@@ -839,8 +1056,11 @@ const demons = [
         legacyDate: "2021-01-01",
         image: "Bloodbath.jpeg",
         points: 18.65,
+
+        /* Bloodbath is classified as having no recorded victors. */
         victors: []
     },
+
 
     {
         name: "The Hell Factory",
@@ -850,8 +1070,10 @@ const demons = [
         legacyDate: "2021-01-01",
         image: "The Hell Factory.jpeg",
         points: 18.10,
+
         victors: []
     },
+
 
     {
         name: "The Ultimate Phase",
@@ -861,8 +1083,10 @@ const demons = [
         legacyDate: "2021-01-01",
         image: "The Ultimate Phase.jpeg",
         points: 17.50,
+
         victors: []
     },
+
 
     {
         name: "Cataclysm",
@@ -872,6 +1096,7 @@ const demons = [
         legacyDate: "2021-01-01",
         image: "Cataclysm.jpeg",
         points: 17.00,
+
         victors: []
     }
 
@@ -899,6 +1124,14 @@ const masterOrder = [
     "Every End",
     "Penumbral",
     "Silent Clubstep",
+
+    /*
+       Legacy order:
+       Bloodbath
+       The Hell Factory
+       The Ultimate Phase
+       Cataclysm
+    */
 
     "Bloodbath",
     "The Hell Factory",
@@ -940,11 +1173,13 @@ const currentRankPoints = {
 function getTimeAgo(date) {
 
     const now = new Date();
+
     const difference = now - date;
 
     const totalDays =
         Math.floor(
-            difference / (1000 * 60 * 60 * 24)
+            difference /
+            (1000 * 60 * 60 * 24)
         );
 
     const totalWeeks =
@@ -956,41 +1191,54 @@ function getTimeAgo(date) {
     const totalYears =
         Math.floor(totalDays / 365.2425);
 
+
     if (totalYears >= 1) {
 
         return totalYears +
-            (totalYears === 1
-                ? " Year Ago"
-                : " Years Ago");
+            (
+                totalYears === 1
+                    ? " Year Ago"
+                    : " Years Ago"
+            );
 
     }
+
 
     if (totalMonths >= 1) {
 
         return totalMonths +
-            (totalMonths === 1
-                ? " Month Ago"
-                : " Months Ago");
+            (
+                totalMonths === 1
+                    ? " Month Ago"
+                    : " Months Ago"
+            );
 
     }
+
 
     if (totalWeeks >= 1) {
 
         return totalWeeks +
-            (totalWeeks === 1
-                ? " Week Ago"
-                : " Weeks Ago");
+            (
+                totalWeeks === 1
+                    ? " Week Ago"
+                    : " Weeks Ago"
+            );
 
     }
+
 
     if (totalDays >= 1) {
 
         return totalDays +
-            (totalDays === 1
-                ? " Day Ago"
-                : " Days Ago");
+            (
+                totalDays === 1
+                    ? " Day Ago"
+                    : " Days Ago"
+            );
 
     }
+
 
     return "Today";
 
@@ -998,21 +1246,34 @@ function getTimeAgo(date) {
 
 
 /* =====================================================
-   DEMON EXISTS
+   CHECK IF DEMON EXISTS
 ===================================================== */
 
-function demonExists(demon, selectedDate) {
+function demonExists(
+    demon,
+    selectedDate
+) {
 
-    if (selectedDate < demon.verification) {
+    if (
+        selectedDate <
+        demon.verification
+    ) {
+
         return false;
+
     }
+
 
     if (
         demon.legacyDate &&
-        selectedDate >= demon.legacyDate
+        selectedDate >=
+        demon.legacyDate
     ) {
+
         return false;
+
     }
+
 
     return true;
 
@@ -1020,48 +1281,84 @@ function demonExists(demon, selectedDate) {
 
 
 /* =====================================================
-   AVAILABLE DEMONS
+   GET AVAILABLE DEMONS
 ===================================================== */
 
-function getAvailableDemons(selectedDate) {
+function getAvailableDemons(
+    selectedDate
+) {
 
     return masterOrder
-        .map(function(name) {
+        .map(
+            function(name) {
 
-            return demons.find(function(demon) {
-                return demon.name === name;
-            });
+                return demons.find(
+                    function(demon) {
 
-        })
-        .filter(function(demon) {
+                        return demon.name === name;
 
-            return demon &&
-                demonExists(demon, selectedDate);
+                    }
+                );
 
-        });
+            }
+        )
+        .filter(
+            function(demon) {
+
+                return demon &&
+                    demonExists(
+                        demon,
+                        selectedDate
+                    );
+
+            }
+        );
 
 }
 
 
 /* =====================================================
-   POINTS
+   GET POINTS
 ===================================================== */
 
-function getDemonPoints(demon, rank) {
+function getDemonPoints(
+    demon,
+    rank
+) {
 
     if (
-        demon.legacyDate &&
-        currentRankPoints[rank] === undefined
+        demon.name === "Bloodbath"
     ) {
-        return demon.points;
+        return 18.65;
     }
 
     if (
-        currentRankPoints[rank] !== undefined &&
-        !demon.legacyDate
+        demon.name === "The Hell Factory"
     ) {
+        return 18.10;
+    }
+
+    if (
+        demon.name === "The Ultimate Phase"
+    ) {
+        return 17.50;
+    }
+
+    if (
+        demon.name === "Cataclysm"
+    ) {
+        return 17.00;
+    }
+
+
+    if (
+        currentRankPoints[rank] !== undefined
+    ) {
+
         return currentRankPoints[rank];
+
     }
+
 
     return demon.points || 0;
 
@@ -1072,160 +1369,203 @@ function getDemonPoints(demon, rank) {
    RENDER LIST
 ===================================================== */
 
-function renderList(selectedDate) {
+function renderList(
+    selectedDate
+) {
 
     const list =
-        document.getElementById("demonList");
+        document.getElementById(
+            "demonList"
+        );
 
     list.innerHTML = "";
 
+
     const noDemons =
-        document.getElementById("noDemons");
+        document.getElementById(
+            "noDemons"
+        );
+
 
     const availableDemons =
-        getAvailableDemons(selectedDate);
+        getAvailableDemons(
+            selectedDate
+        );
 
-    if (availableDemons.length === 0) {
 
-        noDemons.style.display = "block";
+    if (
+        availableDemons.length === 0
+    ) {
+
+        noDemons.style.display =
+            "block";
+
         return;
 
     }
 
-    noDemons.style.display = "none";
 
-    availableDemons.forEach(function(demon, index) {
+    noDemons.style.display =
+        "none";
 
-        const rank = index + 1;
 
-        const points =
-            getDemonPoints(demon, rank);
+    availableDemons.forEach(
+        function(demon, index) {
 
-        const card =
-            document.createElement("div");
+            const rank =
+                index + 1;
 
-        card.className = "demon";
-        card.dataset.name = demon.name;
 
-        card.innerHTML = `
+            const points =
+                getDemonPoints(
+                    demon,
+                    rank
+                );
 
-            <div class="image-container">
 
-                <img
-                    class="demon-image"
-                    src="${demon.image}"
-                    alt="${demon.name}"
-                >
+            const card =
+                document.createElement(
+                    "div"
+                );
 
-            </div>
 
-            <div class="name">
-                #${rank} - ${demon.name}
-            </div>
+            card.className =
+                "demon";
 
-            <div class="info">
-                Created By: ${demon.createdBy}
-            </div>
 
-            <div class="info">
-                Verified By: ${demon.verifiedBy}
-            </div>
+            card.dataset.name =
+                demon.name;
 
-            <div class="info">
-                Verified:
-                ${getTimeAgo(
-                    new Date(
-                        demon.verification + "T00:00:00"
-                    )
-                )}
-            </div>
 
-            <div class="points">
-                List Points: ${points.toFixed(2)}
-            </div>
+            card.innerHTML = `
 
-            <button
-                class="victors-button"
-                onclick="toggleVictors(this)"
-            >
-                Victors
-            </button>
+                <div class="image-container">
 
-            <button
-                class="victors-button"
-                onclick="showDemonHistory('${escapeQuotes(demon.name)}')"
-            >
-                Demon History
-            </button>
+                    <img
+                        class="demon-image"
+                        src="${demon.image}"
+                        alt="${demon.name}"
+                    >
 
-            <div class="victors-panel">
-
-                <div class="victors-title">
-                    Victors
                 </div>
 
-                ${
-                    demon.victors.length === 0
-                    ?
-                    `
-                    <div class="victor">
-                        No recorded victors.
+
+                <div class="name">
+                    #${rank} - ${demon.name}
+                </div>
+
+
+                <div class="info">
+                    Created By: ${demon.createdBy}
+                </div>
+
+
+                <div class="info">
+                    Verified By: ${demon.verifiedBy}
+                </div>
+
+
+                <div class="info">
+                    Verified: ${getTimeAgo(
+                        new Date(
+                            demon.verification +
+                            "T00:00:00"
+                        )
+                    )}
+                </div>
+
+
+                <div class="points">
+                    List Points: ${points.toFixed(2)}
+                </div>
+
+
+                <button
+                    class="victors-button"
+                    onclick="toggleVictors(this)"
+                >
+                    Victors
+                </button>
+
+
+                <button
+                    class="victors-button"
+                    onclick="showDemonHistory('${demon.name.replace(/'/g, "\\'")}')"
+                >
+                    Demon History
+                </button>
+
+
+                <div class="victors-panel">
+
+                    <div class="victors-title">
+                        Victors
                     </div>
-                    `
-                    :
-                    demon.victors.map(function(victor) {
 
-                        return `
-                        <div class="victor">
-                            ${victor.country}
-                            ${escapeHTML(victor.name)}
-                        </div>
-                        `;
+                    ${
+                        demon.victors.length === 0
 
-                    }).join("")
-                }
+                        ?
 
-            </div>
-        `;
+                        `<div class="victor">
+                            No recorded victors.
+                        </div>`
 
-        const image =
-            card.querySelector(".demon-image");
+                        :
 
-        image.onerror = function() {
+                        demon.victors.map(
+                            function(victor) {
 
-            image.parentElement.innerHTML =
-                '<div class="placeholder">Placeholder</div>';
+                                return `
+                                    <div class="victor">
 
-        };
+                                        ${victor.country}
 
-        list.appendChild(card);
+                                        <span
+                                            class="victor-player"
+                                            onclick="showPlayerProfile('${victor.name.replace(/'/g, "\\'")}')"
+                                        >
+                                            ${victor.name}
+                                        </span>
 
-    });
+                                    </div>
+                                `;
 
-}
+                            }
+                        ).join("")
 
+                    }
 
-/* =====================================================
-   ESCAPE
-===================================================== */
+                </div>
 
-function escapeHTML(text) {
-
-    return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
+            `;
 
 
-function escapeQuotes(text) {
+            const image =
+                card.querySelector(
+                    ".demon-image"
+                );
 
-    return String(text)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+
+            image.onerror =
+                function() {
+
+                    const container =
+                        image.parentElement;
+
+
+                    container.innerHTML =
+                        '<div class="placeholder">Placeholder</div>';
+
+                };
+
+
+            list.appendChild(
+                card
+            );
+
+        }
+    );
 
 }
 
@@ -1234,20 +1574,32 @@ function escapeQuotes(text) {
    VICTORS
 ===================================================== */
 
-function toggleVictors(button) {
+function toggleVictors(
+    button
+) {
 
     const panel =
         button.nextElementSibling.nextElementSibling;
 
-    if (panel.style.display === "block") {
 
-        panel.style.display = "none";
-        button.textContent = "Victors";
+    if (
+        panel.style.display ===
+        "block"
+    ) {
+
+        panel.style.display =
+            "none";
+
+        button.textContent =
+            "Victors";
 
     } else {
 
-        panel.style.display = "block";
-        button.textContent = "Hide Victors";
+        panel.style.display =
+            "block";
+
+        button.textContent =
+            "Hide Victors";
 
     }
 
@@ -1255,252 +1607,233 @@ function toggleVictors(button) {
 
 
 /* =====================================================
-   DATE FORMATTING
+   POSITION HISTORY DATA
+=====================================================
+
+   Only add an event when the demon's actual
+   placement changes.
+
+   type:
+   "placed" = yellow
+   "higher" = green
+   "lower" = red
+
 ===================================================== */
 
-function formatDate(dateString) {
+const positionHistory = {
 
-    return new Date(
-        dateString + "T00:00:00"
-    ).toLocaleDateString(
-        "en-US",
+    "Society": [
         {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
+            date: "2026-06-20",
+            reason: "Society Placed",
+            position: 1,
+            type: "placed"
         }
-    );
+    ],
 
-}
+    "Thinking Space II": [
+        {
+            date: "2025-05-25",
+            reason: "Thinking Space II Placed",
+            position: 1,
+            type: "placed"
+        },
 
-
-/* =====================================================
-   HISTORICAL POSITION
-===================================================== */
-
-/*
-    The historical list is calculated from the final
-    master order.
-
-    A demon enters the list on its verification date.
-    Every later demon that is CURRENTLY above it pushes
-    it down.
-
-    Multiple demons entering above on the same date
-    are grouped into ONE history event.
-*/
-
-function getHistoricalPositionEvents(demon) {
-
-    const events = [];
-
-    const allRelevant =
-        demons
-            .filter(function(item) {
-
-                return (
-                    item.verification <=
-                    demon.verification
-                );
-
-            })
-            .sort(function(a, b) {
-
-                if (
-                    a.verification ===
-                    b.verification
-                ) {
-
-                    return (
-                        masterOrder.indexOf(a.name) -
-                        masterOrder.indexOf(b.name)
-                    );
-
-                }
-
-                return a.verification.localeCompare(
-                    b.verification
-                );
-
-            });
-
-
-    /*
-        Find the position at the moment this demon
-        was initially placed.
-    */
-
-    let positionAtPlacement = 1;
-
-    allRelevant.forEach(function(item) {
-
-        if (
-            item.name === demon.name
-        ) {
-            return;
+        {
+            date: "2026-06-20",
+            reason: "Society Placed Above",
+            position: 2,
+            type: "lower"
         }
+    ],
 
-        const itemRank =
-            masterOrder.indexOf(item.name);
+    "Amethyst": [
+        {
+            date: "2025-05-25",
+            reason: "Amethyst Placed",
+            position: 1,
+            type: "placed"
+        },
 
-        const demonRank =
-            masterOrder.indexOf(demon.name);
+        {
+            date: "2026-06-20",
+            reason: "Society Placed Above",
+            position: 2,
+            type: "lower"
+        },
 
-        if (
-            itemRank !== -1 &&
-            demonRank !== -1 &&
-            itemRank < demonRank
-        ) {
-
-            positionAtPlacement++;
-
+        {
+            date: "2026-06-20",
+            reason: "Thinking Space II Placed Above",
+            position: 3,
+            type: "lower"
         }
+    ],
 
-    });
-
-
-    /*
-        For levels that were already verified before
-        the demon, use their final ordering.
-    */
-
-    events.push({
-
-        date: demon.verification,
-        type: "placed",
-        position: positionAtPlacement,
-        reasons: ["Placed on the FiDemonlist"]
-
-    });
-
-
-    let currentPosition =
-        positionAtPlacement;
-
-
-    /*
-        Look at EVERY later verification date.
-
-        We group all demons verified on the same day.
-    */
-
-    const laterDemons =
-        demons.filter(function(item) {
-
-            return (
-                item.verification >
-                demon.verification
-            );
-
-        });
-
-
-    const dateGroups = new Map();
-
-    laterDemons.forEach(function(item) {
-
-        if (!dateGroups.has(item.verification)) {
-
-            dateGroups.set(
-                item.verification,
-                []
-            );
-
+    "Flamewall": [
+        {
+            date: "2025-09-21",
+            reason: "Flamewall Placed",
+            position: 1,
+            type: "placed"
         }
+    ],
 
-        dateGroups
-            .get(item.verification)
-            .push(item);
-
-    });
-
-
-    const sortedDates =
-        Array.from(dateGroups.keys())
-            .sort();
-
-
-    sortedDates.forEach(function(date) {
-
-        const group =
-            dateGroups.get(date);
-
-
-        const pushingDemons =
-            group.filter(function(item) {
-
-                const itemRank =
-                    masterOrder.indexOf(item.name);
-
-                const demonRank =
-                    masterOrder.indexOf(demon.name);
-
-                return (
-                    itemRank !== -1 &&
-                    demonRank !== -1 &&
-                    itemRank < demonRank
-                );
-
-            });
-
-
-        if (pushingDemons.length === 0) {
-            return;
+    "Tidal Wave": [
+        {
+            date: "2023-09-09",
+            reason: "Tidal Wave Placed",
+            position: 1,
+            type: "placed"
         }
+    ],
 
-
-        /*
-            Only record the event if the position
-            actually changes.
-        */
-
-        const newPosition =
-            currentPosition +
-            pushingDemons.length;
-
-
-        if (newPosition === currentPosition) {
-            return;
+    "Green Bullet": [
+        {
+            date: "2026-06-16",
+            reason: "Green Bullet Placed",
+            position: 1,
+            type: "placed"
         }
+    ],
 
+    "Orbit": [
+        {
+            date: "2026-02-10",
+            reason: "Orbit Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
-        events.push({
+    "Antarctic Lights": [
+        {
+            date: "2026-07-16",
+            reason: "Antarctic Lights Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
-            date: date,
-            type: "lower",
-            position: newPosition,
+    "Nullscapes": [
+        {
+            date: "2024-09-04",
+            reason: "Nullscapes Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
-            reasons:
-                pushingDemons.map(function(item) {
-                    return item.name;
-                })
+    "Quanteuse Processing": [
+        {
+            date: "2024-12-31",
+            reason: "Quanteuse Processing Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
-        });
+    "BOOBAWAMBA": [
+        {
+            date: "2024-10-05",
+            reason: "BOOBAWAMBA Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
+    "The Bloop": [
+        {
+            date: "2026-03-15",
+            reason: "The Bloop Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
-        currentPosition =
-            newPosition;
+    "Every End": [
+        {
+            date: "2025-03-16",
+            reason: "Every End Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
-    });
+    "Penumbral": [
+        {
+            date: "2026-03-05",
+            reason: "Penumbral Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
+    "Silent Clubstep": [
+        {
+            date: "2022-07-12",
+            reason: "Silent Clubstep Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
-    return events;
+    "Bloodbath": [
+        {
+            date: "2015-08-12",
+            reason: "Bloodbath Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
 
-}
+    "The Hell Factory": [
+        {
+            date: "2015-12-28",
+            reason: "The Hell Factory Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
+
+    "The Ultimate Phase": [
+        {
+            date: "2016-06-21",
+            reason: "The Ultimate Phase Placed",
+            position: 1,
+            type: "placed"
+        }
+    ],
+
+    "Cataclysm": [
+        {
+            date: "2016-01-15",
+            reason: "Cataclysm Placed",
+            position: 1,
+            type: "placed"
+        }
+    ]
+
+};
 
 
 /* =====================================================
    DEMON HISTORY
 ===================================================== */
 
-function showDemonHistory(demonName) {
+function showDemonHistory(
+    demonName
+) {
 
     const demon =
-        demons.find(function(item) {
+        demons.find(
+            function(item) {
 
-            return item.name === demonName;
+                return item.name ===
+                    demonName;
 
-        });
+            }
+        );
 
 
     if (!demon) {
@@ -1520,16 +1853,27 @@ function showDemonHistory(demonName) {
 
 
     const overlay =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    overlay.id = "historyOverlay";
-    overlay.className = "history-overlay";
+
+    overlay.id =
+        "historyOverlay";
+
+
+    overlay.className =
+        "history-overlay";
 
 
     const history =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    history.className = "history-box";
+
+    history.className =
+        "history-box";
 
 
     const verificationDate =
@@ -1555,11 +1899,28 @@ function showDemonHistory(demonName) {
 
     if (demon.legacyDate) {
 
+        const legacyDate =
+            new Date(
+                demon.legacyDate +
+                "T00:00:00"
+            );
+
+
+        const formattedLegacy =
+            legacyDate.toLocaleDateString(
+                "en-US",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
+            );
+
+
         legacyHTML = `
 
             <div class="info">
-                🏛️ Became Legacy:
-                ${formatDate(demon.legacyDate)}
+                🏛️ Became Legacy: ${formattedLegacy}
             </div>
 
         `;
@@ -1583,113 +1944,162 @@ function showDemonHistory(demonName) {
         ?
 
         `
-        <div class="info">
-            No recorded victors.
-        </div>
+            <div class="info">
+                No recorded victors.
+            </div>
         `
 
         :
 
-        demon.victors.map(function(victor) {
+        demon.victors.map(
+            function(victor) {
 
-            return `
+                return `
 
-                <div class="victor">
-                    ${victor.country}
-                    ${escapeHTML(victor.name)}
-                </div>
+                    <div class="victor">
 
-            `;
+                        ${victor.country}
 
-        }).join("");
-
-
-    const positionEvents =
-        getHistoricalPositionEvents(demon);
-
-
-    const historyEventsHTML =
-        positionEvents.map(function(event) {
-
-            let eventClass = "";
-            let reasonText = "";
-
-
-            if (event.type === "placed") {
-
-                eventClass =
-                    "history-event history-placed";
-
-                reasonText =
-                    "Placed on the FiDemonlist";
-
-            }
-
-
-            if (event.type === "lower") {
-
-                eventClass =
-                    "history-event history-lower";
-
-                reasonText =
-                    event.reasons
-                        .map(function(name) {
-
-                            return escapeHTML(name) +
-                                " placed above";
-
-                        })
-                        .join("<br>");
-
-            }
-
-
-            return `
-
-                <div class="${eventClass}">
-
-                    <div class="history-date">
-                        ${formatDate(event.date)}
-                    </div>
-
-                    <div class="history-event-row">
-
-                        <div class="history-reason">
-                            ${reasonText}
-                        </div>
-
-                        <div class="history-position">
-                            #${event.position}
-                        </div>
+                        <span
+                            class="victor-player"
+                            onclick="showPlayerProfile('${victor.name.replace(/'/g, "\\'")}')"
+                        >
+                            ${victor.name}
+                        </span>
 
                     </div>
 
-                </div>
+                `;
 
-            `;
+            }
+        ).join("");
 
-        }).join("");
+
+    /* ============================
+       POSITION HISTORY
+    ============================ */
+
+    const events =
+        positionHistory[demon.name] || [];
+
+
+    let positionHistoryHTML = "";
+
+
+    if (events.length === 0) {
+
+        positionHistoryHTML = `
+            <div class="info">
+                No recorded placement changes.
+            </div>
+        `;
+
+    } else {
+
+        positionHistoryHTML =
+            events.map(
+                function(event) {
+
+                    const eventDate =
+                        new Date(
+                            event.date +
+                            "T00:00:00"
+                        );
+
+
+                    const formattedDate =
+                        eventDate.toLocaleDateString(
+                            "en-US",
+                            {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric"
+                            }
+                        );
+
+
+                    let colorClass =
+                        "position-placed";
+
+
+                    if (
+                        event.type ===
+                        "higher"
+                    ) {
+
+                        colorClass =
+                            "position-higher";
+
+                    }
+
+
+                    if (
+                        event.type ===
+                        "lower"
+                    ) {
+
+                        colorClass =
+                            "position-lower";
+
+                    }
+
+
+                    return `
+
+                        <div class="position-event">
+
+                            <div class="position-date">
+                                ${formattedDate}
+                            </div>
+
+                            <div class="position-row">
+
+                                <div class="position-reason">
+                                    ${event.reason}
+                                </div>
+
+                                <div
+                                    class="position-number ${colorClass}"
+                                >
+                                    #${event.position}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
 
 
     history.innerHTML = `
 
         <h2>
-            ${escapeHTML(demon.name)}
+            ${demon.name}
         </h2>
 
-        <div class="info">
-            Created By: ${escapeHTML(demon.createdBy)}
-        </div>
 
         <div class="info">
-            Verified By: ${escapeHTML(demon.verifiedBy)}
+            Created By: ${demon.createdBy}
         </div>
+
+
+        <div class="info">
+            Verified By: ${demon.verifiedBy}
+        </div>
+
 
         <div class="info">
             📅 Verified: ${formattedVerification}
         </div>
 
+
         ${legacyHTML}
+
 
         <div class="points">
             List Points: ${demon.points.toFixed(2)}
@@ -1710,10 +2120,14 @@ function showDemonHistory(demonName) {
         <div class="history-section">
 
             <h3>
-                📊 Position History
+                📜 Position History
             </h3>
 
-            ${historyEventsHTML}
+            <div class="position-history">
+
+                ${positionHistoryHTML}
+
+            </div>
 
         </div>
 
@@ -1728,104 +2142,114 @@ function showDemonHistory(demonName) {
     `;
 
 
-    overlay.appendChild(history);
+    overlay.appendChild(
+        history
+    );
 
-    document.body.appendChild(overlay);
+
+    document.body.appendChild(
+        overlay
+    );
 
 
     document.getElementById(
         "closeHistory"
-    ).onclick = function() {
-
-        overlay.remove();
-
-    };
-
-
-    overlay.onclick = function(event) {
-
-        if (
-            event.target === overlay
-        ) {
+    ).onclick =
+        function() {
 
             overlay.remove();
 
-        }
+        };
 
-    };
+
+    overlay.onclick =
+        function(event) {
+
+            if (
+                event.target === overlay
+            ) {
+
+                overlay.remove();
+
+            }
+
+        };
 
 }
 
 
 /* =====================================================
-   PLAYERS
+   GET PLAYERS
 ===================================================== */
 
 function getAllPlayers() {
 
-    const playerMap = new Map();
+    const playerMap =
+        new Map();
 
 
-    demons.forEach(function(demon) {
+    demons.forEach(
+        function(demon) {
 
-        demon.victors.forEach(function(victor) {
+            demon.victors.forEach(
+                function(victor) {
 
-            /*
-                Case-insensitive player matching.
+                    /*
+                       Names are compared case-insensitively.
+                       The first/canonical spelling is kept.
+                    */
 
-                wPopoff = WPOPOFF = wpopoff
-                dovvin = DOVVIN = Dovvin
-            */
-
-            const key =
-                victor.name.toLowerCase();
+                    const key =
+                        victor.name.toLowerCase();
 
 
-            if (!playerMap.has(key)) {
+                    if (
+                        !playerMap.has(key)
+                    ) {
 
-                playerMap.set(
-                    key,
-                    {
-                        name: victor.name,
-                        country: victor.country,
-                        completions: []
+                        playerMap.set(
+                            key,
+                            {
+                                name:
+                                    victor.name,
+
+                                country:
+                                    victor.country,
+
+                                completions:
+                                    []
+                            }
+                        );
+
                     }
-                );
-
-            }
 
 
-            const player =
-                playerMap.get(key);
+                    const player =
+                        playerMap.get(key);
 
 
-            /*
-                Use the newest/correct capitalization
-                provided in the database.
-            */
+                    if (
+                        !player.completions.some(
+                            function(name) {
 
-            player.name =
-                victor.name;
+                                return name.toLowerCase() ===
+                                    demon.name.toLowerCase();
 
-            player.country =
-                victor.country;
+                            }
+                        )
+                    ) {
 
+                        player.completions.push(
+                            demon.name
+                        );
 
-            if (
-                !player.completions.includes(
-                    demon.name
-                )
-            ) {
+                    }
 
-                player.completions.push(
-                    demon.name
-                );
+                }
+            );
 
-            }
-
-        });
-
-    });
+        }
+    );
 
 
     return Array.from(
@@ -1839,40 +2263,45 @@ function getAllPlayers() {
    PLAYER POINTS
 ===================================================== */
 
-function calculatePlayerPoints(player) {
+function calculatePlayerPoints(
+    player
+) {
 
     let total = 0;
 
 
-    player.completions.forEach(function(completionName) {
+    player.completions.forEach(
+        function(completionName) {
 
-        const demon =
-            demons.find(function(item) {
+            const demon =
+                demons.find(
+                    function(item) {
 
-                return item.name ===
-                    completionName;
+                        return item.name ===
+                            completionName;
 
-            });
-
-
-        if (!demon) {
-            return;
-        }
+                    }
+                );
 
 
-        const currentRank =
-            masterOrder.indexOf(
-                demon.name
-            ) + 1;
+            if (!demon) {
+                return;
+            }
 
 
-        total +=
-            getDemonPoints(
+            const currentRank =
+                masterOrder.indexOf(
+                    demon.name
+                ) + 1;
+
+
+            total += getDemonPoints(
                 demon,
                 currentRank
             );
 
-    });
+        }
+    );
 
 
     return total;
@@ -1881,7 +2310,7 @@ function calculatePlayerPoints(player) {
 
 
 /* =====================================================
-   LEADERBOARD
+   PLAYER LEADERBOARD
 ===================================================== */
 
 function renderLeaderboard() {
@@ -1897,82 +2326,388 @@ function renderLeaderboard() {
 
     const rankedPlayers =
         getAllPlayers()
-            .map(function(player) {
+            .map(
+                function(player) {
 
-                return {
+                    return {
 
-                    name:
-                        player.name,
+                        name:
+                            player.name,
 
-                    country:
-                        player.country,
+                        country:
+                            player.country,
 
-                    completions:
-                        player.completions,
+                        completions:
+                            player.completions,
 
-                    points:
-                        calculatePlayerPoints(
-                            player
-                        )
+                        points:
+                            calculatePlayerPoints(
+                                player
+                            )
 
-                };
+                    };
 
-            })
-            .sort(function(a, b) {
+                }
+            )
+            .sort(
+                function(a, b) {
 
-                return b.points -
-                    a.points;
+                    return b.points -
+                        a.points;
 
-            });
-
-
-    rankedPlayers.forEach(function(player, index) {
-
-        const rank =
-            index + 1;
-
-
-        const card =
-            document.createElement(
-                "div"
+                }
             );
 
 
-        card.className =
-            "player-card";
+    rankedPlayers.forEach(
+        function(player, index) {
+
+            const rank =
+                index + 1;
 
 
-        card.innerHTML = `
+            const card =
+                document.createElement(
+                    "div"
+                );
 
-            <div class="player-rank">
-                #${rank}
-            </div>
 
-            <div class="player-info">
+            card.className =
+                "player-card";
 
-                <div class="player-name">
-                    ${player.country}
-                    ${escapeHTML(player.name)}
+
+            card.innerHTML = `
+
+                <div class="player-rank">
+                    #${rank}
                 </div>
 
-                <div class="player-completions">
+
+                <div class="player-info">
+
+                    <div
+                        class="player-name"
+                        onclick="showPlayerProfile('${player.name.replace(/'/g, "\\'")}')"
+                    >
+                        ${player.country}
+                        ${player.name}
+                    </div>
+
+
+                    <div class="player-completions">
+                        ${player.completions.length}
+                        completed demons
+                    </div>
+
+                </div>
+
+
+                <div class="player-points">
+                    ${player.points.toFixed(2)}
+                    Points
+                </div>
+
+            `;
+
+
+            leaderboard.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PLAYER PROFILE
+===================================================== */
+
+function showPlayerProfile(
+    playerName
+) {
+
+    const players =
+        getAllPlayers();
+
+
+    const player =
+        players.find(
+            function(item) {
+
+                return item.name.toLowerCase() ===
+                    playerName.toLowerCase();
+
+            }
+        );
+
+
+    if (!player) {
+        return;
+    }
+
+
+    const existing =
+        document.getElementById(
+            "profileOverlay"
+        );
+
+
+    if (existing) {
+        existing.remove();
+    }
+
+
+    const playerPoints =
+        calculatePlayerPoints(
+            player
+        );
+
+
+    const rankedPlayers =
+        getAllPlayers()
+            .map(
+                function(item) {
+
+                    return {
+
+                        name:
+                            item.name,
+
+                        country:
+                            item.country,
+
+                        completions:
+                            item.completions,
+
+                        points:
+                            calculatePlayerPoints(
+                                item
+                            )
+
+                    };
+
+                }
+            )
+            .sort(
+                function(a, b) {
+
+                    return b.points -
+                        a.points;
+
+                }
+            );
+
+
+    const playerRank =
+        rankedPlayers.findIndex(
+            function(item) {
+
+                return item.name.toLowerCase() ===
+                    player.name.toLowerCase();
+
+            }
+        ) + 1;
+
+
+    const overlay =
+        document.createElement(
+            "div"
+        );
+
+
+    overlay.id =
+        "profileOverlay";
+
+
+    overlay.className =
+        "profile-overlay";
+
+
+    const profile =
+        document.createElement(
+            "div"
+        );
+
+
+    profile.className =
+        "profile-box";
+
+
+    const completedDemons =
+        player.completions
+            .map(
+                function(demonName) {
+
+                    const demon =
+                        demons.find(
+                            function(item) {
+
+                                return item.name ===
+                                    demonName;
+
+                            }
+                        );
+
+
+                    if (!demon) {
+                        return "";
+                    }
+
+
+                    const rank =
+                        masterOrder.indexOf(
+                            demon.name
+                        ) + 1;
+
+
+                    const points =
+                        getDemonPoints(
+                            demon,
+                            rank
+                        );
+
+
+                    return `
+
+                        <div class="profile-demon">
+
+                            <div class="profile-demon-name">
+                                #${rank} - ${demon.name}
+                            </div>
+
+                            <div class="profile-demon-points">
+                                ${points.toFixed(2)} pts
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    profile.innerHTML = `
+
+        <h2>
+            ${player.country}
+            ${player.name}
+        </h2>
+
+
+        <div class="profile-country">
+            FiDemonlist Player
+        </div>
+
+
+        <div class="profile-stats">
+
+            <div class="profile-stat">
+
+                <div class="profile-stat-number">
+                    #${playerRank}
+                </div>
+
+                <div class="profile-stat-label">
+                    Player Rank
+                </div>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+                <div class="profile-stat-number">
+                    ${playerPoints.toFixed(2)}
+                </div>
+
+                <div class="profile-stat-label">
+                    List Points
+                </div>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+                <div class="profile-stat-number">
                     ${player.completions.length}
-                    completed demons
+                </div>
+
+                <div class="profile-stat-label">
+                    Completions
                 </div>
 
             </div>
 
-            <div class="player-points">
-                ${player.points.toFixed(2)}
-                Points
-            </div>
-
-        `;
+        </div>
 
 
-        leaderboard.appendChild(card);
+        <div class="profile-section">
 
-    });
+            <h3>
+                🏆 Completed Demons
+            </h3>
+
+
+            ${
+                completedDemons ||
+
+                `
+                    <div class="info">
+                        No recorded completions.
+                    </div>
+                `
+            }
+
+        </div>
+
+
+        <button
+            class="close-profile"
+            id="closeProfile"
+        >
+            Close
+        </button>
+
+    `;
+
+
+    overlay.appendChild(
+        profile
+    );
+
+
+    document.body.appendChild(
+        overlay
+    );
+
+
+    document.getElementById(
+        "closeProfile"
+    ).onclick =
+        function() {
+
+            overlay.remove();
+
+        };
+
+
+    overlay.onclick =
+        function(event) {
+
+            if (
+                event.target === overlay
+            ) {
+
+                overlay.remove();
+
+            }
+
+        };
 
 }
 
@@ -2110,12 +2845,16 @@ leaderboardButton.addEventListener(
 
 
 /* =====================================================
-   TRAVEL
+   TRAVEL TO DATE
 ===================================================== */
 
-function travelToDate(selectedDate) {
+function travelToDate(
+    selectedDate
+) {
 
-    renderList(selectedDate);
+    renderList(
+        selectedDate
+    );
 
 
     const status =
@@ -2171,7 +2910,7 @@ function travelToDate(selectedDate) {
 
 
 /* =====================================================
-   APPLY DATE
+   TRAVEL
 ===================================================== */
 
 document.getElementById(
@@ -2180,7 +2919,9 @@ document.getElementById(
     "click",
     function() {
 
-        if (datePicker.value) {
+        if (
+            datePicker.value
+        ) {
 
             travelToDate(
                 datePicker.value
@@ -2204,6 +2945,7 @@ document.getElementById(
 
         datePicker.value =
             todayString;
+
 
         travelToDate(
             todayString
@@ -2233,28 +2975,30 @@ document.getElementById(
             );
 
 
-        cards.forEach(function(card) {
+        cards.forEach(
+            function(card) {
 
-            const name =
-                card.dataset.name
-                    .toLowerCase();
+                const name =
+                    card.dataset.name
+                        .toLowerCase();
 
 
-            if (
-                name.includes(text)
-            ) {
+                if (
+                    name.includes(text)
+                ) {
 
-                card.style.display =
-                    "block";
+                    card.style.display =
+                        "block";
 
-            } else {
+                } else {
 
-                card.style.display =
-                    "none";
+                    card.style.display =
+                        "none";
+
+                }
 
             }
-
-        });
+        );
 
     }
 );
@@ -2267,6 +3011,7 @@ document.getElementById(
 travelToDate(
     todayString
 );
+
 
 renderLeaderboard();
 
