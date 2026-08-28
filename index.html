@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>FiDemonlist</title>
+
     <style>
         body {
             margin: 0;
@@ -11,26 +13,31 @@
             background: #111111;
             color: white;
         }
+
         header {
             background: #1b1b1b;
             padding: 25px 20px;
             text-align: center;
             border-bottom: 2px solid #333333;
         }
+
         header h1 {
             margin: 0;
             font-size: 38px;
         }
+
         header p {
             margin: 7px 0 0;
             color: #aaaaaa;
             font-size: 15px;
         }
+
         .container {
             max-width: 900px;
             margin: 30px auto;
             padding: 0 20px;
         }
+
         .search {
             width: 100%;
             box-sizing: border-box;
@@ -43,9 +50,11 @@
             margin-bottom: 25px;
             outline: none;
         }
+
         .search::placeholder {
             color: #777777;
         }
+
         .demon {
             background: #1c1c1c;
             border: 1px solid #333333;
@@ -54,21 +63,54 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        .demon-image {
-            display: block;
+
+        /*
+            IMAGE CONTAINER
+
+            Every image gets exactly the same display area.
+            object-fit: contain means the entire image stays visible
+            instead of being cropped or stretched.
+        */
+
+        .image-container {
             width: 100%;
             max-width: 600px;
             height: 280px;
-            object-fit: cover;
             margin: 0 auto 18px auto;
-            border-radius: 9px;
+
             background: #333333;
+            border-radius: 9px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
         }
+
+        .demon-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /*
+            Placeholder shown when an image cannot be found.
+        */
+
+        .placeholder {
+            color: #aaaaaa;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
         .name {
             font-size: 25px;
             font-weight: bold;
             margin-bottom: 12px;
         }
+
         .info {
             color: #aaaaaa;
             font-size: 15px;
@@ -76,109 +118,288 @@
         }
     </style>
 </head>
+
 <body>
+
     <header>
         <h1>FiDemonlist</h1>
         <p>The Custom Geometry Dash Demonlist</p>
     </header>
+
+
     <div class="container">
+
         <input
             id="search"
             class="search"
             type="text"
             placeholder="Search demons..."
         >
-        <!-- BLOODBATH -->
+
+
+        <!-- ==========================================
+             #1 BLOODBATH
+        =========================================== -->
+
         <div class="demon" data-name="Bloodbath">
-            <img
-                class="demon-image"
-                src="Bloodbath.jpeg"
-                alt="Bloodbath"
-            >
+
+            <div class="image-container">
+
+                <img
+                    class="demon-image"
+                    src="Bloodbath.jpeg"
+                    alt="Bloodbath"
+                    onerror="showPlaceholder(this)"
+                >
+
+            </div>
+
+
             <div class="name">
                 #1 - Bloodbath
             </div>
+
+
             <div class="info">
                 Created By: Riot
             </div>
+
+
             <div class="info">
                 Verified By: Riot
             </div>
+
+
             <div class="info" id="bloodbath-verified">
                 Verified: Calculating...
             </div>
+
         </div>
+
+
+        <!-- ==========================================
+             #2 THE HELL FACTORY
+        =========================================== -->
+
+        <div class="demon" data-name="The Hell Factory">
+
+            <div class="image-container">
+
+                <img
+                    class="demon-image"
+                    src="TheHellFactory.jpeg"
+                    alt="The Hell Factory"
+                    onerror="showPlaceholder(this)"
+                >
+
+            </div>
+
+
+            <div class="name">
+                #2 - The Hell Factory
+            </div>
+
+
+            <div class="info">
+                Created By: TeamN2
+            </div>
+
+
+            <div class="info">
+                Verified By: Powerbomb
+            </div>
+
+
+            <div class="info">
+                Verified: December 28 2015
+            </div>
+
+        </div>
+
     </div>
+
+
     <script>
+
+        // ==========================================
+        // IMAGE PLACEHOLDER SYSTEM
+        // ==========================================
+
+        function showPlaceholder(image) {
+
+            const container = image.parentElement;
+
+            container.innerHTML =
+                '<div class="placeholder">Placeholder</div>';
+
+        }
+
+
         // ==========================================
         // VERIFICATION TIME SYSTEM
         // ==========================================
-        const bloodbathVerificationDate = new Date("2015-08-12T00:00:00");
+
+        const bloodbathVerificationDate =
+            new Date("2015-08-12T00:00:00");
+
+
         function getTimeAgo(date) {
+
             const now = new Date();
-            const millisecondsPerSecond = 1000;
-            const millisecondsPerMinute = millisecondsPerSecond * 60;
-            const millisecondsPerHour = millisecondsPerMinute * 60;
-            const millisecondsPerDay = millisecondsPerHour * 24;
-            const difference = now - date;
-            const totalDays = Math.floor(
-                difference / millisecondsPerDay
-            );
-            const totalWeeks = Math.floor(
-                totalDays / 7
-            );
-            const totalMonths = Math.floor(
-                totalDays / 30.4375
-            );
-            const totalYears = Math.floor(
-                totalDays / 365.2425
-            );
+
+            const millisecondsPerDay =
+                1000 * 60 * 60 * 24;
+
+
+            const difference =
+                now - date;
+
+
+            const totalDays =
+                Math.floor(
+                    difference / millisecondsPerDay
+                );
+
+
+            const totalWeeks =
+                Math.floor(
+                    totalDays / 7
+                );
+
+
+            const totalMonths =
+                Math.floor(
+                    totalDays / 30.4375
+                );
+
+
+            const totalYears =
+                Math.floor(
+                    totalDays / 365.2425
+                );
+
+
             // YEARS
+
             if (totalYears >= 1) {
+
                 return totalYears +
-                    (totalYears === 1 ? " Year Ago" : " Years Ago");
+                    (
+                        totalYears === 1
+                            ? " Year Ago"
+                            : " Years Ago"
+                    );
+
             }
+
+
             // MONTHS
+
             if (totalMonths >= 1) {
+
                 return totalMonths +
-                    (totalMonths === 1 ? " Month Ago" : " Months Ago");
+                    (
+                        totalMonths === 1
+                            ? " Month Ago"
+                            : " Months Ago"
+                    );
+
             }
+
+
             // WEEKS
+
             if (totalWeeks >= 1) {
+
                 return totalWeeks +
-                    (totalWeeks === 1 ? " Week Ago" : " Weeks Ago");
+                    (
+                        totalWeeks === 1
+                            ? " Week Ago"
+                            : " Weeks Ago"
+                    );
+
             }
+
+
             // DAYS
+
             if (totalDays >= 1) {
+
                 return totalDays +
-                    (totalDays === 1 ? " Day Ago" : " Days Ago");
+                    (
+                        totalDays === 1
+                            ? " Day Ago"
+                            : " Days Ago"
+                    );
+
             }
-            // LESS THAN ONE DAY
+
+
             return "Today";
         }
+
+
         // ==========================================
         // DISPLAY BLOODBATH VERIFICATION TIME
         // ==========================================
-        document.getElementById("bloodbath-verified").textContent =
-            "Verified: " + getTimeAgo(bloodbathVerificationDate);
+
+        document.getElementById(
+            "bloodbath-verified"
+        ).textContent =
+            "Verified: " +
+            getTimeAgo(
+                bloodbathVerificationDate
+            );
+
+
         // ==========================================
         // SEARCH SYSTEM
         // ==========================================
-        const searchBox = document.getElementById("search");
-        const demons = document.querySelectorAll(".demon");
-        searchBox.addEventListener("input", function() {
-            const searchText =
-                searchBox.value.toLowerCase();
-            demons.forEach(function(demon) {
-                const demonName =
-                    demon.dataset.name.toLowerCase();
-                if (demonName.includes(searchText)) {
-                    demon.style.display = "block";
-                } else {
-                    demon.style.display = "none";
-                }
-            });
-        });
+
+        const searchBox =
+            document.getElementById("search");
+
+
+        const demons =
+            document.querySelectorAll(".demon");
+
+
+        searchBox.addEventListener(
+            "input",
+            function() {
+
+                const searchText =
+                    searchBox.value.toLowerCase();
+
+
+                demons.forEach(
+                    function(demon) {
+
+                        const demonName =
+                            demon.dataset.name.toLowerCase();
+
+
+                        if (
+                            demonName.includes(searchText)
+                        ) {
+
+                            demon.style.display =
+                                "block";
+
+                        } else {
+
+                            demon.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
     </script>
+
 </body>
 </html>
