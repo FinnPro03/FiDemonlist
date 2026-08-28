@@ -8,12 +8,21 @@
 
     <style>
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #111111;
             color: white;
         }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
 
         header {
             position: relative;
@@ -34,12 +43,24 @@
             font-size: 15px;
         }
 
-        .time-travel-button {
+
+        /* ==========================================
+           HEADER BUTTONS
+        ========================================== */
+
+        .header-buttons {
             position: absolute;
+
             right: 20px;
             top: 50%;
+
             transform: translateY(-50%);
 
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-button {
             padding: 11px 16px;
 
             border: 1px solid #444444;
@@ -54,9 +75,14 @@
             cursor: pointer;
         }
 
-        .time-travel-button:hover {
+        .header-button:hover {
             background: #383838;
         }
+
+
+        /* ==========================================
+           MAIN CONTAINER
+        ========================================== */
 
         .container {
             max-width: 900px;
@@ -64,9 +90,13 @@
             padding: 0 20px;
         }
 
+
+        /* ==========================================
+           SEARCH
+        ========================================== */
+
         .search {
             width: 100%;
-            box-sizing: border-box;
 
             padding: 15px;
 
@@ -87,7 +117,12 @@
             color: #777777;
         }
 
-        .time-travel-panel {
+
+        /* ==========================================
+           PANELS
+        ========================================== */
+
+        .panel {
             display: none;
 
             background: #1c1c1c;
@@ -98,17 +133,22 @@
             padding: 20px;
 
             margin-bottom: 25px;
+        }
 
+        .panel h2 {
+            margin-top: 0;
             text-align: center;
         }
 
-        .time-travel-panel h2 {
-            margin-top: 0;
+        .panel-description {
+            color: #aaaaaa;
+            text-align: center;
         }
 
-        .time-travel-panel p {
-            color: #aaaaaa;
-        }
+
+        /* ==========================================
+           TIME TRAVEL
+        ========================================== */
 
         .date-input {
             padding: 12px;
@@ -122,6 +162,10 @@
             font-size: 16px;
 
             margin: 10px;
+        }
+
+        .panel-buttons {
+            text-align: center;
         }
 
         .apply-button,
@@ -157,6 +201,11 @@
             background: #333333;
         }
 
+
+        /* ==========================================
+           TIME TRAVEL STATUS
+        ========================================== */
+
         .time-travel-status {
             display: none;
 
@@ -168,6 +217,104 @@
 
             font-size: 14px;
         }
+
+
+        /* ==========================================
+           PLAYER LEADERBOARD
+        ========================================== */
+
+        .leaderboard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .player-card {
+            display: flex;
+
+            align-items: center;
+
+            background: #222222;
+
+            border: 1px solid #333333;
+            border-radius: 10px;
+
+            padding: 15px;
+        }
+
+        .player-rank {
+            width: 55px;
+
+            font-size: 23px;
+            font-weight: bold;
+
+            text-align: center;
+        }
+
+        .player-info {
+            flex: 1;
+
+            margin-left: 10px;
+        }
+
+        .player-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .player-completions {
+            margin-top: 5px;
+
+            color: #999999;
+
+            font-size: 13px;
+        }
+
+        .player-points {
+            font-size: 18px;
+            font-weight: bold;
+
+            text-align: right;
+        }
+
+
+        /* ==========================================
+           COMPLETION LIST
+        ========================================== */
+
+        .completion-section {
+            margin-top: 20px;
+
+            border-top: 1px solid #333333;
+
+            padding-top: 20px;
+        }
+
+        .completion-section h3 {
+            margin-bottom: 10px;
+        }
+
+        .completion-item {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 8px 0;
+
+            border-bottom: 1px solid #292929;
+
+            color: #cccccc;
+        }
+
+        .completion-points {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+
+        /* ==========================================
+           DEMON CARD
+        ========================================== */
 
         .demon {
             background: #1c1c1c;
@@ -181,6 +328,11 @@
 
             text-align: center;
         }
+
+
+        /* ==========================================
+           IMAGE
+        ========================================== */
 
         .image-container {
             width: 100%;
@@ -218,6 +370,11 @@
             font-weight: bold;
         }
 
+
+        /* ==========================================
+           DEMON TEXT
+        ========================================== */
+
         .name {
             font-size: 25px;
 
@@ -233,6 +390,21 @@
 
             margin: 6px 0;
         }
+
+        .points {
+            color: #ffffff;
+
+            font-size: 15px;
+
+            margin-top: 10px;
+
+            font-weight: bold;
+        }
+
+
+        /* ==========================================
+           NO DEMONS
+        ========================================== */
 
         .no-demons {
             display: none;
@@ -252,29 +424,43 @@
             font-size: 18px;
         }
 
-        @media (max-width: 600px) {
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding-bottom: 85px;
+            }
 
             header h1 {
                 font-size: 30px;
             }
 
-            .time-travel-button {
-                position: static;
+            .header-buttons {
+                top: auto;
+                bottom: 15px;
+
+                right: 0;
+                left: 0;
 
                 transform: none;
 
-                margin-top: 15px;
+                justify-content: center;
             }
 
-            .date-input {
-                width: 80%;
-
-                margin: 10px auto;
+            .header-button {
+                padding: 10px 13px;
             }
 
-            .apply-button,
-            .today-button {
-                margin: 5px;
+            .player-card {
+                padding: 12px;
+            }
+
+            .player-points {
+                font-size: 15px;
             }
 
         }
@@ -295,12 +481,24 @@
         The Custom Geometry Dash Demonlist
     </p>
 
-    <button
-        class="time-travel-button"
-        id="timeTravelButton"
-    >
-        Time Travel
-    </button>
+
+    <div class="header-buttons">
+
+        <button
+            class="header-button"
+            id="timeTravelButton"
+        >
+            Time Travel
+        </button>
+
+        <button
+            class="header-button"
+            id="leaderboardButton"
+        >
+            Player Leaderboard
+        </button>
+
+    </div>
 
 </header>
 
@@ -309,41 +507,76 @@
 <div class="container">
 
 
-    <!-- TIME TRAVEL -->
+    <!-- ==========================================
+         TIME TRAVEL PANEL
+    ========================================== -->
 
     <div
-        class="time-travel-panel"
+        class="panel"
         id="timeTravelPanel"
     >
 
         <h2>Time Travel</h2>
 
-        <p>
+        <p class="panel-description">
             Choose a date to see the FiDemonlist from that date.
         </p>
 
-        <input
-            type="date"
-            id="datePicker"
-            class="date-input"
-        >
+        <div class="panel-buttons">
 
-        <button
-            class="apply-button"
-            id="applyDate"
-        >
-            Travel
-        </button>
+            <input
+                type="date"
+                id="datePicker"
+                class="date-input"
+            >
 
-        <button
-            class="today-button"
-            id="returnToday"
-        >
-            Today
-        </button>
+            <button
+                class="apply-button"
+                id="applyDate"
+            >
+                Travel
+            </button>
+
+            <button
+                class="today-button"
+                id="returnToday"
+            >
+                Today
+            </button>
+
+        </div>
 
     </div>
 
+
+
+    <!-- ==========================================
+         PLAYER LEADERBOARD PANEL
+    ========================================== -->
+
+    <div
+        class="panel"
+        id="leaderboardPanel"
+    >
+
+        <h2>Player Leaderboard</h2>
+
+        <p class="panel-description">
+            Player rankings are based on completed FiDemonlist demons.
+        </p>
+
+        <div
+            class="leaderboard-list"
+            id="leaderboardList"
+        ></div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         TIME TRAVEL STATUS
+    ========================================== -->
 
     <div
         class="time-travel-status"
@@ -351,7 +584,10 @@
     ></div>
 
 
-    <!-- SEARCH -->
+
+    <!-- ==========================================
+         SEARCH
+    ========================================== -->
 
     <input
         id="search"
@@ -361,7 +597,10 @@
     >
 
 
-    <!-- LIST -->
+
+    <!-- ==========================================
+         DEMON LIST
+    ========================================== -->
 
     <div id="demonList"></div>
 
@@ -387,45 +626,15 @@
 const demons = [
 
     {
-        name: "Bloodbath",
+        name: "Society",
 
-        createdBy: "Riot",
+        createdBy: "Neomarbilan",
 
-        verifiedBy: "Riot",
+        verifiedBy: "Wpopoff",
 
-        verification: "2015-08-12",
+        verification: "2026-06-20",
 
-        legacyDate: "2021-01-01",
-
-        image: "Bloodbath.jpeg"
-    },
-
-
-    {
-        name: "The Hell Factory",
-
-        createdBy: "TeamN2",
-
-        verifiedBy: "Powerbomb",
-
-        verification: "2015-12-28",
-
-        legacyDate: "2021-01-01",
-
-        image: "The Hell Factory.jpeg"
-    },
-
-
-    {
-        name: "Tidal Wave",
-
-        createdBy: "OniLink",
-
-        verifiedBy: "Zoink",
-
-        verification: "2023-09-09",
-
-        image: "Tidal Wave.jpeg"
+        image: "Society.jpeg"
     },
 
 
@@ -469,15 +678,45 @@ const demons = [
 
 
     {
-        name: "Society",
+        name: "Tidal Wave",
 
-        createdBy: "Neomarbilan",
+        createdBy: "OniLink",
 
-        verifiedBy: "Wpopoff",
+        verifiedBy: "Zoink",
 
-        verification: "2026-06-20",
+        verification: "2023-09-09",
 
-        image: "Society.jpeg"
+        image: "Tidal Wave.jpeg"
+    },
+
+
+    {
+        name: "Bloodbath",
+
+        createdBy: "Riot",
+
+        verifiedBy: "Riot",
+
+        verification: "2015-08-12",
+
+        legacyDate: "2021-01-01",
+
+        image: "Bloodbath.jpeg"
+    },
+
+
+    {
+        name: "The Hell Factory",
+
+        createdBy: "TeamN2",
+
+        verifiedBy: "Powerbomb",
+
+        verification: "2015-12-28",
+
+        legacyDate: "2021-01-01",
+
+        image: "The Hell Factory.jpeg"
     }
 
 ];
@@ -486,16 +725,6 @@ const demons = [
 
 /* =====================================================
    MASTER ORDER
-=====================================================
-
-   THIS IS THE CURRENT ORDER.
-
-   Historical rankings are NOT stored here.
-
-   The website takes this order and removes
-   demons that didn't exist yet or were already
-   legacy.
-
 ===================================================== */
 
 const masterOrder = [
@@ -513,6 +742,106 @@ const masterOrder = [
     "Bloodbath",
 
     "The Hell Factory"
+
+];
+
+
+
+/* =====================================================
+   POINTERCRATE-STYLE POINTS
+=====================================================
+
+   These are based on CURRENT placement.
+
+   As we add more demons, more point values
+   can be added here.
+
+===================================================== */
+
+const currentRankPoints = {
+
+    1: 350.00,
+
+    2: 331.71,
+
+    3: 313.42,
+
+    4: 291.70,
+
+    5: 271.78
+
+};
+
+
+
+/* =====================================================
+   LEGACY POINTS
+=====================================================
+
+   Pointercrate does not give legacy demons
+   list points.
+
+   These are lowered values based on the
+   Pointercrate-style scale.
+
+===================================================== */
+
+const legacyPoints = {
+
+    "Bloodbath": 18.65,
+
+    "The Hell Factory": 18.10
+
+};
+
+
+
+/* =====================================================
+   PLAYER COMPLETIONS
+===================================================== */
+
+const players = [
+
+    {
+        name: "Zoink",
+
+        completions: [
+
+            "Society",
+
+            "Thinking Space II",
+
+            "Amethyst",
+
+            "Flamewall",
+
+            "Tidal Wave",
+
+            "Bloodbath"
+
+        ]
+
+    },
+
+
+    {
+        name: "Wpopoff",
+
+        completions: [
+
+            "Society",
+
+            "Thinking Space II",
+
+            "Amethyst",
+
+            "Tidal Wave",
+
+            "Bloodbath"
+
+        ]
+
+    }
 
 ];
 
@@ -612,255 +941,6 @@ function getTimeAgo(date) {
 
 
 /* =====================================================
-   CHECK IF DEMON EXISTS ON DATE
-===================================================== */
-
-function demonExists(
-    demon,
-    selectedDate
-) {
-
-    /*
-       Demon hasn't been verified yet.
-    */
-
-    if (
-        selectedDate <
-        demon.verification
-    ) {
-
-        return false;
-
-    }
-
-
-    /*
-       Legacy demon has already
-       left the list.
-    */
-
-    if (
-        demon.legacyDate &&
-        selectedDate >=
-        demon.legacyDate
-    ) {
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-
-/* =====================================================
-   GET CURRENT ORDER FOR DATE
-===================================================== */
-
-function getOrderForDate(
-    selectedDate
-) {
-
-    /*
-       Start with the CURRENT order.
-
-       Then remove anything that didn't
-       exist at the selected date.
-    */
-
-    return masterOrder.filter(
-        function(name) {
-
-            const demon =
-                demons.find(
-                    function(item) {
-
-                        return item.name ===
-                            name;
-
-                    }
-                );
-
-
-            if (!demon) {
-
-                return false;
-
-            }
-
-
-            return demonExists(
-                demon,
-                selectedDate
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   RENDER LIST
-===================================================== */
-
-function renderList(
-    selectedDate
-) {
-
-    const list =
-        document.getElementById(
-            "demonList"
-        );
-
-
-    list.innerHTML = "";
-
-
-    const noDemons =
-        document.getElementById(
-            "noDemons"
-        );
-
-
-    const order =
-        getOrderForDate(
-            selectedDate
-        );
-
-
-    if (
-        order.length === 0
-    ) {
-
-        noDemons.style.display =
-            "block";
-
-        return;
-
-    }
-
-
-    noDemons.style.display =
-        "none";
-
-
-    /*
-       IMPORTANT:
-
-       The rank is generated HERE.
-
-       That means the first demon
-       remaining is #1, second is #2,
-       etc.
-
-       We are NOT copying today's
-       number.
-    */
-
-    order.forEach(
-        function(name, index) {
-
-            const demon =
-                demons.find(
-                    function(item) {
-
-                        return item.name ===
-                            name;
-
-                    }
-                );
-
-
-            const rank =
-                index + 1;
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "demon";
-
-
-            card.dataset.name =
-                demon.name;
-
-
-            card.innerHTML = `
-
-                <div class="image-container">
-
-                    <img
-                        class="demon-image"
-                        src="${demon.image}"
-                        alt="${demon.name}"
-                    >
-
-                </div>
-
-                <div class="name">
-                    #${rank} - ${demon.name}
-                </div>
-
-                <div class="info">
-                    Created By: ${demon.createdBy}
-                </div>
-
-                <div class="info">
-                    Verified By: ${demon.verifiedBy}
-                </div>
-
-                <div class="info">
-                    Verified: ${getTimeAgo(
-                        new Date(
-                            demon.verification +
-                            "T00:00:00"
-                        )
-                    )}
-                </div>
-
-            `;
-
-
-            const image =
-                card.querySelector(
-                    ".demon-image"
-                );
-
-
-            image.onerror =
-                function() {
-
-                    const container =
-                        image.parentElement;
-
-
-                    container.innerHTML =
-                        '<div class="placeholder">Placeholder</div>';
-
-                };
-
-
-            list.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
    DATE SETTINGS
 ===================================================== */
 
@@ -904,6 +984,490 @@ datePicker.value =
 
 
 /* =====================================================
+   CHECK IF DEMON EXISTS
+===================================================== */
+
+function demonExists(
+    demon,
+    selectedDate
+) {
+
+    /*
+       Not verified yet.
+    */
+
+    if (
+        selectedDate <
+        demon.verification
+    ) {
+
+        return false;
+
+    }
+
+
+    /*
+       Legacy demon has left.
+    */
+
+    if (
+        demon.legacyDate &&
+        selectedDate >=
+        demon.legacyDate
+    ) {
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   GET AVAILABLE DEMONS
+===================================================== */
+
+function getAvailableDemons(
+    selectedDate
+) {
+
+    return masterOrder
+        .map(
+            function(name) {
+
+                return demons.find(
+                    function(demon) {
+
+                        return demon.name ===
+                            name;
+
+                    }
+                );
+
+            }
+        )
+        .filter(
+            function(demon) {
+
+                return demon &&
+                    demonExists(
+                        demon,
+                        selectedDate
+                    );
+
+            }
+        );
+
+}
+
+
+
+/* =====================================================
+   GET POINTS FOR DEMON
+===================================================== */
+
+function getDemonPoints(
+    demon,
+    rank
+) {
+
+    /*
+       Legacy demons use their special
+       lowered points.
+    */
+
+    if (
+        legacyPoints[demon.name] !==
+        undefined
+    ) {
+
+        return legacyPoints[
+            demon.name
+        ];
+
+    }
+
+
+    /*
+       Normal demons use their rank's
+       Pointercrate-style points.
+    */
+
+    if (
+        currentRankPoints[rank] !==
+        undefined
+    ) {
+
+        return currentRankPoints[rank];
+
+    }
+
+
+    /*
+       For future demons beyond the
+       currently defined ranks, return 0
+       until their point value is added.
+    */
+
+    return 0;
+
+}
+
+
+
+/* =====================================================
+   RENDER DEMON LIST
+===================================================== */
+
+function renderList(
+    selectedDate
+) {
+
+    const list =
+        document.getElementById(
+            "demonList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    const noDemons =
+        document.getElementById(
+            "noDemons"
+        );
+
+
+    const availableDemons =
+        getAvailableDemons(
+            selectedDate
+        );
+
+
+    if (
+        availableDemons.length === 0
+    ) {
+
+        noDemons.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    noDemons.style.display =
+        "none";
+
+
+    /*
+       Ranking is generated AFTER
+       unavailable demons are removed.
+
+       Therefore the first available
+       demon becomes #1.
+    */
+
+    availableDemons.forEach(
+        function(demon, index) {
+
+            const rank =
+                index + 1;
+
+
+            const points =
+                getDemonPoints(
+                    demon,
+                    rank
+                );
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "demon";
+
+
+            card.dataset.name =
+                demon.name;
+
+
+            card.innerHTML = `
+
+                <div class="image-container">
+
+                    <img
+                        class="demon-image"
+                        src="${demon.image}"
+                        alt="${demon.name}"
+                    >
+
+                </div>
+
+
+                <div class="name">
+                    #${rank} - ${demon.name}
+                </div>
+
+
+                <div class="info">
+                    Created By: ${demon.createdBy}
+                </div>
+
+
+                <div class="info">
+                    Verified By: ${demon.verifiedBy}
+                </div>
+
+
+                <div class="info">
+                    Verified: ${getTimeAgo(
+                        new Date(
+                            demon.verification +
+                            "T00:00:00"
+                        )
+                    )}
+                </div>
+
+
+                <div class="points">
+                    List Points: ${points.toFixed(2)}
+                </div>
+
+            `;
+
+
+            const image =
+                card.querySelector(
+                    ".demon-image"
+                );
+
+
+            image.onerror =
+                function() {
+
+                    const container =
+                        image.parentElement;
+
+
+                    container.innerHTML =
+                        '<div class="placeholder">Placeholder</div>';
+
+                };
+
+
+            list.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   PLAYER POINT CALCULATION
+===================================================== */
+
+function calculatePlayerPoints(
+    player
+) {
+
+    let total =
+        0;
+
+
+    player.completions.forEach(
+        function(completionName) {
+
+            const demon =
+                demons.find(
+                    function(item) {
+
+                        return item.name ===
+                            completionName;
+
+                    }
+                );
+
+
+            if (!demon) {
+                return;
+            }
+
+
+            /*
+               Find the demon's CURRENT
+               position in the master order.
+            */
+
+            const currentRank =
+                masterOrder.indexOf(
+                    demon.name
+                ) + 1;
+
+
+            const points =
+                getDemonPoints(
+                    demon,
+                    currentRank
+                );
+
+
+            total +=
+                points;
+
+        }
+    );
+
+
+    return total;
+
+}
+
+
+
+/* =====================================================
+   RENDER PLAYER LEADERBOARD
+===================================================== */
+
+function renderLeaderboard() {
+
+    const leaderboard =
+        document.getElementById(
+            "leaderboardList"
+        );
+
+
+    leaderboard.innerHTML = "";
+
+
+    const rankedPlayers =
+        players
+            .map(
+                function(player) {
+
+                    return {
+
+                        name:
+                            player.name,
+
+                        completions:
+                            player.completions,
+
+                        points:
+                            calculatePlayerPoints(
+                                player
+                            )
+
+                    };
+
+                }
+            )
+            .sort(
+                function(a, b) {
+
+                    return b.points -
+                        a.points;
+
+                }
+            );
+
+
+    rankedPlayers.forEach(
+        function(player, index) {
+
+            const rank =
+                index + 1;
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "player-card";
+
+
+            card.innerHTML = `
+
+                <div class="player-rank">
+                    #${rank}
+                </div>
+
+
+                <div class="player-info">
+
+                    <div class="player-name">
+                        ${player.name}
+                    </div>
+
+                    <div class="player-completions">
+                        ${player.completions.length}
+                        completed demons
+                    </div>
+
+                </div>
+
+
+                <div class="player-points">
+                    ${player.points.toFixed(2)}
+                    Points
+                </div>
+
+            `;
+
+
+            leaderboard.appendChild(
+                card
+            );
+
+
+            /*
+               Add completion details
+               underneath the player.
+            */
+
+            const details =
+                document.createElement(
+                    "div"
+                );
+
+
+            details.className =
+                "completion-section";
+
+
+            details.style.display =
+                "none";
+
+
+            /*
+               Not shown by default.
+               The main leaderboard stays clean.
+            */
+
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
    TIME TRAVEL BUTTON
 ===================================================== */
 
@@ -935,6 +1499,57 @@ timeTravelButton.addEventListener(
 
             timeTravelPanel.style.display =
                 "block";
+
+
+            leaderboardPanel.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   LEADERBOARD BUTTON
+===================================================== */
+
+const leaderboardButton =
+    document.getElementById(
+        "leaderboardButton"
+    );
+
+
+const leaderboardPanel =
+    document.getElementById(
+        "leaderboardPanel"
+    );
+
+
+leaderboardButton.addEventListener(
+    "click",
+    function() {
+
+        if (
+            leaderboardPanel.style.display ===
+            "block"
+        ) {
+
+            leaderboardPanel.style.display =
+                "none";
+
+        } else {
+
+            leaderboardPanel.style.display =
+                "block";
+
+
+            timeTravelPanel.style.display =
+                "none";
+
+
+            renderLeaderboard();
 
         }
 
@@ -1010,7 +1625,7 @@ function travelToDate(
 
 
 /* =====================================================
-   TRAVEL
+   TRAVEL BUTTON
 ===================================================== */
 
 document.getElementById(
@@ -1035,7 +1650,7 @@ document.getElementById(
 
 
 /* =====================================================
-   RETURN TO TODAY
+   TODAY BUTTON
 ===================================================== */
 
 document.getElementById(
@@ -1114,6 +1729,9 @@ document.getElementById(
 travelToDate(
     todayString
 );
+
+
+renderLeaderboard();
 
 </script>
 
