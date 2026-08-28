@@ -1,12 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>FiDemonlist</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111111;
+            color: white;
+        }
+
+        header {
+            background: #1b1b1b;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #333;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+            color: #aaa;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .search {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .demon {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .rank {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .name {
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .creator {
+            color: #999;
+            margin-top: 5px;
+        }
+    </style>
 </head>
+
 <body>
 
+<header>
     <h1>FiDemonlist</h1>
-    <p>My Custom Geometry Dash Demonlist</p>
+    <p>The Custom Geometry Dash Demonlist</p>
+</header>
+
+<div class="container">
+
+    <input
+        class="search"
+        type="text"
+        placeholder="Search demons..."
+    >
+
+    <div class="demon">
+        <div class="rank">#1</div>
+        <div class="name">Example Demon</div>
+        <div class="creator">Created by Example</div>
+    </div>
+
+    <div class="demon">
+        <div class="rank">#2</div>
+        <div class="name">Another Demon</div>
+        <div class="creator">Created by Example2</div>
+    </div>
+
+    <div class="demon">
+        <div class="rank">#3</div>
+        <div class="name">Cool Demon</div>
+        <div class="creator">Created by Example3</div>
+    </div>
+
+</div>
 
 </body>
 </html>
