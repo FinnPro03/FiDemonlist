@@ -15,7 +15,6 @@
             color: white;
         }
 
-
         /* ==========================================
            HEADER
         ========================================== */
@@ -46,10 +45,8 @@
 
         .time-travel-button {
             position: absolute;
-
             right: 20px;
             top: 50%;
-
             transform: translateY(-50%);
 
             padding: 11px 16px;
@@ -64,8 +61,6 @@
             font-weight: bold;
 
             cursor: pointer;
-
-            transition: 0.2s;
         }
 
         .time-travel-button:hover {
@@ -74,7 +69,7 @@
 
 
         /* ==========================================
-           CONTAINER
+           MAIN CONTAINER
         ========================================== */
 
         .container {
@@ -133,12 +128,10 @@
 
         .time-travel-panel h2 {
             margin-top: 0;
-            margin-bottom: 8px;
         }
 
         .time-travel-panel p {
             color: #aaaaaa;
-            margin-top: 0;
         }
 
         .date-input {
@@ -180,6 +173,7 @@
             border: 1px solid #444444;
             background: #222222;
             color: white;
+
             margin-left: 5px;
         }
 
@@ -385,7 +379,7 @@
             <h2>Time Travel</h2>
 
             <p>
-                Choose a date to see what the FiDemonlist looked like.
+                Choose a date to see the FiDemonlist from that date.
             </p>
 
             <input
@@ -412,10 +406,6 @@
 
 
 
-        <!-- ==========================================
-             TIME TRAVEL STATUS
-        ========================================== -->
-
         <div
             class="time-travel-status"
             id="timeTravelStatus"
@@ -437,213 +427,11 @@
 
 
         <!-- ==========================================
-             #1 SOCIETY
+             DEMON LIST
         ========================================== -->
 
-        <div
-            class="demon"
-            data-name="Society"
-            data-verification="2026-06-20"
-        >
+        <div id="demonList"></div>
 
-            <div class="image-container">
-
-                <img
-                    class="demon-image"
-                    src="Society.jpeg"
-                    alt="Society"
-                    onerror="showPlaceholder(this)"
-                >
-
-            </div>
-
-            <div class="name">
-                #1 - Society
-            </div>
-
-            <div class="info">
-                Created By: Neomarbilan
-            </div>
-
-            <div class="info">
-                Verified By: Wpopoff
-            </div>
-
-            <div class="info verification-time">
-                Verified: Calculating...
-            </div>
-
-        </div>
-
-
-
-        <!-- ==========================================
-             #2 THINKING SPACE II
-        ========================================== -->
-
-        <div
-            class="demon"
-            data-name="Thinking Space II"
-            data-verification="2025-05-25"
-        >
-
-            <div class="image-container">
-
-                <img
-                    class="demon-image"
-                    src="Thinking Space II.jpeg"
-                    alt="Thinking Space II"
-                    onerror="showPlaceholder(this)"
-                >
-
-            </div>
-
-            <div class="name">
-                #2 - Thinking Space II
-            </div>
-
-            <div class="info">
-                Created By: CairoX
-            </div>
-
-            <div class="info">
-                Verified By: Zoink
-            </div>
-
-            <div class="info verification-time">
-                Verified: Calculating...
-            </div>
-
-        </div>
-
-
-
-        <!-- ==========================================
-             #3 AMETHYST
-        ========================================== -->
-
-        <div
-            class="demon"
-            data-name="Amethyst"
-            data-verification="2025-05-25"
-        >
-
-            <div class="image-container">
-
-                <img
-                    class="demon-image"
-                    src="Amethyst.jpeg"
-                    alt="Amethyst"
-                    onerror="showPlaceholder(this)"
-                >
-
-            </div>
-
-            <div class="name">
-                #3 - Amethyst
-            </div>
-
-            <div class="info">
-                Created By: iMist
-            </div>
-
-            <div class="info">
-                Verified By: Wpopoff
-            </div>
-
-            <div class="info verification-time">
-                Verified: Calculating...
-            </div>
-
-        </div>
-
-
-
-        <!-- ==========================================
-             #1 BLOODBATH
-        ========================================== -->
-
-        <div
-            class="demon"
-            data-name="Bloodbath"
-            data-verification="2015-08-12"
-        >
-
-            <div class="image-container">
-
-                <img
-                    class="demon-image"
-                    src="Bloodbath.jpeg"
-                    alt="Bloodbath"
-                    onerror="showPlaceholder(this)"
-                >
-
-            </div>
-
-            <div class="name">
-                #1 - Bloodbath
-            </div>
-
-            <div class="info">
-                Created By: Riot
-            </div>
-
-            <div class="info">
-                Verified By: Riot
-            </div>
-
-            <div class="info verification-time">
-                Verified: Calculating...
-            </div>
-
-        </div>
-
-
-
-        <!-- ==========================================
-             #2 THE HELL FACTORY
-        ========================================== -->
-
-        <div
-            class="demon"
-            data-name="The Hell Factory"
-            data-verification="2015-12-28"
-        >
-
-            <div class="image-container">
-
-                <img
-                    class="demon-image"
-                    src="The Hell Factory.jpeg"
-                    alt="The Hell Factory"
-                    onerror="showPlaceholder(this)"
-                >
-
-            </div>
-
-            <div class="name">
-                #2 - The Hell Factory
-            </div>
-
-            <div class="info">
-                Created By: TeamN2
-            </div>
-
-            <div class="info">
-                Verified By: Powerbomb
-            </div>
-
-            <div class="info verification-time">
-                Verified: Calculating...
-            </div>
-
-        </div>
-
-
-
-        <!-- ==========================================
-             NO DEMONS MESSAGE
-        ========================================== -->
 
         <div
             class="no-demons"
@@ -658,6 +446,86 @@
 
 
     <script>
+
+
+        /* ==========================================
+           DEMON DATABASE
+        ========================================== */
+
+        const demons = [
+
+            {
+                name: "Bloodbath",
+                createdBy: "Riot",
+                verifiedBy: "Riot",
+                verification: "2015-08-12",
+                image: "Bloodbath.jpeg"
+            },
+
+            {
+                name: "The Hell Factory",
+                createdBy: "TeamN2",
+                verifiedBy: "Powerbomb",
+                verification: "2015-12-28",
+                image: "The Hell Factory.jpeg"
+            },
+
+            {
+                name: "Thinking Space II",
+                createdBy: "CairoX",
+                verifiedBy: "Zoink",
+                verification: "2025-05-25",
+                image: "Thinking Space II.jpeg"
+            },
+
+            {
+                name: "Amethyst",
+                createdBy: "iMist",
+                verifiedBy: "Wpopoff",
+                verification: "2025-05-25",
+                image: "Amethyst.jpeg"
+            },
+
+            {
+                name: "Society",
+                createdBy: "Neomarbilan",
+                verifiedBy: "Wpopoff",
+                verification: "2026-06-20",
+                image: "Society.jpeg"
+            }
+
+        ];
+
+
+
+        /* ==========================================
+           HISTORICAL RANKINGS
+        ========================================== */
+
+        const historicalRankings = {
+
+            "2015-08-12": {
+                "Bloodbath": 1
+            },
+
+            "2015-12-28": {
+                "Bloodbath": 1,
+                "The Hell Factory": 2
+            },
+
+            "2025-05-25": {
+                "Thinking Space II": 1,
+                "Amethyst": 2
+            },
+
+            "2026-06-20": {
+                "Society": 1,
+                "Thinking Space II": 2,
+                "Amethyst": 3
+            }
+
+        };
+
 
 
         /* ==========================================
@@ -677,22 +545,20 @@
 
 
         /* ==========================================
-           AUTOMATIC TIME AGO
+           TIME AGO SYSTEM
         ========================================== */
 
         function getTimeAgo(date) {
 
             const now = new Date();
 
-            const millisecondsPerDay =
-                1000 * 60 * 60 * 24;
-
             const difference =
                 now - date;
 
             const totalDays =
                 Math.floor(
-                    difference / millisecondsPerDay
+                    difference /
+                    (1000 * 60 * 60 * 24)
                 );
 
 
@@ -769,46 +635,6 @@
 
 
         /* ==========================================
-           UPDATE ALL VERIFICATION TIMES
-        ========================================== */
-
-        function updateVerificationTimes() {
-
-            const elements =
-                document.querySelectorAll(
-                    ".verification-time"
-                );
-
-
-            elements.forEach(
-                function(element) {
-
-                    const demon =
-                        element.closest(".demon");
-
-
-                    const date =
-                        new Date(
-                            demon.dataset.verification +
-                            "T00:00:00"
-                        );
-
-
-                    element.textContent =
-                        "Verified: " +
-                        getTimeAgo(date);
-
-                }
-            );
-
-        }
-
-
-        updateVerificationTimes();
-
-
-
-        /* ==========================================
            DATE SETTINGS
         ========================================== */
 
@@ -848,6 +674,229 @@
 
         datePicker.value =
             todayString;
+
+
+
+        /* ==========================================
+           GET HISTORICAL LIST
+        ========================================== */
+
+        function getListForDate(
+            selectedDate
+        ) {
+
+            /*
+                Find the newest historical
+                snapshot that existed on or
+                before the selected date.
+            */
+
+            let bestSnapshot = null;
+
+            let bestDate = null;
+
+
+            Object.keys(
+                historicalRankings
+            ).forEach(
+                function(snapshotDate) {
+
+                    if (
+                        snapshotDate <=
+                        selectedDate
+                    ) {
+
+                        if (
+                            bestDate === null ||
+                            snapshotDate >
+                            bestDate
+                        ) {
+
+                            bestDate =
+                                snapshotDate;
+
+                            bestSnapshot =
+                                historicalRankings[
+                                    snapshotDate
+                                ];
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+            return bestSnapshot;
+
+        }
+
+
+
+        /* ==========================================
+           RENDER LIST
+        ========================================== */
+
+        function renderList(
+            selectedDate
+        ) {
+
+            const list =
+                document.getElementById(
+                    "demonList"
+                );
+
+
+            list.innerHTML = "";
+
+
+            const rankings =
+                getListForDate(
+                    selectedDate
+                );
+
+
+            const noDemons =
+                document.getElementById(
+                    "noDemons"
+                );
+
+
+            if (!rankings) {
+
+                noDemons.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            noDemons.style.display =
+                "none";
+
+
+            /*
+                Convert ranking object into
+                an array and sort by rank.
+            */
+
+            const rankedDemons =
+                Object.keys(rankings)
+                    .map(
+                        function(name) {
+
+                            return {
+                                name: name,
+                                rank: rankings[name]
+                            };
+
+                        }
+                    )
+                    .sort(
+                        function(a, b) {
+
+                            return a.rank -
+                                b.rank;
+
+                        }
+                    );
+
+
+            rankedDemons.forEach(
+                function(rankedDemon) {
+
+                    const demon =
+                        demons.find(
+                            function(item) {
+
+                                return item.name ===
+                                    rankedDemon.name;
+
+                            }
+                        );
+
+
+                    if (!demon) {
+                        return;
+                    }
+
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "demon";
+
+
+                    card.dataset.name =
+                        demon.name;
+
+
+                    card.innerHTML = `
+
+                        <div class="image-container">
+
+                            <img
+                                class="demon-image"
+                                src="${demon.image}"
+                                alt="${demon.name}"
+                            >
+
+                        </div>
+
+                        <div class="name">
+                            #${rankedDemon.rank} - ${demon.name}
+                        </div>
+
+                        <div class="info">
+                            Created By: ${demon.createdBy}
+                        </div>
+
+                        <div class="info">
+                            Verified By: ${demon.verifiedBy}
+                        </div>
+
+                        <div class="info">
+                            Verified: ${getTimeAgo(
+                                new Date(
+                                    demon.verification +
+                                    "T00:00:00"
+                                )
+                            )}
+                        </div>
+
+                    `;
+
+
+                    const image =
+                        card.querySelector(
+                            ".demon-image"
+                        );
+
+
+                    image.onerror =
+                        function() {
+
+                            showPlaceholder(
+                                image
+                            );
+
+                        };
+
+
+                    list.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        }
 
 
 
@@ -892,84 +941,17 @@
 
 
         /* ==========================================
-           TIME TRAVEL
+           TRAVEL TO DATE
         ========================================== */
 
         function travelToDate(
             selectedDate
         ) {
 
-            const selected =
-                new Date(
-                    selectedDate +
-                    "T23:59:59"
-                );
-
-
-            const demons =
-                document.querySelectorAll(
-                    ".demon"
-                );
-
-
-            let visibleDemons = 0;
-
-
-            demons.forEach(
-                function(demon) {
-
-                    const verificationDate =
-                        new Date(
-                            demon.dataset.verification +
-                            "T00:00:00"
-                        );
-
-
-                    if (
-                        verificationDate <=
-                        selected
-                    ) {
-
-                        demon.style.display =
-                            "block";
-
-                        visibleDemons++;
-
-                    } else {
-
-                        demon.style.display =
-                            "none";
-
-                    }
-
-                }
+            renderList(
+                selectedDate
             );
 
-
-            const noDemons =
-                document.getElementById(
-                    "noDemons"
-                );
-
-
-            if (
-                visibleDemons === 0
-            ) {
-
-                noDemons.style.display =
-                    "block";
-
-            } else {
-
-                noDemons.style.display =
-                    "none";
-
-            }
-
-
-            /* ======================================
-               DATE STATUS
-            ====================================== */
 
             const status =
                 document.getElementById(
@@ -987,15 +969,15 @@
 
             } else {
 
-                const dateObject =
+                const date =
                     new Date(
                         selectedDate +
                         "T00:00:00"
                     );
 
 
-                const formattedDate =
-                    dateObject.toLocaleDateString(
+                const formatted =
+                    date.toLocaleDateString(
                         "en-US",
                         {
                             year: "numeric",
@@ -1011,15 +993,10 @@
 
                 status.textContent =
                     "Viewing the FiDemonlist from " +
-                    formattedDate;
+                    formatted;
 
             }
 
-
-            /*
-                Clear search whenever
-                time travel is used.
-            */
 
             document.getElementById(
                 "search"
@@ -1081,78 +1058,40 @@
            SEARCH
         ========================================== */
 
-        const searchBox =
-            document.getElementById(
-                "search"
-            );
-
-
-        searchBox.addEventListener(
+        document.getElementById(
+            "search"
+        ).addEventListener(
             "input",
             function() {
 
-                const searchText =
-                    searchBox.value.toLowerCase();
+                const text =
+                    this.value.toLowerCase();
 
 
-                const demons =
+                const cards =
                     document.querySelectorAll(
-                        ".demon"
+                        "#demonList .demon"
                     );
 
 
-                demons.forEach(
-                    function(demon) {
+                cards.forEach(
+                    function(card) {
 
                         const name =
-                            demon.dataset.name
+                            card.dataset.name
                                 .toLowerCase();
 
 
-                        const verificationDate =
-                            new Date(
-                                demon.dataset.verification +
-                                "T00:00:00"
-                            );
-
-
-                        const selectedDate =
-                            new Date(
-                                datePicker.value +
-                                "T23:59:59"
-                            );
-
-
-                        /*
-                            Don't show a demon
-                            before it existed.
-                        */
-
                         if (
-                            verificationDate >
-                            selectedDate
+                            name.includes(text)
                         ) {
 
-                            demon.style.display =
-                                "none";
-
-                            return;
-
-                        }
-
-
-                        if (
-                            name.includes(
-                                searchText
-                            )
-                        ) {
-
-                            demon.style.display =
+                            card.style.display =
                                 "block";
 
                         } else {
 
-                            demon.style.display =
+                            card.style.display =
                                 "none";
 
                         }
@@ -1166,7 +1105,7 @@
 
 
         /* ==========================================
-           START ON TODAY
+           START WITH TODAY'S LIST
         ========================================== */
 
         travelToDate(
