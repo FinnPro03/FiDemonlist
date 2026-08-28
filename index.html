@@ -262,7 +262,7 @@
         font-size: 18px;
     }
     /* ============================
-       HISTORY
+       DEMON HISTORY
     ============================ */
     .history-overlay {
         position: fixed;
@@ -270,7 +270,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.78);
+        background: rgba(0, 0, 0, 0.75);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -283,14 +283,14 @@
         border-radius: 14px;
         padding: 25px;
         width: 100%;
-        max-width: 700px;
+        max-width: 650px;
         max-height: 85vh;
         overflow-y: auto;
     }
     .history-box h2 {
         margin-top: 0;
-        text-align: center;
         font-size: 28px;
+        text-align: center;
     }
     .history-section {
         border-top: 1px solid #333333;
@@ -301,46 +301,58 @@
         margin-top: 0;
         text-align: center;
     }
-    .history-event {
-        margin: 12px 0;
-        border: 1px solid #333333;
+    .placement-event {
+        margin-bottom: 12px;
+        padding: 14px;
         border-radius: 9px;
-        overflow: hidden;
+        background: #151515;
+        border: 1px solid #333333;
     }
-    .history-date {
+    .placement-date {
         text-align: center;
-        background: #242424;
-        padding: 9px;
-        font-size: 14px;
         font-weight: bold;
-        color: #dddddd;
+        color: white;
+        margin-bottom: 12px;
     }
-    .history-event-row {
+    .placement-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 12px 14px;
         gap: 15px;
+        padding: 10px 12px;
+        border-radius: 7px;
     }
-    .history-reason {
+    .placement-reason {
         flex: 1;
         text-align: left;
-        font-weight: bold;
+        font-size: 14px;
     }
-    .history-position {
-        min-width: 90px;
+    .placement-position {
+        min-width: 55px;
         text-align: right;
         font-size: 18px;
         font-weight: bold;
     }
-    .history-placed {
-        color: #f0c94a;
+    .placement-new {
+        background: rgba(180, 150, 0, 0.18);
+        border-left: 4px solid #d6b600;
     }
-    .history-higher {
-        color: #55d66b;
+    .placement-higher {
+        background: rgba(0, 150, 60, 0.18);
+        border-left: 4px solid #22aa66;
     }
-    .history-lower {
-        color: #ff5555;
+    .placement-lower {
+        background: rgba(190, 40, 40, 0.18);
+        border-left: 4px solid #cc4444;
+    }
+    .placement-new .placement-reason {
+        color: #e0c900;
+    }
+    .placement-higher .placement-reason {
+        color: #44cc88;
+    }
+    .placement-lower .placement-reason {
+        color: #ee6666;
     }
     .close-history {
         display: block;
@@ -380,15 +392,11 @@
         .player-points {
             font-size: 15px;
         }
-        .history-event-row {
-            padding: 10px;
+        .placement-row {
+            gap: 8px;
         }
-        .history-reason {
+        .placement-reason {
             font-size: 13px;
-        }
-        .history-position {
-            font-size: 16px;
-            min-width: 65px;
         }
     }
 </style>
@@ -396,18 +404,32 @@
 <body>
 <header>
 <h1>FiDemonlist</h1>
-<p>The Custom Geometry Dash Demonlist</p>
+<p>
+    The Custom Geometry Dash Demonlist
+</p>
 <div class="header-buttons">
-    <button class="header-button" id="timeTravelButton">
+    <button
+        class="header-button"
+        id="timeTravelButton"
+    >
         Time Travel
     </button>
-    <button class="header-button" id="leaderboardButton">
+    <button
+        class="header-button"
+        id="leaderboardButton"
+    >
         Player Leaderboard
     </button>
 </div>
 </header>
 <div class="container">
-<div class="panel" id="timeTravelPanel">
+<!-- ============================
+     TIME TRAVEL
+============================ -->
+<div
+    class="panel"
+    id="timeTravelPanel"
+>
     <h2>Time Travel</h2>
     <p class="panel-description">
         Choose a date to see the FiDemonlist from that date.
@@ -418,30 +440,57 @@
             id="datePicker"
             class="date-input"
         >
-        <button class="apply-button" id="applyDate">
+        <button
+            class="apply-button"
+            id="applyDate"
+        >
             Travel
         </button>
-        <button class="today-button" id="returnToday">
+        <button
+            class="today-button"
+            id="returnToday"
+        >
             Today
         </button>
     </div>
 </div>
-<div class="panel" id="leaderboardPanel">
+<!-- ============================
+     PLAYER LEADERBOARD
+============================ -->
+<div
+    class="panel"
+    id="leaderboardPanel"
+>
     <h2>Player Leaderboard</h2>
     <p class="panel-description">
         Player rankings are based on completed FiDemonlist demons.
     </p>
-    <div class="leaderboard-list" id="leaderboardList"></div>
+    <div
+        class="leaderboard-list"
+        id="leaderboardList"
+    ></div>
 </div>
-<div class="time-travel-status" id="timeTravelStatus"></div>
+<div
+    class="time-travel-status"
+    id="timeTravelStatus"
+></div>
+<!-- ============================
+     SEARCH
+============================ -->
 <input
     id="search"
     class="search"
     type="text"
     placeholder="Search demons..."
 >
+<!-- ============================
+     DEMON LIST
+============================ -->
 <div id="demonList"></div>
-<div class="no-demons" id="noDemons">
+<div
+    class="no-demons"
+    id="noDemons"
+>
     No demons were on the list at this date.
 </div>
 </div>
@@ -458,7 +507,7 @@ const demons = [
         image: "Society.jpeg",
         points: 350.00,
         victors: [
-            { name: "Wpopoff", country: "🇺🇸" },
+            { name: "wPopoff", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" }
         ]
     },
@@ -471,7 +520,7 @@ const demons = [
         points: 331.71,
         victors: [
             { name: "Zoink", country: "🇺🇸" },
-            { name: "Wpopoff", country: "🇺🇸" },
+            { name: "wPopoff", country: "🇺🇸" },
             { name: "Trick", country: "🇺🇸" }
         ]
     },
@@ -483,7 +532,7 @@ const demons = [
         image: "Amethyst.jpeg",
         points: 313.42,
         victors: [
-            { name: "Wpopoff", country: "🇺🇸" },
+            { name: "wPopoff", country: "🇺🇸" },
             { name: "Zoink", country: "🇺🇸" }
         ]
     },
@@ -510,7 +559,7 @@ const demons = [
         victors: [
             { name: "Zoink", country: "🇺🇸" },
             { name: "Trick", country: "🇺🇸" },
-            { name: "Wpopoff", country: "🇺🇸" },
+            { name: "wPopoff", country: "🇺🇸" },
             { name: "Taiago", country: "🇵🇹" },
             { name: "Netermind", country: "🇺🇸" },
             { name: "레전드아잉몰라요", country: "🇰🇷" }
@@ -706,9 +755,9 @@ const demons = [
             { name: "Cookie", country: "🇺🇸" }
         ]
     },
-    /* ============================
-       LEGACY
-    ============================ */
+    /* =================================================
+       LEGACY DEMONS
+    ================================================= */
     {
         name: "Bloodbath",
         createdBy: "Riot",
@@ -751,10 +800,7 @@ const demons = [
     }
 ];
 /* =====================================================
-   MASTER ORDER
-   THIS IS THE CURRENT ORDER.
-   HISTORICAL RANKS ARE CALCULATED FROM THIS ORDER
-   AFTER REMOVING LEVELS THAT DID NOT EXIST YET.
+   MASTER CURRENT ORDER
 ===================================================== */
 const masterOrder = [
     "Society",
@@ -856,13 +902,15 @@ function demonExists(
     selectedDate
 ) {
     if (
-        selectedDate < demon.verification
+        selectedDate <
+        demon.verification
     ) {
         return false;
     }
     if (
         demon.legacyDate &&
-        selectedDate >= demon.legacyDate
+        selectedDate >=
+        demon.legacyDate
     ) {
         return false;
     }
@@ -875,40 +923,70 @@ function getAvailableDemons(
     selectedDate
 ) {
     return masterOrder
-        .map(function(name) {
-            return demons.find(function(demon) {
-                return demon.name === name;
-            });
-        })
-        .filter(function(demon) {
-            return demon &&
-                demonExists(
-                    demon,
-                    selectedDate
+        .map(
+            function(name) {
+                return demons.find(
+                    function(demon) {
+                        return demon.name === name;
+                    }
                 );
-        });
+            }
+        )
+        .filter(
+            function(demon) {
+                return demon &&
+                    demonExists(
+                        demon,
+                        selectedDate
+                    );
+            }
+        );
 }
 /* =====================================================
-   GET POINTS
+   GET DEMON POINTS
 ===================================================== */
 function getDemonPoints(
     demon,
     rank
 ) {
-    if (demon.legacyDate) {
+    if (
+        demon.legacyDate
+    ) {
         return demon.points;
     }
-    if (
-        currentRankPoints[rank] !== undefined
-    ) {
-        return currentRankPoints[rank];
-    }
-    return demon.points || 0;
+    return demon.points ||
+        currentRankPoints[rank] ||
+        0;
 }
 /* =====================================================
-   DATE FORMAT
+   GET HISTORICAL PLACEMENT
 ===================================================== */
-function formatDate(dateString) {
+function getHistoricalPlacement(
+    demon,
+    selectedDate
+) {
+    const available =
+        getAvailableDemons(
+            selectedDate
+        );
+    const index =
+        available.findIndex(
+            function(item) {
+                return item.name ===
+                    demon.name;
+            }
+        );
+    if (index === -1) {
+        return null;
+    }
+    return index + 1;
+}
+/* =====================================================
+   GET DATE STRING
+===================================================== */
+function formatDate(
+    dateString
+) {
     return new Date(
         dateString + "T00:00:00"
     ).toLocaleDateString(
@@ -921,365 +999,261 @@ function formatDate(dateString) {
     );
 }
 /* =====================================================
-   GET POSITION ON A DATE
+   GET PLACEMENT EVENTS
+=====================================================
+   This creates history ONLY when a level's
+   placement actually changes.
+   It compares the list before and after
+   every verification date.
 ===================================================== */
-function getPosition(
-    demonName,
-    date
-) {
-    const available =
-        getAvailableDemons(date);
-    const index =
-        available.findIndex(function(demon) {
-            return demon.name === demonName;
-        });
-    if (index === -1) {
-        return null;
-    }
-    return index + 1;
-}
-/* =====================================================
-   GET ALL IMPORTANT HISTORY DATES
-===================================================== */
-function getHistoryDates() {
-    const dates = new Set();
-    demons.forEach(function(demon) {
-        dates.add(demon.verification);
-        if (demon.legacyDate) {
-            dates.add(demon.legacyDate);
-        }
-    });
-    return Array.from(dates).sort();
-}
-/* =====================================================
-   FIND WHAT CAUSED A POSITION CHANGE
-===================================================== */
-function getPositionChangeReason(
-    demon,
-    previousDate,
-    currentDate,
-    oldPosition,
-    newPosition
-) {
-    const candidates = demons
-        .filter(function(other) {
-            if (
-                other.name === demon.name
-            ) {
-                return false;
-            }
-            return (
-                other.verification === currentDate
-            );
-        });
-    /*
-       If a new demon entered the list on this date,
-       that is the thing that pushed existing demons.
-    */
-    if (candidates.length > 0) {
-        const candidate =
-            candidates[0];
-        const candidatePosition =
-            getPosition(
-                candidate.name,
-                currentDate
-            );
-        if (
-            candidatePosition !== null
-        ) {
-            if (
-                newPosition > oldPosition &&
-                candidatePosition < newPosition
-            ) {
-                return candidate.name +
-                    " Placed Above";
-            }
-            if (
-                newPosition < oldPosition &&
-                candidatePosition > newPosition
-            ) {
-                return candidate.name +
-                    " Placed Below";
-            }
-        }
-    }
-    /*
-       Legacy removal can move a demon upward.
-    */
-    const removed =
-        demons.filter(function(other) {
-            return (
-                other.legacyDate === currentDate &&
-                other.name !== demon.name
-            );
-        });
-    if (removed.length > 0) {
-        const removedDemon =
-            removed[0];
-        if (
-            newPosition < oldPosition
-        ) {
-            return removedDemon.name +
-                " Became Legacy";
-        }
-    }
-    /*
-       Fallback.
-    */
-    if (
-        newPosition < oldPosition
-    ) {
-        return "Position Changed Higher";
-    }
-    if (
-        newPosition > oldPosition
-    ) {
-        return "Position Changed Lower";
-    }
-    return "Position Unchanged";
-}
-/* =====================================================
-   BUILD DEMON HISTORY
-===================================================== */
-function buildDemonHistory(
+function getPlacementHistory(
     demon
 ) {
     const events = [];
-    const dates =
-        getHistoryDates();
+    const allDates =
+        [...new Set(
+            demons
+                .map(
+                    function(item) {
+                        return item.verification;
+                    }
+                )
+        )]
+        .sort();
     let previousPosition = null;
-    let previousDate = null;
-    dates.forEach(function(date) {
-        const position =
-            getPosition(
-                demon.name,
+    for (
+        let i = 0;
+        i < allDates.length;
+        i++
+    ) {
+        const date =
+            allDates[i];
+        const beforeDate =
+            new Date(
+                date + "T00:00:00"
+            );
+        beforeDate.setDate(
+            beforeDate.getDate() - 1
+        );
+        const beforeString =
+            beforeDate
+                .toISOString()
+                .split("T")[0];
+        const oldPosition =
+            getHistoricalPlacement(
+                demon,
+                beforeString
+            );
+        const newPosition =
+            getHistoricalPlacement(
+                demon,
                 date
             );
-        if (position === null) {
-            return;
+        if (
+            newPosition === null
+        ) {
+            continue;
         }
         /*
-           First appearance = PLACED.
-        */
+         * The demon itself is being placed.
+         */
         if (
-            previousPosition === null
+            oldPosition === null
         ) {
-            events.push({
-                date: demon.verification,
-                type: "placed",
-                reason: "Placed",
-                position: position
-            });
-            previousPosition =
-                position;
-            previousDate =
-                date;
-            return;
-        }
-        /*
-           Only create an event if the actual
-           position changed.
-        */
-        if (
-            position !== previousPosition
-        ) {
-            let type;
-            if (
-                position < previousPosition
-            ) {
-                type = "higher";
-            } else {
-                type = "lower";
-            }
-            const reason =
-                getPositionChangeReason(
-                    demon,
-                    previousDate,
-                    date,
-                    previousPosition,
-                    position
+            const placedDemons =
+                demons.filter(
+                    function(other) {
+                        return (
+                            other.verification === date &&
+                            other.name !== demon.name &&
+                            getHistoricalPlacement(
+                                other,
+                                date
+                            ) !== null
+                        );
+                    }
                 );
+            let reason =
+                "Level Placed";
+            if (
+                placedDemons.length > 0
+            ) {
+                reason =
+                    "Placed alongside: " +
+                    placedDemons
+                        .map(
+                            function(other) {
+                                return other.name;
+                            }
+                        )
+                        .join(", ");
+            }
             events.push({
                 date: date,
-                type: type,
-                reason: reason,
-                position: position
+                oldPosition: null,
+                newPosition: newPosition,
+                type: "new",
+                reason: reason
             });
+            previousPosition =
+                newPosition;
+            continue;
         }
-        previousPosition =
-            position;
-        previousDate =
-            date;
-    });
+        /*
+         * Only create an event if
+         * the actual position changed.
+         */
+        if (
+            oldPosition !==
+            newPosition
+        ) {
+            const changedLevels = [];
+            demons.forEach(
+                function(other) {
+                    if (
+                        other.name ===
+                        demon.name
+                    ) {
+                        return;
+                    }
+                    const oldOther =
+                        getHistoricalPlacement(
+                            other,
+                            beforeString
+                        );
+                    const newOther =
+                        getHistoricalPlacement(
+                            other,
+                            date
+                        );
+                    if (
+                        oldOther === null ||
+                        newOther === null
+                    ) {
+                        return;
+                    }
+                    if (
+                        oldOther !==
+                        newOther
+                    ) {
+                        /*
+                         * This other level changed
+                         * because of its new placement
+                         * on this date.
+                         */
+                        if (
+                            other.verification ===
+                            date
+                        ) {
+                            changedLevels.push(
+                                other.name
+                            );
+                        }
+                    }
+                }
+            );
+            const uniqueChangedLevels =
+                [...new Set(
+                    changedLevels
+                )];
+            let reason;
+            if (
+                uniqueChangedLevels.length > 0
+            ) {
+                reason =
+                    uniqueChangedLevels.join(
+                        ", "
+                    ) +
+                    (
+                        uniqueChangedLevels.length === 1
+                            ? " Placed Above"
+                            : " Placed Above"
+                    );
+            } else {
+                reason =
+                    "List Placement Changed";
+            }
+            events.push({
+                date: date,
+                oldPosition:
+                    oldPosition,
+                newPosition:
+                    newPosition,
+                type:
+                    newPosition <
+                    oldPosition
+                        ? "higher"
+                        : "lower",
+                reason:
+                    reason
+            });
+            previousPosition =
+                newPosition;
+        }
+    }
     return events;
 }
 /* =====================================================
-   RENDER HISTORY
+   RENDER PLACEMENT HISTORY
 ===================================================== */
-function showDemonHistory(
-    demonName
+function renderPlacementHistory(
+    demon
 ) {
-    const demon =
-        demons.find(function(item) {
-            return item.name === demonName;
-        });
-    if (!demon) {
-        return;
-    }
-    const existing =
-        document.getElementById(
-            "historyOverlay"
-        );
-    if (existing) {
-        existing.remove();
-    }
-    const overlay =
-        document.createElement("div");
-    overlay.id =
-        "historyOverlay";
-    overlay.className =
-        "history-overlay";
-    const history =
-        document.createElement("div");
-    history.className =
-        "history-box";
     const events =
-        buildDemonHistory(
+        getPlacementHistory(
             demon
         );
-    let historyHTML = "";
-    events.forEach(function(event) {
-        let eventClass = "";
-        let label = "";
-        if (
-            event.type === "placed"
-        ) {
-            eventClass =
-                "history-placed";
-            label =
-                "🟡 " + event.reason;
-        } else if (
-            event.type === "higher"
-        ) {
-            eventClass =
-                "history-higher";
-            label =
-                "🟢 " + event.reason;
-        } else {
-            eventClass =
-                "history-lower";
-            label =
-                "🔴 " + event.reason;
-        }
-        historyHTML += `
-            <div class="history-event">
-                <div class="history-date">
-                    ${formatDate(event.date)}
-                </div>
-                <div class="history-event-row">
-                    <div class="history-reason ${eventClass}">
-                        ${label}
-                    </div>
-                    <div class="history-position ${eventClass}">
-                        #${event.position}
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-    let legacyHTML = "";
-    if (demon.legacyDate) {
-        legacyHTML = `
+    if (
+        events.length === 0
+    ) {
+        return `
             <div class="info">
-                🏛️ Became Legacy:
-                ${formatDate(demon.legacyDate)}
-            </div>
-        `;
-    } else {
-        legacyHTML = `
-            <div class="info">
-                🟢 Currently Active
+                No placement changes recorded.
             </div>
         `;
     }
-    history.innerHTML = `
-        <h2>
-            ${demon.name}
-        </h2>
-        <div class="info">
-            Created By: ${demon.createdBy}
-        </div>
-        <div class="info">
-            Verified By: ${demon.verifiedBy}
-        </div>
-        <div class="info">
-            📅 Verified:
-            ${formatDate(demon.verification)}
-        </div>
-        ${legacyHTML}
-        <div class="points">
-            Current List Points:
-            ${demon.points.toFixed(2)}
-        </div>
-        <div class="history-section">
-            <h3>
-                📊 Position History
-            </h3>
-            ${
-                historyHTML ||
-                `
-                    <div class="info">
-                        No position changes recorded.
-                    </div>
-                `
-            }
-        </div>
-        <div class="history-section">
-            <h3>
-                🏆 Victors
-            </h3>
-            ${
-                demon.victors.length === 0
-                ?
-                `
-                    <div class="info">
-                        No recorded victors.
-                    </div>
-                `
-                :
-                demon.victors.map(function(victor) {
-                    return `
-                        <div class="victor">
-                            ${victor.country}
-                            ${victor.name}
+    return events
+        .map(
+            function(event) {
+                let positionText =
+                    "#" +
+                    event.newPosition;
+                let className =
+                    "placement-new";
+                if (
+                    event.type ===
+                    "higher"
+                ) {
+                    className =
+                        "placement-higher";
+                }
+                if (
+                    event.type ===
+                    "lower"
+                ) {
+                    className =
+                        "placement-lower";
+                }
+                return `
+                    <div class="placement-event">
+                        <div class="placement-date">
+                            ${formatDate(event.date)}
                         </div>
-                    `;
-                }).join("")
+                        <div
+                            class="placement-row ${className}"
+                        >
+                            <div class="placement-reason">
+                                ${event.reason}
+                            </div>
+                            <div class="placement-position">
+                                ${positionText}
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
-        </div>
-        <button
-            class="close-history"
-            id="closeHistory"
-        >
-            Close
-        </button>
-    `;
-    overlay.appendChild(history);
-    document.body.appendChild(overlay);
-    document.getElementById(
-        "closeHistory"
-    ).onclick =
-        function() {
-            overlay.remove();
-        };
-    overlay.onclick =
-        function(event) {
-            if (
-                event.target === overlay
-            ) {
-                overlay.remove();
-            }
-        };
+        )
+        .join("");
 }
 /* =====================================================
    RENDER LIST
@@ -1319,7 +1293,9 @@ function renderList(
                     rank
                 );
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
             card.className =
                 "demon";
             card.dataset.name =
@@ -1342,8 +1318,7 @@ function renderList(
                     Verified By: ${demon.verifiedBy}
                 </div>
                 <div class="info">
-                    Verified:
-                    ${getTimeAgo(
+                    Verified: ${getTimeAgo(
                         new Date(
                             demon.verification +
                             "T00:00:00"
@@ -1351,8 +1326,7 @@ function renderList(
                     )}
                 </div>
                 <div class="points">
-                    List Points:
-                    ${points.toFixed(2)}
+                    List Points: ${points.toFixed(2)}
                 </div>
                 <button
                     class="victors-button"
@@ -1362,9 +1336,7 @@ function renderList(
                 </button>
                 <button
                     class="victors-button"
-                    onclick="showDemonHistory(
-                        '${demon.name.replace(/'/g, "\\'")}'
-                    )"
+                    onclick="showDemonHistory('${demon.name.replace(/'/g, "\\'")}')"
                 >
                     Demon History
                 </button>
@@ -1375,11 +1347,9 @@ function renderList(
                     ${
                         demon.victors.length === 0
                         ?
-                        `
-                            <div class="victor">
-                                No recorded victors.
-                            </div>
-                        `
+                        `<div class="victor">
+                            No recorded victors.
+                        </div>`
                         :
                         demon.victors.map(
                             function(victor) {
@@ -1405,7 +1375,9 @@ function renderList(
                     container.innerHTML =
                         '<div class="placeholder">Placeholder</div>';
                 };
-            list.appendChild(card);
+            list.appendChild(
+                card
+            );
         }
     );
 }
@@ -1418,7 +1390,8 @@ function toggleVictors(
     const panel =
         button.nextElementSibling.nextElementSibling;
     if (
-        panel.style.display === "block"
+        panel.style.display ===
+        "block"
     ) {
         panel.style.display =
             "none";
@@ -1432,62 +1405,222 @@ function toggleVictors(
     }
 }
 /* =====================================================
+   DEMON HISTORY
+===================================================== */
+function showDemonHistory(
+    demonName
+) {
+    const demon =
+        demons.find(
+            function(item) {
+                return item.name ===
+                    demonName;
+            }
+        );
+    if (!demon) {
+        return;
+    }
+    const existing =
+        document.getElementById(
+            "historyOverlay"
+        );
+    if (existing) {
+        existing.remove();
+    }
+    const overlay =
+        document.createElement(
+            "div"
+        );
+    overlay.id =
+        "historyOverlay";
+    overlay.className =
+        "history-overlay";
+    const history =
+        document.createElement(
+            "div"
+        );
+    history.className =
+        "history-box";
+    const verificationDate =
+        new Date(
+            demon.verification +
+            "T00:00:00"
+        );
+    const formattedVerification =
+        verificationDate.toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
+    let legacyHTML = "";
+    if (
+        demon.legacyDate
+    ) {
+        const legacyDate =
+            new Date(
+                demon.legacyDate +
+                "T00:00:00"
+            );
+        const formattedLegacy =
+            legacyDate.toLocaleDateString(
+                "en-US",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
+            );
+        legacyHTML = `
+            <div class="info">
+                🏛️ Became Legacy: ${formattedLegacy}
+            </div>
+        `;
+    } else {
+        legacyHTML = `
+            <div class="info">
+                🟢 Currently Active
+            </div>
+        `;
+    }
+    const victorsHTML =
+        demon.victors.length === 0
+        ?
+        `
+            <div class="info">
+                No recorded victors.
+            </div>
+        `
+        :
+        demon.victors.map(
+            function(victor) {
+                return `
+                    <div class="victor">
+                        ${victor.country}
+                        ${victor.name}
+                    </div>
+                `;
+            }
+        ).join("");
+    history.innerHTML = `
+        <h2>
+            ${demon.name}
+        </h2>
+        <div class="info">
+            Created By: ${demon.createdBy}
+        </div>
+        <div class="info">
+            Verified By: ${demon.verifiedBy}
+        </div>
+        <div class="info">
+            📅 Verified: ${formattedVerification}
+        </div>
+        ${legacyHTML}
+        <div class="points">
+            List Points: ${demon.points.toFixed(2)}
+        </div>
+        <div class="history-section">
+            <h3>
+                🏆 Victors
+            </h3>
+            ${victorsHTML}
+        </div>
+        <div class="history-section">
+            <h3>
+                📍 Placement History
+            </h3>
+            ${renderPlacementHistory(
+                demon
+            )}
+        </div>
+        <button
+            class="close-history"
+            id="closeHistory"
+        >
+            Close
+        </button>
+    `;
+    overlay.appendChild(
+        history
+    );
+    document.body.appendChild(
+        overlay
+    );
+    document.getElementById(
+        "closeHistory"
+    ).onclick =
+        function() {
+            overlay.remove();
+        };
+    overlay.onclick =
+        function(event) {
+            if (
+                event.target === overlay
+            ) {
+                overlay.remove();
+            }
+        };
+}
+/* =====================================================
    GET PLAYERS
+=====================================================
+   Names are compared case-insensitively,
+   while the first/correct spelling stored
+   for each player is preserved.
 ===================================================== */
 function getAllPlayers() {
     const playerMap =
         new Map();
-    demons.forEach(function(demon) {
-        demon.victors.forEach(function(victor) {
-            /*
-               Case-sensitive display names are preserved,
-               but player identity is normalized so
-               wPopoff / Wpopoff / wpopoff cannot become
-               separate leaderboard entries.
-            */
-            const key =
-                victor.name.toLowerCase();
-            if (!playerMap.has(key)) {
-                playerMap.set(
-                    key,
-                    {
-                        name:
-                            victor.name,
-                        country:
-                            victor.country,
-                        completions:
-                            []
+    demons.forEach(
+        function(demon) {
+            demon.victors.forEach(
+                function(victor) {
+                    const key =
+                        victor.name
+                            .trim()
+                            .toLowerCase();
+                    if (
+                        !playerMap.has(key)
+                    ) {
+                        playerMap.set(
+                            key,
+                            {
+                                name:
+                                    victor.name,
+                                country:
+                                    victor.country,
+                                completions:
+                                    []
+                            }
+                        );
                     }
-                );
-            }
-            const player =
-                playerMap.get(key);
-            /*
-               Use the corrected display names.
-            */
-            if (
-                key === "wpopoff"
-            ) {
-                player.name =
-                    "wPopoff";
-            }
-            if (
-                key === "dovvin"
-            ) {
-                player.name =
-                    "dovvin";
-            }
-            if (
-                !player.completions.includes(
-                    demon.name
-                )
-            ) {
-                player.completions.push(
-                    demon.name
-                );
-            }
-        });
-    });
+                    const player =
+                        playerMap.get(
+                            key
+                        );
+                    /*
+                     * Keep the newest spelling
+                     * supplied in the database.
+                     */
+                    player.name =
+                        victor.name;
+                    player.country =
+                        victor.country;
+                    if (
+                        !player.completions.includes(
+                            demon.name
+                        )
+                    ) {
+                        player.completions.push(
+                            demon.name
+                        );
+                    }
+                }
+            );
+        }
+    );
     return Array.from(
         playerMap.values()
     );
@@ -1502,21 +1635,21 @@ function calculatePlayerPoints(
     player.completions.forEach(
         function(completionName) {
             const demon =
-                demons.find(function(item) {
-                    return item.name ===
-                        completionName;
-                });
+                demons.find(
+                    function(item) {
+                        return item.name ===
+                            completionName;
+                    }
+                );
             if (!demon) {
                 return;
             }
-            const currentRank =
-                masterOrder.indexOf(
-                    demon.name
-                ) + 1;
-            total += getDemonPoints(
-                demon,
-                currentRank
-            );
+            /*
+             * A player's points are based on
+             * the demon's CURRENT list points.
+             */
+            total +=
+                demon.points || 0;
         }
     );
     return total;
@@ -1532,30 +1665,36 @@ function renderLeaderboard() {
     leaderboard.innerHTML = "";
     const rankedPlayers =
         getAllPlayers()
-            .map(function(player) {
-                return {
-                    name:
-                        player.name,
-                    country:
-                        player.country,
-                    completions:
-                        player.completions,
-                    points:
-                        calculatePlayerPoints(
-                            player
-                        )
-                };
-            })
-            .sort(function(a, b) {
-                return b.points -
-                    a.points;
-            });
+            .map(
+                function(player) {
+                    return {
+                        name:
+                            player.name,
+                        country:
+                            player.country,
+                        completions:
+                            player.completions,
+                        points:
+                            calculatePlayerPoints(
+                                player
+                            )
+                    };
+                }
+            )
+            .sort(
+                function(a, b) {
+                    return b.points -
+                        a.points;
+                }
+            );
     rankedPlayers.forEach(
         function(player, index) {
             const rank =
                 index + 1;
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
             card.className =
                 "player-card";
             card.innerHTML = `
@@ -1577,7 +1716,9 @@ function renderLeaderboard() {
                     Points
                 </div>
             `;
-            leaderboard.appendChild(card);
+            leaderboard.appendChild(
+                card
+            );
         }
     );
 }
@@ -1758,20 +1899,22 @@ document.getElementById(
             document.querySelectorAll(
                 "#demonList .demon"
             );
-        cards.forEach(function(card) {
-            const name =
-                card.dataset.name
-                    .toLowerCase();
-            if (
-                name.includes(text)
-            ) {
-                card.style.display =
-                    "block";
-            } else {
-                card.style.display =
-                    "none";
+        cards.forEach(
+            function(card) {
+                const name =
+                    card.dataset.name
+                        .toLowerCase();
+                if (
+                    name.includes(text)
+                ) {
+                    card.style.display =
+                        "block";
+                } else {
+                    card.style.display =
+                        "none";
+                }
             }
-        });
+        );
     }
 );
 /* =====================================================
