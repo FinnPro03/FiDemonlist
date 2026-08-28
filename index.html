@@ -64,14 +64,6 @@
             text-align: center;
         }
 
-        /*
-            IMAGE CONTAINER
-
-            Every image gets exactly the same display area.
-            object-fit: contain means the entire image stays visible
-            instead of being cropped or stretched.
-        */
-
         .image-container {
             width: 100%;
             max-width: 600px;
@@ -94,10 +86,6 @@
             object-fit: contain;
             display: block;
         }
-
-        /*
-            Placeholder shown when an image cannot be found.
-        */
 
         .placeholder {
             color: #aaaaaa;
@@ -154,23 +142,22 @@
 
             </div>
 
-
             <div class="name">
                 #1 - Bloodbath
             </div>
-
 
             <div class="info">
                 Created By: Riot
             </div>
 
-
             <div class="info">
                 Verified By: Riot
             </div>
 
-
-            <div class="info" id="bloodbath-verified">
+            <div
+                class="info"
+                id="bloodbath-verified"
+            >
                 Verified: Calculating...
             </div>
 
@@ -187,31 +174,30 @@
 
                 <img
                     class="demon-image"
-                    src="TheHellFactory.jpeg"
+                    src="The Hell Factory.jpeg"
                     alt="The Hell Factory"
                     onerror="showPlaceholder(this)"
                 >
 
             </div>
 
-
             <div class="name">
                 #2 - The Hell Factory
             </div>
-
 
             <div class="info">
                 Created By: TeamN2
             </div>
 
-
             <div class="info">
                 Verified By: Powerbomb
             </div>
 
-
-            <div class="info">
-                Verified: December 28 2015
+            <div
+                class="info"
+                id="the-hell-factory-verified"
+            >
+                Verified: Calculating...
             </div>
 
         </div>
@@ -236,12 +222,8 @@
 
 
         // ==========================================
-        // VERIFICATION TIME SYSTEM
+        // AUTOMATIC TIME AGO SYSTEM
         // ==========================================
-
-        const bloodbathVerificationDate =
-            new Date("2015-08-12T00:00:00");
-
 
         function getTimeAgo(date) {
 
@@ -250,28 +232,23 @@
             const millisecondsPerDay =
                 1000 * 60 * 60 * 24;
 
-
             const difference =
                 now - date;
-
 
             const totalDays =
                 Math.floor(
                     difference / millisecondsPerDay
                 );
 
-
             const totalWeeks =
                 Math.floor(
                     totalDays / 7
                 );
 
-
             const totalMonths =
                 Math.floor(
                     totalDays / 30.4375
                 );
-
 
             const totalYears =
                 Math.floor(
@@ -289,7 +266,6 @@
                             ? " Year Ago"
                             : " Years Ago"
                     );
-
             }
 
 
@@ -303,7 +279,6 @@
                             ? " Month Ago"
                             : " Months Ago"
                     );
-
             }
 
 
@@ -317,7 +292,6 @@
                             ? " Week Ago"
                             : " Weeks Ago"
                     );
-
             }
 
 
@@ -331,7 +305,6 @@
                             ? " Day Ago"
                             : " Days Ago"
                     );
-
             }
 
 
@@ -340,7 +313,18 @@
 
 
         // ==========================================
-        // DISPLAY BLOODBATH VERIFICATION TIME
+        // VERIFICATION DATES
+        // ==========================================
+
+        const bloodbathVerificationDate =
+            new Date("2015-08-12T00:00:00");
+
+        const theHellFactoryVerificationDate =
+            new Date("2015-12-28T00:00:00");
+
+
+        // ==========================================
+        // UPDATE VERIFICATION TEXT
         // ==========================================
 
         document.getElementById(
@@ -352,13 +336,21 @@
             );
 
 
+        document.getElementById(
+            "the-hell-factory-verified"
+        ).textContent =
+            "Verified: " +
+            getTimeAgo(
+                theHellFactoryVerificationDate
+            );
+
+
         // ==========================================
         // SEARCH SYSTEM
         // ==========================================
 
         const searchBox =
             document.getElementById("search");
-
 
         const demons =
             document.querySelectorAll(".demon");
