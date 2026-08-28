@@ -3,449 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FiDemonlist</title>
-<style>
-    * {
-        box-sizing: border-box;
-    }
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #111111;
-        color: white;
-    }
-    header {
-        position: relative;
-        background: #1b1b1b;
-        padding: 25px 20px;
-        text-align: center;
-        border-bottom: 2px solid #333333;
-    }
-    header h1 {
-        margin: 0;
-        font-size: 38px;
-    }
-    header p {
-        margin: 7px 0 0;
-        color: #aaaaaa;
-        font-size: 15px;
-    }
-    .header-buttons {
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        gap: 8px;
-    }
-    .header-button {
-        padding: 11px 16px;
-        border: 1px solid #444444;
-        border-radius: 8px;
-        background: #292929;
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .header-button:hover {
-        background: #383838;
-    }
-    .container {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 0 20px;
-    }
-    .search {
-        width: 100%;
-        padding: 15px;
-        border-radius: 8px;
-        border: 1px solid #333333;
-        background: #1c1c1c;
-        color: white;
-        font-size: 16px;
-        margin-bottom: 25px;
-        outline: none;
-    }
-    .search::placeholder {
-        color: #777777;
-    }
-    .panel {
-        display: none;
-        background: #1c1c1c;
-        border: 1px solid #333333;
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 25px;
-    }
-    .panel h2 {
-        margin-top: 0;
-        text-align: center;
-    }
-    .panel-description {
-        color: #aaaaaa;
-        text-align: center;
-    }
-    .date-input {
-        padding: 12px;
-        border-radius: 7px;
-        border: 1px solid #444444;
-        background: #111111;
-        color: white;
-        font-size: 16px;
-        margin: 10px;
-    }
-    .panel-buttons {
-        text-align: center;
-    }
-    .apply-button,
-    .today-button {
-        padding: 12px 18px;
-        border-radius: 7px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .apply-button {
-        border: none;
-        background: #444444;
-        color: white;
-    }
-    .apply-button:hover {
-        background: #555555;
-    }
-    .today-button {
-        border: 1px solid #444444;
-        background: #222222;
-        color: white;
-        margin-left: 5px;
-    }
-    .today-button:hover {
-        background: #333333;
-    }
-    .time-travel-status {
-        display: none;
-        text-align: center;
-        color: #aaaaaa;
-        margin-bottom: 20px;
-        font-size: 14px;
-    }
-    .demon {
-        background: #1c1c1c;
-        border: 1px solid #333333;
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    .image-container {
-        width: 100%;
-        max-width: 600px;
-        height: 280px;
-        margin: 0 auto 18px auto;
-        background: #333333;
-        border-radius: 9px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-    .demon-image {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        display: block;
-    }
-    .placeholder {
-        color: #aaaaaa;
-        font-size: 24px;
-        font-weight: bold;
-    }
-    .name {
-        font-size: 25px;
-        font-weight: bold;
-        margin-bottom: 12px;
-    }
-    .info {
-        color: #aaaaaa;
-        font-size: 15px;
-        margin: 6px 0;
-    }
-    .points {
-        color: white;
-        font-size: 15px;
-        margin-top: 10px;
-        font-weight: bold;
-    }
-    .button-row {
-        margin-top: 12px;
-    }
-    .victors-button {
-        margin: 5px;
-        padding: 10px 17px;
-        border: 1px solid #444444;
-        border-radius: 7px;
-        background: #292929;
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .victors-button:hover {
-        background: #383838;
-    }
-    .victors-panel {
-        display: none;
-        margin-top: 15px;
-        padding: 15px;
-        background: #151515;
-        border: 1px solid #333333;
-        border-radius: 9px;
-        text-align: left;
-    }
-    .victors-title {
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-    .victor {
-        padding: 8px 0;
-        border-bottom: 1px solid #292929;
-        color: #dddddd;
-        font-size: 15px;
-    }
-    .victor:last-child {
-        border-bottom: none;
-    }
-    .leaderboard-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .player-card {
-        display: flex;
-        align-items: center;
-        background: #222222;
-        border: 1px solid #333333;
-        border-radius: 10px;
-        padding: 15px;
-    }
-    .player-rank {
-        width: 55px;
-        font-size: 23px;
-        font-weight: bold;
-        text-align: center;
-    }
-    .player-info {
-        flex: 1;
-        margin-left: 10px;
-    }
-    .player-name {
-        font-size: 18px;
-        font-weight: bold;
-    }
-    .player-completions {
-        margin-top: 5px;
-        color: #999999;
-        font-size: 13px;
-    }
-    .player-points {
-        font-size: 18px;
-        font-weight: bold;
-        text-align: right;
-    }
-    .no-demons {
-        display: none;
-        text-align: center;
-        padding: 50px 20px;
-        background: #1c1c1c;
-        border: 1px solid #333333;
-        border-radius: 12px;
-        color: #888888;
-        font-size: 18px;
-    }
-    /* ============================
-       MODAL
-    ============================ */
-    .history-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.75);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        z-index: 9999;
-    }
-    .history-box {
-        background: #1c1c1c;
-        border: 1px solid #444444;
-        border-radius: 14px;
-        padding: 25px;
-        width: 100%;
-        max-width: 600px;
-        max-height: 85vh;
-        overflow-y: auto;
-        text-align: center;
-    }
-    .history-box h2 {
-        margin-top: 0;
-        font-size: 28px;
-    }
-    .history-section {
-        border-top: 1px solid #333333;
-        margin-top: 20px;
-        padding-top: 20px;
-    }
-    .history-section h3 {
-        margin-top: 0;
-    }
-    .close-history {
-        margin-top: 20px;
-        padding: 10px 18px;
-        border: 1px solid #444444;
-        border-radius: 7px;
-        background: #292929;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .close-history:hover {
-        background: #383838;
-    }
-    /* POSITION HISTORY */
-    .position-entry {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px;
-        margin: 8px 0;
-        background: #222222;
-        border: 1px solid #333333;
-        border-radius: 8px;
-    }
-    .position-date {
-        color: #bbbbbb;
-        text-align: left;
-    }
-    .position-rank {
-        font-size: 18px;
-        font-weight: bold;
-    }
-    @media (max-width: 700px) {
+    <title>FiDemonlist</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111111;
+            color: white;
+        }
         header {
-            padding-bottom: 85px;
+            position: relative;
+            background: #1b1b1b;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 2px solid #333333;
         }
         header h1 {
-            font-size: 30px;
+            margin: 0;
+            font-size: 38px;
         }
-        .header-buttons {
-            top: auto;
-            bottom: 15px;
-            right: 0;
-            left: 0;
-            transform: none;
-            justify-content: center;
-        }
-        .header-button {
-            padding: 10px 13px;
-        }
-        .player-card {
-            padding: 12px;
-        }
-        .player-points {
+        header p {
+            margin: 7px 0 0;
+            color: #aaaaaa;
             font-size: 15px;
         }
-    }
-</style>
+        .header-buttons {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        .header-button {
+            padding: 11px 16px;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            background: #292929;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .header-button:hover {
+            background: #383838;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .search {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+            background: #1c1c1c;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 25px;
+            outline: none;
+        }
+        .search::placeholder {
+            color: #777777;
+        }
+        .panel {
+            display: none;
+            background: #1c1c1c;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .panel h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .panel-description {
+            color: #aaaaaa;
+            text-align: center;
+        }
+        .date-input {
+            padding: 12px;
+            border-radius: 7px;
+            border: 1px solid #444444;
+            background: #111111;
+            color: white;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .panel-buttons {
+            text-align: center;
+        }
+        .apply-button,
+        .today-button {
+            padding: 12px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .apply-button {
+            border: none;
+            background: #444444;
+            color: white;
+        }
+        .apply-button:hover {
+            background: #555555;
+        }
+        .today-button {
+            border: 1px solid #444444;
+            background: #222222;
+            color: white;
+            margin-left: 5px;
+        }
+        .today-button:hover {
+            background: #333333;
+        }
+        .time-travel-status {
+            display: none;
+            text-align: center;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .demon {
+            background: #1c1c1c;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .image-container {
+            width: 100%;
+            max-width: 600px;
+            height: 280px;
+            margin: 0 auto 18px auto;
+            background: #333333;
+            border-radius: 9px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .demon-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .placeholder {
+            color: #aaaaaa;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .name {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .info {
+            color: #aaaaaa;
+            font-size: 15px;
+            margin: 6px 0;
+        }
+        .points {
+            color: white;
+            font-size: 15px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .victors-button {
+            margin: 5px;
+            padding: 10px 17px;
+            border: 1px solid #444444;
+            border-radius: 7px;
+            background: #292929;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .victors-button:hover {
+            background: #383838;
+        }
+        .victors-panel {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #151515;
+            border: 1px solid #333333;
+            border-radius: 9px;
+            text-align: left;
+        }
+        .victors-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .victor {
+            padding: 8px 0;
+            border-bottom: 1px solid #292929;
+            color: #dddddd;
+            font-size: 15px;
+        }
+        .victor:last-child {
+            border-bottom: none;
+        }
+        .leaderboard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .player-card {
+            display: flex;
+            align-items: center;
+            background: #222222;
+            border: 1px solid #333333;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .player-rank {
+            width: 55px;
+            font-size: 23px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .player-info {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .player-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .player-completions {
+            margin-top: 5px;
+            color: #999999;
+            font-size: 13px;
+        }
+        .player-points {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+        }
+        .history-button {
+            margin: 5px;
+            padding: 10px 17px;
+            border: 1px solid #444444;
+            border-radius: 7px;
+            background: #292929;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .history-button:hover {
+            background: #383838;
+        }
+        .no-demons {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            background: #1c1c1c;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            color: #888888;
+            font-size: 18px;
+        }
+        /* ============================
+           HISTORY OVERLAY
+        ============================ */
+        .history-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+        .history-box {
+            background: #1c1c1c;
+            border: 1px solid #444444;
+            border-radius: 14px;
+            padding: 25px;
+            width: 100%;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: center;
+        }
+        .history-box h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+        .history-section {
+            border-top: 1px solid #333333;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        .history-section h3 {
+            margin-top: 0;
+        }
+        .position-history {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .position-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #222222;
+            border: 1px solid #333333;
+            border-radius: 8px;
+        }
+        .position-date {
+            color: #aaaaaa;
+            font-size: 14px;
+            text-align: left;
+        }
+        .position-rank {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .close-history {
+            margin-top: 20px;
+            padding: 10px 18px;
+            border: 1px solid #444444;
+            border-radius: 7px;
+            background: #292929;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-history:hover {
+            background: #383838;
+        }
+        @media (max-width: 700px) {
+            header {
+                padding-bottom: 85px;
+            }
+            header h1 {
+                font-size: 30px;
+            }
+            .header-buttons {
+                top: auto;
+                bottom: 15px;
+                right: 0;
+                left: 0;
+                transform: none;
+                justify-content: center;
+            }
+            .header-button {
+                padding: 10px 13px;
+            }
+            .player-card {
+                padding: 12px;
+            }
+            .player-points {
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 <header>
-<h1>FiDemonlist</h1>
-<p>
-    The Custom Geometry Dash Demonlist
-</p>
-<div class="header-buttons">
-    <button
-        class="header-button"
-        id="timeTravelButton"
-    >
-        Time Travel
-    </button>
-    <button
-        class="header-button"
-        id="leaderboardButton"
-    >
-        Player Leaderboard
-    </button>
-</div>
-</header>
-<div class="container">
-<!-- TIME TRAVEL -->
-<div
-    class="panel"
-    id="timeTravelPanel"
->
-    <h2>Time Travel</h2>
-    <p class="panel-description">
-        Choose a date to see the FiDemonlist from that date.
+    <h1>FiDemonlist</h1>
+    <p>
+        The Custom Geometry Dash Demonlist
     </p>
-    <div class="panel-buttons">
-        <input
-            type="date"
-            id="datePicker"
-            class="date-input"
-        >
+    <div class="header-buttons">
         <button
-            class="apply-button"
-            id="applyDate"
+            class="header-button"
+            id="timeTravelButton"
         >
-            Travel
+            Time Travel
         </button>
         <button
-            class="today-button"
-            id="returnToday"
+            class="header-button"
+            id="leaderboardButton"
         >
-            Today
+            Player Leaderboard
         </button>
     </div>
-</div>
-<!-- PLAYER LEADERBOARD -->
-<div
-    class="panel"
-    id="leaderboardPanel"
->
-    <h2>Player Leaderboard</h2>
-    <p class="panel-description">
-        Player rankings are based on completed FiDemonlist demons.
-    </p>
+</header>
+<div class="container">
+    <!-- TIME TRAVEL -->
     <div
-        class="leaderboard-list"
-        id="leaderboardList"
+        class="panel"
+        id="timeTravelPanel"
+    >
+        <h2>Time Travel</h2>
+        <p class="panel-description">
+            Choose a date to see the FiDemonlist from that date.
+        </p>
+        <div class="panel-buttons">
+            <input
+                type="date"
+                id="datePicker"
+                class="date-input"
+            >
+            <button
+                class="apply-button"
+                id="applyDate"
+            >
+                Travel
+            </button>
+            <button
+                class="today-button"
+                id="returnToday"
+            >
+                Today
+            </button>
+        </div>
+    </div>
+    <!-- PLAYER LEADERBOARD -->
+    <div
+        class="panel"
+        id="leaderboardPanel"
+    >
+        <h2>Player Leaderboard</h2>
+        <p class="panel-description">
+            Player rankings are based on completed FiDemonlist demons.
+        </p>
+        <div
+            class="leaderboard-list"
+            id="leaderboardList"
+        ></div>
+    </div>
+    <div
+        class="time-travel-status"
+        id="timeTravelStatus"
     ></div>
-</div>
-<div
-    class="time-travel-status"
-    id="timeTravelStatus"
-></div>
-<!-- SEARCH -->
-<input
-    id="search"
-    class="search"
-    type="text"
-    placeholder="Search demons..."
->
-<!-- DEMON LIST -->
-<div id="demonList"></div>
-<div
-    class="no-demons"
-    id="noDemons"
->
-    No demons were on the list at this date.
-</div>
+    <!-- SEARCH -->
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="Search demons..."
+    >
+    <!-- DEMON LIST -->
+    <div id="demonList"></div>
+    <div
+        class="no-demons"
+        id="noDemons"
+    >
+        No demons were on the list at this date.
+    </div>
 </div>
 <script>
 /* =====================================================
@@ -572,9 +587,24 @@ const demons = [
             { name: "SpaceRS", country: "🇷🇸" }
         ]
     },
-    /* ============================
-       LEGACY
-    ============================ */
+    {
+        name: "Quanteuse Processing",
+        createdBy: "Renn241 and BlankB",
+        verifiedBy: "Zoink",
+        verification: "2024-12-31",
+        image: "Quanteuse Processing.jpeg",
+        points: 194.54,
+        victors: [
+            { name: "Zoink", country: "🇺🇸" },
+            { name: "Dovvin", country: "🇵🇱" },
+            { name: "Seregiusz", country: "🇵🇱" },
+            { name: "Sharkyga", country: "🇦🇺" },
+            { name: "Karkito", country: "🇰🇷" }
+        ]
+    },
+    /* =================================================
+       LEGACY DEMONS
+    ================================================= */
     {
         name: "Bloodbath",
         createdBy: "Riot",
@@ -618,7 +648,6 @@ const demons = [
 ];
 /* =====================================================
    MASTER ORDER
-   THIS NEVER CHANGES
 ===================================================== */
 const masterOrder = [
     "Society",
@@ -630,10 +659,47 @@ const masterOrder = [
     "Orbit",
     "Antarctic Lights",
     "Nullscapes",
+    "Quanteuse Processing",
     "Bloodbath",
     "The Hell Factory",
     "The Ultimate Phase",
     "Cataclysm"
+];
+/* =====================================================
+   HISTORICAL ORDER
+   Only actual ordering relationships are stored here.
+===================================================== */
+const historicalOrders = [
+    {
+        date: "2015-08-12",
+        order: [
+            "Bloodbath"
+        ]
+    },
+    {
+        date: "2015-12-28",
+        order: [
+            "Bloodbath",
+            "The Hell Factory"
+        ]
+    },
+    {
+        date: "2016-01-15",
+        order: [
+            "Bloodbath",
+            "The Hell Factory",
+            "Cataclysm"
+        ]
+    },
+    {
+        date: "2016-06-21",
+        order: [
+            "Bloodbath",
+            "The Hell Factory",
+            "The Ultimate Phase",
+            "Cataclysm"
+        ]
+    }
 ];
 /* =====================================================
    CURRENT LIST POINTS
@@ -647,7 +713,8 @@ const currentRankPoints = {
     6: 253.53,
     7: 236.80,
     8: 221.47,
-    9: 207.42
+    9: 207.42,
+    10: 194.54
 };
 /* =====================================================
    TIME AGO
@@ -713,10 +780,6 @@ function demonExists(
     ) {
         return false;
     }
-    /*
-       Legacy demons disappear ON their
-       legacy date.
-    */
     if (
         demon.legacyDate &&
         selectedDate >=
@@ -753,86 +816,19 @@ function getAvailableDemons(
         );
 }
 /* =====================================================
-   GET HISTORICAL RANK
-===================================================== */
-function getHistoricalRank(
-    demon,
-    selectedDate
-) {
-    const available =
-        getAvailableDemons(
-            selectedDate
-        );
-    const index =
-        available.findIndex(
-            function(item) {
-                return item.name ===
-                    demon.name;
-            }
-        );
-    if (index === -1) {
-        return null;
-    }
-    return index + 1;
-}
-/* =====================================================
    GET POINTS
 ===================================================== */
 function getDemonPoints(
     demon,
     rank
 ) {
-    /*
-       Legacy points stay fixed.
-    */
     if (
-        demon.name === "Bloodbath"
-    ) {
-        return 18.65;
-    }
-    if (
-        demon.name === "The Hell Factory"
-    ) {
-        return 18.10;
-    }
-    if (
-        demon.name === "The Ultimate Phase"
-    ) {
-        return 17.50;
-    }
-    if (
-        demon.name === "Cataclysm"
-    ) {
-        return 17.00;
-    }
-    /*
-       Active demons use their current
-       list-position points.
-    */
-    if (
-        currentRankPoints[rank] !== undefined
+        currentRankPoints[rank] !== undefined &&
+        !demon.legacyDate
     ) {
         return currentRankPoints[rank];
     }
     return demon.points || 0;
-}
-/* =====================================================
-   FORMAT DATE
-===================================================== */
-function formatDate(
-    dateString
-) {
-    return new Date(
-        dateString +
-        "T00:00:00"
-    ).toLocaleDateString(
-        "en-US",
-        {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        }
-    );
 }
 /* =====================================================
    RENDER LIST
@@ -897,8 +893,7 @@ function renderList(
                     Verified By: ${demon.verifiedBy}
                 </div>
                 <div class="info">
-                    Verified:
-                    ${getTimeAgo(
+                    Verified: ${getTimeAgo(
                         new Date(
                             demon.verification +
                             "T00:00:00"
@@ -908,26 +903,18 @@ function renderList(
                 <div class="points">
                     List Points: ${points.toFixed(2)}
                 </div>
-                <div class="button-row">
-                    <button
-                        class="victors-button"
-                        onclick="toggleVictors(this)"
-                    >
-                        Victors
-                    </button>
-                    <button
-                        class="victors-button"
-                        onclick="showPositionHistory('${demon.name.replace(/'/g, "\\'")}')"
-                    >
-                        Position History
-                    </button>
-                    <button
-                        class="victors-button"
-                        onclick="showDemonHistory('${demon.name.replace(/'/g, "\\'")}')"
-                    >
-                        Demon History
-                    </button>
-                </div>
+                <button
+                    class="victors-button"
+                    onclick="toggleVictors(this)"
+                >
+                    Victors
+                </button>
+                <button
+                    class="history-button"
+                    onclick="showDemonHistory('${demon.name.replace(/'/g, "\\'")}')"
+                >
+                    Position History
+                </button>
                 <div class="victors-panel">
                     <div class="victors-title">
                         Victors
@@ -976,8 +963,7 @@ function toggleVictors(
     button
 ) {
     const panel =
-        button.parentElement
-            .nextElementSibling;
+        button.nextElementSibling.nextElementSibling;
     if (
         panel.style.display ===
         "block"
@@ -994,49 +980,100 @@ function toggleVictors(
     }
 }
 /* =====================================================
-   POSITION HISTORY
+   GET HISTORICAL LIST
 ===================================================== */
-function showPositionHistory(
+function getHistoricalList(
+    selectedDate
+) {
+    const available =
+        getAvailableDemons(
+            selectedDate
+        );
+    let list =
+        [];
+    historicalOrders.forEach(
+        function(snapshot) {
+            if (
+                snapshot.date <=
+                selectedDate
+            ) {
+                list =
+                    snapshot.order.slice();
+            }
+        }
+    );
+    /*
+       Add all currently available demons that
+       are not explicitly placed in an older
+       snapshot.
+       They are inserted according to the master
+       order, preserving the known order.
+    */
+    available.forEach(
+        function(demon) {
+            if (
+                !list.includes(
+                    demon.name
+                )
+            ) {
+                let inserted = false;
+                const masterIndex =
+                    masterOrder.indexOf(
+                        demon.name
+                    );
+                for (
+                    let i = 0;
+                    i < list.length;
+                    i++
+                ) {
+                    const otherIndex =
+                        masterOrder.indexOf(
+                            list[i]
+                        );
+                    if (
+                        masterIndex <
+                        otherIndex
+                    ) {
+                        list.splice(
+                            i,
+                            0,
+                            demon.name
+                        );
+                        inserted = true;
+                        break;
+                    }
+                }
+                if (!inserted) {
+                    list.push(
+                        demon.name
+                    );
+                }
+            }
+        }
+    );
+    return list.filter(
+        function(name) {
+            return available.some(
+                function(demon) {
+                    return demon.name === name;
+                }
+            );
+        }
+    );
+}
+/* =====================================================
+   POSITION HISTORY
+   Only creates an entry when the placement changes.
+===================================================== */
+function getPositionHistory(
     demonName
 ) {
-    const demon =
-        demons.find(
-            function(item) {
-                return item.name ===
-                    demonName;
-            }
-        );
-    if (!demon) {
-        return;
-    }
-    const existing =
-        document.getElementById(
-            "historyOverlay"
-        );
-    if (existing) {
-        existing.remove();
-    }
-    const overlay =
-        document.createElement(
-            "div"
-        );
-    overlay.id =
-        "historyOverlay";
-    overlay.className =
-        "history-overlay";
-    const history =
-        document.createElement(
-            "div"
-        );
-    history.className =
-        "history-box";
-    /*
-       Every important list-change date.
-       The position is recalculated from
-       the master order.
-    */
-    const importantDates = [
-        demon.verification,
+    const relevantDates = [
+        "2015-01-01",
+        "2015-08-12",
+        "2015-12-28",
+        "2016-01-15",
+        "2016-06-21",
         "2017-01-01",
         "2023-09-09",
         "2024-09-04",
@@ -1049,76 +1086,43 @@ function showPositionHistory(
         "2026-07-16",
         todayString
     ];
-    const uniqueDates =
-        [...new Set(
-            importantDates
-        )]
-        .sort();
-    let positionHTML = "";
-    uniqueDates.forEach(
+    const history = [];
+    let previousPosition = null;
+    relevantDates.forEach(
         function(date) {
-            const rank =
-                getHistoricalRank(
-                    demon,
+            const list =
+                getHistoricalList(
                     date
                 );
+            const position =
+                list.indexOf(
+                    demonName
+                );
             if (
-                rank === null
+                position === -1
             ) {
                 return;
             }
-            positionHTML += `
-                <div class="position-entry">
-                    <div class="position-date">
-                        ${formatDate(date)}
-                    </div>
-                    <div class="position-rank">
-                        #${rank}
-                    </div>
-                </div>
-            `;
+            const rank =
+                position + 1;
+            /*
+               Only add the date if the
+               placement actually changed.
+            */
+            if (
+                previousPosition === null ||
+                rank !== previousPosition
+            ) {
+                history.push({
+                    date: date,
+                    rank: rank
+                });
+                previousPosition =
+                    rank;
+            }
         }
     );
-    history.innerHTML = `
-        <h2>
-            ${demon.name}
-        </h2>
-        <div class="info">
-            Position History
-        </div>
-        <div class="history-section">
-            <h3>
-                📊 List Positions
-            </h3>
-            ${positionHTML}
-        </div>
-        <button
-            class="close-history"
-            id="closeHistory"
-        >
-            Close
-        </button>
-    `;
-    overlay.appendChild(
-        history
-    );
-    document.body.appendChild(
-        overlay
-    );
-    document.getElementById(
-        "closeHistory"
-    ).onclick =
-        function() {
-            overlay.remove();
-        };
-    overlay.onclick =
-        function(event) {
-            if (
-                event.target === overlay
-            ) {
-                overlay.remove();
-            }
-        };
+    return history;
 }
 /* =====================================================
    DEMON HISTORY
@@ -1157,18 +1161,39 @@ function showDemonHistory(
         );
     history.className =
         "history-box";
+    const verificationDate =
+        new Date(
+            demon.verification +
+            "T00:00:00"
+        );
     const formattedVerification =
-        formatDate(
-            demon.verification
+        verificationDate.toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
         );
     let legacyHTML = "";
     if (demon.legacyDate) {
+        const legacyDate =
+            new Date(
+                demon.legacyDate +
+                "T00:00:00"
+            );
+        const formattedLegacy =
+            legacyDate.toLocaleDateString(
+                "en-US",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
+            );
         legacyHTML = `
             <div class="info">
-                🏛️ Became Legacy:
-                ${formatDate(
-                    demon.legacyDate
-                )}
+                🏛️ Became Legacy: ${formattedLegacy}
             </div>
         `;
     } else {
@@ -1197,6 +1222,47 @@ function showDemonHistory(
                 `;
             }
         ).join("");
+    const positionHistory =
+        getPositionHistory(
+            demon.name
+        );
+    const positionHistoryHTML =
+        positionHistory.length === 0
+        ?
+        `
+            <div class="info">
+                No recorded position changes yet.
+            </div>
+        `
+        :
+        positionHistory.map(
+            function(entry) {
+                const date =
+                    new Date(
+                        entry.date +
+                        "T00:00:00"
+                    );
+                const formattedDate =
+                    date.toLocaleDateString(
+                        "en-US",
+                        {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric"
+                        }
+                    );
+                return `
+                    <div class="position-entry">
+                        <div class="position-date">
+                            ${formattedDate}
+                        </div>
+                        <div class="position-rank">
+                            #${entry.rank}
+                        </div>
+                    </div>
+                `;
+            }
+        ).join("");
     history.innerHTML = `
         <h2>
             ${demon.name}
@@ -1208,13 +1274,11 @@ function showDemonHistory(
             Verified By: ${demon.verifiedBy}
         </div>
         <div class="info">
-            📅 Verified:
-            ${formattedVerification}
+            📅 Verified: ${formattedVerification}
         </div>
         ${legacyHTML}
         <div class="points">
-            List Points:
-            ${demon.points.toFixed(2)}
+            List Points: ${demon.points.toFixed(2)}
         </div>
         <div class="history-section">
             <h3>
@@ -1224,30 +1288,11 @@ function showDemonHistory(
         </div>
         <div class="history-section">
             <h3>
-                📜 Timeline
+                📈 Position History
             </h3>
-            <div class="info">
-                ${formattedVerification}
-                — Demon verified
+            <div class="position-history">
+                ${positionHistoryHTML}
             </div>
-            ${
-                demon.legacyDate
-                ?
-                `
-                <div class="info">
-                    ${formatDate(
-                        demon.legacyDate
-                    )}
-                    — Became Legacy
-                </div>
-                `
-                :
-                `
-                <div class="info">
-                    Currently on the FiDemonlist
-                </div>
-                `
-            }
         </div>
         <button
             class="close-history"
