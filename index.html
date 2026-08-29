@@ -268,7 +268,6 @@
         color: #888888;
         font-size: 18px;
     }
-    /* PLAYER PROFILE */
     .profile-overlay {
         position: fixed;
         inset: 0;
@@ -542,7 +541,7 @@ const demons = [
         points: 221.47,
         victors: [
             { name: "Axinity", country: "🇩🇰" },
-            { name: "Weyolll3", country: "🇪🇸" }
+            { name: "weyolll3", country: "🇪🇸" }
         ]
     },
     {
@@ -825,6 +824,41 @@ const demons = [
             { name: "Pluntix", country: "🇨🇿" },
             { name: "Axinity", country: "🇩🇰" }
         ]
+    },
+    /* =========================
+       #19
+    ========================= */
+    {
+        name: "KILLSTEALER",
+        createdBy: "Rynoxious and Asterion",
+        verifiedBy: "kloone",
+        verification: "2026-04-22",
+        image: "KILLSTEALER.jpeg",
+        points: 117.62,
+        victors: [
+            { name: "kloone", country: "🇫🇮" },
+            { name: "zLevii", country: "🇳🇿" }
+        ]
+    },
+    /* =========================
+       #20
+    ========================= */
+    {
+        name: "Subsuming Vortex",
+        createdBy: "SeptaGon7",
+        verifiedBy: "Cursed",
+        verification: "2025-09-10",
+        image: "Subsuming Vortex.jpeg",
+        points: 112.23,
+        victors: [
+            { name: "Cursed", country: "🇬🇧" },
+            { name: "Zoink", country: "🇺🇸" },
+            { name: "Rodmentor", country: "🇨🇴" },
+            { name: "weyolll3", country: "🇪🇸" },
+            { name: "wPopoff", country: "🇺🇸" },
+            { name: "Beto", country: "🇮🇱" },
+            { name: "manu", country: "🇨🇱" }
+        ]
     }
 ];
 /* =====================================================
@@ -849,6 +883,8 @@ const masterOrder = [
     "Ashley Wave Trials",
     "Ultra Paracosm",
     "Andromeda",
+    "KILLSTEALER",
+    "Subsuming Vortex",
     "Bloodbath",
     "The Hell Factory",
     "The Ultimate Phase",
@@ -875,7 +911,9 @@ const currentRankPoints = {
     15: 144.56,
     16: 136.92,
     17: 129.92,
-    18: 123.50
+    18: 123.50,
+    19: 117.62,
+    20: 112.23
 };
 /* =====================================================
    TIME AGO
@@ -961,7 +999,8 @@ function getAvailableDemons(
             function(name) {
                 return demons.find(
                     function(demon) {
-                        return demon.name === name;
+                        return demon.name ===
+                            name;
                     }
                 );
             }
@@ -1145,9 +1184,8 @@ function getAllPlayers() {
                 function(victor) {
                     /*
                        Names are normalized by lowercase
-                       so wPopoff/wpopoff and
-                       dovvin/Dovvin can never become
-                       duplicate players.
+                       so capitalization differences never
+                       create duplicate players.
                     */
                     const key =
                         victor.name.toLowerCase();
