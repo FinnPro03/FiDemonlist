@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FiDemonlist - Custom Geometry Dash Demonlist</title>
-
-<meta name="description" content="FiDemonlist is a custom Geometry Dash Demonlist featuring demon rankings, historical levels, victors, player rankings, and Time Travel.">
+<title>FiDemonlist</title>
 
 <style>
 * {
@@ -316,6 +314,18 @@ header p {
     font-size: 18px;
 }
 
+/* AI READABLE INFORMATION */
+.ai-readable-data {
+    position: absolute;
+    left: -99999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* PLAYER PROFILE */
+
 .profile-overlay {
     position: fixed;
     inset: 0;
@@ -385,72 +395,6 @@ header p {
     background: #383838;
 }
 
-/*
-=====================================================
-AI / CRAWLER READABLE LEVEL INDEX
-=====================================================
-
-This section is intentionally present in the actual HTML.
-
-JavaScript-only content can be invisible to crawlers that
-do not execute JavaScript.
-
-This section gives AI/search crawlers a static representation
-of the FiDemonlist levels and their metadata.
-*/
-
-.ai-level-index {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.ai-level-index h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.ai-level-index-description {
-    color: #aaaaaa;
-    margin-bottom: 25px;
-}
-
-.ai-level {
-    background: #1c1c1c;
-    border: 1px solid #333333;
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 15px;
-}
-
-.ai-level h3 {
-    margin: 0 0 10px 0;
-    font-size: 21px;
-}
-
-.ai-level p {
-    margin: 5px 0;
-    color: #cccccc;
-}
-
-/*
-The static AI index is useful to crawlers but is visually
-hidden from normal visitors because the interactive list
-above is the actual UI.
-*/
-
-.ai-readable-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
 @media (max-width: 700px) {
 
     header {
@@ -498,329 +442,31 @@ The Custom Geometry Dash Demonlist
 <div class="header-buttons">
 
 <button
-    class="header-button"
-    id="timeTravelButton">
-    Time Travel
+class="header-button"
+id="timeTravelButton"
+>
+Time Travel
 </button>
 
 <button
-    class="header-button"
-    id="leaderboardButton">
-    Player Leaderboard
+class="header-button"
+id="leaderboardButton"
+>
+Player Leaderboard
 </button>
 
 </div>
+
 </header>
-
-
-<!-- =====================================================
-     STATIC AI-READABLE LEVEL DATABASE
-===================================================== -->
-
-<section
-    class="ai-level-index ai-readable-hidden"
-    id="aiLevelIndex">
-
-<h2>FiDemonlist Levels</h2>
-
-<p class="ai-level-index-description">
-Complete FiDemonlist level information, including current demons and historical demons.
-</p>
-
-
-<!-- CURRENT LEVELS -->
-
-<article class="ai-level">
-<h3>#1 - Society</h3>
-<p>Created By: Neomarbilan</p>
-<p>Verified By: Wpopoff</p>
-<p>Verified: June 20 2026</p>
-<p>Points: 350.00</p>
-</article>
-
-<article class="ai-level">
-<h3>#2 - Thinking Space II</h3>
-<p>Created By: CairoX</p>
-<p>Verified By: Zoink</p>
-<p>Verified: May 25 2025</p>
-<p>Points: 331.71</p>
-</article>
-
-<article class="ai-level">
-<h3>#3 - Amethyst</h3>
-<p>Created By: iMist</p>
-<p>Verified By: Wpopoff</p>
-<p>Verified: May 25 2025</p>
-<p>Points: 313.42</p>
-</article>
-
-<article class="ai-level">
-<h3>#4 - Flamewall</h3>
-<p>Created By: Narwall</p>
-<p>Verified By: Cuatrocientos</p>
-<p>Verified: September 21 2025</p>
-<p>Points: 291.70</p>
-</article>
-
-<article class="ai-level">
-<h3>#5 - Tidal Wave</h3>
-<p>Created By: OniLink</p>
-<p>Verified By: Zoink</p>
-<p>Verified: September 9 2023</p>
-<p>Points: 271.78</p>
-</article>
-
-<article class="ai-level">
-<h3>#6 - Green Bullet</h3>
-<p>Created By: MinaY</p>
-<p>Verified By: Nickname09</p>
-<p>Verified: June 16 2026</p>
-<p>Points: 253.53</p>
-</article>
-
-<article class="ai-level">
-<h3>#7 - Orbit</h3>
-<p>Created By: MindCap</p>
-<p>Verified By: Zoink</p>
-<p>Verified: February 10 2026</p>
-<p>Points: 236.80</p>
-</article>
-
-<article class="ai-level">
-<h3>#8 - Antarctic Lights</h3>
-<p>Created By: declanlc</p>
-<p>Verified By: Axinity</p>
-<p>Verified: July 16 2026</p>
-<p>Points: 221.47</p>
-</article>
-
-<article class="ai-level">
-<h3>#9 - Nullscapes</h3>
-<p>Created By: Kiba</p>
-<p>Verified By: Zoink</p>
-<p>Verified: September 4 2024</p>
-<p>Points: 207.42</p>
-</article>
-
-<article class="ai-level">
-<h3>#10 - Quanteuse Processing</h3>
-<p>Created By: Renn241 and BlankB</p>
-<p>Verified By: Zoink</p>
-<p>Verified: December 31 2024</p>
-<p>Points: 194.54</p>
-</article>
-
-<article class="ai-level">
-<h3>#11 - BOOBAWAMBA</h3>
-<p>Created By: Akunakunn</p>
-<p>Verified By: Eastshark</p>
-<p>Verified: October 5 2024</p>
-<p>Points: 182.73</p>
-</article>
-
-<article class="ai-level">
-<h3>#12 - The Bloop</h3>
-<p>Created By: murkkat</p>
-<p>Verified By: Zoink</p>
-<p>Verified: March 15 2026</p>
-<p>Points: 171.91</p>
-</article>
-
-<article class="ai-level">
-<h3>#13 - Every End</h3>
-<p>Created By: MindCap</p>
-<p>Verified By: Hqmy</p>
-<p>Verified: March 16 2025</p>
-<p>Points: 161.99</p>
-</article>
-
-<article class="ai-level">
-<h3>#14 - Penumbral</h3>
-<p>Created By: nxhtrise</p>
-<p>Verified By: w3rty</p>
-<p>Verified: March 5 2026</p>
-<p>Points: 152.89</p>
-</article>
-
-<article class="ai-level">
-<h3>#15 - Silent Clubstep</h3>
-<p>Created By: Sailent</p>
-<p>Verified By: paqoe</p>
-<p>Verified: July 12 2022</p>
-<p>Points: 144.56</p>
-<p>Additional Victor: 🇮🇹 zStucc</p>
-</article>
-
-<article class="ai-level">
-<h3>#16 - Ashley Wave Trials</h3>
-<p>Created By: OddMod</p>
-<p>Verified By: Zoink</p>
-<p>Verified: November 2 2024</p>
-<p>Points: 136.92</p>
-</article>
-
-<article class="ai-level">
-<h3>#17 - Ultra Paracosm</h3>
-<p>Created By: Renn241 and declanlc</p>
-<p>Verified By: Wity</p>
-<p>Verified: April 21 2026</p>
-<p>Points: 129.92</p>
-</article>
-
-<article class="ai-level">
-<h3>#18 - Andromeda</h3>
-<p>Created By: Insxne97</p>
-<p>Verified By: Taiago</p>
-<p>Verified: January 19 2025</p>
-<p>Points: 123.50</p>
-</article>
-
-<article class="ai-level">
-<h3>#19 - KILLSTEALER</h3>
-<p>Created By: Rynoxious and Asterion</p>
-<p>Verified By: kloone</p>
-<p>Verified: April 22 2026</p>
-<p>Points: 117.62</p>
-</article>
-
-<article class="ai-level">
-<h3>#20 - Subsuming Vortex</h3>
-<p>Created By: SeptaGon7</p>
-<p>Verified By: Cursed</p>
-<p>Verified: September 10 2025</p>
-<p>Points: 112.23</p>
-</article>
-
-<article class="ai-level">
-<h3>#21 - Anathema</h3>
-<p>Created By: nikrodox</p>
-<p>Verified By: Whizkid05</p>
-<p>Verified: November 20 2024</p>
-<p>Points: 110.81</p>
-</article>
-
-<article class="ai-level">
-<h3>#22 - Avernus</h3>
-<p>Created By: Bo and Pockewindfish</p>
-<p>Verified By: Zoink</p>
-<p>Verified: March 22 2023</p>
-<p>Points: 109.39</p>
-</article>
-
-<article class="ai-level">
-<h3>#23 - Acheron</h3>
-<p>Created By: ryamu</p>
-<p>Verified By: Zoink</p>
-<p>Verified: August 23 2022</p>
-<p>Points: 107.99</p>
-</article>
-
-<article class="ai-level">
-<h3>#24 - Spectre</h3>
-<p>Created By: xander</p>
-<p>Verified By: PersonHuman42</p>
-<p>Verified: October 5 2024</p>
-<p>Points: 106.61</p>
-</article>
-
-<article class="ai-level">
-<h3>#25 - Menace</h3>
-<p>Created By: Arraegen</p>
-<p>Verified By: Whizkid05</p>
-<p>Verified: July 14 2024</p>
-<p>Points: 105.24</p>
-</article>
-
-
-<!-- HISTORICAL LEVELS -->
-
-<article class="ai-level">
-<h3>Historical - Phobos</h3>
-<p>Created By: GMTSean</p>
-<p>Verified By: KrmaL</p>
-<p>Verified: May 12 2016</p>
-<p>Fell Off: May 13 2021</p>
-<p>Points: 0</p>
-</article>
-
-<article class="ai-level">
-<h3>Historical - Betrayal of Fate</h3>
-<p>Historical placement: #2</p>
-<p>More information will be added later.</p>
-<p>Points: 0</p>
-</article>
-
-<article class="ai-level">
-<h3>Historical - Bloodbath</h3>
-<p>Created By: Riot</p>
-<p>Verified By: Riot</p>
-<p>Verified: August 12 2015</p>
-<p>Fell Off: January 29 2021</p>
-<p>Points: 0</p>
-</article>
-
-<article class="ai-level">
-<h3>Historical - The Hell Factory</h3>
-<p>Created By: TeamN2</p>
-<p>Verified By: Powerbomb</p>
-<p>Verified: December 28 2015</p>
-<p>Fell Off: September 4 2020</p>
-<p>Points: 0</p>
-</article>
-
-<article class="ai-level">
-<h3>Historical - A Bizarre Phantasm</h3>
-<p>Created By: TeamN2</p>
-<p>Verified By: GoodSmile</p>
-<p>Verified: April 11 2016</p>
-<p>Fell Off: September 21 2020</p>
-<p>Points: 0</p>
-</article>
-
-<article class="ai-level">
-<h3>Historical - Conical Depression</h3>
-<p>Created By: KrmaL</p>
-<p>Verified By: KrmaL</p>
-<p>Verified: March 10 2016</p>
-<p>Fell Off: November 1 2020</p>
-<p>Points: 0</p>
-</article>
-
-<article class="ai-level">
-<h3>Historical - Aftermath</h3>
-<p>Historical placement: #6</p>
-<p>More information will be added later.</p>
-<p>Points: 0</p>
-</article>
-
-<article class="ai-level">
-<h3>Historical - The Ultimate Phase</h3>
-<p>Created By: Andromeda</p>
-<p>Verified By: Andromeda</p>
-<p>Verified: June 21 2016</p>
-<p>Fell Off: July 5 2019</p>
-<p>Points: 0</p>
-</article>
-
-<article class="ai-level">
-<h3>Historical - Cataclysm</h3>
-<p>Created By: Ggb0y</p>
-<p>Verified By: Riot</p>
-<p>Verified: January 15 2016</p>
-<p>Fell Off: September 2 2019</p>
-<p>Points: 0</p>
-</article>
-
-</section>
-
 
 <div class="container">
 
 <!-- TIME TRAVEL -->
 
 <div
-    class="panel"
-    id="timeTravelPanel">
+class="panel"
+id="timeTravelPanel"
+>
 
 <h2>Time Travel</h2>
 
@@ -831,31 +477,35 @@ Choose a date to see the FiDemonlist from that date.
 <div class="panel-buttons">
 
 <input
-    type="date"
-    id="datePicker"
-    class="date-input">
+type="date"
+id="datePicker"
+class="date-input"
+>
 
 <button
-    class="apply-button"
-    id="applyDate">
-    Travel
+class="apply-button"
+id="applyDate"
+>
+Travel
 </button>
 
 <button
-    class="today-button"
-    id="returnToday">
-    Today
+class="today-button"
+id="returnToday"
+>
+Today
 </button>
 
 </div>
-</div>
 
+</div>
 
 <!-- PLAYER LEADERBOARD -->
 
 <div
-    class="panel"
-    id="leaderboardPanel">
+class="panel"
+id="leaderboardPanel"
+>
 
 <h2>Player Leaderboard</h2>
 
@@ -864,38 +514,336 @@ Player rankings are based on completed FiDemonlist demons.
 </p>
 
 <div
-    class="leaderboard-list"
-    id="leaderboardList">
-</div>
+class="leaderboard-list"
+id="leaderboardList"
+></div>
 
 </div>
-
 
 <div
-    class="time-travel-status"
-    id="timeTravelStatus">
-</div>
-
+class="time-travel-status"
+id="timeTravelStatus"
+></div>
 
 <input
-    id="search"
-    class="search"
-    type="text"
-    placeholder="Search demons...">
-
+id="search"
+class="search"
+type="text"
+placeholder="Search demons..."
+>
 
 <div id="demonList"></div>
 
-
 <div
-    class="no-demons"
-    id="noDemons">
-
+class="no-demons"
+id="noDemons"
+>
 No demons were on the list at this date.
-
 </div>
 
 </div>
+
+
+<!-- =====================================================
+     AI-READABLE LEVEL DATABASE
+     This is intentionally present in normal HTML so
+     crawlers/AI systems can read the level information
+     without needing to execute JavaScript.
+===================================================== -->
+
+<section class="ai-readable-data">
+
+<h2>FiDemonlist Level Data</h2>
+
+<p>
+FiDemonlist is a custom Geometry Dash Demonlist.
+The following information contains the levels, rankings,
+creators, verifiers, verification dates and historical
+fall-off dates.
+</p>
+
+
+<h3>Current FiDemonlist</h3>
+
+<article>
+<h4>#1 Society</h4>
+<p>Created By: Neomarbilan</p>
+<p>Verified By: Wpopoff</p>
+<p>Verified: June 20 2026</p>
+<p>Points: 350.00</p>
+</article>
+
+<article>
+<h4>#2 Thinking Space II</h4>
+<p>Created By: CairoX</p>
+<p>Verified By: Zoink</p>
+<p>Verified: May 25 2025</p>
+<p>Points: 331.71</p>
+</article>
+
+<article>
+<h4>#3 Amethyst</h4>
+<p>Created By: iMist</p>
+<p>Verified By: Wpopoff</p>
+<p>Verified: May 25 2025</p>
+<p>Points: 313.42</p>
+</article>
+
+<article>
+<h4>#4 Flamewall</h4>
+<p>Created By: Narwall</p>
+<p>Verified By: Cuatrocientos</p>
+<p>Verified: September 21 2025</p>
+<p>Points: 291.70</p>
+</article>
+
+<article>
+<h4>#5 Tidal Wave</h4>
+<p>Created By: OniLink</p>
+<p>Verified By: Zoink</p>
+<p>Verified: September 9 2023</p>
+<p>Points: 271.78</p>
+</article>
+
+<article>
+<h4>#6 Green Bullet</h4>
+<p>Created By: MinaY</p>
+<p>Verified By: Nickname09</p>
+<p>Verified: June 16 2026</p>
+<p>Points: 253.53</p>
+</article>
+
+<article>
+<h4>#7 Orbit</h4>
+<p>Created By: MindCap</p>
+<p>Verified By: Zoink</p>
+<p>Verified: February 10 2026</p>
+<p>Points: 236.80</p>
+</article>
+
+<article>
+<h4>#8 Antarctic Lights</h4>
+<p>Created By: declanlc</p>
+<p>Verified By: Axinity</p>
+<p>Verified: July 16 2026</p>
+<p>Points: 221.47</p>
+</article>
+
+<article>
+<h4>#9 Nullscapes</h4>
+<p>Created By: Kiba</p>
+<p>Verified By: Zoink</p>
+<p>Verified: September 4 2024</p>
+<p>Points: 207.42</p>
+</article>
+
+<article>
+<h4>#10 Quanteuse Processing</h4>
+<p>Created By: Renn241 and BlankB</p>
+<p>Verified By: Zoink</p>
+<p>Verified: December 31 2024</p>
+<p>Points: 194.54</p>
+</article>
+
+<article>
+<h4>#11 BOOBAWAMBA</h4>
+<p>Created By: Akunakunn</p>
+<p>Verified By: Eastshark</p>
+<p>Verified: October 5 2024</p>
+<p>Points: 182.73</p>
+</article>
+
+<article>
+<h4>#12 The Bloop</h4>
+<p>Created By: murkkat</p>
+<p>Verified By: Zoink</p>
+<p>Verified: March 15 2026</p>
+<p>Points: 171.91</p>
+</article>
+
+<article>
+<h4>#13 Every End</h4>
+<p>Created By: MindCap</p>
+<p>Verified By: Hqmy</p>
+<p>Verified: March 16 2025</p>
+<p>Points: 161.99</p>
+</article>
+
+<article>
+<h4>#14 Penumbral</h4>
+<p>Created By: nxhtrise</p>
+<p>Verified By: w3rty</p>
+<p>Verified: March 5 2026</p>
+<p>Points: 152.89</p>
+</article>
+
+<article>
+<h4>#15 Silent Clubstep</h4>
+<p>Created By: Sailent</p>
+<p>Verified By: paqoe</p>
+<p>Verified: July 12 2022</p>
+<p>Points: 144.56</p>
+</article>
+
+<article>
+<h4>#16 Ashley Wave Trials</h4>
+<p>Created By: OddMod</p>
+<p>Verified By: Zoink</p>
+<p>Verified: November 2 2024</p>
+<p>Points: 136.92</p>
+</article>
+
+<article>
+<h4>#17 Ultra Paracosm</h4>
+<p>Created By: Renn241 and declanlc</p>
+<p>Verified By: Wity</p>
+<p>Verified: April 21 2026</p>
+<p>Points: 129.92</p>
+</article>
+
+<article>
+<h4>#18 Andromeda</h4>
+<p>Created By: Insxne97</p>
+<p>Verified By: Taiago</p>
+<p>Verified: January 19 2025</p>
+<p>Points: 123.50</p>
+</article>
+
+<article>
+<h4>#19 KILLSTEALER</h4>
+<p>Created By: Rynoxious and Asterion</p>
+<p>Verified By: kloone</p>
+<p>Verified: April 22 2026</p>
+<p>Points: 117.62</p>
+</article>
+
+<article>
+<h4>#20 Subsuming Vortex</h4>
+<p>Created By: SeptaGon7</p>
+<p>Verified By: Cursed</p>
+<p>Verified: September 10 2025</p>
+<p>Points: 112.23</p>
+</article>
+
+<article>
+<h4>#21 Anathema</h4>
+<p>Created By: nikrodox</p>
+<p>Verified By: Whizkid05</p>
+<p>Verified: November 20 2024</p>
+<p>Points: 110.81</p>
+</article>
+
+<article>
+<h4>#22 Avernus</h4>
+<p>Created By: Bo and Pockewindfish</p>
+<p>Verified By: Zoink</p>
+<p>Verified: March 22 2023</p>
+<p>Points: 109.39</p>
+</article>
+
+<article>
+<h4>#23 Acheron</h4>
+<p>Created By: ryamu</p>
+<p>Verified By: Zoink</p>
+<p>Verified: August 23 2022</p>
+<p>Points: 107.99</p>
+</article>
+
+<article>
+<h4>#24 Spectre</h4>
+<p>Created By: xander</p>
+<p>Verified By: PersonHuman42</p>
+<p>Verified: October 5 2024</p>
+<p>Points: 106.61</p>
+</article>
+
+<article>
+<h4>#25 Menace</h4>
+<p>Created By: Arraegen</p>
+<p>Verified By: Whizkid05</p>
+<p>Verified: July 14 2024</p>
+<p>Points: 105.24</p>
+</article>
+
+
+<h3>Historical FiDemonlist Levels</h3>
+
+<article>
+<h4>Phobos</h4>
+<p>Historical Rank: #1</p>
+<p>Created By: GMTSean</p>
+<p>Verified By: KrmaL</p>
+<p>Verified: May 12 2016</p>
+<p>Fell Off: May 13 2021</p>
+<p>Points: 0.00</p>
+</article>
+
+<article>
+<h4>Bloodbath</h4>
+<p>Historical Rank: #3</p>
+<p>Created By: Riot</p>
+<p>Verified By: Riot</p>
+<p>Verified: August 12 2015</p>
+<p>Fell Off: January 29 2021</p>
+<p>Points: 0.00</p>
+</article>
+
+<article>
+<h4>The Hell Factory</h4>
+<p>Historical Rank: #4</p>
+<p>Created By: TeamN2</p>
+<p>Verified By: Powerbomb</p>
+<p>Verified: December 28 2015</p>
+<p>Fell Off: September 4 2020</p>
+<p>Points: 0.00</p>
+</article>
+
+<article>
+<h4>A Bizarre Phantasm</h4>
+<p>Historical Rank: #5</p>
+<p>Created By: TeamN2</p>
+<p>Verified By: GoodSmile</p>
+<p>Verified: April 11 2016</p>
+<p>Fell Off: September 21 2020</p>
+<p>Points: 0.00</p>
+</article>
+
+<article>
+<h4>Conical Depression</h4>
+<p>Historical Rank: #5</p>
+<p>Created By: KrmaL</p>
+<p>Verified By: KrmaL</p>
+<p>Verified: March 10 2016</p>
+<p>Fell Off: November 1 2020</p>
+<p>Points: 0.00</p>
+</article>
+
+<article>
+<h4>The Ultimate Phase</h4>
+<p>Historical Rank: #7</p>
+<p>Created By: Andromeda</p>
+<p>Verified By: Andromeda</p>
+<p>Verified: June 21 2016</p>
+<p>Fell Off: July 5 2019</p>
+<p>Points: 0.00</p>
+</article>
+
+<article>
+<h4>Cataclysm</h4>
+<p>Historical Rank: #8</p>
+<p>Created By: Ggb0y</p>
+<p>Verified By: Riot</p>
+<p>Verified: January 15 2016</p>
+<p>Fell Off: September 2 2019</p>
+<p>Points: 0.00</p>
+</article>
+
+<p>
+Historical order also includes Betrayal of Fate at #2
+and Aftermath at #6. These levels will be added later.
+</p>
+
+</section>
 
 
 <script>
@@ -905,6 +853,10 @@ No demons were on the list at this date.
 ===================================================== */
 
 const demons = [
+
+/* =========================
+   CURRENT DEMONS
+========================= */
 
 {
 name: "Society",
@@ -1328,7 +1280,7 @@ victors: [
 { name: "misty", country: "🇷🇺" },
 { name: "turtle", country: "🇨🇦" },
 { name: "Johnlikediamond", country: "🇺🇸" },
-{ name: "JerPaa", country: "🇫🇮" },
+{ name: "Jerppaa", country: "🇫🇮" },
 { name: "eternalluna", country: "🇨🇳" },
 { name: "Scoff", country: "🇨🇦" },
 { name: "TimsTeam", country: "🇷🇺" },
@@ -1520,7 +1472,7 @@ victors: [
 { name: "Flavyola64", country: "🇧🇪" },
 { name: "mariner", country: "🇫🇮" },
 { name: "bims", country: "🇩🇪" },
-{ name: "Ahwiin", country: "Unknown Country" },
+{ name: "Ahwiin", country: "[Unknown Country]" },
 { name: "KrNati", country: "🇦🇺" },
 { name: "fuuturisticfire", country: "🇺🇸" },
 { name: "wPopoff", country: "🇺🇸" },
@@ -1531,27 +1483,20 @@ victors: [
 },
 
 
-/* =====================================================
+/* =========================
    HISTORICAL DEMONS
-===================================================== */
+========================= */
 
 {
 name: "Phobos",
 createdBy: "GMTSean",
 verifiedBy: "KrmaL",
 verification: "2016-05-12",
-fellOff: "2021-05-13",
-historical: true,
+fallOff: "2021-05-13",
 image: "Phobos.jpeg",
 points: 0,
-victors: []
-},
-
-{
-name: "Betrayal of Fate",
 historical: true,
-historicalPlacement: 2,
-points: 0,
+historicalRank: 1,
 victors: []
 },
 
@@ -1560,10 +1505,11 @@ name: "Bloodbath",
 createdBy: "Riot",
 verifiedBy: "Riot",
 verification: "2015-08-12",
-fellOff: "2021-01-29",
-historical: true,
+fallOff: "2021-01-29",
 image: "Bloodbath.jpeg",
 points: 0,
+historical: true,
+historicalRank: 3,
 victors: []
 },
 
@@ -1572,10 +1518,11 @@ name: "The Hell Factory",
 createdBy: "TeamN2",
 verifiedBy: "Powerbomb",
 verification: "2015-12-28",
-fellOff: "2020-09-04",
-historical: true,
+fallOff: "2020-09-04",
 image: "The Hell Factory.jpeg",
 points: 0,
+historical: true,
+historicalRank: 4,
 victors: []
 },
 
@@ -1584,10 +1531,11 @@ name: "A Bizarre Phantasm",
 createdBy: "TeamN2",
 verifiedBy: "GoodSmile",
 verification: "2016-04-11",
-fellOff: "2020-09-21",
-historical: true,
+fallOff: "2020-09-21",
 image: "A Bizarre Phantasm.jpeg",
 points: 0,
+historical: true,
+historicalRank: 5,
 victors: []
 },
 
@@ -1596,18 +1544,11 @@ name: "Conical Depression",
 createdBy: "KrmaL",
 verifiedBy: "KrmaL",
 verification: "2016-03-10",
-fellOff: "2020-11-01",
-historical: true,
+fallOff: "2020-11-01",
 image: "Conical Depression.jpeg",
 points: 0,
-victors: []
-},
-
-{
-name: "Aftermath",
 historical: true,
-historicalPlacement: 6,
-points: 0,
+historicalRank: 5,
 victors: []
 },
 
@@ -1616,10 +1557,11 @@ name: "The Ultimate Phase",
 createdBy: "Andromeda",
 verifiedBy: "Andromeda",
 verification: "2016-06-21",
-fellOff: "2019-07-05",
-historical: true,
+fallOff: "2019-07-05",
 image: "The Ultimate Phase.jpeg",
 points: 0,
+historical: true,
+historicalRank: 7,
 victors: []
 },
 
@@ -1628,10 +1570,11 @@ name: "Cataclysm",
 createdBy: "Ggb0y",
 verifiedBy: "Riot",
 verification: "2016-01-15",
-fellOff: "2019-09-02",
-historical: true,
+fallOff: "2019-09-02",
 image: "Cataclysm.jpeg",
 points: 0,
+historical: true,
+historicalRank: 8,
 victors: []
 }
 
@@ -1643,7 +1586,6 @@ victors: []
 ===================================================== */
 
 const masterOrder = [
-
 "Society",
 "Thinking Space II",
 "Amethyst",
@@ -1669,7 +1611,6 @@ const masterOrder = [
 "Acheron",
 "Spectre",
 "Menace"
-
 ];
 
 
@@ -1678,7 +1619,6 @@ const masterOrder = [
 ===================================================== */
 
 const historicalOrder = [
-
 "Phobos",
 "Betrayal of Fate",
 "Bloodbath",
@@ -1688,7 +1628,6 @@ const historicalOrder = [
 "Aftermath",
 "The Ultimate Phase",
 "Cataclysm"
-
 ];
 
 
@@ -1697,7 +1636,6 @@ const historicalOrder = [
 ===================================================== */
 
 const currentRankPoints = {
-
 1: 350.00,
 2: 331.71,
 3: 313.42,
@@ -1723,7 +1661,6 @@ const currentRankPoints = {
 23: 107.99,
 24: 106.61,
 25: 105.24
-
 };
 
 
@@ -1751,7 +1688,6 @@ Math.floor(totalDays / 30.4375);
 
 const totalYears =
 Math.floor(totalDays / 365.2425);
-
 
 if (totalYears >= 1) {
 
@@ -1808,16 +1744,13 @@ return "Today";
 
 function demonExists(demon, selectedDate) {
 
-if (
-demon.verification &&
-selectedDate < demon.verification
-) {
+if (selectedDate < demon.verification) {
 return false;
 }
 
 if (
-demon.fellOff &&
-selectedDate >= demon.fellOff
+demon.fallOff &&
+selectedDate >= demon.fallOff
 ) {
 return false;
 }
@@ -1828,23 +1761,22 @@ return true;
 
 
 /* =====================================================
-   AVAILABLE CURRENT DEMONS
+   AVAILABLE DEMONS
 ===================================================== */
 
 function getAvailableDemons(selectedDate) {
 
-return masterOrder
-
+const currentDemons =
+masterOrder
 .map(function(name) {
 
-return demons.find(function(demon) {
-
+return demons.find(
+function(demon) {
 return demon.name === name;
-
-});
+}
+);
 
 })
-
 .filter(function(demon) {
 
 return demon &&
@@ -1855,6 +1787,39 @@ selectedDate
 
 });
 
+
+const historicalDemons =
+demons
+.filter(function(demon) {
+
+return demon.historical &&
+demonExists(
+demon,
+selectedDate
+);
+
+})
+.sort(function(a, b) {
+
+return a.historicalRank -
+b.historicalRank;
+
+});
+
+
+/*
+Historical demons are shown before the
+modern/current list when travelling to
+a historical period.
+
+If current demons also existed on that date,
+they are appended after the historical entries.
+*/
+
+return historicalDemons.concat(
+currentDemons
+);
+
 }
 
 
@@ -1864,15 +1829,32 @@ selectedDate
 
 function getDemonPoints(demon, rank) {
 
+if (demon.historical) {
+return 0;
+}
+
 if (
 currentRankPoints[rank] !== undefined
 ) {
-
 return currentRankPoints[rank];
-
 }
 
 return demon.points || 0;
+
+}
+
+
+/* =====================================================
+   GET HISTORICAL RANK
+===================================================== */
+
+function getHistoricalDisplayRank(demon) {
+
+if (demon.historicalRank) {
+return demon.historicalRank;
+}
+
+return null;
 
 }
 
@@ -1915,17 +1897,37 @@ noDemons.style.display =
 "none";
 
 
-availableDemons.forEach(
-function(demon, index) {
+let currentRank = 0;
 
-const rank =
-index + 1;
+
+availableDemons.forEach(
+function(demon) {
+
+let rank;
+
+if (demon.historical) {
+
+rank =
+getHistoricalDisplayRank(
+demon
+);
+
+} else {
+
+currentRank++;
+
+rank =
+currentRank;
+
+}
+
 
 const points =
 getDemonPoints(
 demon,
 rank
 );
+
 
 const card =
 document.createElement(
@@ -1945,7 +1947,7 @@ card.innerHTML = `
 
 <img
 class="demon-image"
-src="${demon.image || ""}"
+src="${demon.image}"
 alt="${demon.name}"
 >
 
@@ -1964,29 +1966,34 @@ Verified By: ${demon.verifiedBy}
 </div>
 
 <div class="info">
-Verified:
-${
-demon.verification
-?
-getTimeAgo(
+Verified: ${getTimeAgo(
 new Date(
 demon.verification +
 "T00:00:00"
 )
-)
-:
-"Unknown"
-}
+)}
 </div>
 
+${
+demon.fallOff
+?
+`
+<div class="info">
+Fell Off: ${demon.fallOff}
+</div>
+`
+:
+""
+}
+
 <div class="points">
-List Points:
-${points.toFixed(2)}
+List Points: ${points.toFixed(2)}
 </div>
 
 <button
 class="victors-button"
-onclick="toggleVictors(this)">
+onclick="toggleVictors(this)"
+>
 Victors
 </button>
 
@@ -2001,13 +2008,16 @@ demon.victors.length === 0
 
 ?
 
-`<div class="victor">
+`
+<div class="victor">
 No recorded victors.
-</div>`
+</div>
+`
 
 :
 
-demon.victors.map(
+demon.victors
+.map(
 function(victor) {
 
 return `
@@ -2020,12 +2030,12 @@ ${victor.name}
 `;
 
 }
-).join("")
+)
+.join("")
 
 }
 
 </div>
-
 `;
 
 
@@ -2033,6 +2043,7 @@ const image =
 card.querySelector(
 ".demon-image"
 );
+
 
 image.onerror =
 function() {
@@ -2046,9 +2057,12 @@ container.innerHTML =
 };
 
 
-list.appendChild(card);
+list.appendChild(
+card
+);
 
-});
+}
+);
 
 }
 
@@ -2073,9 +2087,7 @@ panel.style.display =
 button.textContent =
 "Victors";
 
-}
-
-else {
+} else {
 
 panel.style.display =
 "block";
@@ -2100,10 +2112,6 @@ new Map();
 
 demons.forEach(
 function(demon) {
-
-if (!demon.victors) {
-return;
-}
 
 demon.victors.forEach(
 function(victor) {
@@ -2133,15 +2141,18 @@ completions:
 }
 
 
-playerMap.get(
-key
-).completions.push(
+playerMap
+.get(key)
+.completions
+.push(
 demon.name
 );
 
-});
+}
+);
 
-});
+}
+);
 
 
 return Array.from(
@@ -2173,7 +2184,18 @@ completionName;
 }
 );
 
+
 if (!demon) {
+return;
+}
+
+
+/*
+Historical demons currently give
+0 points.
+*/
+
+if (demon.historical) {
 return;
 }
 
@@ -2184,8 +2206,6 @@ demon.name
 ) + 1;
 
 
-if (currentRank > 0) {
-
 total +=
 getDemonPoints(
 demon,
@@ -2193,8 +2213,7 @@ currentRank
 );
 
 }
-
-});
+);
 
 
 return total;
@@ -2233,6 +2252,7 @@ document.getElementById(
 "profileOverlay"
 );
 
+
 if (existing) {
 existing.remove();
 }
@@ -2266,7 +2286,8 @@ player
 
 
 const completionHTML =
-player.completions.map(
+player.completions
+.map(
 function(levelName) {
 
 return `
@@ -2278,7 +2299,8 @@ ${levelName}
 `;
 
 }
-).join("");
+)
+.join("");
 
 
 box.innerHTML = `
@@ -2313,16 +2335,17 @@ ${completionHTML}
 
 <button
 class="close-profile"
-id="closeProfile">
-
+id="closeProfile"
+>
 Close
-
 </button>
 
 `;
 
 
-overlay.appendChild(box);
+overlay.appendChild(
+box
+);
 
 document.body.appendChild(
 overlay
@@ -2343,7 +2366,8 @@ overlay.onclick =
 function(event) {
 
 if (
-event.target === overlay
+event.target ===
+overlay
 ) {
 
 overlay.remove();
@@ -2365,6 +2389,7 @@ const leaderboard =
 document.getElementById(
 "leaderboardList"
 );
+
 
 leaderboard.innerHTML = "";
 
@@ -2418,6 +2443,7 @@ document.createElement(
 "div"
 );
 
+
 card.className =
 "player-card";
 
@@ -2464,7 +2490,8 @@ leaderboard.appendChild(
 card
 );
 
-});
+}
+);
 
 }
 
@@ -2475,6 +2502,7 @@ card
 
 const firstDate =
 "2015-01-01";
+
 
 const today =
 new Date();
@@ -2517,15 +2545,18 @@ document.getElementById(
 "timeTravelButton"
 );
 
+
 const timeTravelPanel =
 document.getElementById(
 "timeTravelPanel"
 );
 
+
 const leaderboardButton =
 document.getElementById(
 "leaderboardButton"
 );
+
 
 const leaderboardPanel =
 document.getElementById(
@@ -2549,9 +2580,7 @@ timeTravelPanel.style.display ===
 timeTravelPanel.style.display =
 "none";
 
-}
-
-else {
+} else {
 
 timeTravelPanel.style.display =
 "block";
@@ -2581,9 +2610,7 @@ leaderboardPanel.style.display ===
 leaderboardPanel.style.display =
 "none";
 
-}
-
-else {
+} else {
 
 leaderboardPanel.style.display =
 "block";
@@ -2624,9 +2651,7 @@ todayString
 status.style.display =
 "none";
 
-}
-
-else {
+} else {
 
 const date =
 new Date(
@@ -2648,6 +2673,7 @@ day: "numeric"
 
 status.style.display =
 "block";
+
 
 status.textContent =
 "Viewing the FiDemonlist from " +
@@ -2700,6 +2726,7 @@ function() {
 datePicker.value =
 todayString;
 
+
 travelToDate(
 todayString
 );
@@ -2743,16 +2770,15 @@ name.includes(text)
 card.style.display =
 "block";
 
-}
-
-else {
+} else {
 
 card.style.display =
 "none";
 
 }
 
-});
+}
+);
 
 }
 );
