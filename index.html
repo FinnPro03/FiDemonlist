@@ -152,6 +152,26 @@ header p {
     font-size: 14px;
 }
 
+.section-title {
+    display: none;
+    background: #1c1c1c;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.section-title p {
+    color: #999999;
+    margin-bottom: 0;
+}
+
 .demon {
     background: #1c1c1c;
     border: 1px solid #333333;
@@ -206,8 +226,7 @@ header p {
     font-weight: bold;
 }
 
-.victors-button,
-.profile-button {
+.victors-button {
     margin: 5px;
     padding: 10px 17px;
     border: 1px solid #444444;
@@ -219,8 +238,7 @@ header p {
     cursor: pointer;
 }
 
-.victors-button:hover,
-.profile-button:hover {
+.victors-button:hover {
     background: #383838;
 }
 
@@ -250,26 +268,6 @@ header p {
 
 .victor:last-child {
     border-bottom: none;
-}
-
-.section-title {
-    background: #1c1c1c;
-    border: 1px solid #333333;
-    border-radius: 12px;
-    padding: 18px;
-    margin: 30px 0 20px;
-    text-align: center;
-}
-
-.section-title h2 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.section-title p {
-    margin: 7px 0 0;
-    color: #999999;
-    font-size: 14px;
 }
 
 .leaderboard-list {
@@ -332,8 +330,6 @@ header p {
     color: #888888;
     font-size: 18px;
 }
-
-/* PLAYER PROFILE */
 
 .profile-overlay {
     position: fixed;
@@ -441,7 +437,10 @@ header p {
 
 <header>
     <h1>FiDemonlist</h1>
-    <p>The Custom Geometry Dash Demonlist</p>
+
+    <p>
+        The Custom Geometry Dash Demonlist
+    </p>
 
     <div class="header-buttons">
         <button class="header-button" id="timeTravelButton">
@@ -459,6 +458,7 @@ header p {
     <!-- TIME TRAVEL -->
 
     <div class="panel" id="timeTravelPanel">
+
         <h2>Time Travel</h2>
 
         <p class="panel-description">
@@ -466,6 +466,7 @@ header p {
         </p>
 
         <div class="panel-buttons">
+
             <input
                 type="date"
                 id="datePicker"
@@ -485,12 +486,14 @@ header p {
             >
                 Today
             </button>
+
         </div>
     </div>
 
     <!-- PLAYER LEADERBOARD -->
 
     <div class="panel" id="leaderboardPanel">
+
         <h2>Player Leaderboard</h2>
 
         <p class="panel-description">
@@ -501,12 +504,21 @@ header p {
             class="leaderboard-list"
             id="leaderboardList"
         ></div>
+
     </div>
 
     <div
         class="time-travel-status"
         id="timeTravelStatus"
     ></div>
+
+    <div
+        class="section-title"
+        id="sectionTitle"
+    >
+        <h2 id="sectionTitleText"></h2>
+        <p id="sectionDescription"></p>
+    </div>
 
     <input
         id="search"
@@ -529,14 +541,10 @@ header p {
 <script>
 
 /* =====================================================
-   DEMON DATABASE
+   CURRENT DEMON DATABASE
 ===================================================== */
 
 const demons = [
-
-    /* =========================
-       CURRENT DEMONS
-    ========================= */
 
     {
         name: "Society",
@@ -806,8 +814,6 @@ const demons = [
             { name: "Thnnder", country: "🇺🇸" },
             { name: "Sanni", country: "🇫🇮" },
             { name: "Cookie", country: "🇺🇸" },
-
-            /* NEW VICTOR */
             { name: "zStucc", country: "🇮🇹" }
         ]
     },
@@ -962,7 +968,7 @@ const demons = [
             { name: "misty", country: "🇷🇺" },
             { name: "turtle", country: "🇨🇦" },
             { name: "Johnlikediamond", country: "🇺🇸" },
-            { name: "Jerppa", country: "🇫🇮" },
+            { name: "Jerppaa", country: "🇫🇮" },
             { name: "eternalluna", country: "🇨🇳" },
             { name: "Scoff", country: "🇨🇦" },
             { name: "TimsTeam", country: "🇷🇺" },
@@ -1154,7 +1160,7 @@ const demons = [
             { name: "Flavyola64", country: "🇧🇪" },
             { name: "mariner", country: "🇫🇮" },
             { name: "bims", country: "🇩🇪" },
-            { name: "Ahwiin", country: "[Unknown Country]" },
+            { name: "Ahwiin", country: "❓" },
             { name: "KrNati", country: "🇦🇺" },
             { name: "fuuturisticfire", country: "🇺🇸" },
             { name: "wPopoff", country: "🇺🇸" },
@@ -1162,112 +1168,17 @@ const demons = [
             { name: "rediio", country: "🇰🇷" },
             { name: "kakol", country: "🇵🇱" }
         ]
-    },
-
-    /* =========================
-       HISTORICAL DEMONS
-       THESE ARE SEPARATE FROM
-       THE CURRENT LIST.
-    ========================= */
-
-    {
-        name: "Phobos",
-        createdBy: "GMTSean",
-        verifiedBy: "KrmaL",
-        verification: "2016-05-12",
-        fellOff: "2021-05-13",
-        historical: true,
-        historicalRank: 1,
-        image: "Phobos.jpeg",
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Bloodbath",
-        createdBy: "Riot",
-        verifiedBy: "Riot",
-        verification: "2015-08-12",
-        fellOff: "2021-01-29",
-        historical: true,
-        historicalRank: 3,
-        image: "Bloodbath.jpeg",
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "The Hell Factory",
-        createdBy: "TeamN2",
-        verifiedBy: "Powerbomb",
-        verification: "2015-12-28",
-        fellOff: "2020-09-04",
-        historical: true,
-        historicalRank: 4,
-        image: "The Hell Factory.jpeg",
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "A Bizarre Phantasm",
-        createdBy: "TeamN2",
-        verifiedBy: "GoodSmile",
-        verification: "2016-04-11",
-        fellOff: "2020-09-21",
-        historical: true,
-        historicalRank: 5,
-        image: "A Bizarre Phantasm.jpeg",
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Conical Depression",
-        createdBy: "KrmaL",
-        verifiedBy: "KrmaL",
-        verification: "2016-03-10",
-        fellOff: "2020-11-01",
-        historical: true,
-        historicalRank: 5,
-        image: "Conical Depression.jpeg",
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "The Ultimate Phase",
-        createdBy: "Andromeda",
-        verifiedBy: "Andromeda",
-        verification: "2016-06-21",
-        fellOff: "2019-07-05",
-        historical: true,
-        historicalRank: 7,
-        image: "The Ultimate Phase.jpeg",
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Cataclysm",
-        createdBy: "Ggb0y",
-        verifiedBy: "Riot",
-        verification: "2016-01-15",
-        fellOff: "2019-09-02",
-        historical: true,
-        historicalRank: 8,
-        image: "Cataclysm.jpeg",
-        points: 0,
-        victors: []
     }
+
 ];
 
 
 /* =====================================================
-   CURRENT MASTER ORDER
+   CURRENT LIST ORDER
 ===================================================== */
 
 const masterOrder = [
+
     "Society",
     "Thinking Space II",
     "Amethyst",
@@ -1293,25 +1204,135 @@ const masterOrder = [
     "Acheron",
     "Spectre",
     "Menace"
+
 ];
 
 
 /* =====================================================
-   HISTORICAL ORDER
+   HISTORICAL DEMONS
+===================================================== */
 
-   IMPORTANT:
-   #2 AND #6 ARE NOT HERE YET.
-   THEY WILL BE ADDED LATER.
+const historicalDemons = [
+
+    {
+        name: "Phobos",
+        createdBy: "GMTSean",
+        verifiedBy: "KrmaL",
+        verification: "2016-05-12",
+        legacyDate: "2021-05-13",
+        image: "Phobos.jpeg",
+        points: 0,
+        victors: []
+    },
+
+    {
+        name: "Bloodbath",
+        createdBy: "Riot",
+        verifiedBy: "Riot",
+        verification: "2015-08-12",
+        legacyDate: "2021-01-29",
+        image: "Bloodbath.jpeg",
+        points: 0,
+        victors: []
+    },
+
+    {
+        name: "The Hell Factory",
+        createdBy: "TeamN2",
+        verifiedBy: "Powerbomb",
+        verification: "2015-12-28",
+        legacyDate: "2020-09-04",
+        image: "The Hell Factory.jpeg",
+        points: 0,
+        victors: []
+    },
+
+    {
+        name: "A Bizarre Phantasm",
+        createdBy: "TeamN2",
+        verifiedBy: "GoodSmile",
+        verification: "2016-04-11",
+        legacyDate: "2020-09-21",
+        image: "A Bizarre Phantasm.jpeg",
+        points: 0,
+        victors: []
+    },
+
+    {
+        name: "Conical Depression",
+        createdBy: "KrmaL",
+        verifiedBy: "KrmaL",
+        verification: "2016-03-10",
+        legacyDate: "2020-11-01",
+        image: "Conical Depression.jpeg",
+        points: 0,
+        victors: []
+    },
+
+    {
+        name: "The Ultimate Phase",
+        createdBy: "Andromeda",
+        verifiedBy: "Andromeda",
+        verification: "2016-06-21",
+        legacyDate: "2019-07-05",
+        image: "The Ultimate Phase.jpeg",
+        points: 0,
+        victors: []
+    },
+
+    {
+        name: "Cataclysm",
+        createdBy: "Ggb0y",
+        verifiedBy: "Riot",
+        verification: "2016-01-15",
+        legacyDate: "2019-09-02",
+        image: "Cataclysm.jpeg",
+        points: 0,
+        victors: []
+    }
+
+];
+
+
+/*
+IMPORTANT:
+
+These are NOT added yet:
+
+Betrayal of Fate
+Aftermath
+
+They are intentionally absent from historicalDemons.
+
+The historical order therefore automatically renumbers
+only the demons that actually exist.
+*/
+
+
+/* =====================================================
+   HISTORICAL ORDER
 ===================================================== */
 
 const historicalOrder = [
+
     "Phobos",
+
+    "Betrayal of Fate",
+
     "Bloodbath",
+
     "The Hell Factory",
+
     "A Bizarre Phantasm",
+
     "Conical Depression",
+
+    "Aftermath",
+
     "The Ultimate Phase",
+
     "Cataclysm"
+
 ];
 
 
@@ -1320,6 +1341,7 @@ const historicalOrder = [
 ===================================================== */
 
 const currentRankPoints = {
+
     1: 350.00,
     2: 331.71,
     3: 313.42,
@@ -1345,6 +1367,7 @@ const currentRankPoints = {
     23: 107.99,
     24: 106.61,
     25: 105.24
+
 };
 
 
@@ -1374,6 +1397,7 @@ function getTimeAgo(date) {
         Math.floor(totalDays / 365.2425);
 
     if (totalYears >= 1) {
+
         return totalYears +
             (
                 totalYears === 1
@@ -1383,6 +1407,7 @@ function getTimeAgo(date) {
     }
 
     if (totalMonths >= 1) {
+
         return totalMonths +
             (
                 totalMonths === 1
@@ -1392,6 +1417,7 @@ function getTimeAgo(date) {
     }
 
     if (totalWeeks >= 1) {
+
         return totalWeeks +
             (
                 totalWeeks === 1
@@ -1401,6 +1427,7 @@ function getTimeAgo(date) {
     }
 
     if (totalDays >= 1) {
+
         return totalDays +
             (
                 totalDays === 1
@@ -1417,40 +1444,14 @@ function getTimeAgo(date) {
    CURRENT DEMON EXISTS
 ===================================================== */
 
-function demonExists(demon, selectedDate) {
-
-    if (demon.historical) {
-        return false;
-    }
-
-    if (selectedDate < demon.verification) {
-        return false;
-    }
-
-    return true;
-}
-
-
-/* =====================================================
-   HISTORICAL DEMON EXISTS
-===================================================== */
-
-function historicalDemonExists(
+function demonExists(
     demon,
     selectedDate
 ) {
 
-    if (!demon.historical) {
-        return false;
-    }
-
-    if (selectedDate < demon.verification) {
-        return false;
-    }
-
     if (
-        demon.fellOff &&
-        selectedDate >= demon.fellOff
+        selectedDate <
+        demon.verification
     ) {
         return false;
     }
@@ -1460,19 +1461,27 @@ function historicalDemonExists(
 
 
 /* =====================================================
-   AVAILABLE CURRENT DEMONS
+   GET CURRENT DEMONS
 ===================================================== */
 
-function getAvailableDemons(selectedDate) {
+function getAvailableDemons(
+    selectedDate
+) {
 
     return masterOrder
+
         .map(function(name) {
 
-            return demons.find(function(demon) {
-                return demon.name === name;
-            });
+            return demons.find(
+                function(demon) {
+
+                    return demon.name === name;
+
+                }
+            );
 
         })
+
         .filter(function(demon) {
 
             return demon &&
@@ -1482,40 +1491,45 @@ function getAvailableDemons(selectedDate) {
                 );
 
         });
+
 }
 
 
 /* =====================================================
-   AVAILABLE HISTORICAL DEMONS
+   GET HISTORICAL DEMONS
 ===================================================== */
 
-function getAvailableHistoricalDemons(
+function getHistoricalDemons(
     selectedDate
 ) {
 
     return historicalOrder
+
         .map(function(name) {
 
-            return demons.find(function(demon) {
-                return demon.name === name;
-            });
+            return historicalDemons.find(
+                function(demon) {
+
+                    return demon.name === name;
+
+                }
+            );
 
         })
+
         .filter(function(demon) {
 
-            return demon &&
-                historicalDemonExists(
-                    demon,
-                    selectedDate
-                );
+            if (!demon) {
+                return false;
+            }
 
-        })
-        .sort(function(a, b) {
-
-            return a.historicalRank -
-                b.historicalRank;
+            return (
+                selectedDate >= demon.verification &&
+                selectedDate < demon.legacyDate
+            );
 
         });
+
 }
 
 
@@ -1531,21 +1545,24 @@ function getDemonPoints(
     if (
         currentRankPoints[rank] !== undefined
     ) {
+
         return currentRankPoints[rank];
+
     }
 
     return demon.points || 0;
+
 }
 
 
 /* =====================================================
-   CREATE DEMON CARD
+   RENDER DEMON
 ===================================================== */
 
-function createDemonCard(
+function renderDemon(
     demon,
     rank,
-    isHistorical
+    historical
 ) {
 
     const card =
@@ -1557,33 +1574,12 @@ function createDemonCard(
         demon.name;
 
     const points =
-        isHistorical
+        historical
             ? 0
             : getDemonPoints(
                 demon,
                 rank
             );
-
-    const fallOffHTML =
-        isHistorical && demon.fellOff
-            ?
-            `
-            <div class="info">
-                Fell Off: ${new Date(
-                    demon.fellOff +
-                    "T00:00:00"
-                ).toLocaleDateString(
-                    "en-US",
-                    {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric"
-                    }
-                )}
-            </div>
-            `
-            :
-            "";
 
     card.innerHTML = `
 
@@ -1598,43 +1594,75 @@ function createDemonCard(
         </div>
 
         <div class="name">
+
             #${rank} - ${demon.name}
+
         </div>
 
         <div class="info">
+
             Created By: ${demon.createdBy}
+
         </div>
 
         <div class="info">
+
             Verified By: ${demon.verifiedBy}
+
         </div>
 
         <div class="info">
+
             Verified: ${getTimeAgo(
                 new Date(
                     demon.verification +
                     "T00:00:00"
                 )
             )}
+
         </div>
 
-        ${fallOffHTML}
+        ${
+            historical
+            ? `
+                <div class="info">
+                    Fell Off: ${new Date(
+                        demon.legacyDate +
+                        "T00:00:00"
+                    ).toLocaleDateString(
+                        "en-US",
+                        {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric"
+                        }
+                    )}
+                </div>
+            `
+            : ""
+        }
 
         <div class="points">
+
             List Points: ${points.toFixed(2)}
+
         </div>
 
         <button
             class="victors-button"
             onclick="toggleVictors(this)"
         >
+
             Victors
+
         </button>
 
         <div class="victors-panel">
 
             <div class="victors-title">
+
                 Victors
+
             </div>
 
             ${
@@ -1643,9 +1671,9 @@ function createDemonCard(
                 ?
 
                 `
-                <div class="victor">
-                    No recorded victors.
-                </div>
+                    <div class="victor">
+                        No recorded victors.
+                    </div>
                 `
 
                 :
@@ -1654,10 +1682,14 @@ function createDemonCard(
                     .map(function(victor) {
 
                         return `
+
                             <div class="victor">
+
                                 ${victor.country}
                                 ${victor.name}
+
                             </div>
+
                         `;
 
                     })
@@ -1665,6 +1697,7 @@ function createDemonCard(
             }
 
         </div>
+
     `;
 
     const image =
@@ -1684,6 +1717,7 @@ function createDemonCard(
         };
 
     return card;
+
 }
 
 
@@ -1691,7 +1725,9 @@ function createDemonCard(
    RENDER LIST
 ===================================================== */
 
-function renderList(selectedDate) {
+function renderList(
+    selectedDate
+) {
 
     const list =
         document.getElementById(
@@ -1705,108 +1741,118 @@ function renderList(selectedDate) {
             "noDemons"
         );
 
-    const currentDemons =
+    const sectionTitle =
+        document.getElementById(
+            "sectionTitle"
+        );
+
+    const sectionTitleText =
+        document.getElementById(
+            "sectionTitleText"
+        );
+
+    const sectionDescription =
+        document.getElementById(
+            "sectionDescription"
+        );
+
+
+    const historical =
+        getHistoricalDemons(
+            selectedDate
+        );
+
+    const current =
         getAvailableDemons(
             selectedDate
         );
 
-    const historicalDemons =
-        getAvailableHistoricalDemons(
-            selectedDate
+
+    /*
+       HISTORICAL MODE
+
+       Only actual historical demons are rendered.
+
+       Missing future demons such as Betrayal of Fate
+       and Aftermath do NOT create empty ranks.
+    */
+
+    if (historical.length > 0) {
+
+        sectionTitle.style.display =
+            "block";
+
+        sectionTitleText.textContent =
+            "Historical FiDemonlist";
+
+        sectionDescription.textContent =
+            "Historical demons from this date.";
+
+        noDemons.style.display =
+            "none";
+
+
+        historical.forEach(
+            function(demon, index) {
+
+                const rank =
+                    index + 1;
+
+                list.appendChild(
+                    renderDemon(
+                        demon,
+                        rank,
+                        true
+                    )
+                );
+
+            }
         );
 
-    if (
-        currentDemons.length === 0 &&
-        historicalDemons.length === 0
-    ) {
+        return;
+
+    }
+
+
+    /*
+       CURRENT MODE
+    */
+
+    sectionTitle.style.display =
+        "none";
+
+
+    if (current.length === 0) {
 
         noDemons.style.display =
             "block";
 
         return;
+
     }
+
 
     noDemons.style.display =
         "none";
 
 
-    /* =========================
-       CURRENT LIST
-    ========================= */
-
-    currentDemons.forEach(
+    current.forEach(
         function(demon, index) {
 
             const rank =
                 index + 1;
 
-            const card =
-                createDemonCard(
+            list.appendChild(
+                renderDemon(
                     demon,
                     rank,
                     false
-                );
-
-            list.appendChild(card);
+                )
+            );
 
         }
     );
 
-
-    /* =========================
-       HISTORICAL LIST
-    ========================= */
-
-    if (historicalDemons.length > 0) {
-
-        const section =
-            document.createElement(
-                "div"
-            );
-
-        section.className =
-            "section-title";
-
-        section.innerHTML = `
-            <h2>Historical Demons</h2>
-            <p>
-                Former FiDemonlist levels
-            </p>
-        `;
-
-        list.appendChild(section);
-
-
-        historicalDemons.forEach(
-            function(demon) {
-
-                /*
-                   IMPORTANT:
-
-                   We use historicalRank
-                   instead of index + 1.
-
-                   This means missing historical
-                   levels such as #2 and #6 stay
-                   missing until they are actually
-                   added to the database.
-                */
-
-                const rank =
-                    demon.historicalRank;
-
-                const card =
-                    createDemonCard(
-                        demon,
-                        rank,
-                        true
-                    );
-
-                list.appendChild(card);
-
-            }
-        );
-    }
 }
 
 
@@ -1814,7 +1860,9 @@ function renderList(selectedDate) {
    VICTORS
 ===================================================== */
 
-function toggleVictors(button) {
+function toggleVictors(
+    button
+) {
 
     const panel =
         button.nextElementSibling;
@@ -1837,7 +1885,9 @@ function toggleVictors(button) {
 
         button.textContent =
             "Hide Victors";
+
     }
+
 }
 
 
@@ -1876,6 +1926,7 @@ function getAllPlayers() {
                                     []
                             }
                         );
+
                     }
 
                     playerMap.get(
@@ -1893,6 +1944,7 @@ function getAllPlayers() {
     return Array.from(
         playerMap.values()
     );
+
 }
 
 
@@ -1923,16 +1975,6 @@ function calculatePlayerPoints(
                 return;
             }
 
-            /*
-               Historical demons currently
-               have 0 points, so they naturally
-               contribute 0 to the leaderboard.
-            */
-
-            if (demon.historical) {
-                return;
-            }
-
             const currentRank =
                 masterOrder.indexOf(
                     demon.name
@@ -1947,6 +1989,7 @@ function calculatePlayerPoints(
     );
 
     return total;
+
 }
 
 
@@ -1975,6 +2018,7 @@ function showPlayerProfile(
         return;
     }
 
+
     const existing =
         document.getElementById(
             "profileOverlay"
@@ -1983,6 +2027,7 @@ function showPlayerProfile(
     if (existing) {
         existing.remove();
     }
+
 
     const overlay =
         document.createElement(
@@ -1995,6 +2040,7 @@ function showPlayerProfile(
     overlay.className =
         "profile-overlay";
 
+
     const box =
         document.createElement(
             "div"
@@ -2003,50 +2049,69 @@ function showPlayerProfile(
     box.className =
         "profile-box";
 
+
     const points =
         calculatePlayerPoints(
             player
         );
 
+
     const completionHTML =
         player.completions
+
             .map(
                 function(levelName) {
 
                     return `
+
                         <div class="completion-item">
+
                             ${levelName}
+
                         </div>
+
                     `;
 
                 }
             )
+
             .join("");
+
 
     box.innerHTML = `
 
         <div class="profile-country">
+
             ${player.country}
+
         </div>
 
         <h2>
+
             ${player.name}
+
         </h2>
 
         <div class="profile-stat">
+
             ${player.completions.length}
             completed demons
+
         </div>
 
         <div class="profile-stat">
+
             ${points.toFixed(2)}
             total points
+
         </div>
 
         <div class="profile-section">
 
             <h3>
+
                 🏆 Completions
+
             </h3>
 
             ${completionHTML}
@@ -2057,15 +2122,20 @@ function showPlayerProfile(
             class="close-profile"
             id="closeProfile"
         >
+
             Close
+
         </button>
+
     `;
+
 
     overlay.appendChild(box);
 
     document.body.appendChild(
         overlay
     );
+
 
     document.getElementById(
         "closeProfile"
@@ -2075,6 +2145,7 @@ function showPlayerProfile(
             overlay.remove();
 
         };
+
 
     overlay.onclick =
         function(event) {
@@ -2089,6 +2160,7 @@ function showPlayerProfile(
             }
 
         };
+
 }
 
 
@@ -2105,8 +2177,10 @@ function renderLeaderboard() {
 
     leaderboard.innerHTML = "";
 
+
     const rankedPlayers =
         getAllPlayers()
+
             .map(
                 function(player) {
 
@@ -2130,6 +2204,7 @@ function renderLeaderboard() {
 
                 }
             )
+
             .sort(
                 function(a, b) {
 
@@ -2139,11 +2214,13 @@ function renderLeaderboard() {
                 }
             );
 
+
     rankedPlayers.forEach(
         function(player, index) {
 
             const rank =
                 index + 1;
+
 
             const card =
                 document.createElement(
@@ -2152,6 +2229,7 @@ function renderLeaderboard() {
 
             card.className =
                 "player-card";
+
 
             card.onclick =
                 function() {
@@ -2162,31 +2240,42 @@ function renderLeaderboard() {
 
                 };
 
+
             card.innerHTML = `
 
                 <div class="player-rank">
+
                     #${rank}
+
                 </div>
 
                 <div class="player-info">
 
                     <div class="player-name">
+
                         ${player.country}
                         ${player.name}
+
                     </div>
 
                     <div class="player-completions">
+
                         ${player.completions.length}
                         completed demons
+
                     </div>
 
                 </div>
 
                 <div class="player-points">
+
                     ${player.points.toFixed(2)}
                     Points
+
                 </div>
+
             `;
+
 
             leaderboard.appendChild(
                 card
@@ -2194,6 +2283,7 @@ function renderLeaderboard() {
 
         }
     );
+
 }
 
 
@@ -2333,10 +2423,12 @@ function travelToDate(
         selectedDate
     );
 
+
     const status =
         document.getElementById(
             "timeTravelStatus"
         );
+
 
     if (
         selectedDate ===
@@ -2354,6 +2446,7 @@ function travelToDate(
                 "T00:00:00"
             );
 
+
         const formatted =
             date.toLocaleDateString(
                 "en-US",
@@ -2364,17 +2457,22 @@ function travelToDate(
                 }
             );
 
+
         status.style.display =
             "block";
+
 
         status.textContent =
             "Viewing the FiDemonlist from " +
             formatted;
+
     }
+
 
     document.getElementById(
         "search"
     ).value = "";
+
 }
 
 
@@ -2436,10 +2534,12 @@ document.getElementById(
         const text =
             this.value.toLowerCase();
 
+
         const cards =
             document.querySelectorAll(
                 "#demonList .demon"
             );
+
 
         cards.forEach(
             function(card) {
@@ -2447,6 +2547,7 @@ document.getElementById(
                 const name =
                     card.dataset.name
                         .toLowerCase();
+
 
                 if (
                     name.includes(text)
