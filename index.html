@@ -1,1430 +1,1538 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>FiDemonlist</title>
-
-    <meta name="description" content="FiDemonlist - The Custom Geometry Dash Demonlist. View current and historical demon rankings, victors, creators, verifiers, and time-travel through the list.">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #111111;
-            color: white;
-        }
-
-        header {
-            position: relative;
-            background: #1b1b1b;
-            padding: 25px 20px;
-            text-align: center;
-            border-bottom: 2px solid #333333;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 38px;
-        }
-
-        header p {
-            margin: 7px 0 0;
-            color: #aaaaaa;
-            font-size: 15px;
-        }
-
-        .header-buttons {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            gap: 8px;
-        }
-
-        .header-button {
-            padding: 11px 16px;
-            border: 1px solid #444444;
-            border-radius: 8px;
-            background: #292929;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .header-button:hover {
-            background: #383838;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .search {
-            width: 100%;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #333333;
-            background: #1c1c1c;
-            color: white;
-            font-size: 16px;
-            margin-bottom: 25px;
-            outline: none;
-        }
-
-        .search::placeholder {
-            color: #777777;
-        }
-
-        .panel {
-            display: none;
-            background: #1c1c1c;
-            border: 1px solid #333333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .panel h2 {
-            margin-top: 0;
-            text-align: center;
-        }
-
-        .panel-description {
-            color: #aaaaaa;
-            text-align: center;
-        }
-
-        .date-input {
-            padding: 12px;
-            border-radius: 7px;
-            border: 1px solid #444444;
-            background: #111111;
-            color: white;
-            font-size: 16px;
-            margin: 10px;
-        }
-
-        .panel-buttons {
-            text-align: center;
-        }
-
-        .apply-button,
-        .today-button {
-            padding: 12px 18px;
-            border-radius: 7px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .apply-button {
-            border: none;
-            background: #444444;
-            color: white;
-        }
-
-        .apply-button:hover {
-            background: #555555;
-        }
-
-        .today-button {
-            border: 1px solid #444444;
-            background: #222222;
-            color: white;
-            margin-left: 5px;
-        }
-
-        .today-button:hover {
-            background: #333333;
-        }
-
-        .time-travel-status {
-            display: none;
-            text-align: center;
-            color: #aaaaaa;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .demon {
-            background: #1c1c1c;
-            border: 1px solid #333333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .image-container {
-            width: 100%;
-            max-width: 600px;
-            height: 280px;
-            margin: 0 auto 18px auto;
-            background: #333333;
-            border-radius: 9px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .demon-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-
-        .placeholder {
-            color: #aaaaaa;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .name {
-            font-size: 25px;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-
-        .info {
-            color: #aaaaaa;
-            font-size: 15px;
-            margin: 6px 0;
-        }
-
-        .points {
-            color: white;
-            font-size: 15px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        .victors-button,
-        .profile-button {
-            margin: 5px;
-            padding: 10px 17px;
-            border: 1px solid #444444;
-            border-radius: 7px;
-            background: #292929;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .victors-button:hover,
-        .profile-button:hover {
-            background: #383838;
-        }
-
-        .victors-panel {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background: #151515;
-            border: 1px solid #333333;
-            border-radius: 9px;
-            text-align: left;
-        }
-
-        .victors-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .victor {
-            padding: 8px 0;
-            border-bottom: 1px solid #292929;
-            color: #dddddd;
-            font-size: 15px;
-        }
-
-        .victor:last-child {
-            border-bottom: none;
-        }
-
-        .leaderboard-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .player-card {
-            display: flex;
-            align-items: center;
-            background: #222222;
-            border: 1px solid #333333;
-            border-radius: 10px;
-            padding: 15px;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-
-        .player-card:hover {
-            background: #2b2b2b;
-        }
-
-        .player-rank {
-            width: 55px;
-            font-size: 23px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .player-info {
-            flex: 1;
-            margin-left: 10px;
-        }
-
-        .player-name {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .player-completions {
-            margin-top: 5px;
-            color: #999999;
-            font-size: 13px;
-        }
-
-        .player-points {
-            font-size: 18px;
-            font-weight: bold;
-            text-align: right;
-        }
-
-        .no-demons {
-            display: none;
-            text-align: center;
-            padding: 50px 20px;
-            background: #1c1c1c;
-            border: 1px solid #333333;
-            border-radius: 12px;
-            color: #888888;
-            font-size: 18px;
-        }
-
-        /* PLAYER PROFILE */
-
-        .profile-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.78);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 9999;
-        }
-
-        .profile-box {
-            background: #1c1c1c;
-            border: 1px solid #444444;
-            border-radius: 14px;
-            padding: 25px;
-            width: 100%;
-            max-width: 600px;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: center;
-        }
-
-        .profile-box h2 {
-            margin-top: 0;
-            font-size: 30px;
-        }
-
-        .profile-country {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .profile-stat {
-            color: #aaaaaa;
-            margin: 8px 0;
-        }
-
-        .profile-section {
-            border-top: 1px solid #333333;
-            margin-top: 20px;
-            padding-top: 20px;
-        }
-
-        .completion-item {
-            padding: 9px 0;
-            border-bottom: 1px solid #292929;
-            color: #dddddd;
-        }
-
-        .completion-item:last-child {
-            border-bottom: none;
-        }
-
-        .close-profile {
-            margin-top: 20px;
-            padding: 10px 18px;
-            border: 1px solid #444444;
-            border-radius: 7px;
-            background: #292929;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close-profile:hover {
-            background: #383838;
-        }
-
-        /* AI / SEARCH ENGINE DATA */
-
-        .ai-level-data {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            color: #777777;
-            font-size: 13px;
-        }
-
-        .ai-level-data h2 {
-            color: #999999;
-        }
-
-        .ai-level-data article {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #222222;
-        }
-
-        @media (max-width: 700px) {
-
-            header {
-                padding-bottom: 85px;
-            }
-
-            header h1 {
-                font-size: 30px;
-            }
-
-            .header-buttons {
-                top: auto;
-                bottom: 15px;
-                right: 0;
-                left: 0;
-                transform: none;
-                justify-content: center;
-            }
-
-            .header-button {
-                padding: 10px 13px;
-            }
-
-            .player-card {
-                padding: 12px;
-            }
-
-            .player-points {
-                font-size: 15px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FiDemonlist</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111111;
+    color: white;
+}
+
+header {
+    position: relative;
+    background: #1b1b1b;
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 2px solid #333333;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+header p {
+    margin: 7px 0 0;
+    color: #aaaaaa;
+    font-size: 15px;
+}
+
+.header-buttons {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.header-button {
+    padding: 11px 16px;
+    border: 1px solid #444444;
+    border-radius: 8px;
+    background: #292929;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.header-button:hover {
+    background: #383838;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.search {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+    background: #1c1c1c;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 25px;
+    outline: none;
+}
+
+.search::placeholder {
+    color: #777777;
+}
+
+.panel {
+    display: none;
+    background: #1c1c1c;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.panel-description {
+    color: #aaaaaa;
+    text-align: center;
+}
+
+.date-input {
+    padding: 12px;
+    border-radius: 7px;
+    border: 1px solid #444444;
+    background: #111111;
+    color: white;
+    font-size: 16px;
+    margin: 10px;
+}
+
+.panel-buttons {
+    text-align: center;
+}
+
+.apply-button,
+.today-button {
+    padding: 12px 18px;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.apply-button {
+    border: none;
+    background: #444444;
+    color: white;
+}
+
+.apply-button:hover {
+    background: #555555;
+}
+
+.today-button {
+    border: 1px solid #444444;
+    background: #222222;
+    color: white;
+    margin-left: 5px;
+}
+
+.today-button:hover {
+    background: #333333;
+}
+
+.time-travel-status {
+    display: none;
+    text-align: center;
+    color: #aaaaaa;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.demon {
+    background: #1c1c1c;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.image-container {
+    width: 100%;
+    max-width: 600px;
+    height: 280px;
+    margin: 0 auto 18px auto;
+    background: #333333;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.demon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.placeholder {
+    color: #aaaaaa;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.name {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.info {
+    color: #aaaaaa;
+    font-size: 15px;
+    margin: 6px 0;
+}
+
+.points {
+    color: white;
+    font-size: 15px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.victors-button,
+.profile-button {
+    margin: 5px;
+    padding: 10px 17px;
+    border: 1px solid #444444;
+    border-radius: 7px;
+    background: #292929;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.victors-button:hover,
+.profile-button:hover {
+    background: #383838;
+}
+
+.victors-panel {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: #151515;
+    border: 1px solid #333333;
+    border-radius: 9px;
+    text-align: left;
+}
+
+.victors-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.victor {
+    padding: 8px 0;
+    border-bottom: 1px solid #292929;
+    color: #dddddd;
+    font-size: 15px;
+}
+
+.victor:last-child {
+    border-bottom: none;
+}
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-card {
+    display: flex;
+    align-items: center;
+    background: #222222;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.player-card:hover {
+    background: #2b2b2b;
+}
+
+.player-rank {
+    width: 55px;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.player-info {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.player-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.player-completions {
+    margin-top: 5px;
+    color: #999999;
+    font-size: 13px;
+}
+
+.player-points {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.no-demons {
+    display: none;
+    text-align: center;
+    padding: 50px 20px;
+    background: #1c1c1c;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    color: #888888;
+    font-size: 18px;
+}
+
+.profile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 9999;
+}
+
+.profile-box {
+    background: #1c1c1c;
+    border: 1px solid #444444;
+    border-radius: 14px;
+    padding: 25px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    text-align: center;
+}
+
+.profile-box h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.profile-country {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.profile-stat {
+    color: #aaaaaa;
+    margin: 8px 0;
+}
+
+.profile-section {
+    border-top: 1px solid #333333;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.completion-item {
+    padding: 9px 0;
+    border-bottom: 1px solid #292929;
+    color: #dddddd;
+}
+
+.completion-item:last-child {
+    border-bottom: none;
+}
+
+.close-profile {
+    margin-top: 20px;
+    padding: 10px 18px;
+    border: 1px solid #444444;
+    border-radius: 7px;
+    background: #292929;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-profile:hover {
+    background: #383838;
+}
+
+/* AI / CRAWLER READABLE DATA */
+.ai-level-data {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.ai-level-data h2 {
+    font-size: 22px;
+}
+
+.ai-level-data article {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333333;
+}
+
+.ai-level-data h3 {
+    margin-bottom: 8px;
+}
+
+.ai-level-data p {
+    color: #cccccc;
+    margin: 5px 0;
+}
+
+@media (max-width: 700px) {
+
+    header {
+        padding-bottom: 85px;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    .header-buttons {
+        top: auto;
+        bottom: 15px;
+        right: 0;
+        left: 0;
+        transform: none;
+        justify-content: center;
+    }
+
+    .header-button {
+        padding: 10px 13px;
+    }
+
+    .player-card {
+        padding: 12px;
+    }
+
+    .player-points {
+        font-size: 15px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>FiDemonlist</h1>
 
-    <p>
-        The Custom Geometry Dash Demonlist
-    </p>
+<h1>FiDemonlist</h1>
 
-    <div class="header-buttons">
+<p>
+The Custom Geometry Dash Demonlist
+</p>
 
-        <button
-            class="header-button"
-            id="timeTravelButton"
-        >
-            Time Travel
-        </button>
+<div class="header-buttons">
 
-        <button
-            class="header-button"
-            id="leaderboardButton"
-        >
-            Player Leaderboard
-        </button>
+<button
+class="header-button"
+id="timeTravelButton">
+Time Travel
+</button>
 
-    </div>
+<button
+class="header-button"
+id="leaderboardButton">
+Player Leaderboard
+</button>
+
+</div>
+
 </header>
-
 
 <div class="container">
 
-    <!-- TIME TRAVEL -->
+<div
+class="panel"
+id="timeTravelPanel">
 
-    <div
-        class="panel"
-        id="timeTravelPanel"
-    >
+<h2>Time Travel</h2>
 
-        <h2>Time Travel</h2>
+<p class="panel-description">
+Choose a date to see the FiDemonlist from that date.
+</p>
 
-        <p class="panel-description">
-            Choose a date to see the FiDemonlist from that date.
-        </p>
+<div class="panel-buttons">
 
-        <div class="panel-buttons">
+<input
+type="date"
+id="datePicker"
+class="date-input">
 
-            <input
-                type="date"
-                id="datePicker"
-                class="date-input"
-            >
+<button
+class="apply-button"
+id="applyDate">
+Travel
+</button>
 
-            <button
-                class="apply-button"
-                id="applyDate"
-            >
-                Travel
-            </button>
+<button
+class="today-button"
+id="returnToday">
+Today
+</button>
 
-            <button
-                class="today-button"
-                id="returnToday"
-            >
-                Today
-            </button>
+</div>
 
-        </div>
+</div>
 
-    </div>
+<div
+class="panel"
+id="leaderboardPanel">
 
+<h2>Player Leaderboard</h2>
 
-    <!-- PLAYER LEADERBOARD -->
+<p class="panel-description">
+Player rankings are based on completed FiDemonlist demons.
+</p>
 
-    <div
-        class="panel"
-        id="leaderboardPanel"
-    >
+<div
+class="leaderboard-list"
+id="leaderboardList">
+</div>
 
-        <h2>Player Leaderboard</h2>
+</div>
 
-        <p class="panel-description">
-            Player rankings are based on completed FiDemonlist demons.
-        </p>
+<div
+class="time-travel-status"
+id="timeTravelStatus">
+</div>
 
-        <div
-            class="leaderboard-list"
-            id="leaderboardList"
-        ></div>
+<input
+id="search"
+class="search"
+type="text"
+placeholder="Search demons...">
 
-    </div>
+<div id="demonList"></div>
 
-
-    <div
-        class="time-travel-status"
-        id="timeTravelStatus"
-    ></div>
-
-
-    <input
-        id="search"
-        class="search"
-        type="text"
-        placeholder="Search demons..."
-    >
-
-
-    <div id="demonList"></div>
-
-
-    <div
-        class="no-demons"
-        id="noDemons"
-    >
-        No demons were on the list at this date.
-    </div>
+<div
+class="no-demons"
+id="noDemons">
+No demons were on the list at this date.
+</div>
 
 </div>
 
 
 <!--
 =====================================================
-AI-READABLE LEVEL DATA
-
-This is visible in the HTML source even if JavaScript
-is not executed by an AI crawler.
+AI READABLE LEVEL DATA
+=====================================================
+This is intentionally present in the HTML so that
+search engines, crawlers and AI systems can read the
+level information without needing to execute JavaScript.
 =====================================================
 -->
 
-<noscript>
+<section
+class="ai-level-data"
+id="aiLevelData">
 
-<section class="ai-level-data">
+<h2>FiDemonlist Levels</h2>
 
-    <h2>FiDemonlist Levels</h2>
+<article>
+<h3>#1 - Society</h3>
+<p>Created By: Neomarbilan</p>
+<p>Verified By: Wpopoff</p>
+<p>Verified: June 20 2026</p>
+<p>Points: 350.00</p>
+</article>
 
-    <article>
-        #1 Society — Created by Neomarbilan — Verified by Wpopoff — June 20 2026 — 350.00 points
-    </article>
+<article>
+<h3>#2 - Thinking Space II</h3>
+<p>Created By: CairoX</p>
+<p>Verified By: Zoink</p>
+<p>Verified: May 25 2025</p>
+<p>Points: 331.71</p>
+</article>
 
-    <article>
-        #2 Thinking Space II — Created by CairoX — Verified by Zoink — May 25 2025 — 331.71 points
-    </article>
+<article>
+<h3>#3 - Amethyst</h3>
+<p>Created By: iMist</p>
+<p>Verified By: Wpopoff</p>
+<p>Verified: May 25 2025</p>
+<p>Points: 313.42</p>
+</article>
 
-    <article>
-        #3 Amethyst — Created by iMist — Verified by Wpopoff — May 25 2025 — 313.42 points
-    </article>
+<article>
+<h3>#4 - Flamewall</h3>
+<p>Created By: Narwall</p>
+<p>Verified By: Cuatrocientos</p>
+<p>Verified: September 21 2025</p>
+<p>Points: 291.70</p>
+</article>
 
-    <article>
-        #4 Flamewall — Created by Narwall — Verified by Cuatrocientos — September 21 2025 — 291.70 points
-    </article>
+<article>
+<h3>#5 - Tidal Wave</h3>
+<p>Created By: OniLink</p>
+<p>Verified By: Zoink</p>
+<p>Verified: September 9 2023</p>
+<p>Points: 271.78</p>
+</article>
 
-    <article>
-        #5 Tidal Wave — Created by OniLink — Verified by Zoink — September 9 2023 — 271.78 points
-    </article>
+<article>
+<h3>#6 - Green Bullet</h3>
+<p>Created By: MinaY</p>
+<p>Verified By: Nickname09</p>
+<p>Verified: June 16 2026</p>
+<p>Points: 253.53</p>
+</article>
 
-    <article>
-        #6 Green Bullet — Created by MinaY — Verified by Nickname09 — June 16 2026 — 253.53 points
-    </article>
+<article>
+<h3>#7 - Orbit</h3>
+<p>Created By: MindCap</p>
+<p>Verified By: Zoink</p>
+<p>Verified: February 10 2026</p>
+<p>Points: 236.80</p>
+</article>
 
-    <article>
-        #7 Orbit — Created by MindCap — Verified by Zoink — February 10 2026 — 236.80 points
-    </article>
+<article>
+<h3>#8 - Antarctic Lights</h3>
+<p>Created By: declanlc</p>
+<p>Verified By: Axinity</p>
+<p>Verified: July 16 2026</p>
+<p>Points: 221.47</p>
+</article>
 
-    <article>
-        #8 Antarctic Lights — Created by declanlc — Verified by Axinity — July 16 2026 — 221.47 points
-    </article>
+<article>
+<h3>#9 - Nullscapes</h3>
+<p>Created By: Kiba</p>
+<p>Verified By: Zoink</p>
+<p>Verified: September 4 2024</p>
+<p>Points: 207.42</p>
+</article>
 
-    <article>
-        #9 Nullscapes — Created by Kiba — Verified by Zoink — September 4 2024 — 207.42 points
-    </article>
+<article>
+<h3>#10 - Quanteuse Processing</h3>
+<p>Created By: Renn241 and BlankB</p>
+<p>Verified By: Zoink</p>
+<p>Verified: December 31 2024</p>
+<p>Points: 194.54</p>
+</article>
 
-    <article>
-        #10 Quanteuse Processing — Created by Renn241 and BlankB — Verified by Zoink — December 31 2024 — 194.54 points
-    </article>
+<article>
+<h3>#11 - BOOBAWAMBA</h3>
+<p>Created By: Akunakunn</p>
+<p>Verified By: Eastshark</p>
+<p>Verified: October 5 2024</p>
+<p>Points: 182.73</p>
+</article>
 
-    <article>
-        #11 BOOBAWAMBA — Created by Akunakunn — Verified by Eastshark — October 5 2024 — 182.73 points
-    </article>
+<article>
+<h3>#12 - The Bloop</h3>
+<p>Created By: murkkat</p>
+<p>Verified By: Zoink</p>
+<p>Verified: March 15 2026</p>
+<p>Points: 171.91</p>
+</article>
 
-    <article>
-        #12 The Bloop — Created by murkkat — Verified by Zoink — March 15 2026 — 171.91 points
-    </article>
+<article>
+<h3>#13 - Every End</h3>
+<p>Created By: MindCap</p>
+<p>Verified By: Hqmy</p>
+<p>Verified: March 16 2025</p>
+<p>Points: 161.99</p>
+</article>
 
-    <article>
-        #13 Every End — Created by MindCap — Verified by Hqmy — March 16 2025 — 161.99 points
-    </article>
+<article>
+<h3>#14 - Penumbral</h3>
+<p>Created By: nxhtrise</p>
+<p>Verified By: w3rty</p>
+<p>Verified: March 5 2026</p>
+<p>Points: 152.89</p>
+</article>
 
-    <article>
-        #14 Penumbral — Created by nxhtrise — Verified by w3rty — March 5 2026 — 152.89 points
-    </article>
+<article>
+<h3>#15 - Silent Clubstep</h3>
+<p>Created By: Sailent</p>
+<p>Verified By: paqoe</p>
+<p>Verified: July 12 2022</p>
+<p>Points: 144.56</p>
+</article>
 
-    <article>
-        #15 Silent Clubstep — Created by Sailent — Verified by paqoe — July 12 2022 — 144.56 points
-    </article>
+<article>
+<h3>#16 - Ashley Wave Trials</h3>
+<p>Created By: OddMod</p>
+<p>Verified By: Zoink</p>
+<p>Verified: November 2 2024</p>
+<p>Points: 136.92</p>
+</article>
 
-    <article>
-        #16 Ashley Wave Trials — Created by OddMod — Verified by Zoink — November 2 2024 — 136.92 points
-    </article>
+<article>
+<h3>#17 - Ultra Paracosm</h3>
+<p>Created By: Renn241 and declanlc</p>
+<p>Verified By: Wity</p>
+<p>Verified: April 21 2026</p>
+<p>Points: 129.92</p>
+</article>
 
-    <article>
-        #17 Ultra Paracosm — Created by Renn241 and declanlc — Verified by Wity — April 21 2026 — 129.92 points
-    </article>
+<article>
+<h3>#18 - Andromeda</h3>
+<p>Created By: Insxne97</p>
+<p>Verified By: Taiago</p>
+<p>Verified: January 19 2025</p>
+<p>Points: 123.50</p>
+</article>
 
-    <article>
-        #18 Andromeda — Created by Insxne97 — Verified by Taiago — January 19 2025 — 123.50 points
-    </article>
+<article>
+<h3>#19 - KILLSTEALER</h3>
+<p>Created By: Rynoxious and Asterion</p>
+<p>Verified By: kloone</p>
+<p>Verified: April 22 2026</p>
+<p>Points: 117.62</p>
+</article>
 
-    <article>
-        #19 KILLSTEALER — Created by Rynoxious and Asterion — Verified by kloone — April 22 2026 — 117.62 points
-    </article>
+<article>
+<h3>#20 - Subsuming Vortex</h3>
+<p>Created By: SeptaGon7</p>
+<p>Verified By: Cursed</p>
+<p>Verified: September 10 2025</p>
+<p>Points: 112.23</p>
+</article>
 
-    <article>
-        #20 Subsuming Vortex — Created by SeptaGon7 — Verified by Cursed — September 10 2025 — 112.23 points
-    </article>
+<article>
+<h3>#21 - Anathema</h3>
+<p>Created By: nikrodox</p>
+<p>Verified By: Whizkid05</p>
+<p>Verified: November 20 2024</p>
+<p>Points: 110.81</p>
+</article>
 
-    <article>
-        #21 Anathema — Created by nikrodox — Verified by Whizkid05 — November 20 2024 — 110.81 points
-    </article>
+<article>
+<h3>#22 - Avernus</h3>
+<p>Created By: Bo and Pockewindfish</p>
+<p>Verified By: Zoink</p>
+<p>Verified: March 22 2023</p>
+<p>Points: 109.39</p>
+</article>
 
-    <article>
-        #22 Avernus — Created by Bo and Pockewindfish — Verified by Zoink — March 22 2023 — 109.39 points
-    </article>
+<article>
+<h3>#23 - Acheron</h3>
+<p>Created By: ryamu</p>
+<p>Verified By: Zoink</p>
+<p>Verified: August 23 2022</p>
+<p>Points: 107.99</p>
+</article>
 
-    <article>
-        #23 Acheron — Created by ryamu — Verified by Zoink — August 23 2022 — 107.99 points
-    </article>
+<article>
+<h3>#24 - Spectre</h3>
+<p>Created By: xander</p>
+<p>Verified By: PersonHuman42</p>
+<p>Verified: October 5 2024</p>
+<p>Points: 106.61</p>
+</article>
 
-    <article>
-        #24 Spectre — Created by xander — Verified by PersonHuman42 — October 5 2024 — 106.61 points
-    </article>
+<article>
+<h3>#25 - Menace</h3>
+<p>Created By: Arraegen</p>
+<p>Verified By: Whizkid05</p>
+<p>Verified: July 14 2024</p>
+<p>Points: 105.24</p>
+</article>
 
-    <article>
-        #25 Menace — Created by Arraegen — Verified by Whizkid05 — July 14 2024 — 105.24 points
-    </article>
+<article>
+<h3>Phobos</h3>
+<p>Created By: GMTSean</p>
+<p>Verified By: KrmaL</p>
+<p>Verified: May 12 2016</p>
+<p>Historical list points: 0.00</p>
+</article>
 
-    <h2>Historical Levels</h2>
+<article>
+<h3>Bloodbath</h3>
+<p>Created By: Riot</p>
+<p>Verified By: Riot</p>
+<p>Verified: August 12 2015</p>
+<p>Historical list points: 0.00</p>
+</article>
 
-    <article>
-        Phobos — Created by GMTSean — Verified by KrmaL — May 12 2016 — Historical list position #1 — 0 points
-    </article>
+<article>
+<h3>The Hell Factory</h3>
+<p>Created By: TeamN2</p>
+<p>Verified By: Powerbomb</p>
+<p>Verified: December 28 2015</p>
+<p>Historical list points: 0.00</p>
+</article>
 
-    <article>
-        Bloodbath — Created by Riot — Verified by Riot — August 12 2015 — Historical list position #3 — 0 points
-    </article>
+<article>
+<h3>A Bizarre Phantasm</h3>
+<p>Created By: TeamN2</p>
+<p>Verified By: GoodSmile</p>
+<p>Verified: April 11 2016</p>
+<p>Historical list points: 0.00</p>
+</article>
 
-    <article>
-        The Hell Factory — Created by TeamN2 — Verified by Powerbomb — December 28 2015 — Historical list position #4 — 0 points
-    </article>
+<article>
+<h3>Conical Depression</h3>
+<p>Created By: KrmaL</p>
+<p>Verified By: KrmaL</p>
+<p>Verified: March 10 2016</p>
+<p>Historical list points: 0.00</p>
+</article>
 
-    <article>
-        A Bizarre Phantasm — Created by TeamN2 — Verified by GoodSmile — April 11 2016 — Historical list position #5 — 0 points
-    </article>
+<article>
+<h3>The Ultimate Phase</h3>
+<p>Created By: Andromeda</p>
+<p>Verified By: Andromeda</p>
+<p>Verified: June 21 2016</p>
+<p>Historical list points: 0.00</p>
+</article>
 
-    <article>
-        Conical Depression — Created by KrmaL — Verified by KrmaL — March 10 2016 — Historical list position #5 — 0 points
-    </article>
-
-    <article>
-        The Ultimate Phase — Created by Andromeda — Verified by Andromeda — June 21 2016 — Historical list position #7 — 0 points
-    </article>
-
-    <article>
-        Cataclysm — Created by Ggb0y — Verified by Riot — January 15 2016 — Historical list position #8 — 0 points
-    </article>
+<article>
+<h3>Cataclysm</h3>
+<p>Created By: Ggb0y</p>
+<p>Verified By: Riot</p>
+<p>Verified: January 15 2016</p>
+<p>Historical list points: 0.00</p>
+</article>
 
 </section>
-
-</noscript>
 
 
 <script>
 
 /* =====================================================
-   CURRENT DEMON DATABASE
+   CURRENT DEMONS
 ===================================================== */
 
 const demons = [
 
-    {
-        name: "Society",
-        createdBy: "Neomarbilan",
-        verifiedBy: "Wpopoff",
-        verification: "2026-06-20",
-        image: "Society.jpeg",
-        points: 350.00,
-        victors: [
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" }
-        ]
-    },
+{
+name: "Society",
+createdBy: "Neomarbilan",
+verifiedBy: "Wpopoff",
+verification: "2026-06-20",
+image: "Society.jpeg",
+points: 350.00,
+victors: [
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Zoink",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "Thinking Space II",
-        createdBy: "CairoX",
-        verifiedBy: "Zoink",
-        verification: "2025-05-25",
-        image: "Thinking Space II.jpeg",
-        points: 331.71,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Trick", country: "🇺🇸" }
-        ]
-    },
+{
+name: "Thinking Space II",
+createdBy: "CairoX",
+verifiedBy: "Zoink",
+verification: "2025-05-25",
+image: "Thinking Space II.jpeg",
+points: 331.71,
+victors: [
+{name:"Zoink",country:"🇺🇸"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Trick",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "Amethyst",
-        createdBy: "iMist",
-        verifiedBy: "Wpopoff",
-        verification: "2025-05-25",
-        image: "Amethyst.jpeg",
-        points: 313.42,
-        victors: [
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" }
-        ]
-    },
+{
+name: "Amethyst",
+createdBy: "iMist",
+verifiedBy: "Wpopoff",
+verification: "2025-05-25",
+image: "Amethyst.jpeg",
+points: 313.42,
+victors: [
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Zoink",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "Flamewall",
-        createdBy: "Narwall",
-        verifiedBy: "Cuatrocientos",
-        verification: "2025-09-21",
-        image: "Flamewall.jpeg",
-        points: 291.70,
-        victors: [
-            { name: "Cuatrocientos", country: "🇪🇸" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "zLevii", country: "🇳🇿" }
-        ]
-    },
+{
+name: "Flamewall",
+createdBy: "Narwall",
+verifiedBy: "Cuatrocientos",
+verification: "2025-09-21",
+image: "Flamewall.jpeg",
+points: 291.70,
+victors: [
+{name:"Cuatrocientos",country:"🇪🇸"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"zLevii",country:"🇳🇿"}
+]
+},
 
-    {
-        name: "Tidal Wave",
-        createdBy: "OniLink",
-        verifiedBy: "Zoink",
-        verification: "2023-09-09",
-        image: "Tidal Wave.jpeg",
-        points: 271.78,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Taiago", country: "🇵🇹" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "레전드아잉몰라요", country: "🇰🇷" }
-        ]
-    },
+{
+name: "Tidal Wave",
+createdBy: "OniLink",
+verifiedBy: "Zoink",
+verification: "2023-09-09",
+image: "Tidal Wave.jpeg",
+points: 271.78,
+victors: [
+{name:"Zoink",country:"🇺🇸"},
+{name:"Trick",country:"🇺🇸"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Taiago",country:"🇵🇹"},
+{name:"Netermind",country:"🇺🇸"},
+{name:"레전드아잉몰라요",country:"🇰🇷"}
+]
+},
 
-    {
-        name: "Green Bullet",
-        createdBy: "MinaY",
-        verifiedBy: "Nickname09",
-        verification: "2026-06-16",
-        image: "Green Bullet.jpeg",
-        points: 253.53,
-        victors: [
-            { name: "Nickname09", country: "🇷🇺" }
-        ]
-    },
+{
+name: "Green Bullet",
+createdBy: "MinaY",
+verifiedBy: "Nickname09",
+verification: "2026-06-16",
+image: "Green Bullet.jpeg",
+points: 253.53,
+victors: [
+{name:"Nickname09",country:"🇷🇺"}
+]
+},
 
-    {
-        name: "Orbit",
-        createdBy: "MindCap",
-        verifiedBy: "Zoink",
-        verification: "2026-02-10",
-        image: "Orbit.jpeg",
-        points: 236.80,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Thelifinof", country: "🇺🇸" }
-        ]
-    },
+{
+name: "Orbit",
+createdBy: "MindCap",
+verifiedBy: "Zoink",
+verification: "2026-02-10",
+image: "Orbit.jpeg",
+points: 236.80,
+victors: [
+{name:"Zoink",country:"🇺🇸"},
+{name:"dovvin",country:"🇵🇱"},
+{name:"Thelifinof",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "Antarctic Lights",
-        createdBy: "declanlc",
-        verifiedBy: "Axinity",
-        verification: "2026-07-16",
-        image: "Antarctic Lights.jpeg",
-        points: 221.47,
-        victors: [
-            { name: "Axinity", country: "🇩🇰" },
-            { name: "Weyolll3", country: "🇪🇸" }
-        ]
-    },
+{
+name: "Antarctic Lights",
+createdBy: "declanlc",
+verifiedBy: "Axinity",
+verification: "2026-07-16",
+image: "Antarctic Lights.jpeg",
+points: 221.47,
+victors: [
+{name:"Axinity",country:"🇩🇰"},
+{name:"Weyolll3",country:"🇪🇸"}
+]
+},
 
-    {
-        name: "Nullscapes",
-        createdBy: "Kiba",
-        verifiedBy: "Zoink",
-        verification: "2024-09-04",
-        image: "Nullscapes.jpeg",
-        points: 207.42,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Spookkd", country: "🇺🇸" },
-            { name: "whfyre", country: "🇺🇦" },
-            { name: "Hover", country: "🇦🇹" },
-            { name: "Theitha", country: "🇵🇦" },
-            { name: "Cryostazz", country: "🇫🇷" },
-            { name: "Benbotwyd", country: "🇺🇸" },
-            { name: "SpaceRS", country: "🇷🇸" }
-        ]
-    },
+{
+name: "Nullscapes",
+createdBy: "Kiba",
+verifiedBy: "Zoink",
+verification: "2024-09-04",
+image: "Nullscapes.jpeg",
+points: 207.42,
+victors: [
+{name:"Zoink",country:"🇺🇸"},
+{name:"Spookkd",country:"🇺🇸"},
+{name:"whfyre",country:"🇺🇦"},
+{name:"Hover",country:"🇦🇹"},
+{name:"Theitha",country:"🇵🇦"},
+{name:"Cryostazz",country:"🇫🇷"},
+{name:"Benbotwyd",country:"🇺🇸"},
+{name:"SpaceRS",country:"🇷🇸"}
+]
+},
 
-    {
-        name: "Quanteuse Processing",
-        createdBy: "Renn241 and BlankB",
-        verifiedBy: "Zoink",
-        verification: "2024-12-31",
-        image: "Quanteuse Processing.jpeg",
-        points: 194.54,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Seregiusz", country: "🇵🇱" },
-            { name: "Sharkyga", country: "🇦🇺" },
-            { name: "Karkito", country: "🇰🇷" }
-        ]
-    },
+{
+name: "Quanteuse Processing",
+createdBy: "Renn241 and BlankB",
+verifiedBy: "Zoink",
+verification: "2024-12-31",
+image: "Quanteuse Processing.jpeg",
+points: 194.54,
+victors: [
+{name:"Zoink",country:"🇺🇸"},
+{name:"dovvin",country:"🇵🇱"},
+{name:"Seregiusz",country:"🇵🇱"},
+{name:"Sharkyga",country:"🇦🇺"},
+{name:"Karkito",country:"🇰🇷"}
+]
+},
 
-    {
-        name: "BOOBAWAMBA",
-        createdBy: "Akunakunn",
-        verifiedBy: "Eastshark",
-        verification: "2024-10-05",
-        image: "BOOBAWAMBA.jpeg",
-        points: 182.73,
-        victors: [
-            { name: "Eastshark", country: "🇪🇸" },
-            { name: "Agonom", country: "🇰🇷" },
-            { name: "Cbrem", country: "🇬🇧" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" }
-        ]
-    },
+{
+name: "BOOBAWAMBA",
+createdBy: "Akunakunn",
+verifiedBy: "Eastshark",
+verification: "2024-10-05",
+image: "BOOBAWAMBA.jpeg",
+points: 182.73,
+victors: [
+{name:"Eastshark",country:"🇪🇸"},
+{name:"Agonom",country:"🇰🇷"},
+{name:"Cbrem",country:"🇬🇧"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"wPopoff",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "The Bloop",
-        createdBy: "murkkat",
-        verifiedBy: "Zoink",
-        verification: "2026-03-15",
-        image: "The Bloop.jpeg",
-        points: 171.91,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" }
-        ]
-    },
+{
+name: "The Bloop",
+createdBy: "murkkat",
+verifiedBy: "Zoink",
+verification: "2026-03-15",
+image: "The Bloop.jpeg",
+points: 171.91,
+victors: [
+{name:"Zoink",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "Every End",
-        createdBy: "MindCap",
-        verifiedBy: "Hqmy",
-        verification: "2025-03-16",
-        image: "Every End.jpeg",
-        points: 161.99,
-        victors: [
-            { name: "Hqmy", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Garbag", country: "🇷🇺" },
-            { name: "Stefan Boss", country: "🇷🇴" },
-            { name: "N3bulA", country: "🇬🇧" },
-            { name: "PlusrMinus", country: "🇺🇸" },
-            { name: "TFIBB", country: "🇺🇸" },
-            { name: "Lanx", country: "🇵🇱" },
-            { name: "Samot", country: "🇦🇷" },
-            { name: "Bims", country: "🇩🇪" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Seturan", country: "🇰🇷" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Forewa", country: "🇷🇺" },
-            { name: "Brumik", country: "🇨🇿" },
-            { name: "Hamsoo", country: "🇰🇷" },
-            { name: "hstorm", country: "🇺🇸" },
-            { name: "Thnnder", country: "🇺🇸" }
-        ]
-    },
+{
+name: "Every End",
+createdBy: "MindCap",
+verifiedBy: "Hqmy",
+verification: "2025-03-16",
+image: "Every End.jpeg",
+points: 161.99,
+victors: [
+{name:"Hqmy",country:"🇺🇸"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"Garbag",country:"🇷🇺"},
+{name:"Stefan Boss",country:"🇷🇴"},
+{name:"N3bulA",country:"🇬🇧"},
+{name:"PlusrMinus",country:"🇺🇸"},
+{name:"TFIBB",country:"🇺🇸"},
+{name:"Lanx",country:"🇵🇱"},
+{name:"Samot",country:"🇦🇷"},
+{name:"Bims",country:"🇩🇪"},
+{name:"dovvin",country:"🇵🇱"},
+{name:"Seturan",country:"🇰🇷"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Forewa",country:"🇷🇺"},
+{name:"Brumik",country:"🇨🇿"},
+{name:"Hamsoo",country:"🇰🇷"},
+{name:"hstorm",country:"🇺🇸"},
+{name:"Thnnder",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "Penumbral",
-        createdBy: "nxhtrise",
-        verifiedBy: "w3rty",
-        verification: "2026-03-05",
-        image: "Penumbral.jpeg",
-        points: 152.89,
-        victors: [
-            { name: "w3rty", country: "🇷🇺" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Sharkified", country: "🇺🇸" }
-        ]
-    },
+{
+name: "Penumbral",
+createdBy: "nxhtrise",
+verifiedBy: "w3rty",
+verification: "2026-03-05",
+image: "Penumbral.jpeg",
+points: 152.89,
+victors: [
+{name:"w3rty",country:"🇷🇺"},
+{name:"dovvin",country:"🇵🇱"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"Sharkified",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "Silent Clubstep",
-        createdBy: "Sailent",
-        verifiedBy: "paqoe",
-        verification: "2022-07-12",
-        image: "Silent Clubstep.jpeg",
-        points: 144.56,
-        victors: [
-            { name: "paqoe", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Doggie", country: "🇺🇸" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "Seturan", country: "🇰🇷" },
-            { name: "zVision", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Adri420", country: "🇪🇸" },
-            { name: "Litoks", country: "🇫🇷" },
-            { name: "Aless50", country: "🇻🇪" },
-            { name: "freksolereal", country: "🇨🇭" },
-            { name: "Diamond", country: "🇦🇱" },
-            { name: "Albert", country: "🇺🇸" },
-            { name: "MeQ8cNv43s6A", country: "🇯🇵" },
-            { name: "niwox", country: "🇫🇷" },
-            { name: "Triqz", country: "🇺🇸" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Juls", country: "🇨🇦" },
-            { name: "Mixasuspa", country: "🇷🇸" },
-            { name: "XBelugaX", country: "🇪🇸" },
-            { name: "Luciid", country: "🇺🇸" },
-            { name: "UNCLEBOGD4N", country: "🇷🇺" },
-            { name: "[미소노 미카] 구아이", country: "🇰🇷" },
-            { name: "whfyre", country: "🇺🇦" },
-            { name: "NathanPatty", country: "🇺🇸" },
-            { name: "Hover", country: "🇦🇹" },
-            { name: "turtle", country: "🇨🇦" },
-            { name: "thiagar", country: "🇦🇷" },
-            { name: "Crewmate", country: "🇺🇸" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Horuszed", country: "🇨🇱" },
-            { name: "Zephronox", country: "🇨🇦" },
-            { name: "Flashl3ang", country: "🇰🇷" },
-            { name: "ChopBlox", country: "🇩🇪" },
-            { name: "eksdulgation", country: "🇷🇺" },
-            { name: "agatha", country: "🇭🇷" },
-            { name: "abb2k", country: "🇮🇱" },
-            { name: "cc478", country: "🇺🇸" },
-            { name: "HumbleGoat216", country: "🇺🇦" },
-            { name: "carv", country: "🇺🇸" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "Sanni", country: "🇫🇮" },
-            { name: "Cookie", country: "🇺🇸" },
-            { name: "zStucc", country: "🇮🇹" }
-        ]
-    },
+{
+name: "Silent Clubstep",
+createdBy: "Sailent",
+verifiedBy: "paqoe",
+verification: "2022-07-12",
+image: "Silent Clubstep.jpeg",
+points: 144.56,
+victors: [
+{name:"paqoe",country:"🇺🇸"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"Doggie",country:"🇺🇸"},
+{name:"Trick",country:"🇺🇸"},
+{name:"Seturan",country:"🇰🇷"},
+{name:"zVision",country:"🇺🇸"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Adri420",country:"🇪🇸"},
+{name:"Litoks",country:"🇫🇷"},
+{name:"Aless50",country:"🇻🇪"},
+{name:"freksolereal",country:"🇨🇭"},
+{name:"Diamond",country:"🇦🇱"},
+{name:"Albert",country:"🇺🇸"},
+{name:"MeQ8cNv43s6A",country:"🇯🇵"},
+{name:"niwox",country:"🇫🇷"},
+{name:"Triqz",country:"🇺🇸"},
+{name:"Netermind",country:"🇺🇸"},
+{name:"Juls",country:"🇨🇦"},
+{name:"Mixasuspa",country:"🇷🇸"},
+{name:"XBelugaX",country:"🇪🇸"},
+{name:"Luciid",country:"🇺🇸"},
+{name:"UNCLEBOGD4N",country:"🇷🇺"},
+{name:"[미소노 미카] 구아이",country:"🇰🇷"},
+{name:"whfyre",country:"🇺🇦"},
+{name:"NathanPatty",country:"🇺🇸"},
+{name:"Hover",country:"🇦🇹"},
+{name:"turtle",country:"🇨🇦"},
+{name:"thiagar",country:"🇦🇷"},
+{name:"Crewmate",country:"🇺🇸"},
+{name:"dovvin",country:"🇵🇱"},
+{name:"Horuszed",country:"🇨🇱"},
+{name:"Zephronox",country:"🇨🇦"},
+{name:"Flashl3ang",country:"🇰🇷"},
+{name:"ChopBlox",country:"🇩🇪"},
+{name:"eksdulgation",country:"🇷🇺"},
+{name:"agatha",country:"🇭🇷"},
+{name:"abb2k",country:"🇮🇱"},
+{name:"cc478",country:"🇺🇸"},
+{name:"HumbleGoat216",country:"🇺🇦"},
+{name:"carv",country:"🇺🇸"},
+{name:"Thnnder",country:"🇺🇸"},
+{name:"Sanni",country:"🇫🇮"},
+{name:"Cookie",country:"🇺🇸"},
+{name:"zStucc",country:"🇮🇹"}
+]
+},
 
-    {
-        name: "Ashley Wave Trials",
-        createdBy: "OddMod",
-        verifiedBy: "Zoink",
-        verification: "2024-11-02",
-        image: "Ashley Wave Trials.jpeg",
-        points: 136.92,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Cookie", country: "🇺🇸" },
-            { name: "yolomodeboom", country: "🇱🇹" }
-        ]
-    },
+{
+name: "Ashley Wave Trials",
+createdBy: "OddMod",
+verifiedBy: "Zoink",
+verification: "2024-11-02",
+image: "Ashley Wave Trials.jpeg",
+points: 136.92,
+victors: [
+{name:"Zoink",country:"🇺🇸"},
+{name:"Cookie",country:"🇺🇸"},
+{name:"yolomodeboom",country:"🇱🇹"}
+]
+},
 
-    {
-        name: "Ultra Paracosm",
-        createdBy: "Renn241 and declanlc",
-        verifiedBy: "Wity",
-        verification: "2026-04-21",
-        image: "Ultra Paracosm.jpeg",
-        points: 129.92,
-        victors: [
-            { name: "Wity", country: "🇪🇸" },
-            { name: "Axinity", country: "🇩🇰" },
-            { name: "Zoink", country: "🇺🇸" }
-        ]
-    },
+{
+name: "Ultra Paracosm",
+createdBy: "Renn241 and declanlc",
+verifiedBy: "Wity",
+verification: "2026-04-21",
+image: "Ultra Paracosm.jpeg",
+points: 129.92,
+victors: [
+{name:"Wity",country:"🇪🇸"},
+{name:"Axinity",country:"🇩🇰"},
+{name:"Zoink",country:"🇺🇸"}
+]
+},
 
-    {
-        name: "Andromeda",
-        createdBy: "Insxne97",
-        verifiedBy: "Taiago",
-        verification: "2025-01-19",
-        image: "Andromeda.jpeg",
-        points: 123.50,
-        victors: [
-            { name: "Taiago", country: "🇵🇹" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "GuillExprex52", country: "🇪🇸" },
-            { name: "Hqmy", country: "🇺🇸" },
-            { name: "Jerpaa", country: "🇫🇮" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "VERTOP", country: "🇷🇺" },
-            { name: "DibiiziCookie", country: "🇧🇷" },
-            { name: "Laniakea", country: "🇰🇷" },
-            { name: "ChopBlox", country: "🇩🇪" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Zeroxy", country: "🇳🇴" },
-            { name: "cudby", country: "🇨🇦" },
-            { name: "Slaughter", country: "🇨🇦" },
-            { name: "DeividG", country: "🇪🇸" },
-            { name: "Sharkified", country: "🇺🇸" },
-            { name: "rediio", country: "🇰🇷" },
-            { name: "Abdieldevil", country: "🇵🇪" },
-            { name: "Pluntix", country: "🇨🇿" },
-            { name: "Axinity", country: "🇩🇰" }
-        ]
-    },
+{
+name: "Andromeda",
+createdBy: "Insxne97",
+verifiedBy: "Taiago",
+verification: "2025-01-19",
+image: "Andromeda.jpeg",
+points: 123.50,
+victors: [
+{name:"Taiago",country:"🇵🇹"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"GuillExprex52",country:"🇪🇸"},
+{name:"Hqmy",country:"🇺🇸"},
+{name:"Jerpaa",country:"🇫🇮"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"VERTOP",country:"🇷🇺"},
+{name:"DibiiziCookie",country:"🇧🇷"},
+{name:"Laniakea",country:"🇰🇷"},
+{name:"ChopBlox",country:"🇩🇪"},
+{name:"dovvin",country:"🇵🇱"},
+{name:"Netermind",country:"🇺🇸"},
+{name:"Zeroxy",country:"🇳🇴"},
+{name:"cudby",country:"🇨🇦"},
+{name:"Slaughter",country:"🇨🇦"},
+{name:"DeividG",country:"🇪🇸"},
+{name:"Sharkified",country:"🇺🇸"},
+{name:"rediio",country:"🇰🇷"},
+{name:"Abdieldevil",country:"🇵🇪"},
+{name:"Pluntix",country:"🇨🇿"},
+{name:"Axinity",country:"🇩🇰"}
+]
+},
 
-    {
-        name: "KILLSTEALER",
-        createdBy: "Rynoxious and Asterion",
-        verifiedBy: "kloone",
-        verification: "2026-04-22",
-        image: "KILLSTEALER.jpeg",
-        points: 117.62,
-        victors: [
-            { name: "kloone", country: "🇫🇮" },
-            { name: "zLevii", country: "🇳🇿" }
-        ]
-    },
+{
+name: "KILLSTEALER",
+createdBy: "Rynoxious and Asterion",
+verifiedBy: "kloone",
+verification: "2026-04-22",
+image: "KILLSTEALER.jpeg",
+points: 117.62,
+victors: [
+{name:"kloone",country:"🇫🇮"},
+{name:"zLevii",country:"🇳🇿"}
+]
+},
 
-    {
-        name: "Subsuming Vortex",
-        createdBy: "SeptaGon7",
-        verifiedBy: "Cursed",
-        verification: "2025-09-10",
-        image: "Subsuming Vortex.jpeg",
-        points: 112.23,
-        victors: [
-            { name: "Cursed", country: "🇬🇧" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Rodmentor", country: "🇨🇴" },
-            { name: "weyolll3", country: "🇪🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Beto", country: "🇮🇱" },
-            { name: "manu", country: "🇨🇱" }
-        ]
-    },
+{
+name: "Subsuming Vortex",
+createdBy: "SeptaGon7",
+verifiedBy: "Cursed",
+verification: "2025-09-10",
+image: "Subsuming Vortex.jpeg",
+points: 112.23,
+victors: [
+{name:"Cursed",country:"🇬🇧"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"Rodmentor",country:"🇨🇴"},
+{name:"weyolll3",country:"🇪🇸"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Beto",country:"🇮🇱"},
+{name:"manu",country:"🇨🇱"}
+]
+},
 
-    {
-        name: "Anathema",
-        createdBy: "nikrodox",
-        verifiedBy: "Whizkid05",
-        verification: "2024-11-20",
-        image: "Anathema.jpeg",
-        points: 110.81,
-        victors: [
-            { name: "Whizkid05", country: "🇬🇧" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "teraaa", country: "🇰🇿" },
-            { name: "PoCle", country: "🇰🇷" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Serpentical", country: "🇭🇺" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "Gokill", country: "🇵🇱" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Jif", country: "🇺🇸" },
-            { name: "coubitic", country: "🇫🇷" },
-            { name: "Nocturina", country: "🇺🇸" },
-            { name: "Yuuwi", country: "🇲🇽" },
-            { name: "kloone", country: "🇫🇮" },
-            { name: "Mizukii", country: "🇩🇪" },
-            { name: "Ronrjkw", country: "🇺🇸" },
-            { name: "takma", country: "🇷🇺" },
-            { name: "DibiiziCookie", country: "🇧🇷" },
-            { name: "eksdulgation", country: "🇷🇺" },
-            { name: "ItzDoVi", country: "🇰🇿" },
-            { name: "Goanga", country: "🇷🇴" },
-            { name: "zLevii", country: "🇳🇿" },
-            { name: "Albert", country: "🇺🇸" },
-            { name: "DreamyBull", country: "🇩🇪" }
-        ]
-    },
+{
+name: "Anathema",
+createdBy: "nikrodox",
+verifiedBy: "Whizkid05",
+verification: "2024-11-20",
+image: "Anathema.jpeg",
+points: 110.81,
+victors: [
+{name:"Whizkid05",country:"🇬🇧"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"teraaa",country:"🇰🇿"},
+{name:"PoCle",country:"🇰🇷"},
+{name:"Netermind",country:"🇺🇸"},
+{name:"Serpentical",country:"🇭🇺"},
+{name:"Trick",country:"🇺🇸"},
+{name:"Gokill",country:"🇵🇱"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Jif",country:"🇺🇸"},
+{name:"coubitic",country:"🇫🇷"},
+{name:"Nocturina",country:"🇺🇸"},
+{name:"Yuuwi",country:"🇲🇽"},
+{name:"kloone",country:"🇫🇮"},
+{name:"Mizukii",country:"🇩🇪"},
+{name:"Ronrjkw",country:"🇺🇸"},
+{name:"takma",country:"🇷🇺"},
+{name:"DibiiziCookie",country:"🇧🇷"},
+{name:"eksdulgation",country:"🇷🇺"},
+{name:"ItzDoVi",country:"🇰🇿"},
+{name:"Goanga",country:"🇷🇴"},
+{name:"zLevii",country:"🇳🇿"},
+{name:"Albert",country:"🇺🇸"},
+{name:"DreamyBull",country:"🇩🇪"}
+]
+},
 
-    {
-        name: "Avernus",
-        createdBy: "Bo and Pockewindfish",
-        verifiedBy: "Zoink",
-        verification: "2023-03-22",
-        image: "Avernus.jpeg",
-        points: 109.39,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Diamond", country: "🇦🇱" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Abdieldevil", country: "🇵🇪" },
-            { name: "Taiago", country: "🇵🇹" },
-            { name: "Mizukii", country: "🇩🇪" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "fallen", country: "🇷🇺" },
-            { name: "Serpentical", country: "🇭🇺" },
-            { name: "Wavyy", country: "🇫🇷" },
-            { name: "Yumira", country: "🇷🇺" },
-            { name: "Doggie", country: "🇺🇸" },
-            { name: "misty", country: "🇷🇺" },
-            { name: "turtle", country: "🇨🇦" },
-            { name: "Johnlikediamond", country: "🇺🇸" },
-            { name: "Jer paa".replace(" ", ""), country: "🇫🇮" },
-            { name: "eternalluna", country: "🇨🇳" },
-            { name: "Scoff", country: "🇨🇦" },
-            { name: "TimsTeam", country: "🇷🇺" },
-            { name: "craig0", country: "🇺🇸" },
-            { name: "teraaa", country: "🇰🇿" },
-            { name: "weyolll3", country: "🇪🇸" },
-            { name: "eastshark", country: "🇪🇸" },
-            { name: "kloone", country: "🇫🇮" },
-            { name: "UNCLEBOGD4N", country: "🇷🇺" },
-            { name: "Cookie", country: "🇺🇸" },
-            { name: "kropka", country: "🇵🇱" },
-            { name: "Sharkified", country: "🇺🇸" },
-            { name: "GodGamer2442", country: "🇬🇧" },
-            { name: "miguel6456", country: "🇪🇸" }
-        ]
-    },
+{
+name: "Avernus",
+createdBy: "Bo and Pockewindfish",
+verifiedBy: "Zoink",
+verification: "2023-03-22",
+image: "Avernus.jpeg",
+points: 109.39,
+victors: [
+{name:"Zoink",country:"🇺🇸"},
+{name:"Diamond",country:"🇦🇱"},
+{name:"Trick",country:"🇺🇸"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Abdieldevil",country:"🇵🇪"},
+{name:"Taiago",country:"🇵🇹"},
+{name:"Mizukii",country:"🇩🇪"},
+{name:"Netermind",country:"🇺🇸"},
+{name:"fallen",country:"🇷🇺"},
+{name:"Serpentical",country:"🇭🇺"},
+{name:"Wavyy",country:"🇫🇷"},
+{name:"Yumira",country:"🇷🇺"},
+{name:"Doggie",country:"🇺🇸"},
+{name:"misty",country:"🇷🇺"},
+{name:"turtle",country:"🇨🇦"},
+{name:"Johnlikediamond",country:"🇺🇸"},
+{name:"Jerppaa",country:"🇫🇮"},
+{name:"eternalluna",country:"🇨🇳"},
+{name:"Scoff",country:"🇨🇦"},
+{name:"TimsTeam",country:"🇷🇺"},
+{name:"craig0",country:"🇺🇸"},
+{name:"teraaa",country:"🇰🇿"},
+{name:"weyolll3",country:"🇪🇸"},
+{name:"eastshark",country:"🇪🇸"},
+{name:"kloone",country:"🇫🇮"},
+{name:"UNCLEBOGD4N",country:"🇷🇺"},
+{name:"Cookie",country:"🇺🇸"},
+{name:"kropka",country:"🇵🇱"},
+{name:"Sharkified",country:"🇺🇸"},
+{name:"GodGamer2442",country:"🇬🇧"},
+{name:"miguel6456",country:"🇪🇸"}
+]
+},
 
-    {
-        name: "Acheron",
-        createdBy: "ryamu",
-        verifiedBy: "Zoink",
-        verification: "2022-08-23",
-        image: "Acheron.jpeg",
-        points: 107.99,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Doggie", country: "🇺🇸" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "Zeroxy", country: "🇳🇴" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "OneAlphaHelix", country: "🇺🇸" },
-            { name: "TheRealEandis", country: "🇷🇺" },
-            { name: "Taiago", country: "🇵🇹" },
-            { name: "RaeveZ", country: "🇨🇴" },
-            { name: "Hover", country: "🇦🇹" },
-            { name: "Light", country: "🇷🇺" },
-            { name: "Mizukii", country: "🇩🇪" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Mikhail Krotov", country: "🇷🇺" },
-            { name: "takma", country: "🇷🇺" },
-            { name: "donley", country: "🇨🇦" },
-            { name: "hstorm", country: "🇺🇸" },
-            { name: "teraaa", country: "🇰🇿" },
-            { name: "Gokill", country: "🇵🇱" },
-            { name: "Paltadashg", country: "🇨🇱" },
-            { name: "Ronrjkw", country: "🇺🇸" },
-            { name: "SnowBallerr", country: "🇦🇺" },
-            { name: "brite", country: "🇮🇹" },
-            { name: "misty", country: "🇷🇺" },
-            { name: "zThund3r", country: "🇫🇷" },
-            { name: "Axinity", country: "🇩🇰" },
-            { name: "RG", country: "🇨🇦" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "The_Bat0", country: "🇷🇺" },
-            { name: "Scoff", country: "🇨🇦" },
-            { name: "LOL123", country: "🇸🇪" },
-            { name: "Goanga", country: "🇷🇴" },
-            { name: "fallen", country: "🇷🇺" },
-            { name: "Stefan Boss", country: "🇷🇴" },
-            { name: "Hqmy", country: "🇺🇸" },
-            { name: "Tunax", country: "🇳🇴" },
-            { name: "TheRealMike", country: "🇺🇸" },
-            { name: "zoe", country: "🇺🇸" },
-            { name: "Kole", country: "🇷🇸" },
-            { name: "Sharkified", country: "🇺🇸" },
-            { name: "Unlucky2", country: "🇩🇪" },
-            { name: "Serpentical", country: "🇭🇺" },
-            { name: "Cursed", country: "🇬🇧" },
-            { name: "it keeps your hands clean", country: "🇺🇸" },
-            { name: "Kaza", country: "🇷🇴" },
-            { name: "kloone", country: "🇫🇮" },
-            { name: "NLShorty", country: "🇨🇦" },
-            { name: "Breakcore", country: "🇪🇪" },
-            { name: "MeQ8cNv43s6A", country: "🇯🇵" },
-            { name: "ChopBlox", country: "🇩🇪" },
-            { name: "Abdieldevil", country: "🇵🇪" },
-            { name: "fluget", country: "🇺🇦" },
-            { name: "Nordstrom", country: "🇺🇸" },
-            { name: "littlegiggle", country: "🇺🇸" },
-            { name: "rediio", country: "🇰🇷" },
-            { name: "turtle", country: "🇨🇦" },
-            { name: "KlimK", country: "🇷🇺" },
-            { name: "DibiiziCookie", country: "🇧🇷" },
-            { name: "Albert", country: "🇺🇸" },
-            { name: "Joker", country: "🇷🇺" },
-            { name: "xalval", country: "🇷🇺" },
-            { name: "eastshark", country: "🇪🇸" },
-            { name: "Ranian", country: "🇮🇸" },
-            { name: "ColossalOrange", country: "🇺🇸" },
-            { name: "sawyer", country: "🇺🇸" },
-            { name: "UNCLEBOGD4N", country: "🇷🇺" },
-            { name: "eternalluna", country: "🇨🇳" },
-            { name: "Denni", country: "🇨🇦" },
-            { name: "noxell", country: "🇷🇺" },
-            { name: "FinnyP515", country: "🇺🇸" },
-            { name: "SpaceRS", country: "🇷🇸" },
-            { name: "zGamerdude", country: "🇺🇸" },
-            { name: "Cookie", country: "🇺🇸" },
-            { name: "Raffox", country: "🇨🇴" },
-            { name: "Edward", country: "🇬🇧" },
-            { name: "itzhealer", country: "🇷🇺" },
-            { name: "HumbleGoat216", country: "🇸🇪" },
-            { name: "maxer", country: "🇷🇺" },
-            { name: "TimsTeam", country: "🇷🇺" },
-            { name: "Syrcx", country: "🇮🇱" },
-            { name: "karkito", country: "🇰🇷" },
-            { name: "eksdulgation", country: "🇷🇺" },
-            { name: "Technical", country: "🇺🇸" },
-            { name: "tea", country: "🇰🇷" },
-            { name: "RAASU", country: "🇩🇪" },
-            { name: "Trolly1", country: "🇺🇸" },
-            { name: "W1nda", country: "🇷🇺" },
-            { name: "Flavyola64", country: "🇧🇪" },
-            { name: "roma666", country: "🇷🇺" },
-            { name: "weyolll3", country: "🇪🇸" },
-            { name: "Komet01", country: "🇵🇱" },
-            { name: "zLevii", country: "🇳🇿" },
-            { name: "Twenty", country: "🇨🇿" },
-            { name: "Ripplez", country: "🇷🇴" },
-            { name: "Lake", country: "🇬🇧" },
-            { name: "nebular", country: "🇩🇪" },
-            { name: "Harhir", country: "🇫🇮" },
-            { name: "VxMasTer", country: "🇷🇴" },
-            { name: "Bigthunder556", country: "🇺🇸" },
-            { name: "ffzer", country: "🇷🇺" },
-            { name: "stevenxd42", country: "🇲🇽" },
-            { name: "whfyre", country: "🇺🇦" },
-            { name: "godiskdjei", country: "🇬🇷" },
-            { name: "zStucc", country: "🇮🇹" },
-            { name: "niwox", country: "🇫🇷" },
-            { name: "Rybertrion", country: "🇺🇸" },
-            { name: "Pleid", country: "🇦🇺" },
-            { name: "mcrawford001", country: "🇺🇸" },
-            { name: "Cryostazz", country: "🇫🇷" },
-            { name: "wSharkiye", country: "🇫🇷" },
-            { name: "Laysah", country: "🇬🇧" }
-        ]
-    },
+{
+name: "Acheron",
+createdBy: "ryamu",
+verifiedBy: "Zoink",
+verification: "2022-08-23",
+image: "Acheron.jpeg",
+points: 107.99,
+victors: [
+{name:"Zoink",country:"🇺🇸"},
+{name:"Doggie",country:"🇺🇸"},
+{name:"Trick",country:"🇺🇸"},
+{name:"Zeroxy",country:"🇳🇴"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"OneAlphaHelix",country:"🇺🇸"},
+{name:"TheRealEandis",country:"🇷🇺"},
+{name:"Taiago",country:"🇵🇹"},
+{name:"RaeveZ",country:"🇨🇴"},
+{name:"Hover",country:"🇦🇹"},
+{name:"Light",country:"🇷🇺"},
+{name:"Mizukii",country:"🇩🇪"},
+{name:"Netermind",country:"🇺🇸"},
+{name:"Mikhail Krotov",country:"🇷🇺"},
+{name:"takma",country:"🇷🇺"},
+{name:"donley",country:"🇨🇦"},
+{name:"hstorm",country:"🇺🇸"},
+{name:"teraaa",country:"🇰🇿"},
+{name:"Gokill",country:"🇵🇱"},
+{name:"Paltadashg",country:"🇨🇱"},
+{name:"Ronrjkw",country:"🇺🇸"},
+{name:"SnowBallerr",country:"🇦🇺"},
+{name:"brite",country:"🇮🇹"},
+{name:"misty",country:"🇷🇺"},
+{name:"zThund3r",country:"🇫🇷"},
+{name:"Axinity",country:"🇩🇰"},
+{name:"RG",country:"🇨🇦"},
+{name:"Thnnder",country:"🇺🇸"},
+{name:"The_Bat0",country:"🇷🇺"},
+{name:"Scoff",country:"🇨🇦"},
+{name:"LOL123",country:"🇸🇪"},
+{name:"Goanga",country:"🇷🇴"},
+{name:"fallen",country:"🇷🇺"},
+{name:"Stefan Boss",country:"🇷🇴"},
+{name:"Hqmy",country:"🇺🇸"},
+{name:"Tunax",country:"🇳🇴"},
+{name:"TheRealMike",country:"🇺🇸"},
+{name:"zoe",country:"🇺🇸"},
+{name:"Kole",country:"🇷🇸"},
+{name:"Sharkified",country:"🇺🇸"},
+{name:"Unlucky2",country:"🇩🇪"},
+{name:"Serpentical",country:"🇭🇺"},
+{name:"Cursed",country:"🇬🇧"},
+{name:"it keeps your hands clean",country:"🇺🇸"},
+{name:"Kaza",country:"🇷🇴"},
+{name:"kloone",country:"🇫🇮"},
+{name:"NLShorty",country:"🇨🇦"},
+{name:"Breakcore",country:"🇪🇪"},
+{name:"MeQ8cNv43s6A",country:"🇯🇵"},
+{name:"ChopBlox",country:"🇩🇪"},
+{name:"Abdieldevil",country:"🇵🇪"},
+{name:"fluget",country:"🇺🇦"},
+{name:"Nordstrom",country:"🇺🇸"},
+{name:"littlegiggle",country:"🇺🇸"},
+{name:"rediio",country:"🇰🇷"},
+{name:"turtle",country:"🇨🇦"},
+{name:"KlimK",country:"🇷🇺"},
+{name:"DibiiziCookie",country:"🇧🇷"},
+{name:"Albert",country:"🇺🇸"},
+{name:"Joker",country:"🇷🇺"},
+{name:"xalval",country:"🇷🇺"},
+{name:"eastshark",country:"🇪🇸"},
+{name:"Ranian",country:"🇮🇸"},
+{name:"ColossalOrange",country:"🇺🇸"},
+{name:"sawyer",country:"🇺🇸"},
+{name:"UNCLEBOGD4N",country:"🇷🇺"},
+{name:"eternalluna",country:"🇨🇳"},
+{name:"Denni",country:"🇨🇦"},
+{name:"noxell",country:"🇷🇺"},
+{name:"FinnyP515",country:"🇺🇸"},
+{name:"SpaceRS",country:"🇷🇸"},
+{name:"zGamerdude",country:"🇺🇸"},
+{name:"Cookie",country:"🇺🇸"},
+{name:"Raffox",country:"🇨🇴"},
+{name:"Edward",country:"🇬🇧"},
+{name:"itzhealer",country:"🇷🇺"},
+{name:"HumbleGoat216",country:"🇸🇪"},
+{name:"maxer",country:"🇷🇺"},
+{name:"TimsTeam",country:"🇷🇺"},
+{name:"Syrcx",country:"🇮🇱"},
+{name:"karkito",country:"🇰🇷"},
+{name:"eksdulgation",country:"🇷🇺"},
+{name:"Technical",country:"🇺🇸"},
+{name:"tea",country:"🇰🇷"},
+{name:"RAASU",country:"🇩🇪"},
+{name:"Trolly1",country:"🇺🇸"},
+{name:"W1nda",country:"🇷🇺"},
+{name:"Flavyola64",country:"🇧🇪"},
+{name:"roma666",country:"🇷🇺"},
+{name:"weyolll3",country:"🇪🇸"},
+{name:"Komet01",country:"🇵🇱"},
+{name:"zLevii",country:"🇳🇿"},
+{name:"Twenty",country:"🇨🇿"},
+{name:"Ripplez",country:"🇷🇴"},
+{name:"Lake",country:"🇬🇧"},
+{name:"nebular",country:"🇩🇪"},
+{name:"Harhir",country:"🇫🇮"},
+{name:"VxMasTer",country:"🇷🇴"},
+{name:"Bigthunder556",country:"🇺🇸"},
+{name:"ffzer",country:"🇷🇺"},
+{name:"stevenxd42",country:"🇲🇽"},
+{name:"whfyre",country:"🇺🇦"},
+{name:"godiskdjei",country:"🇬🇷"},
+{name:"zStucc",country:"🇮🇹"},
+{name:"niwox",country:"🇫🇷"},
+{name:"Rybertrion",country:"🇺🇸"},
+{name:"Pleid",country:"🇦🇺"},
+{name:"mcrawford001",country:"🇺🇸"},
+{name:"Cryostazz",country:"🇫🇷"},
+{name:"wSharkiye",country:"🇫🇷"},
+{name:"Laysah",country:"🇬🇧"}
+]
+},
 
-    {
-        name: "Spectre",
-        createdBy: "xander",
-        verifiedBy: "PersonHuman42",
-        verification: "2024-10-05",
-        image: "Spectre.jpeg",
-        points: 106.61,
-        victors: [
-            { name: "PersonHuman42", country: "🇦🇺" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "Laysah", country: "🇬🇧" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Albert", country: "🇺🇸" },
-            { name: "zLevii", country: "🇳🇿" },
-            { name: "Stefan Boss", country: "🇷🇴" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "wwdonut", country: "🇺🇸" },
-            { name: "SaturMan", country: "🇷🇺" },
-            { name: "NLShorty", country: "🇨🇦" },
-            { name: "eastshark", country: "🇪🇸" },
-            { name: "weyolll3", country: "🇪🇸" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "1rua", country: "🇮🇪" },
-            { name: "lus", country: "🇧🇷" },
-            { name: "strikk", country: "🇧🇷" },
-            { name: "Bixeo", country: "🇨🇱" },
-            { name: "PoCle", country: "🇰🇷" },
-            { name: "YeldA", country: "🇰🇷" },
-            { name: "vsce", country: "🇲🇽" },
-            { name: "BigHoss", country: "🇺🇸" },
-            { name: "karkito", country: "🇰🇷" }
-        ]
-    },
+{
+name: "Spectre",
+createdBy: "xander",
+verifiedBy: "PersonHuman42",
+verification: "2024-10-05",
+image: "Spectre.jpeg",
+points: 106.61,
+victors: [
+{name:"PersonHuman42",country:"🇦🇺"},
+{name:"Trick",country:"🇺🇸"},
+{name:"Netermind",country:"🇺🇸"},
+{name:"Thnnder",country:"🇺🇸"},
+{name:"Laysah",country:"🇬🇧"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"Albert",country:"🇺🇸"},
+{name:"zLevii",country:"🇳🇿"},
+{name:"Stefan Boss",country:"🇷🇴"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"wwdonut",country:"🇺🇸"},
+{name:"SaturMan",country:"🇷🇺"},
+{name:"NLShorty",country:"🇨🇦"},
+{name:"eastshark",country:"🇪🇸"},
+{name:"weyolll3",country:"🇪🇸"},
+{name:"dovvin",country:"🇵🇱"},
+{name:"1rua",country:"🇮🇪"},
+{name:"lus",country:"🇧🇷"},
+{name:"strikk",country:"🇧🇷"},
+{name:"Bixeo",country:"🇨🇱"},
+{name:"PoCle",country:"🇰🇷"},
+{name:"YeldA",country:"🇰🇷"},
+{name:"vsce",country:"🇲🇽"},
+{name:"BigHoss",country:"🇺🇸"},
+{name:"karkito",country:"🇰🇷"}
+]
+},
 
-    {
-        name: "Menace",
-        createdBy: "Arraegen",
-        verifiedBy: "Whizkid05",
-        verification: "2024-07-14",
-        image: "Menace.jpeg",
-        points: 105.24,
-        victors: [
-            { name: "Whizkid05", country: "🇬🇧" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Dovi", country: "🇷🇺" },
-            { name: "Flavyola64", country: "🇧🇪" },
-            { name: "mariner", country: "🇫🇮" },
-            { name: "bims", country: "🇩🇪" },
-            { name: "Ahwiin", country: "Unknown Country" },
-            { name: "KrNati", country: "🇦🇺" },
-            { name: "fuuturisticfire", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Senatorias", country: "🇵🇱" },
-            { name: "rediio", country: "🇰🇷" },
-            { name: "kakol", country: "🇵🇱" }
-        ]
-    }
+{
+name: "Menace",
+createdBy: "Arraegen",
+verifiedBy: "Whizkid05",
+verification: "2024-07-14",
+image: "Menace.jpeg",
+points: 105.24,
+victors: [
+{name:"Whizkid05",country:"🇬🇧"},
+{name:"Thnnder",country:"🇺🇸"},
+{name:"Zoink",country:"🇺🇸"},
+{name:"Netermind",country:"🇺🇸"},
+{name:"Dovi",country:"🇷🇺"},
+{name:"Flavyola64",country:"🇧🇪"},
+{name:"mariner",country:"🇫🇮"},
+{name:"bims",country:"🇩🇪"},
+{name:"Ahwiin",country:"Unknown Country"},
+{name:"KrNati",country:"🇦🇺"},
+{name:"fuuturisticfire",country:"🇺🇸"},
+{name:"wPopoff",country:"🇺🇸"},
+{name:"Senatorias",country:"🇵🇱"},
+{name:"rediio",country:"🇰🇷"},
+{name:"kakol",country:"🇵🇱"}
+]
+}
 
 ];
 
 
 /* =====================================================
-   HISTORICAL DEMON DATABASE
-
-   These are NOT a separate displayed section.
-
-   They only appear when travelling to a date
-   between their verification date and fall-off date.
+   HISTORICAL DEMONS
+   These are NOT a separate section.
+   They are only inserted into the list when the
+   selected date is within their historical period.
 ===================================================== */
 
 const historicalDemons = [
 
-    {
-        name: "Phobos",
-        createdBy: "GMTSean",
-        verifiedBy: "KrmaL",
-        verification: "2016-05-12",
-        fellOff: "2021-05-13",
-        image: "Phobos.jpeg",
-        points: 0
-    },
+{
+name: "Phobos",
+createdBy: "GMTSean",
+verifiedBy: "KrmaL",
+verification: "2016-05-12",
+fallOff: "2021-05-13",
+image: "Phobos.jpeg",
+points: 0
+},
 
-    {
-        name: "Bloodbath",
-        createdBy: "Riot",
-        verifiedBy: "Riot",
-        verification: "2015-08-12",
-        fellOff: "2021-01-29",
-        image: "Bloodbath.jpeg",
-        points: 0
-    },
+{
+name: "Bloodbath",
+createdBy: "Riot",
+verifiedBy: "Riot",
+verification: "2015-08-12",
+fallOff: "2021-01-29",
+image: "Bloodbath.jpeg",
+points: 0
+},
 
-    {
-        name: "The Hell Factory",
-        createdBy: "TeamN2",
-        verifiedBy: "Powerbomb",
-        verification: "2015-12-28",
-        fellOff: "2020-09-04",
-        image: "The Hell Factory.jpeg",
-        points: 0
-    },
+{
+name: "The Hell Factory",
+createdBy: "TeamN2",
+verifiedBy: "Powerbomb",
+verification: "2015-12-28",
+fallOff: "2020-09-04",
+image: "The Hell Factory.jpeg",
+points: 0
+},
 
-    {
-        name: "A Bizarre Phantasm",
-        createdBy: "TeamN2",
-        verifiedBy: "GoodSmile",
-        verification: "2016-04-11",
-        fellOff: "2020-09-21",
-        image: "A Bizarre Phantasm.jpeg",
-        points: 0
-    },
+{
+name: "A Bizarre Phantasm",
+createdBy: "TeamN2",
+verifiedBy: "GoodSmile",
+verification: "2016-04-11",
+fallOff: "2020-09-21",
+image: "A Bizarre Phantasm.jpeg",
+points: 0
+},
 
-    {
-        name: "Conical Depression",
-        createdBy: "KrmaL",
-        verifiedBy: "KrmaL",
-        verification: "2016-03-10",
-        fellOff: "2020-11-01",
-        image: "Conical Depression.jpeg",
-        points: 0
-    },
+{
+name: "Conical Depression",
+createdBy: "KrmaL",
+verifiedBy: "KrmaL",
+verification: "2016-03-10",
+fallOff: "2020-11-01",
+image: "Conical Depression.jpeg",
+points: 0
+},
 
-    {
-        name: "The Ultimate Phase",
-        createdBy: "Andromeda",
-        verifiedBy: "Andromeda",
-        verification: "2016-06-21",
-        fellOff: "2019-07-05",
-        image: "The Ultimate Phase.jpeg",
-        points: 0
-    },
+{
+name: "The Ultimate Phase",
+createdBy: "Andromeda",
+verifiedBy: "Andromeda",
+verification: "2016-06-21",
+fallOff: "2019-07-05",
+image: "The Ultimate Phase.jpeg",
+points: 0
+},
 
-    {
-        name: "Cataclysm",
-        createdBy: "Ggb0y",
-        verifiedBy: "Riot",
-        verification: "2016-01-15",
-        fellOff: "2019-09-02",
-        image: "Cataclysm.jpeg",
-        points: 0
-    }
+{
+name: "Cataclysm",
+createdBy: "Ggb0y",
+verifiedBy: "Riot",
+verification: "2016-01-15",
+fallOff: "2019-09-02",
+image: "Cataclysm.jpeg",
+points: 0
+}
 
 ];
 
@@ -1433,53 +1541,47 @@ const historicalDemons = [
    CURRENT MASTER ORDER
 ===================================================== */
 
-const masterOrder = [
-    "Society",
-    "Thinking Space II",
-    "Amethyst",
-    "Flamewall",
-    "Tidal Wave",
-    "Green Bullet",
-    "Orbit",
-    "Antarctic Lights",
-    "Nullscapes",
-    "Quanteuse Processing",
-    "BOOBAWAMBA",
-    "The Bloop",
-    "Every End",
-    "Penumbral",
-    "Silent Clubstep",
-    "Ashley Wave Trials",
-    "Ultra Paracosm",
-    "Andromeda",
-    "KILLSTEALER",
-    "Subsuming Vortex",
-    "Anathema",
-    "Avernus",
-    "Acheron",
-    "Spectre",
-    "Menace"
+const currentOrder = [
+"Society",
+"Thinking Space II",
+"Amethyst",
+"Flamewall",
+"Tidal Wave",
+"Green Bullet",
+"Orbit",
+"Antarctic Lights",
+"Nullscapes",
+"Quanteuse Processing",
+"BOOBAWAMBA",
+"The Bloop",
+"Every End",
+"Penumbral",
+"Silent Clubstep",
+"Ashley Wave Trials",
+"Ultra Paracosm",
+"Andromeda",
+"KILLSTEALER",
+"Subsuming Vortex",
+"Anathema",
+"Avernus",
+"Acheron",
+"Spectre",
+"Menace"
 ];
 
 
 /* =====================================================
    HISTORICAL ORDER
-
-   This is ONLY used when time travelling into the
-   historical period.
-
-   Betrayal of Fate and Aftermath intentionally do NOT
-   exist yet.
 ===================================================== */
 
 const historicalOrder = [
-    "Phobos",
-    "Bloodbath",
-    "The Hell Factory",
-    "A Bizarre Phantasm",
-    "Conical Depression",
-    "The Ultimate Phase",
-    "Cataclysm"
+"Phobos",
+"Bloodbath",
+"The Hell Factory",
+"A Bizarre Phantasm",
+"Conical Depression",
+"The Ultimate Phase",
+"Cataclysm"
 ];
 
 
@@ -1489,31 +1591,31 @@ const historicalOrder = [
 
 const currentRankPoints = {
 
-    1: 350.00,
-    2: 331.71,
-    3: 313.42,
-    4: 291.70,
-    5: 271.78,
-    6: 253.53,
-    7: 236.80,
-    8: 221.47,
-    9: 207.42,
-    10: 194.54,
-    11: 182.73,
-    12: 171.91,
-    13: 161.99,
-    14: 152.89,
-    15: 144.56,
-    16: 136.92,
-    17: 129.92,
-    18: 123.50,
-    19: 117.62,
-    20: 112.23,
-    21: 110.81,
-    22: 109.39,
-    23: 107.99,
-    24: 106.61,
-    25: 105.24
+1:350.00,
+2:331.71,
+3:313.42,
+4:291.70,
+5:271.78,
+6:253.53,
+7:236.80,
+8:221.47,
+9:207.42,
+10:194.54,
+11:182.73,
+12:171.91,
+13:161.99,
+14:152.89,
+15:144.56,
+16:136.92,
+17:129.92,
+18:123.50,
+19:117.62,
+20:112.23,
+21:110.81,
+22:109.39,
+23:107.99,
+24:106.61,
+25:105.24
 
 };
 
@@ -1524,195 +1626,164 @@ const currentRankPoints = {
 
 function getTimeAgo(date) {
 
-    const now = new Date();
+const now = new Date();
 
-    const difference = now - date;
+const difference = now - date;
 
-    const totalDays =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
+const totalDays =
+Math.floor(
+difference /
+(1000 * 60 * 60 * 24)
+);
 
-    const totalWeeks =
-        Math.floor(totalDays / 7);
+const totalWeeks =
+Math.floor(totalDays / 7);
 
-    const totalMonths =
-        Math.floor(totalDays / 30.4375);
+const totalMonths =
+Math.floor(totalDays / 30.4375);
 
-    const totalYears =
-        Math.floor(totalDays / 365.2425);
+const totalYears =
+Math.floor(totalDays / 365.2425);
 
+if (totalYears >= 1) {
 
-    if (totalYears >= 1) {
-
-        return totalYears +
-            (
-                totalYears === 1
-                    ? " Year Ago"
-                    : " Years Ago"
-            );
-
-    }
-
-
-    if (totalMonths >= 1) {
-
-        return totalMonths +
-            (
-                totalMonths === 1
-                    ? " Month Ago"
-                    : " Months Ago"
-            );
-
-    }
-
-
-    if (totalWeeks >= 1) {
-
-        return totalWeeks +
-            (
-                totalWeeks === 1
-                    ? " Week Ago"
-                    : " Weeks Ago"
-            );
-
-    }
-
-
-    if (totalDays >= 1) {
-
-        return totalDays +
-            (
-                totalDays === 1
-                    ? " Day Ago"
-                    : " Days Ago"
-            );
-
-    }
-
-
-    return "Today";
-}
-
-
-/* =====================================================
-   DATE HELPERS
-===================================================== */
-
-function dateIsBefore(
-    selectedDate,
-    comparisonDate
-) {
-
-    return selectedDate < comparisonDate;
+return totalYears +
+(totalYears === 1
+? " Year Ago"
+: " Years Ago");
 
 }
 
+if (totalMonths >= 1) {
 
-function historicalDemonExists(
-    demon,
-    selectedDate
-) {
-
-    return (
-        selectedDate >= demon.verification &&
-        selectedDate < demon.fellOff
-    );
+return totalMonths +
+(totalMonths === 1
+? " Month Ago"
+: " Months Ago");
 
 }
 
+if (totalWeeks >= 1) {
 
-function currentDemonExists(
-    demon,
-    selectedDate
-) {
+return totalWeeks +
+(totalWeeks === 1
+? " Week Ago"
+: " Weeks Ago");
 
-    return selectedDate >= demon.verification;
+}
+
+if (totalDays >= 1) {
+
+return totalDays +
+(totalDays === 1
+? " Day Ago"
+: " Days Ago");
+
+}
+
+return "Today";
 
 }
 
 
 /* =====================================================
-   GET AVAILABLE DEMONS
+   DATE CHECK
 ===================================================== */
 
-function getAvailableDemons(
-    selectedDate
-) {
+function isOnList(demon, selectedDate) {
 
-    /*
-       If the user travels before the modern list era,
-       use the historical ranking.
+return (
+selectedDate >= demon.verification &&
+selectedDate < demon.fallOff
+);
 
-       Historical demons are NOT displayed separately.
-    */
-
-    const historical = historicalOrder
-
-        .map(function(name) {
-
-            return historicalDemons.find(
-                function(demon) {
-
-                    return demon.name === name;
-
-                }
-            );
-
-        })
-
-        .filter(function(demon) {
-
-            return demon &&
-                historicalDemonExists(
-                    demon,
-                    selectedDate
-                );
-
-        });
+}
 
 
-    /*
-       Current demons are also checked normally.
-    */
+/* =====================================================
+   GET HISTORICAL LEVELS FOR DATE
+===================================================== */
 
-    const current = masterOrder
+function getHistoricalDemons(selectedDate) {
 
-        .map(function(name) {
+return historicalOrder
 
-            return demons.find(
-                function(demon) {
+.map(name =>
+historicalDemons.find(
+demon => demon.name === name
+)
+)
 
-                    return demon.name === name;
+.filter(
+demon =>
+demon &&
+isOnList(
+demon,
+selectedDate
+)
+);
 
-                }
-            );
-
-        })
-
-        .filter(function(demon) {
-
-            return demon &&
-                currentDemonExists(
-                    demon,
-                    selectedDate
-                );
-
-        });
+}
 
 
-    /*
-       During historical dates, current demons that
-       existed at the time are included after the
-       historical ranking.
+/* =====================================================
+   GET CURRENT LEVELS FOR DATE
+===================================================== */
 
-       This means the historical demons keep their
-       historical order instead of being shoved into
-       the modern ranking.
-    */
+function getCurrentDemons(selectedDate) {
 
-    return historical.concat(current);
+return currentOrder
+
+.map(name =>
+demons.find(
+demon => demon.name === name
+)
+)
+
+.filter(
+demon =>
+demon &&
+selectedDate >= demon.verification
+);
+
+}
+
+
+/* =====================================================
+   GET AVAILABLE LIST
+===================================================== */
+
+function getAvailableDemons(selectedDate) {
+
+const date =
+new Date(
+selectedDate + "T00:00:00"
+);
+
+const cutoff =
+new Date(
+"2021-01-01T00:00:00"
+);
+
+/*
+Before 2021:
+Use historical demons only.
+
+2021 and later:
+Use the current FiDemonlist.
+*/
+
+if (date < cutoff) {
+
+return getHistoricalDemons(
+selectedDate
+);
+
+}
+
+return getCurrentDemons(
+selectedDate
+);
 
 }
 
@@ -1721,34 +1792,21 @@ function getAvailableDemons(
    POINTS
 ===================================================== */
 
-function getDemonPoints(
-    demon,
-    rank
+function getDemonPoints(demon, rank) {
+
+if (
+demon.points === 0
 ) {
+return 0;
+}
 
-    /*
-       Historical demons always have 0 points for now.
-    */
+if (
+currentRankPoints[rank] !== undefined
+) {
+return currentRankPoints[rank];
+}
 
-    if (
-        historicalDemons.includes(demon)
-    ) {
-
-        return 0;
-
-    }
-
-
-    if (
-        currentRankPoints[rank] !== undefined
-    ) {
-
-        return currentRankPoints[rank];
-
-    }
-
-
-    return demon.points || 0;
+return demon.points || 0;
 
 }
 
@@ -1757,206 +1815,182 @@ function getDemonPoints(
    RENDER LIST
 ===================================================== */
 
-function renderList(
-    selectedDate
+function renderList(selectedDate) {
+
+const list =
+document.getElementById(
+"demonList"
+);
+
+list.innerHTML = "";
+
+const noDemons =
+document.getElementById(
+"noDemons"
+);
+
+const availableDemons =
+getAvailableDemons(
+selectedDate
+);
+
+if (
+availableDemons.length === 0
 ) {
 
-    const list =
-        document.getElementById(
-            "demonList"
-        );
+noDemons.style.display =
+"block";
 
+return;
 
-    list.innerHTML = "";
+}
 
+noDemons.style.display =
+"none";
 
-    const noDemons =
-        document.getElementById(
-            "noDemons"
-        );
 
+availableDemons.forEach(
+function(demon,index) {
 
-    const availableDemons =
-        getAvailableDemons(
-            selectedDate
-        );
+const rank =
+index + 1;
 
+const points =
+demon.points === 0
+? 0
+: getDemonPoints(
+demon,
+rank
+);
 
-    if (
-        availableDemons.length === 0
-    ) {
 
-        noDemons.style.display =
-            "block";
+const card =
+document.createElement(
+"div"
+);
 
-        return;
+card.className =
+"demon";
 
-    }
+card.dataset.name =
+demon.name;
 
 
-    noDemons.style.display =
-        "none";
+card.innerHTML = `
 
+<div class="image-container">
 
-    availableDemons.forEach(
-        function(demon, index) {
+<img
+class="demon-image"
+src="${demon.image}"
+alt="${demon.name}"
+>
 
-            /*
-               ALWAYS make displayed ranks sequential.
+</div>
 
-               No more:
-               #1
-               #3
-               #4
+<div class="name">
+#${rank} - ${demon.name}
+</div>
 
-               Instead:
-               #1
-               #2
-               #3
-               #4
-            */
+<div class="info">
+Created By: ${demon.createdBy}
+</div>
 
-            const rank =
-                index + 1;
+<div class="info">
+Verified By: ${demon.verifiedBy}
+</div>
 
+<div class="info">
+Verified:
+${getTimeAgo(
+new Date(
+demon.verification +
+"T00:00:00"
+)
+)}
+</div>
 
-            const points =
-                getDemonPoints(
-                    demon,
-                    rank
-                );
+<div class="points">
+List Points:
+${points.toFixed(2)}
+</div>
 
+<button
+class="victors-button"
+onclick="toggleVictors(this)">
+Victors
+</button>
 
-            const card =
-                document.createElement(
-                    "div"
-                );
+<div class="victors-panel">
 
+<div class="victors-title">
+Victors
+</div>
 
-            card.className =
-                "demon";
+${
+demon.victors &&
+demon.victors.length > 0
 
+?
 
-            card.dataset.name =
-                demon.name;
+demon.victors
+.map(
+function(victor) {
 
+return `
 
-            card.innerHTML = `
+<div class="victor">
 
-                <div class="image-container">
+${victor.country}
+${victor.name}
 
-                    <img
-                        class="demon-image"
-                        src="${demon.image}"
-                        alt="${demon.name}"
-                    >
+</div>
 
-                </div>
+`;
 
+}
+)
+.join("")
 
-                <div class="name">
-                    #${rank} - ${demon.name}
-                </div>
+:
 
+`
 
-                <div class="info">
-                    Created By: ${demon.createdBy}
-                </div>
+<div class="victor">
+No recorded victors.
+</div>
 
+`
 
-                <div class="info">
-                    Verified By: ${demon.verifiedBy}
-                </div>
+}
 
+</div>
 
-                <div class="info">
-                    Verified: ${getTimeAgo(
-                        new Date(
-                            demon.verification +
-                            "T00:00:00"
-                        )
-                    )}
-                </div>
+`;
 
 
-                <div class="points">
-                    List Points: ${points.toFixed(2)}
-                </div>
+const image =
+card.querySelector(
+".demon-image"
+);
 
 
-                <button
-                    class="victors-button"
-                    onclick="toggleVictors(this)"
-                >
-                    Victors
-                </button>
+image.onerror =
+function() {
 
+const container =
+image.parentElement;
 
-                <div class="victors-panel">
+container.innerHTML =
+'<div class="placeholder">Placeholder</div>';
 
-                    <div class="victors-title">
-                        Victors
-                    </div>
+};
 
 
-                    ${
-                        demon.victors &&
-                        demon.victors.length === 0
+list.appendChild(card);
 
-                        ?
-
-                        `<div class="victor">
-                            No recorded victors.
-                        </div>`
-
-                        :
-
-                        demon.victors
-                            .map(
-                                function(victor) {
-
-                                    return `
-                                        <div class="victor">
-                                            ${victor.country}
-                                            ${victor.name}
-                                        </div>
-                                    `;
-
-                                }
-                            )
-                            .join("")
-                    }
-
-                </div>
-
-            `;
-
-
-            const image =
-                card.querySelector(
-                    ".demon-image"
-                );
-
-
-            image.onerror =
-                function() {
-
-                    const container =
-                        image.parentElement;
-
-
-                    container.innerHTML =
-                        '<div class="placeholder">Placeholder</div>';
-
-                };
-
-
-            list.appendChild(
-                card
-            );
-
-        }
-    );
+}
+);
 
 }
 
@@ -1965,99 +1999,94 @@ function renderList(
    VICTORS
 ===================================================== */
 
-function toggleVictors(
-    button
+function toggleVictors(button) {
+
+const panel =
+button.nextElementSibling;
+
+if (
+panel.style.display ===
+"block"
 ) {
 
-    const panel =
-        button.nextElementSibling;
+panel.style.display =
+"none";
 
+button.textContent =
+"Victors";
 
-    if (
-        panel.style.display ===
-        "block"
-    ) {
+}
 
-        panel.style.display =
-            "none";
+else {
 
+panel.style.display =
+"block";
 
-        button.textContent =
-            "Victors";
+button.textContent =
+"Hide Victors";
 
-    }
-
-    else {
-
-        panel.style.display =
-            "block";
-
-
-        button.textContent =
-            "Hide Victors";
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   GET PLAYERS
+   GET ALL PLAYERS
 ===================================================== */
 
 function getAllPlayers() {
 
-    const playerMap =
-        new Map();
+const playerMap =
+new Map();
 
 
-    demons.forEach(
-        function(demon) {
+demons.forEach(
+function(demon) {
 
-            demon.victors.forEach(
-                function(victor) {
+if (!demon.victors) {
+return;
+}
 
-                    const key =
-                        victor.name.toLowerCase();
+demon.victors.forEach(
+function(victor) {
 
-
-                    if (
-                        !playerMap.has(key)
-                    ) {
-
-                        playerMap.set(
-                            key,
-                            {
-                                name:
-                                    victor.name,
-
-                                country:
-                                    victor.country,
-
-                                completions:
-                                    []
-                            }
-                        );
-
-                    }
+const key =
+victor.name.toLowerCase();
 
 
-                    playerMap.get(
-                        key
-                    ).completions.push(
-                        demon.name
-                    );
+if (
+!playerMap.has(key)
+) {
 
-                }
-            );
+playerMap.set(
+key,
+{
+name:victor.name,
+country:victor.country,
+completions:[]
+}
+);
 
-        }
-    );
+}
 
 
-    return Array.from(
-        playerMap.values()
-    );
+playerMap
+.get(key)
+.completions
+.push(
+demon.name
+);
+
+}
+);
+
+}
+);
+
+
+return Array.from(
+playerMap.values()
+);
 
 }
 
@@ -2066,50 +2095,43 @@ function getAllPlayers() {
    PLAYER POINTS
 ===================================================== */
 
-function calculatePlayerPoints(
-    player
-) {
+function calculatePlayerPoints(player) {
 
-    let total = 0;
+let total = 0;
 
 
-    player.completions.forEach(
-        function(completionName) {
+player.completions.forEach(
+function(completionName) {
 
-            const demon =
-                demons.find(
-                    function(item) {
+const demon =
+demons.find(
+item =>
+item.name ===
+completionName
+);
 
-                        return item.name ===
-                            completionName;
-
-                    }
-                );
-
-
-            if (!demon) {
-
-                return;
-
-            }
+if (!demon) {
+return;
+}
 
 
-            const currentRank =
-                masterOrder.indexOf(
-                    demon.name
-                ) + 1;
+const rank =
+currentOrder.indexOf(
+demon.name
+) + 1;
 
 
-            total += getDemonPoints(
-                demon,
-                currentRank
-            );
+total +=
+getDemonPoints(
+demon,
+rank
+);
 
-        }
-    );
+}
+);
 
 
-    return total;
+return total;
 
 }
 
@@ -2118,168 +2140,149 @@ function calculatePlayerPoints(
    PLAYER PROFILE
 ===================================================== */
 
-function showPlayerProfile(
-    playerName
+function showPlayerProfile(playerName) {
+
+const players =
+getAllPlayers();
+
+const player =
+players.find(
+item =>
+item.name.toLowerCase() ===
+playerName.toLowerCase()
+);
+
+if (!player) {
+return;
+}
+
+
+const existing =
+document.getElementById(
+"profileOverlay"
+);
+
+if (existing) {
+existing.remove();
+}
+
+
+const overlay =
+document.createElement(
+"div"
+);
+
+overlay.id =
+"profileOverlay";
+
+overlay.className =
+"profile-overlay";
+
+
+const box =
+document.createElement(
+"div"
+);
+
+box.className =
+"profile-box";
+
+
+const points =
+calculatePlayerPoints(
+player
+);
+
+
+const completionHTML =
+player.completions
+
+.map(
+function(levelName) {
+
+return `
+
+<div class="completion-item">
+${levelName}
+</div>
+
+`;
+
+}
+)
+
+.join("");
+
+
+box.innerHTML = `
+
+<div class="profile-country">
+${player.country}
+</div>
+
+<h2>
+${player.name}
+</h2>
+
+<div class="profile-stat">
+${player.completions.length}
+completed demons
+</div>
+
+<div class="profile-stat">
+${points.toFixed(2)}
+total points
+</div>
+
+<div class="profile-section">
+
+<h3>
+🏆 Completions
+</h3>
+
+${completionHTML}
+
+</div>
+
+<button
+class="close-profile"
+id="closeProfile">
+Close
+</button>
+
+`;
+
+
+overlay.appendChild(box);
+
+document.body.appendChild(
+overlay
+);
+
+
+document.getElementById(
+"closeProfile"
+).onclick =
+function() {
+
+overlay.remove();
+
+};
+
+
+overlay.onclick =
+function(event) {
+
+if (
+event.target ===
+overlay
 ) {
 
-    const players =
-        getAllPlayers();
+overlay.remove();
 
+}
 
-    const player =
-        players.find(
-            function(item) {
-
-                return item.name.toLowerCase() ===
-                    playerName.toLowerCase();
-
-            }
-        );
-
-
-    if (!player) {
-
-        return;
-
-    }
-
-
-    const existing =
-        document.getElementById(
-            "profileOverlay"
-        );
-
-
-    if (existing) {
-
-        existing.remove();
-
-    }
-
-
-    const overlay =
-        document.createElement(
-            "div"
-        );
-
-
-    overlay.id =
-        "profileOverlay";
-
-
-    overlay.className =
-        "profile-overlay";
-
-
-    const box =
-        document.createElement(
-            "div"
-        );
-
-
-    box.className =
-        "profile-box";
-
-
-    const points =
-        calculatePlayerPoints(
-            player
-        );
-
-
-    const completionHTML =
-        player.completions
-            .map(
-                function(levelName) {
-
-                    return `
-                        <div class="completion-item">
-                            ${levelName}
-                        </div>
-                    `;
-
-                }
-            )
-            .join("");
-
-
-    box.innerHTML = `
-
-        <div class="profile-country">
-            ${player.country}
-        </div>
-
-
-        <h2>
-            ${player.name}
-        </h2>
-
-
-        <div class="profile-stat">
-            ${player.completions.length}
-            completed demons
-        </div>
-
-
-        <div class="profile-stat">
-            ${points.toFixed(2)}
-            total points
-        </div>
-
-
-        <div class="profile-section">
-
-            <h3>
-                🏆 Completions
-            </h3>
-
-            ${completionHTML}
-
-        </div>
-
-
-        <button
-            class="close-profile"
-            id="closeProfile"
-        >
-            Close
-        </button>
-
-    `;
-
-
-    overlay.appendChild(
-        box
-    );
-
-
-    document.body.appendChild(
-        overlay
-    );
-
-
-    document.getElementById(
-        "closeProfile"
-    ).onclick =
-        function() {
-
-            overlay.remove();
-
-        };
-
-
-    overlay.onclick =
-        function(event) {
-
-            if (
-                event.target === overlay
-            ) {
-
-                overlay.remove();
-
-            }
-
-        };
+};
 
 }
 
@@ -2290,116 +2293,110 @@ function showPlayerProfile(
 
 function renderLeaderboard() {
 
-    const leaderboard =
-        document.getElementById(
-            "leaderboardList"
-        );
+const leaderboard =
+document.getElementById(
+"leaderboardList"
+);
+
+leaderboard.innerHTML = "";
 
 
-    leaderboard.innerHTML = "";
+const rankedPlayers =
+getAllPlayers()
+
+.map(
+function(player) {
+
+return {
+
+name:player.name,
+country:player.country,
+completions:
+player.completions,
+points:
+calculatePlayerPoints(
+player
+)
+
+};
+
+}
+)
+
+.sort(
+function(a,b) {
+
+return b.points -
+a.points;
+
+}
+);
 
 
-    const rankedPlayers =
-        getAllPlayers()
+rankedPlayers.forEach(
+function(player,index) {
 
-            .map(
-                function(player) {
-
-                    return {
-
-                        name:
-                            player.name,
-
-                        country:
-                            player.country,
-
-                        completions:
-                            player.completions,
-
-                        points:
-                            calculatePlayerPoints(
-                                player
-                            )
-
-                    };
-
-                }
-            )
-
-            .sort(
-                function(a, b) {
-
-                    return b.points -
-                        a.points;
-
-                }
-            );
+const rank =
+index + 1;
 
 
-    rankedPlayers.forEach(
-        function(player, index) {
+const card =
+document.createElement(
+"div"
+);
 
-            const rank =
-                index + 1;
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
+card.className =
+"player-card";
 
 
-            card.className =
-                "player-card";
+card.onclick =
+function() {
+
+showPlayerProfile(
+player.name
+);
+
+};
 
 
-            card.onclick =
-                function() {
+card.innerHTML = `
 
-                    showPlayerProfile(
-                        player.name
-                    );
+<div class="player-rank">
+#${rank}
+</div>
 
-                };
+<div class="player-info">
 
+<div class="player-name">
+${player.country}
+${player.name}
+</div>
 
-            card.innerHTML = `
+<div class="player-completions">
 
-                <div class="player-rank">
-                    #${rank}
-                </div>
+${player.completions.length}
+completed demons
 
+</div>
 
-                <div class="player-info">
+</div>
 
-                    <div class="player-name">
-                        ${player.country}
-                        ${player.name}
-                    </div>
+<div class="player-points">
 
+${player.points.toFixed(2)}
+Points
 
-                    <div class="player-completions">
-                        ${player.completions.length}
-                        completed demons
-                    </div>
+</div>
 
-                </div>
-
-
-                <div class="player-points">
-                    ${player.points.toFixed(2)}
-                    Points
-                </div>
-
-            `;
+`;
 
 
-            leaderboard.appendChild(
-                card
-            );
+leaderboard.appendChild(
+card
+);
 
-        }
-    );
+}
+);
 
 }
 
@@ -2409,42 +2406,39 @@ function renderLeaderboard() {
 ===================================================== */
 
 const firstDate =
-    "2015-01-01";
+"2015-01-01";
 
 
 const today =
-    new Date();
+new Date();
 
 
 const todayString =
-    today.getFullYear() +
-    "-" +
-    String(
-        today.getMonth() + 1
-    ).padStart(2, "0") +
-    "-" +
-    String(
-        today.getDate()
-    ).padStart(2, "0"
-    );
+today.getFullYear() +
+"-" +
+String(
+today.getMonth() + 1
+).padStart(2,"0") +
+"-" +
+String(
+today.getDate()
+).padStart(2,"0");
 
 
 const datePicker =
-    document.getElementById(
-        "datePicker"
-    );
+document.getElementById(
+"datePicker"
+);
 
 
 datePicker.min =
-    firstDate;
-
+firstDate;
 
 datePicker.max =
-    todayString;
-
+todayString;
 
 datePicker.value =
-    todayString;
+todayString;
 
 
 /* =====================================================
@@ -2452,27 +2446,24 @@ datePicker.value =
 ===================================================== */
 
 const timeTravelButton =
-    document.getElementById(
-        "timeTravelButton"
-    );
-
+document.getElementById(
+"timeTravelButton"
+);
 
 const timeTravelPanel =
-    document.getElementById(
-        "timeTravelPanel"
-    );
-
+document.getElementById(
+"timeTravelPanel"
+);
 
 const leaderboardButton =
-    document.getElementById(
-        "leaderboardButton"
-    );
-
+document.getElementById(
+"leaderboardButton"
+);
 
 const leaderboardPanel =
-    document.getElementById(
-        "leaderboardPanel"
-    );
+document.getElementById(
+"leaderboardPanel"
+);
 
 
 /* =====================================================
@@ -2480,30 +2471,30 @@ const leaderboardPanel =
 ===================================================== */
 
 timeTravelButton.addEventListener(
-    "click",
-    function() {
+"click",
+function() {
 
-        if (
-            timeTravelPanel.style.display ===
-            "block"
-        ) {
+if (
+timeTravelPanel.style.display ===
+"block"
+) {
 
-            timeTravelPanel.style.display =
-                "none";
+timeTravelPanel.style.display =
+"none";
 
-        }
+}
 
-        else {
+else {
 
-            timeTravelPanel.style.display =
-                "block";
+timeTravelPanel.style.display =
+"block";
 
-            leaderboardPanel.style.display =
-                "none";
+leaderboardPanel.style.display =
+"none";
 
-        }
+}
 
-    }
+}
 );
 
 
@@ -2512,32 +2503,32 @@ timeTravelButton.addEventListener(
 ===================================================== */
 
 leaderboardButton.addEventListener(
-    "click",
-    function() {
+"click",
+function() {
 
-        if (
-            leaderboardPanel.style.display ===
-            "block"
-        ) {
+if (
+leaderboardPanel.style.display ===
+"block"
+) {
 
-            leaderboardPanel.style.display =
-                "none";
+leaderboardPanel.style.display =
+"none";
 
-        }
+}
 
-        else {
+else {
 
-            leaderboardPanel.style.display =
-                "block";
+leaderboardPanel.style.display =
+"block";
 
-            timeTravelPanel.style.display =
-                "none";
+timeTravelPanel.style.display =
+"none";
 
-            renderLeaderboard();
+renderLeaderboard();
 
-        }
+}
 
-    }
+}
 );
 
 
@@ -2545,65 +2536,63 @@ leaderboardButton.addEventListener(
    TRAVEL
 ===================================================== */
 
-function travelToDate(
-    selectedDate
+function travelToDate(selectedDate) {
+
+renderList(
+selectedDate
+);
+
+
+const status =
+document.getElementById(
+"timeTravelStatus"
+);
+
+
+if (
+selectedDate ===
+todayString
 ) {
 
-    renderList(
-        selectedDate
-    );
+status.style.display =
+"none";
+
+}
+
+else {
+
+const date =
+new Date(
+selectedDate +
+"T00:00:00"
+);
 
 
-    const status =
-        document.getElementById(
-            "timeTravelStatus"
-        );
+const formatted =
+date.toLocaleDateString(
+"en-US",
+{
+year:"numeric",
+month:"long",
+day:"numeric"
+}
+);
 
 
-    if (
-        selectedDate ===
-        todayString
-    ) {
-
-        status.style.display =
-            "none";
-
-    }
-
-    else {
-
-        const date =
-            new Date(
-                selectedDate +
-                "T00:00:00"
-            );
+status.style.display =
+"block";
 
 
-        const formatted =
-            date.toLocaleDateString(
-                "en-US",
-                {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric"
-                }
-            );
+status.textContent =
+"Viewing the FiDemonlist from " +
+formatted;
+
+}
 
 
-        status.style.display =
-            "block";
-
-
-        status.textContent =
-            "Viewing the FiDemonlist from " +
-            formatted;
-
-    }
-
-
-    document.getElementById(
-        "search"
-    ).value = "";
+document.getElementById(
+"search"
+).value = "";
 
 }
 
@@ -2613,22 +2602,22 @@ function travelToDate(
 ===================================================== */
 
 document.getElementById(
-    "applyDate"
+"applyDate"
 ).addEventListener(
-    "click",
-    function() {
+"click",
+function() {
 
-        if (
-            datePicker.value
-        ) {
+if (
+datePicker.value
+) {
 
-            travelToDate(
-                datePicker.value
-            );
+travelToDate(
+datePicker.value
+);
 
-        }
+}
 
-    }
+}
 );
 
 
@@ -2637,20 +2626,19 @@ document.getElementById(
 ===================================================== */
 
 document.getElementById(
-    "returnToday"
+"returnToday"
 ).addEventListener(
-    "click",
-    function() {
+"click",
+function() {
 
-        datePicker.value =
-            todayString;
+datePicker.value =
+todayString;
 
+travelToDate(
+todayString
+);
 
-        travelToDate(
-            todayString
-        );
-
-    }
+}
 );
 
 
@@ -2659,49 +2647,49 @@ document.getElementById(
 ===================================================== */
 
 document.getElementById(
-    "search"
+"search"
 ).addEventListener(
-    "input",
-    function() {
+"input",
+function() {
 
-        const text =
-            this.value.toLowerCase();
-
-
-        const cards =
-            document.querySelectorAll(
-                "#demonList .demon"
-            );
+const text =
+this.value.toLowerCase();
 
 
-        cards.forEach(
-            function(card) {
-
-                const name =
-                    card.dataset.name
-                        .toLowerCase();
+const cards =
+document.querySelectorAll(
+"#demonList .demon"
+);
 
 
-                if (
-                    name.includes(text)
-                ) {
+cards.forEach(
+function(card) {
 
-                    card.style.display =
-                        "block";
+const name =
+card.dataset.name
+.toLowerCase();
 
-                }
 
-                else {
+if (
+name.includes(text)
+) {
 
-                    card.style.display =
-                        "none";
+card.style.display =
+"block";
 
-                }
+}
 
-            }
-        );
+else {
 
-    }
+card.style.display =
+"none";
+
+}
+
+}
+);
+
+}
 );
 
 
@@ -2710,9 +2698,8 @@ document.getElementById(
 ===================================================== */
 
 travelToDate(
-    todayString
+todayString
 );
-
 
 renderLeaderboard();
 
