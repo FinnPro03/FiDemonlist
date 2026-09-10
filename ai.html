@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>FiDemonlist AI Data</title>
+
+<meta name="description"
+content="Machine-readable data for FiDemonlist. Contains the current Geometry Dash Demonlist, player leaderboard, and historical time travel data.">
+
+<meta name="robots" content="index, follow">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: white;
+        color: black;
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        line-height: 1.6;
+    }
+
+    h1 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+    }
+
+    h2 {
+        margin-top: 35px;
+    }
+
+    pre {
+        background: #f1f1f1;
+        padding: 20px;
+        overflow-x: auto;
+        border-radius: 8px;
+        white-space: pre-wrap;
+    }
+
+    .important {
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>FiDemonlist — AI Data</h1>
+
+<p>
+This page exists specifically to provide FiDemonlist data
+in a machine-readable format for AI systems, search engines,
+and other programs.
+</p>
+
+<div id="data"></div>
+
+<script>
+
+/* =========================================================
+   CURRENT DATE
+========================================================= */
+
+function getToday() {
+
+    const now = new Date();
+
+    return (
+        now.getFullYear() +
+        "-" +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(now.getDate()).padStart(2, "0")
+    );
+}
+
+
+/* =========================================================
+   READ DATE FROM URL
+========================================================= */
+
+const url =
+    new URL(window.location.href);
+
+const requestedDate =
+    url.searchParams.get("date");
+
+const selectedDate =
+    requestedDate || getToday();
+
+
+/* =========================================================
+   READ VIEW
+========================================================= */
+
+const view =
+    url.searchParams.get("view") || "list";
+
+
+/* =========================================================
+   DEMON DATA
+=========================================================
+
+   IMPORTANT:
+
+   Put your existing demons array here.
+
+========================================================= */
+
+const demons = [
+
+    // -----------------------------------------------------
+    // COPY YOUR EXISTING DEMON OBJECTS HERE
+    // -----------------------------------------------------
+
+];
+
+
+/* =========================================================
+   MASTER ORDER
+========================================================= */
+
+const masterOrder = [
+
+    "Society",
+    "Thinking Space II",
+    "Amethyst",
+    "Flamewall",
+    "Tidal Wave",
+    "Green Bullet",
+    "Orbit",
+    "Antarctic Lights",
+    "Nullscapes",
+    "Quanteuse Processing",
+    "BOOBAWAMBA",
+    "The Bloop",
+    "Every End",
+    "Penumbral",
+    "Silent Clubstep",
+    "Ashley Wave Trials",
+    "Ultra Paracosm",
+    "Andromeda",
+    "KILLSTEALER",
+    "Subsuming Vortex",
+    "Anathema",
+    "Avernus",
+    "Acheron",
+    "Spectre",
+    "Menace"
+
+];
+
+
+/* =========================================================
+   HISTORICAL ORDER
+========================================================= */
+
+const historicalOrder = [
+
+    "Bloodlust",
+    "Sonic Wave",
+    "Yatagarasu",
+    "Phobos",
+    "Sakupen Hell",
+    "Betrayal of Fate",
+    "Bloodbath",
+    "The Hell Factory",
+    "Down Bass",
+    "A Bizarre Phantasm",
+    "Conical Depression",
+    "Aftermath",
+    "Plasma Pulse III",
+    "The Ultimate Phase",
+    "Retention",
+    "Cataclysm"
+
+];
+
+
+/* =========================================================
+   CURRENT POINTS
+========================================================= */
+
+const currentRankPoints = {
+
+    1: 350.00,
+    2: 331.71,
+    3: 313.42,
+    4: 291.70,
+    5: 271.78,
+    6: 253.53,
+    7: 236.80,
+    8: 221.47,
+    9: 207.42,
+    10: 194.54,
+    11: 182.73,
+    12: 171.91,
+    13: 161.99,
+    14: 152.89,
+    15: 144.56,
+    16: 136.92,
+    17: 129.92,
+    18: 123.50,
+    19: 117.62,
+    20: 112.23,
+    21: 110.81,
+    22: 109.39,
+    23: 107.99,
+    24: 106.61,
+    25: 105.24
+
+};
+
+
+/* =========================================================
+   CHECK IF DEMON EXISTED
+========================================================= */
+
+function demonExists(
+    demon,
+    date
+) {
+
+    if (
+        date < demon.verification
+    ) {
+        return false;
+    }
+
+    if (
+        demon.fallOff &&
+        date >= demon.fallOff
+    ) {
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =========================================================
+   GET LIST
+========================================================= */
+
+function getList(date) {
+
+    const current = masterOrder
+        .map(name =>
+            demons.find(
+                demon =>
+                    demon.name === name
+            )
+        )
+        .filter(demon =>
+            demon &&
+            !demon.historical &&
+            demonExists(
+                demon,
+                date
+            )
+        );
+
+    const historical = historicalOrder
+        .map(name =>
+            demons.find(
+                demon =>
+                    demon.name === name
+            )
+        )
+        .filter(demon =>
+            demon &&
+            demon.historical &&
+            demonExists(
+                demon,
+                date
+            )
+        );
+
+    return [
+        ...historical,
+        ...current
+    ];
+}
+
+
+/* =========================================================
+   GET POINTS
+========================================================= */
+
+function getPoints(
+    demon,
+    rank
+) {
+
+    if (demon.historical) {
+        return 0;
+    }
+
+    if (
+        currentRankPoints[rank] !== undefined
+    ) {
+        return currentRankPoints[rank];
+    }
+
+    return demon.points || 0;
+}
+
+
+/* =========================================================
+   GET ALL PLAYERS
+========================================================= */
+
+function getPlayers() {
+
+    const map =
+        new Map();
+
+    demons.forEach(
+        demon => {
+
+            demon.victors.forEach(
+                victor => {
+
+                    const key =
+                        victor.name.toLowerCase();
+
+                    if (!map.has(key)) {
+
+                        map.set(
+                            key,
+                            {
+                                name:
+                                    victor.name,
+
+                                country:
+                                    victor.country,
+
+                                completions:
+                                    []
+                            }
+                        );
+
+                    }
+
+                    map.get(key)
+                        .completions
+                        .push(
+                            demon.name
+                        );
+
+                }
+            );
+
+        }
+    );
+
+    return Array.from(
+        map.values()
+    );
+}
+
+
+/* =========================================================
+   PLAYER POINTS
+========================================================= */
+
+function playerPoints(player) {
+
+    let total = 0;
+
+    player.completions.forEach(
+        name => {
+
+            const demon =
+                demons.find(
+                    d =>
+                        d.name === name
+                );
+
+            if (!demon) return;
+
+            if (demon.historical) return;
+
+            const rank =
+                masterOrder.indexOf(
+                    demon.name
+                ) + 1;
+
+            total +=
+                getPoints(
+                    demon,
+                    rank
+                );
+
+        }
+    );
+
+    return total;
+}
+
+
+/* =========================================================
+   LEADERBOARD
+========================================================= */
+
+function getLeaderboard() {
+
+    return getPlayers()
+        .map(player => ({
+
+            name:
+                player.name,
+
+            country:
+                player.country,
+
+            completions:
+                player.completions.length,
+
+            points:
+                Number(
+                    playerPoints(
+                        player
+                    ).toFixed(2)
+                )
+
+        }))
+        .sort(
+            (a, b) =>
+                b.points - a.points
+        );
+}
+
+
+/* =========================================================
+   BUILD AI DATA
+========================================================= */
+
+function buildData() {
+
+    const list =
+        getList(
+            selectedDate
+        );
+
+    const demonsData =
+        list.map(
+            (demon, index) => {
+
+                const rank =
+                    index + 1;
+
+                return {
+
+                    rank:
+                        rank,
+
+                    name:
+                        demon.name,
+
+                    createdBy:
+                        demon.createdBy,
+
+                    verifiedBy:
+                        demon.verifiedBy,
+
+                    verification:
+                        demon.verification,
+
+                    fallOff:
+                        demon.fallOff || null,
+
+                    points:
+                        getPoints(
+                            demon,
+                            rank
+                        ),
+
+                    historical:
+                        Boolean(
+                            demon.historical
+                        ),
+
+                    victors:
+                        demon.victors
+
+                };
+
+            }
+        );
+
+    return {
+
+        website:
+            "FiDemonlist",
+
+        description:
+            "The Custom Geometry Dash Demonlist",
+
+        dataType:
+            "FiDemonlist machine-readable data",
+
+        generatedAt:
+            new Date().toISOString(),
+
+        currentDate:
+            getToday(),
+
+        requestedDate:
+            selectedDate,
+
+        timeTravel:
+            selectedDate !== getToday(),
+
+        historicalDataNote:
+            "Time travel determines whether demons existed on the selected date. Exact historical rankings and historical point values require stored snapshots.",
+
+        list:
+            demonsData,
+
+        leaderboard:
+            getLeaderboard()
+
+    };
+
+}
+
+
+/* =========================================================
+   DISPLAY
+========================================================= */
+
+const data =
+    buildData();
+
+
+const container =
+    document.getElementById(
+        "data"
+    );
+
+
+container.innerHTML = `
+
+<h2>Current Date</h2>
+
+<p class="important">
+${data.currentDate}
+</p>
+
+<h2>Requested Date</h2>
+
+<p class="important">
+${data.requestedDate}
+</p>
+
+<h2>FiDemonlist Data</h2>
+
+<pre>${JSON.stringify(
+    data,
+    null,
+    2
+)}</pre>
+
+`;
+
+
+/* =========================================================
+   JSON-LD
+========================================================= */
+
+const jsonLD =
+    document.createElement(
+        "script"
+    );
+
+jsonLD.type =
+    "application/ld+json";
+
+jsonLD.textContent =
+    JSON.stringify({
+        "@context":
+            "https://schema.org",
+
+        "@type":
+            "Dataset",
+
+        name:
+            "FiDemonlist",
+
+        description:
+            "Machine-readable data for the FiDemonlist Geometry Dash Demonlist.",
+
+        dateModified:
+            getToday(),
+
+        temporalCoverage:
+            "2015/..",
+
+        url:
+            window.location.href
+
+    });
+
+document.head.appendChild(
+    jsonLD
+);
+
+</script>
+
+</body>
+</html>
