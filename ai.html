@@ -1,2553 +1,1408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>FiDemonlist AI Data</title>
+    <title>FiDemonlist AI</title>
 
-<meta
-    name="description"
-    content="Machine-readable FiDemonlist data. Contains the current Top 25 Geometry Dash Demonlist, demon information, player completions, and historical data."
->
+    <meta
+        name="description"
+        content="Machine-readable FiDemonlist data including the current Geometry Dash Demonlist and Legacy Demons."
+    >
 
-<meta name="robots" content="index, follow">
+    <meta
+        name="robots"
+        content="index, follow"
+    >
 
-<link
-    rel="canonical"
-    href="https://finnpro03.github.io/FiDemonlist/ai.html"
->
+    <style>
 
-<script type="application/ld+json" id="structuredData">
-{
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    "name": "FiDemonlist",
-    "description": "Machine-readable data for FiDemonlist, the Custom Geometry Dash Demonlist.",
-    "isAccessibleForFree": true
-}
-</script>
-
-<style>
-    body {
-        margin: 0;
-        padding: 25px;
-        background: #111;
-        color: #eee;
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-    }
-
-    main {
-        max-width: 1100px;
-        margin: auto;
-    }
-
-    h1 {
-        font-size: 32px;
-    }
-
-    h2 {
-        margin-top: 35px;
-    }
-
-    .important {
-        background: #1c1c1c;
-        border: 1px solid #444;
-        border-radius: 10px;
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    .warning {
-        background: #241d12;
-        border: 1px solid #66502b;
-        border-radius: 10px;
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    pre {
-        white-space: pre-wrap;
-        word-break: break-word;
-        background: #181818;
-        border: 1px solid #333;
-        border-radius: 10px;
-        padding: 15px;
-        overflow-x: auto;
-    }
-
-    code {
-        font-family: monospace;
-    }
-
-    a {
-        color: #aaa;
-    }
-</style>
-</head>
-
-<body>
-
-<main>
-
-<h1>FiDemonlist AI Data</h1>
-
-<div class="important">
-
-<strong>This page is specifically designed for AI systems, search engines, bots, and machine-readable access.</strong>
-
-<br><br>
-
-FiDemonlist is the Custom Geometry Dash Demonlist.
-
-<br><br>
-
-<strong>Current date:</strong>
-<span id="currentDate">Loading...</span>
-
-<br>
-
-<strong>Data generated:</strong>
-<span id="generatedAt">Loading...</span>
-
-<br>
-
-<strong>Current Top 25:</strong>
-Yes
-
-<br>
-
-<strong>Current list size:</strong>
-25
-
-</div>
-
-
-<div class="important">
-
-<strong>IMPORTANT FOR AI READERS</strong>
-
-<br><br>
-
-The current FiDemonlist Top 25 is explicitly listed below.
-
-<br><br>
-
-Rank 1: Society<br>
-Rank 2: Thinking Space II<br>
-Rank 3: Amethyst<br>
-Rank 4: Flamewall<br>
-Rank 5: Tidal Wave<br>
-Rank 6: Green Bullet<br>
-Rank 7: Orbit<br>
-Rank 8: Antarctic Lights<br>
-Rank 9: Nullscapes<br>
-Rank 10: Quanteuse Processing<br>
-Rank 11: BOOBAWAMBA<br>
-Rank 12: The Bloop<br>
-Rank 13: Every End<br>
-Rank 14: Penumbral<br>
-Rank 15: Silent Clubstep<br>
-Rank 16: Ashley Wave Trials<br>
-Rank 17: Ultra Paracosm<br>
-Rank 18: Andromeda<br>
-Rank 19: KILLSTEALER<br>
-Rank 20: Subsuming Vortex<br>
-Rank 21: Anathema<br>
-Rank 22: Avernus<br>
-Rank 23: Acheron<br>
-Rank 24: Spectre<br>
-Rank 25: Menace
-
-</div>
-
-
-<div class="warning">
-
-<strong>Historical time travel:</strong>
-
-<br><br>
-
-FiDemonlist can provide exact historical rankings only for dates for which a historical snapshot has been recorded.
-
-If no snapshot exists for a requested date, this page will NOT claim that the current ranking is the exact historical ranking.
-
-The verification and fall-off dates can still be used to determine whether a demon existed on a requested date.
-
-</div>
-
-
-<h2>Machine-readable data</h2>
-
-<pre id="output">Loading FiDemonlist data...</pre>
-
-
-<h2>Current Top 25 — Static HTML Data</h2>
-
-<pre id="staticTop25">
-1. Society — 350.00 points
-2. Thinking Space II — 331.71 points
-3. Amethyst — 313.42 points
-4. Flamewall — 291.70 points
-5. Tidal Wave — 271.78 points
-6. Green Bullet — 253.53 points
-7. Orbit — 236.80 points
-8. Antarctic Lights — 221.47 points
-9. Nullscapes — 207.42 points
-10. Quanteuse Processing — 194.54 points
-11. BOOBAWAMBA — 182.73 points
-12. The Bloop — 171.91 points
-13. Every End — 161.99 points
-14. Penumbral — 152.89 points
-15. Silent Clubstep — 144.56 points
-16. Ashley Wave Trials — 136.92 points
-17. Ultra Paracosm — 129.92 points
-18. Andromeda — 123.50 points
-19. KILLSTEALER — 117.62 points
-20. Subsuming Vortex — 112.23 points
-21. Anathema — 110.81 points
-22. Avernus — 109.39 points
-23. Acheron — 107.99 points
-24. Spectre — 106.61 points
-25. Menace — 105.24 points
-</pre>
-
-
-<script>
-"use strict";
-
-/*
-===========================================================
-FiDemonlist AI DATA
-===========================================================
-
-This file is separate from the normal FiDemonlist page.
-
-PURPOSE:
-- Make FiDemonlist easier for AI systems to read.
-- Make the current Top 25 extremely explicit.
-- Provide structured JSON.
-- Support date queries.
-- Support demon queries.
-- Support player leaderboard queries.
-- Support historical snapshots when snapshots exist.
-
-URL EXAMPLES:
-
-Current list:
-ai.html
-
-Top 25:
-ai.html?top=25
-
-Leaderboard:
-ai.html?view=leaderboard
-
-Specific demon:
-ai.html?demon=Society
-
-Time travel:
-ai.html?date=2026-06-20
-
-Time travel + demon:
-ai.html?date=2026-06-20&demon=Society
-
-Time travel + leaderboard:
-ai.html?date=2026-06-20&view=leaderboard
-
-===========================================================
-*/
-
-
-/*
-===========================================================
-CURRENT TOP 25
-===========================================================
-*/
-
-const masterOrder = [
-    "Society",
-    "Thinking Space II",
-    "Amethyst",
-    "Flamewall",
-    "Tidal Wave",
-    "Green Bullet",
-    "Orbit",
-    "Antarctic Lights",
-    "Nullscapes",
-    "Quanteuse Processing",
-    "BOOBAWAMBA",
-    "The Bloop",
-    "Every End",
-    "Penumbral",
-    "Silent Clubstep",
-    "Ashley Wave Trials",
-    "Ultra Paracosm",
-    "Andromeda",
-    "KILLSTEALER",
-    "Subsuming Vortex",
-    "Anathema",
-    "Avernus",
-    "Acheron",
-    "Spectre",
-    "Menace"
-];
-
-
-const currentRankPoints = {
-    "Society": 350.00,
-    "Thinking Space II": 331.71,
-    "Amethyst": 313.42,
-    "Flamewall": 291.70,
-    "Tidal Wave": 271.78,
-    "Green Bullet": 253.53,
-    "Orbit": 236.80,
-    "Antarctic Lights": 221.47,
-    "Nullscapes": 207.42,
-    "Quanteuse Processing": 194.54,
-    "BOOBAWAMBA": 182.73,
-    "The Bloop": 171.91,
-    "Every End": 161.99,
-    "Penumbral": 152.89,
-    "Silent Clubstep": 144.56,
-    "Ashley Wave Trials": 136.92,
-    "Ultra Paracosm": 129.92,
-    "Andromeda": 123.50,
-    "KILLSTEALER": 117.62,
-    "Subsuming Vortex": 112.23,
-    "Anathema": 110.81,
-    "Avernus": 109.39,
-    "Acheron": 107.99,
-    "Spectre": 106.61,
-    "Menace": 105.24
-};
-
-
-/*
-===========================================================
-DEMON DATABASE
-===========================================================
-*/
-
-const demons = [
-
-    {
-        name: "Society",
-        createdBy: "Neomarbilan",
-        verifiedBy: "Wpopoff",
-        verification: "2026-06-20",
-        points: 350.00,
-        victors: [
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "Thinking Space II",
-        createdBy: "CairoX",
-        verifiedBy: "Zoink",
-        verification: "2025-05-25",
-        points: 331.71,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Trick", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "Amethyst",
-        createdBy: "iMist",
-        verifiedBy: "Wpopoff",
-        verification: "2025-05-25",
-        points: 313.42,
-        victors: [
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "Flamewall",
-        createdBy: "Narwall",
-        verifiedBy: "Cuatrocientos",
-        verification: "2025-09-21",
-        points: 291.70,
-        victors: [
-            { name: "Cuatrocientos", country: "🇪🇸" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "zLevii", country: "🇳🇿" }
-        ]
-    },
-
-    {
-        name: "Tidal Wave",
-        createdBy: "OniLink",
-        verifiedBy: "Zoink",
-        verification: "2023-09-09",
-        points: 271.78,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Taiago", country: "🇵🇹" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "레전드아잉몰라요", country: "🇰🇷" }
-        ]
-    },
-
-    {
-        name: "Green Bullet",
-        createdBy: "MinaY",
-        verifiedBy: "Nickname09",
-        verification: "2026-06-16",
-        points: 253.53,
-        victors: [
-            { name: "Nickname09", country: "🇷🇺" }
-        ]
-    },
-
-    {
-        name: "Orbit",
-        createdBy: "MindCap",
-        verifiedBy: "Zoink",
-        verification: "2026-02-10",
-        points: 236.80,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Thelifinof", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "Antarctic Lights",
-        createdBy: "declanlc",
-        verifiedBy: "Axinity",
-        verification: "2026-07-16",
-        points: 221.47,
-        victors: [
-            { name: "Axinity", country: "🇩🇰" },
-            { name: "weyolll3", country: "🇪🇸" }
-        ]
-    },
-
-    {
-        name: "Nullscapes",
-        createdBy: "Kiba",
-        verifiedBy: "Zoink",
-        verification: "2024-09-04",
-        points: 207.42,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Spookkd", country: "🇺🇸" },
-            { name: "whfyre", country: "🇺🇦" },
-            { name: "Hover", country: "🇦🇹" },
-            { name: "Theitha", country: "🇵🇦" },
-            { name: "Cryostazz", country: "🇫🇷" },
-            { name: "Benbotwyd", country: "🇺🇸" },
-            { name: "SpaceRS", country: "🇷🇸" }
-        ]
-    },
-
-    {
-        name: "Quanteuse Processing",
-        createdBy: "Renn241 and BlankB",
-        verifiedBy: "Zoink",
-        verification: "2024-12-31",
-        points: 194.54,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Seregiusz", country: "🇵🇱" },
-            { name: "Sharkyga", country: "🇦🇺" },
-            { name: "Karkito", country: "🇰🇷" }
-        ]
-    },
-
-    {
-        name: "BOOBAWAMBA",
-        createdBy: "Akunakunn",
-        verifiedBy: "Eastshark",
-        verification: "2024-10-05",
-        points: 182.73,
-        victors: [
-            { name: "Eastshark", country: "🇪🇸" },
-            { name: "Agonom", country: "🇰🇷" },
-            { name: "Cbrem", country: "🇬🇧" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "The Bloop",
-        createdBy: "murkkat",
-        verifiedBy: "Zoink",
-        verification: "2026-03-15",
-        points: 171.91,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Nickname09", country: "🇷🇺" }
-        ]
-    },
-
-    {
-        name: "Every End",
-        createdBy: "MindCap",
-        verifiedBy: "Hqmy",
-        verification: "2025-03-16",
-        points: 161.99,
-        victors: [
-            { name: "Hqmy", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Garbag", country: "🇷🇺" },
-            { name: "Stefan Boss", country: "🇷🇴" },
-            { name: "N3bulA", country: "🇬🇧" },
-            { name: "PlusrMinus", country: "🇺🇸" },
-            { name: "TFIBB", country: "🇺🇸" },
-            { name: "Lanx", country: "🇵🇱" },
-            { name: "Samot", country: "🇦🇷" },
-            { name: "Bims", country: "🇩🇪" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Seturan", country: "🇰🇷" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Forewa", country: "🇷🇺" },
-            { name: "Brumik", country: "🇨🇿" },
-            { name: "Hamsoo", country: "🇰🇷" },
-            { name: "hstorm", country: "🇺🇸" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "Neuba", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "Penumbral",
-        createdBy: "nxhtrise",
-        verifiedBy: "w3rty",
-        verification: "2026-03-05",
-        points: 152.89,
-        victors: [
-            { name: "w3rty", country: "🇷🇺" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Sharkified", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "Silent Clubstep",
-        createdBy: "Sailent",
-        verifiedBy: "paqoe",
-        verification: "2022-07-12",
-        points: 144.56,
-        victors: [
-            { name: "paqoe", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Doggie", country: "🇺🇸" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "Seturan", country: "🇰🇷" },
-            { name: "zVision", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Adri420", country: "🇪🇸" },
-            { name: "Litoks", country: "🇫🇷" },
-            { name: "Aless50", country: "🇻🇪" },
-            { name: "freksolereal", country: "🇨🇭" },
-            { name: "Diamond", country: "🇦🇱" },
-            { name: "Albert", country: "🇺🇸" },
-            { name: "MeQ8cNv43s6A", country: "🇯🇵" },
-            { name: "niwox", country: "🇫🇷" },
-            { name: "Triqz", country: "🇺🇸" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Juls", country: "🇨🇦" },
-            { name: "Mixasuspa", country: "🇷🇸" },
-            { name: "XBelugaX", country: "🇪🇸" },
-            { name: "Luciid", country: "🇺🇸" },
-            { name: "UNCLEBOGD4N", country: "🇷🇺" },
-            { name: "[미소노 미카] 구아이", country: "🇰🇷" },
-            { name: "whfyre", country: "🇺🇦" },
-            { name: "NathanPatty", country: "🇺🇸" },
-            { name: "Hover", country: "🇦🇹" },
-            { name: "turtle", country: "🇨🇦" },
-            { name: "thiagar", country: "🇦🇷" },
-            { name: "songfilehub", country: "🇺🇸" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Horuszed", country: "🇨🇱" },
-            { name: "Zephronox", country: "🇨🇦" },
-            { name: "Flashl3ang", country: "🇰🇷" },
-            { name: "ChopBlox", country: "🇩🇪" },
-            { name: "eksdulgation", country: "🇷🇺" },
-            { name: "agatha", country: "🇭🇷" },
-            { name: "abb2k", country: "🇮🇱" },
-            { name: "cc478", country: "🇺🇸" },
-            { name: "HumbleGoat216", country: "🇺🇦" },
-            { name: "carv", country: "🇺🇸" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "Sanni", country: "🇫🇮" },
-            { name: "Cookie", country: "🇺🇸" },
-            { name: "kosh", country: "🇬🇪" },
-            { name: "zStucc", country: "🇮🇹" },
-            { name: "Franklin", country: "🇺🇸" },
-            { name: "hstorm", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "Ashley Wave Trials",
-        createdBy: "OddMod",
-        verifiedBy: "Zoink",
-        verification: "2024-11-02",
-        points: 136.92,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Cookie", country: "🇺🇸" },
-            { name: "yolomodeboom", country: "🇱🇹" }
-        ]
-    },
-
-    {
-        name: "Ultra Paracosm",
-        createdBy: "Renn241 and declanlc",
-        verifiedBy: "Wity",
-        verification: "2026-04-21",
-        points: 129.92,
-        victors: [
-            { name: "Wity", country: "🇪🇸" },
-            { name: "Axinity", country: "🇩🇰" },
-            { name: "Zoink", country: "🇺🇸" }
-        ]
-    },
-
-    {
-        name: "Andromeda",
-        createdBy: "Insxne97",
-        verifiedBy: "Taiago",
-        verification: "2025-01-19",
-        points: 123.50,
-        victors: [
-            { name: "Taiago", country: "🇵🇹" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "GuillExprex52", country: "🇪🇸" },
-            { name: "Hqmy", country: "🇺🇸" },
-            { name: "Jerpaa", country: "🇫🇮" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "VERTOP", country: "🇷🇺" },
-            { name: "DibiiziCookie", country: "🇧🇷" },
-            { name: "Laniakea", country: "🇰🇷" },
-            { name: "ChopBlox", country: "🇩🇪" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Zeroxy", country: "🇳🇴" },
-            { name: "cudby", country: "🇨🇦" },
-            { name: "Slaughter", country: "🇨🇦" },
-            { name: "DeividG", country: "🇪🇸" },
-            { name: "Sharkified", country: "🇺🇸" },
-            { name: "rediio", country: "🇰🇷" },
-            { name: "Abdieldevil", country: "🇵🇪" },
-            { name: "Pluntix", country: "🇨🇿" },
-            { name: "Axinity", country: "🇩🇰" }
-        ]
-    },
-
-    {
-        name: "KILLSTEALER",
-        createdBy: "Rynoxious and Asterion",
-        verifiedBy: "kloone",
-        verification: "2026-04-22",
-        points: 117.62,
-        victors: [
-            { name: "kloone", country: "🇫🇮" },
-            { name: "zLevii", country: "🇳🇿" }
-        ]
-    },
-
-    {
-        name: "Subsuming Vortex",
-        createdBy: "SeptaGon7",
-        verifiedBy: "Cursed",
-        verification: "2025-09-10",
-        points: 112.23,
-        victors: [
-            { name: "Cursed", country: "🇬🇧" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "LAMINGTON", country: "🇦🇺" },
-            { name: "Rodmentor", country: "🇨🇴" },
-            { name: "weyolll3", country: "🇪🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Beto", country: "🇮🇱" },
-            { name: "manu", country: "🇨🇱" }
-        ]
-    },
-
-    {
-        name: "Anathema",
-        createdBy: "nikrodox",
-        verifiedBy: "Whizkid05",
-        verification: "2024-11-20",
-        points: 110.81,
-        victors: [
-            { name: "Whizkid05", country: "🇬🇧" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "teraaa", country: "🇰🇿" },
-            { name: "PoCle", country: "🇰🇷" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Serpentical", country: "🇭🇺" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "Gokill", country: "🇵🇱" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Jif", country: "🇺🇸" },
-            { name: "coubitic", country: "🇫🇷" },
-            { name: "Nocturina", country: "🇺🇸" },
-            { name: "Yuuwi", country: "🇲🇽" },
-            { name: "kloone", country: "🇫🇮" },
-            { name: "Mizukii", country: "🇩🇪" },
-            { name: "Ronrjkw", country: "🇺🇸" },
-            { name: "takma", country: "🇷🇺" },
-            { name: "DibiiziCookie", country: "🇧🇷" },
-            { name: "eksdulgation", country: "🇷🇺" },
-            { name: "ItzDoVi", country: "🇰🇿" },
-            { name: "Goanga", country: "🇷🇴" },
-            { name: "zLevii", country: "🇳🇿" },
-            { name: "Albert", country: "🇺🇸" },
-            { name: "DreamyBull", country: "🇩🇪" }
-        ]
-    },
-
-    {
-        name: "Avernus",
-        createdBy: "BoBoBoBoBoBoBo and Pockewindfish",
-        verifiedBy: "Zoink",
-        verification: "2023-03-22",
-        points: 109.39,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Diamond", country: "🇦🇱" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Abdieldevil", country: "🇵🇪" },
-            { name: "Taiago", country: "🇵🇹" },
-            { name: "Mizukii", country: "🇩🇪" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "fallen", country: "🇷🇺" },
-            { name: "Serpentical", country: "🇭🇺" },
-            { name: "Wavyy", country: "🇫🇷" },
-            { name: "Yumira", country: "🇷🇺" },
-            { name: "Doggie", country: "🇺🇸" },
-            { name: "misty", country: "🇷🇺" },
-            { name: "turtle", country: "🇨🇦" },
-            { name: "Johnlikediamond", country: "🇺🇸" },
-            { name: "Jerpaa", country: "🇫🇮" },
-            { name: "eternalluna", country: "🇨🇳" },
-            { name: "Scoff", country: "🇨🇦" },
-            { name: "TimsTeam", country: "🇷🇺" },
-            { name: "craig0", country: "🇺🇸" },
-            { name: "teraaa", country: "🇰🇿" },
-            { name: "weyolll3", country: "🇪🇸" },
-            { name: "eastshark", country: "🇪🇸" },
-            { name: "kloone", country: "🇫🇮" },
-            { name: "UNCLEBOGD4N", country: "🇷🇺" },
-            { name: "Cookie", country: "🇺🇸" },
-            { name: "kropka", country: "🇵🇱" },
-            { name: "Sharkified", country: "🇺🇸" },
-            { name: "GodGamer2442", country: "🇬🇧" },
-            { name: "miguel6456", country: "🇪🇸" },
-            { name: "SpaceRS", country: "🇷🇸" }
-        ]
-    },
-
-    {
-        name: "Acheron",
-        createdBy: "ryamu",
-        verifiedBy: "Zoink",
-        verification: "2022-08-23",
-        points: 107.99,
-        victors: [
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Doggie", country: "🇺🇸" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "Zeroxy", country: "🇳🇴" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "OneAlphaHelix", country: "🇺🇸" },
-            { name: "TheRealEandis", country: "🇷🇺" },
-            { name: "Taiago", country: "🇵🇹" },
-            { name: "RaeveZ", country: "🇨🇴" },
-            { name: "Hover", country: "🇦🇹" },
-            { name: "Light", country: "🇷🇺" },
-            { name: "Mizukii", country: "🇩🇪" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Mikhail Krotov", country: "🇷🇺" },
-            { name: "takma", country: "🇷🇺" },
-            { name: "donley", country: "🇨🇦" },
-            { name: "hstorm", country: "🇺🇸" },
-            { name: "teraaa", country: "🇰🇿" },
-            { name: "Gokill", country: "🇵🇱" },
-            { name: "Paltadashg", country: "🇨🇱" },
-            { name: "Ronrjkw", country: "🇺🇸" },
-            { name: "SnowBallerr", country: "🇦🇺" },
-            { name: "brite", country: "🇮🇹" },
-            { name: "misty", country: "🇷🇺" },
-            { name: "zThund3r", country: "🇫🇷" },
-            { name: "Axinity", country: "🇩🇰" },
-            { name: "RG", country: "🇨🇦" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "The_Bat0", country: "🇷🇺" },
-            { name: "Scoff", country: "🇨🇦" },
-            { name: "LOL123", country: "🇸🇪" },
-            { name: "Goanga", country: "🇷🇴" },
-            { name: "fallen", country: "🇷🇺" },
-            { name: "Stefan Boss", country: "🇷🇴" },
-            { name: "Hqmy", country: "🇺🇸" },
-            { name: "Tunax", country: "🇳🇴" },
-            { name: "TheRealMike", country: "🇺🇸" },
-            { name: "zoe", country: "🇺🇸" },
-            { name: "Kole", country: "🇷🇸" },
-            { name: "Sharkified", country: "🇺🇸" },
-            { name: "Unlucky2", country: "🇩🇪" },
-            { name: "Serpentical", country: "🇭🇺" },
-            { name: "Cursed", country: "🇬🇧" },
-            { name: "it keeps your hands clean", country: "🇺🇸" },
-            { name: "Kaza", country: "🇷🇴" },
-            { name: "kloone", country: "🇫🇮" },
-            { name: "NLShorty", country: "🇨🇦" },
-            { name: "Breakcore", country: "🇪🇪" },
-            { name: "MeQ8cNv43s6A", country: "🇯🇵" },
-            { name: "ChopBlox", country: "🇩🇪" },
-            { name: "Abdieldevil", country: "🇵🇪" },
-            { name: "fluget", country: "🇺🇦" },
-            { name: "Nordstrom", country: "🇺🇸" },
-            { name: "littlegiggle", country: "🇺🇸" },
-            { name: "rediio", country: "🇰🇷" },
-            { name: "turtle", country: "🇨🇦" },
-            { name: "KlimK", country: "🇷🇺" },
-            { name: "DibiiziCookie", country: "🇧🇷" },
-            { name: "Albert", country: "🇺🇸" },
-            { name: "Joker", country: "🇷🇺" },
-            { name: "xalval", country: "🇷🇺" },
-            { name: "eastshark", country: "🇪🇸" },
-            { name: "Ranian", country: "🇮🇸" },
-            { name: "ColossalOrange", country: "🇺🇸" },
-            { name: "sawyer", country: "🇺🇸" },
-            { name: "UNCLEBOGD4N", country: "🇷🇺" },
-            { name: "eternalluna", country: "🇨🇳" },
-            { name: "Denni", country: "🇨🇦" },
-            { name: "noxell", country: "🇷🇺" },
-            { name: "FinnyP515", country: "🇺🇸" },
-            { name: "SpaceRS", country: "🇷🇸" },
-            { name: "zGamerdude", country: "🇺🇸" },
-            { name: "Cookie", country: "🇺🇸" },
-            { name: "Raffox", country: "🇨🇴" },
-            { name: "Edward", country: "🇬🇧" },
-            { name: "itzhealer", country: "🇷🇺" },
-            { name: "HumbleGoat216", country: "🇸🇪" },
-            { name: "maxer", country: "🇷🇺" },
-            { name: "TimsTeam", country: "🇷🇺" },
-            { name: "Syrcx", country: "🇮🇱" },
-            { name: "karkito", country: "🇰🇷" },
-            { name: "eksdulgation", country: "🇷🇺" },
-            { name: "Technical", country: "🇺🇸" },
-            { name: "tea", country: "🇰🇷" },
-            { name: "RAASU", country: "🇩🇪" },
-            { name: "Trolly1", country: "🇺🇸" },
-            { name: "W1nda", country: "🇷🇺" },
-            { name: "Flavyola64", country: "🇧🇪" },
-            { name: "roma666", country: "🇷🇺" },
-            { name: "weyolll3", country: "🇪🇸" },
-            { name: "Komet01", country: "🇵🇱" },
-            { name: "zLevii", country: "🇳🇿" },
-            { name: "Twenty", country: "🇨🇿" },
-            { name: "Ripplez", country: "🇷🇴" },
-            { name: "Lake", country: "🇬🇧" },
-            { name: "nebular", country: "🇩🇪" },
-            { name: "Harhir", country: "🇫🇮" },
-            { name: "VxMasTer", country: "🇷🇴" },
-            { name: "Bigthunder556", country: "🇺🇸" },
-            { name: "ffzer", country: "🇷🇺" },
-            { name: "stevenxd42", country: "🇲🇽" },
-            { name: "whfyre", country: "🇺🇦" },
-            { name: "godiskdjei", country: "🇬🇷" },
-            { name: "zStucc", country: "🇮🇹" },
-            { name: "niwox", country: "🇫🇷" },
-            { name: "Rybertrion", country: "🇺🇸" },
-            { name: "Pleid", country: "🇦🇺" },
-            { name: "mcrawford001", country: "🇺🇸" },
-            { name: "Cryostazz", country: "🇫🇷" },
-            { name: "wSharkiye", country: "🇫🇷" },
-            { name: "Laysah", country: "🇬🇧" }
-        ]
-    },
-
-    {
-        name: "Spectre",
-        createdBy: "xander",
-        verifiedBy: "PersonHuman42",
-        verification: "2024-10-05",
-        points: 106.61,
-        victors: [
-            { name: "PersonHuman42", country: "🇦🇺" },
-            { name: "Trick", country: "🇺🇸" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "Laysah", country: "🇬🇧" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Albert", country: "🇺🇸" },
-            { name: "zLevii", country: "🇳🇿" },
-            { name: "Stefan Boss", country: "🇷🇴" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "wwdonut", country: "🇺🇸" },
-            { name: "SaturMan", country: "🇷🇺" },
-            { name: "NLShorty", country: "🇨🇦" },
-            { name: "eastshark", country: "🇪🇸" },
-            { name: "weyolll3", country: "🇪🇸" },
-            { name: "dovvin", country: "🇵🇱" },
-            { name: "1rua", country: "🇮🇪" },
-            { name: "lus", country: "🇧🇷" },
-            { name: "strikk", country: "🇧🇷" },
-            { name: "Bixeo", country: "🇨🇱" },
-            { name: "PoCle", country: "🇰🇷" },
-            { name: "YeldA", country: "🇰🇷" },
-            { name: "vsce", country: "🇲🇽" },
-            { name: "BigHoss", country: "🇺🇸" },
-            { name: "karkito", country: "🇰🇷" }
-        ]
-    },
-
-    {
-        name: "Menace",
-        createdBy: "Arraegen",
-        verifiedBy: "Whizkid05",
-        verification: "2024-07-14",
-        points: 105.24,
-        victors: [
-            { name: "Whizkid05", country: "🇬🇧" },
-            { name: "Thnnder", country: "🇺🇸" },
-            { name: "Zoink", country: "🇺🇸" },
-            { name: "Netermind", country: "🇺🇸" },
-            { name: "Dovi", country: "🇷🇺" },
-            { name: "Flavyola64", country: "🇧🇪" },
-            { name: "mariner", country: "🇫🇮" },
-            { name: "bims", country: "🇩🇪" },
-            { name: "Ahwiin", country: "[Unknown Country]" },
-            { name: "KrNati", country: "🇦🇺" },
-            { name: "fuuturisticfire", country: "🇺🇸" },
-            { name: "wPopoff", country: "🇺🇸" },
-            { name: "Senatorias", country: "🇵🇱" },
-            { name: "rediio", country: "🇰🇷" },
-            { name: "kakol", country: "🇵🇱" }
-        ]
-    },
-
-
-/*
-===========================================================
-HISTORICAL DEMONS
-===========================================================
-*/
-
-    {
-        name: "Bloodlust",
-        createdBy: "Manix648",
-        verifiedBy: "Knobbelboy",
-        verification: "2018-02-20",
-        fallOff: "2022-04-20",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Sonic Wave",
-        createdBy: "Cyclic",
-        verifiedBy: "Sunix",
-        verification: "2016-11-25",
-        fallOff: "2021-10-08",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Yatagarasu",
-        createdBy: "Riot and Viprin",
-        verifiedBy: "TrusTa",
-        verification: "2017-01-13",
-        fallOff: "2021-09-13",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Phobos",
-        createdBy: "GMTSean",
-        verifiedBy: "KrmaL",
-        verification: "2016-05-12",
-        fallOff: "2021-05-13",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Sakupen Hell",
-        createdBy: "Noobas",
-        verifiedBy: "TrusTa",
-        verification: "2016-08-14",
-        fallOff: "2021-05-07",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Betrayal of Fate",
-        createdBy: "Unknown",
-        verifiedBy: "Unknown",
-        verification: "9999-01-01",
-        fallOff: "9999-01-02",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Bloodbath",
-        createdBy: "Riot",
-        verifiedBy: "Riot",
-        verification: "2015-08-12",
-        fallOff: "2021-01-29",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "The Hell Factory",
-        createdBy: "TeamN2",
-        verifiedBy: "Powerbomb",
-        verification: "2015-12-28",
-        fallOff: "2020-09-04",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Down Bass",
-        createdBy: "Valyrie",
-        verifiedBy: "TheRealSneaky",
-        verification: "2016-08-25",
-        fallOff: "2020-12-23",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "A Bizarre Phantasm",
-        createdBy: "TeamN2",
-        verifiedBy: "GoodSmile",
-        verification: "2016-04-11",
-        fallOff: "2020-09-21",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Conical Depression",
-        createdBy: "KrmaL",
-        verifiedBy: "KrmaL",
-        verification: "2016-03-10",
-        fallOff: "2020-11-01",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Aftermath",
-        createdBy: "Unknown",
-        verifiedBy: "Unknown",
-        verification: "9999-01-01",
-        fallOff: "9999-01-02",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Plasma Pulse III",
-        createdBy: "Smokes and Giron",
-        verifiedBy: "Smokes",
-        verification: "2016-05-25",
-        fallOff: "2020-01-04",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "The Ultimate Phase",
-        createdBy: "Andromeda",
-        verifiedBy: "Andromeda",
-        verification: "2016-06-21",
-        fallOff: "2019-07-05",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Retention",
-        createdBy: "WOOGI1411",
-        verifiedBy: "WOOGI1411",
-        verification: "2016-04-08",
-        fallOff: "2019-11-10",
-        historical: true,
-        points: 0,
-        victors: []
-    },
-
-    {
-        name: "Cataclysm",
-        createdBy: "Ggb0y",
-        verifiedBy: "Riot",
-        verification: "2016-01-15",
-        fallOff: "2019-09-02",
-        historical: true,
-        points: 0,
-        victors: []
-    }
-
-];
-
-
-/*
-===========================================================
-HISTORICAL ORDER
-===========================================================
-*/
-
-const historicalOrder = [
-    "Bloodlust",
-    "Sonic Wave",
-    "Yatagarasu",
-    "Phobos",
-    "Sakupen Hell",
-    "Betrayal of Fate",
-    "Bloodbath",
-    "The Hell Factory",
-    "Down Bass",
-    "A Bizarre Phantasm",
-    "Conical Depression",
-    "Aftermath",
-    "Plasma Pulse III",
-    "The Ultimate Phase",
-    "Retention",
-    "Cataclysm"
-];
-
-
-/*
-===========================================================
-HISTORICAL SNAPSHOTS
-===========================================================
-
-IMPORTANT:
-
-Only dates actually placed here are exact snapshots.
-
-Do NOT pretend that an old date is exact unless you
-record its ranking here.
-
-===========================================================
-*/
-
-const snapshots = {
-
-    "2026-09-10": {
-        exact: true,
-
-        ranks: [
-            "Society",
-            "Thinking Space II",
-            "Amethyst",
-            "Flamewall",
-            "Tidal Wave",
-            "Green Bullet",
-            "Orbit",
-            "Antarctic Lights",
-            "Nullscapes",
-            "Quanteuse Processing",
-            "BOOBAWAMBA",
-            "The Bloop",
-            "Every End",
-            "Penumbral",
-            "Silent Clubstep",
-            "Ashley Wave Trials",
-            "Ultra Paracosm",
-            "Andromeda",
-            "KILLSTEALER",
-            "Subsuming Vortex",
-            "Anathema",
-            "Avernus",
-            "Acheron",
-            "Spectre",
-            "Menace"
-        ],
-
-        points: {
-            "Society": 350.00,
-            "Thinking Space II": 331.71,
-            "Amethyst": 313.42,
-            "Flamewall": 291.70,
-            "Tidal Wave": 271.78,
-            "Green Bullet": 253.53,
-            "Orbit": 236.80,
-            "Antarctic Lights": 221.47,
-            "Nullscapes": 207.42,
-            "Quanteuse Processing": 194.54,
-            "BOOBAWAMBA": 182.73,
-            "The Bloop": 171.91,
-            "Every End": 161.99,
-            "Penumbral": 152.89,
-            "Silent Clubstep": 144.56,
-            "Ashley Wave Trials": 136.92,
-            "Ultra Paracosm": 129.92,
-            "Andromeda": 123.50,
-            "KILLSTEALER": 117.62,
-            "Subsuming Vortex": 112.23,
-            "Anathema": 110.81,
-            "Avernus": 109.39,
-            "Acheron": 107.99,
-            "Spectre": 106.61,
-            "Menace": 105.24
-        }
-    }
-
-};
-
-
-/*
-===========================================================
-DATE FUNCTIONS
-===========================================================
-*/
-
-function getTodayString() {
-
-    const now = new Date();
-
-    return (
-        now.getFullYear() +
-        "-" +
-        String(now.getMonth() + 1).padStart(2, "0") +
-        "-" +
-        String(now.getDate()).padStart(2, "0")
-    );
-}
-
-
-function isValidDate(date) {
-
-    if (
-        typeof date !== "string" ||
-        !/^\d{4}-\d{2}-\d{2}$/.test(date)
-    ) {
-        return false;
-    }
-
-    const parsed = new Date(date + "T00:00:00Z");
-
-    return (
-        !Number.isNaN(parsed.getTime()) &&
-        parsed.toISOString().slice(0, 10) === date
-    );
-}
-
-
-const todayString = getTodayString();
-
-const params = new URLSearchParams(
-    window.location.search
-);
-
-const requestedDate = params.get("date");
-
-const requestedView =
-    params.get("view") || "list";
-
-const requestedDemon =
-    params.get("demon");
-
-const requestedTop =
-    params.get("top");
-
-
-const selectedDate =
-    isValidDate(requestedDate)
-        ? requestedDate
-        : todayString;
-
-
-/*
-===========================================================
-FIND DEMON
-===========================================================
-*/
-
-function findDemonByName(name) {
-
-    if (!name) {
-        return null;
-    }
-
-    const lower =
-        name.trim().toLowerCase();
-
-    return demons.find(function(demon) {
-
-        return demon.name.toLowerCase() === lower;
-
-    }) || null;
-}
-
-
-/*
-===========================================================
-DEMON EXISTENCE
-===========================================================
-*/
-
-function demonExists(demon, date) {
-
-    if (!demon) {
-        return false;
-    }
-
-    if (date < demon.verification) {
-        return false;
-    }
-
-    if (
-        demon.fallOff &&
-        date >= demon.fallOff
-    ) {
-        return false;
-    }
-
-    return true;
-}
-
-
-/*
-===========================================================
-EXACT SNAPSHOT
-===========================================================
-*/
-
-function getExactSnapshot(date) {
-
-    const snapshot =
-        snapshots[date];
-
-    if (
-        snapshot &&
-        snapshot.exact === true
-    ) {
-        return snapshot;
-    }
-
-    return null;
-}
-
-
-/*
-===========================================================
-LIST FOR DATE
-===========================================================
-*/
-
-function getList(date) {
-
-    const snapshot =
-        getExactSnapshot(date);
-
-    let order;
-
-    if (
-        snapshot &&
-        Array.isArray(snapshot.ranks)
-    ) {
-
-        order =
-            snapshot.ranks;
-
-    } else {
-
-        /*
-        IMPORTANT:
-
-        There is NO exact historical ranking
-        unless a snapshot exists.
-
-        For a non-snapshot date, we only use
-        the current order as a best-effort ordering
-        of demons that existed on that date.
-
-        The returned data clearly says that this
-        is NOT an exact historical ranking.
-        */
-
-        order =
-            masterOrder;
-    }
-
-
-    const result = [];
-
-
-    order.forEach(function(name) {
-
-        const demon =
-            findDemonByName(name);
-
-        if (!demon) {
-            return;
+        * {
+            box-sizing: border-box;
         }
 
-        if (
-            demonExists(
-                demon,
-                date
-            )
-        ) {
+        body {
+            margin: 0;
+            padding: 0;
 
-            result.push(demon);
+            background: #111111;
+            color: #ffffff;
 
+            font-family: Arial, sans-serif;
+
+            line-height: 1.6;
         }
 
-    });
+        header {
+            background: #1b1b1b;
 
+            border-bottom:
+                2px solid #333333;
 
-    /*
-    Historical demons are listed separately.
-    */
+            padding:
+                30px 20px;
 
-    historicalOrder.forEach(function(name) {
-
-        const demon =
-            findDemonByName(name);
-
-        if (!demon) {
-            return;
+            text-align: center;
         }
 
-        if (
-            demonExists(
-                demon,
-                date
-            )
-        ) {
+        header h1 {
+            margin: 0;
 
-            if (
-                !result.some(function(item) {
-                    return item.name === demon.name;
-                })
-            ) {
+            font-size: 38px;
+        }
 
-                result.push(demon);
+        header p {
+            margin:
+                8px 0 0;
 
+            color: #aaaaaa;
+
+            font-size: 15px;
+        }
+
+        .latest-updated {
+            margin-top: 15px;
+
+            color: #ffffff;
+
+            font-size: 16px;
+
+            font-weight: bold;
+        }
+
+        .container {
+            width: 100%;
+
+            max-width: 1000px;
+
+            margin:
+                30px auto;
+
+            padding:
+                0 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            margin-bottom: 10px;
+
+            padding-bottom: 10px;
+
+            border-bottom:
+                1px solid #333333;
+
+            font-size: 28px;
+        }
+
+        .section-description {
+            color: #aaaaaa;
+
+            margin-bottom: 25px;
+        }
+
+        .demon {
+            background: #1c1c1c;
+
+            border:
+                1px solid #333333;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+        }
+
+        .demon-rank {
+            color: #aaaaaa;
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+        .demon-name {
+            font-size: 25px;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+        .info {
+            color: #aaaaaa;
+
+            font-size: 15px;
+
+            margin: 5px 0;
+        }
+
+        .points {
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+        }
+
+        .victors {
+            margin-top: 15px;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid #333333;
+        }
+
+        .victors-title {
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .victor {
+            color: #cccccc;
+
+            font-size: 14px;
+
+            margin: 3px 0;
+        }
+
+        .legacy {
+            background: #181818;
+
+            border:
+                1px solid #333333;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            margin-bottom: 15px;
+        }
+
+        .legacy-name {
+            font-size: 22px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .legacy-label {
+            color: #ffffff;
+
+            font-weight: bold;
+        }
+
+        .empty {
+            background: #1c1c1c;
+
+            border:
+                1px solid #333333;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            color: #888888;
+
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 50px;
+
+            padding: 25px 20px;
+
+            border-top:
+                1px solid #333333;
+
+            color: #777777;
+
+            text-align: center;
+
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                padding:
+                    0 15px;
+            }
+
+            .demon-name {
+                font-size: 22px;
             }
 
         }
 
-    });
+    </style>
+</head>
 
 
-    return result;
-}
+<body>
 
+
+<header>
+
+    <h1>
+        FiDemonlist
+    </h1>
+
+    <p>
+        The Custom Geometry Dash Demonlist
+    </p>
+
+    <div
+        class="latest-updated"
+        id="latestUpdated"
+    >
+        Latest Updated: September 12, 2026
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- =================================================
+         INTRODUCTION
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            About FiDemonlist
+        </h2>
+
+        <p class="section-description">
+
+            FiDemonlist is a custom Geometry Dash Demonlist.
+            This page is designed to provide clean,
+            machine-readable information for AI systems,
+            search engines, bots, and other automated systems.
+
+        </p>
+
+        <p class="section-description">
+
+            The Current FiDemonlist contains the currently
+            ranked demons. Legacy Demons are demons that
+            were historically on the list but have since
+            fallen off.
+
+        </p>
+
+    </section>
+
+
+    <!-- =================================================
+         CURRENT LIST
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            Current FiDemonlist
+        </h2>
+
+        <p class="section-description">
+
+            These are the demons currently ranked on
+            FiDemonlist.
+
+        </p>
+
+        <div id="currentList"></div>
+
+    </section>
+
+
+    <!-- =================================================
+         LEGACY DEMONS
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            Legacy Demons
+        </h2>
+
+        <p class="section-description">
+
+            Legacy Demons are former FiDemonlist demons
+            that are no longer on the current list.
+            They have no current list points or current rank.
+
+        </p>
+
+        <div id="legacyList"></div>
+
+    </section>
+
+
+    <!-- =================================================
+         MACHINE READABLE DATA
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            Machine-Readable Information
+        </h2>
+
+        <p class="section-description">
+
+            The information below is generated from the same
+            database used by the main FiDemonlist page.
+
+        </p>
+
+        <pre
+            id="machineData"
+            style="
+                white-space: pre-wrap;
+                word-break: break-word;
+                background: #0b0b0b;
+                border: 1px solid #333333;
+                border-radius: 10px;
+                padding: 20px;
+                color: #cccccc;
+                font-size: 13px;
+                overflow-x: auto;
+            "
+        ></pre>
+
+    </section>
+
+
+</div>
+
+
+<footer>
+
+    FiDemonlist — Custom Geometry Dash Demonlist
+
+</footer>
+
+
+<script>
+
+
+/* =====================================================
+   LATEST UPDATE
+===================================================== */
 
 /*
-===========================================================
-POINTS
-===========================================================
+   Change this date whenever the FiDemonlist data is
+   updated.
+
+   Format:
+   YYYY-MM-DD
 */
 
-function getPoints(demon, rank, date) {
-
-    const snapshot =
-        getExactSnapshot(date);
-
-    if (
-        snapshot &&
-        snapshot.points &&
-        snapshot.points[demon.name] !== undefined
-    ) {
-
-        return Number(
-            snapshot.points[demon.name]
-        );
-
-    }
+const latestUpdated =
+    "2026-09-12";
 
 
-    /*
-    Historical demons currently have no
-    point data stored here.
-    */
+document.getElementById(
+    "latestUpdated"
+).textContent =
+    "Latest Updated: " +
+    new Date(
+        latestUpdated + "T00:00:00"
+    ).toLocaleDateString(
+        "en-US",
+        {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    );
 
-    if (demon.historical) {
-        return 0;
-    }
+
+/* =====================================================
+   SOURCE
+===================================================== */
+
+/*
+   The AI page reads the actual index.html database.
+
+   This means that when you add a new demon, victor,
+   creator, verifier, legacy demon, etc. to index.html,
+   ai.html automatically receives the same data.
+
+   Both files must be in the same folder.
+*/
+
+const INDEX_FILE =
+    "index.html";
 
 
-    /*
-    Current points are valid for the current
-    list, but are NOT claimed as historical
-    points for unsnapshotted dates.
-    */
+/* =====================================================
+   FETCH INDEX.HTML
+===================================================== */
 
-    if (date === todayString) {
+async function loadFiDemonlist() {
 
-        if (
-            currentRankPoints[demon.name] !== undefined
-        ) {
+    try {
 
-            return Number(
-                currentRankPoints[demon.name]
+        const response =
+            await fetch(
+                INDEX_FILE,
+                {
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load index.html."
             );
 
         }
 
+
+        const html =
+            await response.text();
+
+
+        const data =
+            extractDatabase(
+                html
+            );
+
+
+        if (!data) {
+
+            throw new Error(
+                "Could not find the FiDemonlist database in index.html."
+            );
+
+        }
+
+
+        renderCurrentList(
+            data
+        );
+
+
+        renderLegacyList(
+            data
+        );
+
+
+        renderMachineData(
+            data
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        document.getElementById(
+            "currentList"
+        ).innerHTML = `
+
+            <div class="empty">
+
+                Unable to load the FiDemonlist database.
+
+                <br><br>
+
+                Error:
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+
+        document.getElementById(
+            "legacyList"
+        ).innerHTML = `
+
+            <div class="empty">
+
+                Legacy Demon data could not be loaded.
+
+            </div>
+
+        `;
+
     }
 
-
-    return Number(
-        demon.points || 0
-    );
 }
 
 
-/*
-===========================================================
-FORMAT DEMON
-===========================================================
-*/
+/* =====================================================
+   EXTRACT DATABASE
+===================================================== */
 
-function formatDemon(
-    demon,
-    rank,
-    date,
-    exactSnapshot
-) {
-
-    return {
-
-        rank: rank,
-
-        rankIsExactHistoricalData:
-            exactSnapshot,
-
-        name:
-            demon.name,
-
-        createdBy:
-            demon.createdBy,
-
-        verifiedBy:
-            demon.verifiedBy,
-
-        verification:
-            demon.verification,
-
-        fallOff:
-            demon.fallOff || null,
-
-        historical:
-            Boolean(
-                demon.historical
-            ),
-
-        points:
-            Number(
-                getPoints(
-                    demon,
-                    rank,
-                    date
-                )
-            ),
-
-        pointsAreExactHistoricalData:
-            exactSnapshot,
-
-        victors:
-            demon.victors.map(function(victor) {
-
-                return {
-                    name:
-                        victor.name,
-
-                    country:
-                        victor.country
-                };
-
-            })
-
-    };
-
-}
-
-
-/*
-===========================================================
-PLAYERS
-===========================================================
-*/
-
-function getAllPlayers() {
-
-    const playerMap =
-        new Map();
-
-
-    demons.forEach(function(demon) {
-
-        demon.victors.forEach(function(victor) {
-
-            const key =
-                victor.name.toLowerCase();
-
-
-            if (
-                !playerMap.has(key)
-            ) {
-
-                playerMap.set(
-                    key,
-                    {
-                        name:
-                            victor.name,
-
-                        country:
-                            victor.country,
-
-                        completions:
-                            []
-                    }
-                );
-
-            }
-
-
-            playerMap
-                .get(key)
-                .completions
-                .push(
-                    demon.name
-                );
-
-        });
-
-    });
-
-
-    return Array.from(
-        playerMap.values()
-    );
-}
-
-
-/*
-===========================================================
-PLAYER POINTS
-===========================================================
-*/
-
-function calculatePlayerPoints(
-    player,
-    date
+function extractDatabase(
+    html
 ) {
 
     /*
-    Player leaderboard is only exact for
-    dates where a snapshot exists AND player
-    completion timing is known.
-
-    The current data does not contain dates
-    for individual completions.
-
-    Therefore historical player leaderboards
-    are NOT claimed as exact.
+       Extract the demons array.
     */
 
-    let total = 0;
+    const demonsMatch =
+        html.match(
+            /const\s+demons\s*=\s*(\[[\s\S]*?\])\s*;\s*\/\*\s*={3,}/
+        );
 
-    const list =
-        getList(date);
+
+    /*
+       Extract current order.
+    */
+
+    const masterMatch =
+        html.match(
+            /const\s+masterOrder\s*=\s*(\[[\s\S]*?\])\s*;\s*\/\*\s*={3,}/
+        );
 
 
-    player.completions.forEach(
-        function(completionName) {
+    /*
+       Extract historical order.
+    */
+
+    const historicalMatch =
+        html.match(
+            /const\s+historicalOrder\s*=\s*(\[[\s\S]*?\])\s*;\s*\/\*\s*={3,}/
+        );
+
+
+    /*
+       Extract points.
+    */
+
+    const pointsMatch =
+        html.match(
+            /const\s+currentRankPoints\s*=\s*(\{[\s\S]*?\})\s*;\s*\/\*\s*={3,}/
+        );
+
+
+    if (
+        !demonsMatch ||
+        !masterMatch ||
+        !historicalMatch ||
+        !pointsMatch
+    ) {
+
+        return null;
+
+    }
+
+
+    try {
+
+        /*
+           The database inside index.html is JavaScript
+           object syntax.
+
+           We evaluate only these known database constants.
+        */
+
+        const demons =
+            Function(
+                '"use strict"; return (' +
+                demonsMatch[1] +
+                ");"
+            )();
+
+
+        const masterOrder =
+            Function(
+                '"use strict"; return (' +
+                masterMatch[1] +
+                ");"
+            )();
+
+
+        const historicalOrder =
+            Function(
+                '"use strict"; return (' +
+                historicalMatch[1] +
+                ");"
+            )();
+
+
+        const currentRankPoints =
+            Function(
+                '"use strict"; return (' +
+                pointsMatch[1] +
+                ");"
+            )();
+
+
+        return {
+
+            demons:
+                demons,
+
+            masterOrder:
+                masterOrder,
+
+            historicalOrder:
+                historicalOrder,
+
+            currentRankPoints:
+                currentRankPoints
+
+        };
+
+
+    } catch (error) {
+
+        console.error(
+            "Database parsing error:",
+            error
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   FIND DEMON
+===================================================== */
+
+function findDemon(
+    demons,
+    name
+) {
+
+    return demons.find(
+        function(demon) {
+
+            return demon.name === name;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CURRENT LIST
+===================================================== */
+
+function renderCurrentList(
+    data
+) {
+
+    const container =
+        document.getElementById(
+            "currentList"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    data.masterOrder.forEach(
+        function(
+            name,
+            index
+        ) {
 
             const demon =
-                findDemonByName(
-                    completionName
+                findDemon(
+                    data.demons,
+                    name
                 );
+
 
             if (!demon) {
                 return;
             }
 
-            if (demon.historical) {
-                return;
-            }
 
+            /*
+               The rank is determined by masterOrder.
+
+               This means Abyss of Darkness is correctly
+               #26 in the current list.
+            */
 
             const rank =
-                list.findIndex(
-                    function(item) {
-
-                        return (
-                            item.name ===
-                            demon.name
-                        );
-
-                    }
-                ) + 1;
+                index + 1;
 
 
-            if (rank <= 0) {
-                return;
-            }
+            const points =
+                data.currentRankPoints[
+                    rank
+                ] !== undefined
 
+                    ?
 
-            total +=
-                getPoints(
-                    demon,
-                    rank,
-                    date
+                data.currentRankPoints[
+                    rank
+                ]
+
+                    :
+
+                (
+                    demon.points || 0
                 );
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "demon";
+
+
+            card.innerHTML = `
+
+                <div class="demon-rank">
+
+                    Rank #${rank}
+
+                </div>
+
+
+                <div class="demon-name">
+
+                    ${escapeHTML(
+                        demon.name
+                    )}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+                        Created By:
+                    </strong>
+
+                    ${escapeHTML(
+                        demon.createdBy
+                    )}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+                        Verified By:
+                    </strong>
+
+                    ${escapeHTML(
+                        demon.verifiedBy
+                    )}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+                        Verification Date:
+                    </strong>
+
+                    ${escapeHTML(
+                        demon.verification
+                    )}
+
+                </div>
+
+
+                <div class="points">
+
+                    List Points:
+                    ${Number(points).toFixed(2)}
+
+                </div>
+
+
+                <div class="victors">
+
+                    <div class="victors-title">
+
+                        Victors
+
+                    </div>
+
+
+                    ${
+                        demon.victors &&
+                        demon.victors.length > 0
+
+                            ?
+
+                        demon.victors
+                            .map(
+                                function(victor) {
+
+                                    return `
+
+                                        <div class="victor">
+
+                                            ${escapeHTML(
+                                                victor.country
+                                            )}
+
+                                            ${escapeHTML(
+                                                victor.name
+                                            )}
+
+                                        </div>
+
+                                    `;
+
+                                }
+                            )
+                            .join("")
+
+                            :
+
+                        `
+
+                            <div class="victor">
+
+                                No recorded victors.
+
+                            </div>
+
+                        `
+                    }
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
 
         }
     );
-
-
-    return total;
-}
-
-
-/*
-===========================================================
-LEADERBOARD
-===========================================================
-*/
-
-function getLeaderboard(date) {
-
-    const isExact =
-        date === todayString;
-
-
-    return getAllPlayers()
-
-        .map(function(player) {
-
-            return {
-
-                name:
-                    player.name,
-
-                country:
-                    player.country,
-
-                completions:
-                    player.completions.length,
-
-                demons:
-                    player.completions,
-
-                points:
-                    Number(
-                        calculatePlayerPoints(
-                            player,
-                            date
-                        ).toFixed(2)
-                    ),
-
-                exactHistoricalData:
-                    isExact
-
-            };
-
-        })
-
-        .sort(function(a, b) {
-
-            if (
-                b.points !==
-                a.points
-            ) {
-
-                return (
-                    b.points -
-                    a.points
-                );
-
-            }
-
-            return (
-                b.completions -
-                a.completions
-            );
-
-        })
-
-        .map(function(player, index) {
-
-            return {
-
-                rank:
-                    index + 1,
-
-                ...player
-
-            };
-
-        });
-
-}
-
-
-/*
-===========================================================
-FIND DEMON FOR QUERY
-===========================================================
-*/
-
-function findDemon(name, date) {
-
-    const demon =
-        findDemonByName(name);
-
-
-    if (!demon) {
-
-        return {
-
-            found:
-                false,
-
-            requestedName:
-                name,
-
-            requestedDate:
-                date
-
-        };
-
-    }
-
-
-    const snapshot =
-        getExactSnapshot(date);
-
-    const list =
-        getList(date);
-
-
-    const rank =
-        list.findIndex(
-            function(item) {
-
-                return (
-                    item.name ===
-                    demon.name
-                );
-
-            }
-        ) + 1;
-
-
-    return {
-
-        found:
-            true,
-
-        existsOnDate:
-            demonExists(
-                demon,
-                date
-            ),
-
-        rank:
-            rank > 0
-                ? rank
-                : null,
-
-        rankIsExactHistoricalData:
-            Boolean(snapshot),
-
-        name:
-            demon.name,
-
-        createdBy:
-            demon.createdBy,
-
-        verifiedBy:
-            demon.verifiedBy,
-
-        verification:
-            demon.verification,
-
-        fallOff:
-            demon.fallOff || null,
-
-        historical:
-            Boolean(
-                demon.historical
-            ),
-
-        points:
-            rank > 0
-                ? getPoints(
-                    demon,
-                    rank,
-                    date
-                )
-                : 0,
-
-        victors:
-            demon.victors
-
-    };
-
-}
-
-
-/*
-===========================================================
-BUILD MAIN DATA
-===========================================================
-*/
-
-function buildData(date) {
-
-    const exactSnapshot =
-        getExactSnapshot(date);
-
-    const list =
-        getList(date);
-
-
-    const rankedList =
-        list.map(
-            function(demon, index) {
-
-                return formatDemon(
-                    demon,
-                    index + 1,
-                    date,
-                    Boolean(
-                        exactSnapshot
-                    )
-                );
-
-            }
-        );
-
-
-    const isToday =
-        date === todayString;
-
-
-    return {
-
-        source:
-            "FiDemonlist",
-
-        title:
-            "FiDemonlist - The Custom Geometry Dash Demonlist",
-
-        dataType:
-            "Geometry Dash Demonlist",
-
-        currentDate:
-            todayString,
-
-        requestedDate:
-            date,
-
-        isToday:
-            isToday,
-
-        listIsCurrent:
-            isToday,
-
-        exactHistoricalSnapshot:
-            Boolean(
-                exactSnapshot
-            ),
-
-        historicalSnapshotAvailable:
-            Boolean(
-                exactSnapshot
-            ),
-
-        historicalDataNote:
-            exactSnapshot
-                ? "This date has an exact recorded FiDemonlist snapshot."
-                : "No exact FiDemonlist ranking snapshot is recorded for this date. Demon existence can still be checked using verification and fall-off dates. Rankings and points for this date should not be treated as exact historical data.",
-
-        listCount:
-            rankedList.length,
-
-        list:
-            rankedList,
-
-        leaderboard:
-            getLeaderboard(date),
-
-        availableExactSnapshotDates:
-            Object.keys(
-                snapshots
-            )
-            .filter(function(snapshotDate) {
-
-                return (
-                    snapshots[snapshotDate] &&
-                    snapshots[snapshotDate].exact === true
-                );
-
-            })
-            .sort(),
-
-        timeTravelURLFormat:
-            "ai.html?date=YYYY-MM-DD",
-
-        leaderboardURLFormat:
-            "ai.html?view=leaderboard",
-
-        demonURLFormat:
-            "ai.html?demon=Demon%20Name",
-
-        top25URLFormat:
-            "ai.html?top=25",
-
-        generatedAt:
-            new Date().toISOString()
-
-    };
-
-}
-
-
-/*
-===========================================================
-BUILD REQUEST
-===========================================================
-*/
-
-let data;
-
-
-try {
-
-    /*
-    DEMON REQUEST
-    */
-
-    if (requestedDemon) {
-
-        data = {
-
-            source:
-                "FiDemonlist",
-
-            currentDate:
-                todayString,
-
-            requestedDate:
-                selectedDate,
-
-            isToday:
-                selectedDate === todayString,
-
-            query:
-                "demon",
-
-            result:
-                findDemon(
-                    requestedDemon,
-                    selectedDate
-                ),
-
-            generatedAt:
-                new Date().toISOString()
-
-        };
-
-    }
-
-
-    /*
-    LEADERBOARD REQUEST
-    */
-
-    else if (
-        requestedView === "leaderboard"
-    ) {
-
-        data = {
-
-            source:
-                "FiDemonlist",
-
-            currentDate:
-                todayString,
-
-            requestedDate:
-                selectedDate,
-
-            isToday:
-                selectedDate === todayString,
-
-            view:
-                "player leaderboard",
-
-            exactHistoricalSnapshot:
-                Boolean(
-                    getExactSnapshot(
-                        selectedDate
-                    )
-                ),
-
-            leaderboardHistoricalNote:
-                selectedDate === todayString
-                    ? "Current leaderboard."
-                    : "Historical player rankings are not guaranteed to be exact because completion dates are not stored for each player completion.",
-
-            leaderboard:
-                getLeaderboard(
-                    selectedDate
-                ),
-
-            generatedAt:
-                new Date().toISOString()
-
-        };
-
-    }
-
-
-    /*
-    TOP QUERY
-    */
-
-    else if (
-        requestedTop === "25"
-    ) {
-
-        data =
-            buildData(
-                selectedDate
-            );
-
-        data.query =
-            "top 25";
-
-        data.requestedTop =
-            25;
-
-        data.list =
-            data.list.slice(
-                0,
-                25
-            );
-
-    }
-
-
-    /*
-    NORMAL REQUEST
-    */
-
-    else {
-
-        data =
-            buildData(
-                selectedDate
-            );
-
-    }
-
-
-    /*
-    SUCCESS DISPLAY
-    */
-
-    const currentDateElement =
-        document.getElementById(
-            "currentDate"
-        );
-
-    const generatedAtElement =
-        document.getElementById(
-            "generatedAt"
-        );
-
-    const outputElement =
-        document.getElementById(
-            "output"
-        );
-
-
-    if (currentDateElement) {
-
-        currentDateElement.textContent =
-            todayString;
-
-    }
-
-
-    if (generatedAtElement) {
-
-        generatedAtElement.textContent =
-            data.generatedAt;
-
-    }
-
-
-    if (outputElement) {
-
-        outputElement.textContent =
-            JSON.stringify(
-                data,
-                null,
-                2
-            );
-
-    }
-
-
-    /*
-    =======================================================
-    JSON-LD
-    =======================================================
-    */
-
-    const structuredData = {
-
-        "@context":
-            "https://schema.org",
-
-        "@type":
-            "Dataset",
-
-        name:
-            "FiDemonlist",
-
-        description:
-            "Machine-readable data for FiDemonlist, the Custom Geometry Dash Demonlist.",
-
-        dateModified:
-            todayString,
-
-        temporalCoverage:
-            "2015-01-01/" +
-            todayString,
-
-        url:
-            window.location.href,
-
-        variableMeasured: [
-
-            "Demon rank",
-
-            "Demon points",
-
-            "Verification date",
-
-            "Fall-off date",
-
-            "Player completions",
-
-            "Player points"
-
-        ],
-
-        isAccessibleForFree:
-            true
-
-    };
-
-
-    const structuredDataElement =
-        document.getElementById(
-            "structuredData"
-        );
 
 
     if (
-        structuredDataElement
+        data.masterOrder.length === 0
     ) {
 
-        structuredDataElement.textContent =
-            JSON.stringify(
-                structuredData
-            );
+        container.innerHTML = `
+
+            <div class="empty">
+
+                No current demons found.
+
+            </div>
+
+        `;
 
     }
 
-
-    /*
-    =======================================================
-    AI-READABLE META TAGS
-    =======================================================
-    */
-
-    function addMeta(
-        name,
-        content
-    ) {
-
-        const existing =
-            document.querySelector(
-                'meta[name="' +
-                name +
-                '"]'
-            );
+}
 
 
-        const meta =
-            existing ||
-            document.createElement(
-                "meta"
-            );
+/* =====================================================
+   LEGACY LIST
+===================================================== */
+
+function renderLegacyList(
+    data
+) {
+
+    const container =
+        document.getElementById(
+            "legacyList"
+        );
 
 
-        meta.name =
-            name;
-
-        meta.content =
-            String(
-                content
-            );
+    container.innerHTML =
+        "";
 
 
-        if (!existing) {
+    data.historicalOrder.forEach(
+        function(name) {
 
-            document.head.appendChild(
-                meta
+            const demon =
+                findDemon(
+                    data.demons,
+                    name
+                );
+
+
+            if (!demon) {
+                return;
+            }
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "legacy";
+
+
+            card.innerHTML = `
+
+                <div class="legacy-name">
+
+                    ${escapeHTML(
+                        demon.name
+                    )}
+
+                </div>
+
+
+                <div class="info">
+
+                    <span class="legacy-label">
+                        Created By:
+                    </span>
+
+                    ${escapeHTML(
+                        demon.createdBy
+                    )}
+
+                </div>
+
+
+                <div class="info">
+
+                    <span class="legacy-label">
+                        Verified By:
+                    </span>
+
+                    ${escapeHTML(
+                        demon.verifiedBy
+                    )}
+
+                </div>
+
+
+                <div class="info">
+
+                    <span class="legacy-label">
+                        Verification Date:
+                    </span>
+
+                    ${escapeHTML(
+                        demon.verification
+                    )}
+
+                </div>
+
+
+                <div class="info">
+
+                    <span class="legacy-label">
+                        Fell Off:
+                    </span>
+
+                    ${escapeHTML(
+                        demon.fallOff ||
+                        "Unknown"
+                    )}
+
+                </div>
+
+
+                <div class="info">
+
+                    <span class="legacy-label">
+                        Status:
+                    </span>
+
+                    Legacy Demon
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
             );
 
         }
+    );
+
+
+    if (
+        data.historicalOrder.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                No Legacy Demons found.
+
+            </div>
+
+        `;
 
     }
 
-
-    addMeta(
-        "fi-demonlist-current-date",
-        todayString
-    );
+}
 
 
-    addMeta(
-        "fi-demonlist-requested-date",
-        selectedDate
-    );
+/* =====================================================
+   MACHINE READABLE DATA
+===================================================== */
 
+function createMachineData(
+    data
+) {
 
-    addMeta(
-        "fi-demonlist-list-count",
-        getList(
-            selectedDate
-        ).length
-    );
-
-
-    addMeta(
-        "fi-demonlist-data-format",
-        "JSON"
-    );
-
-
-    addMeta(
-        "fi-demonlist-exact-snapshot",
-        Boolean(
-            getExactSnapshot(
-                selectedDate
-            )
-        )
-    );
-
-
-    /*
-    =======================================================
-    STATIC MACHINE DATA
-    =======================================================
-    */
-
-    const staticMachineData = {
-
-        source:
-            "FiDemonlist",
-
-        dataType:
-            "Geometry Dash Demonlist",
-
-        currentDate:
-            todayString,
-
-        currentTop25:
-            masterOrder.map(
+    const current =
+        data.masterOrder
+            .map(
                 function(name, index) {
+
+                    const demon =
+                        findDemon(
+                            data.demons,
+                            name
+                        );
+
+
+                    if (!demon) {
+                        return null;
+                    }
+
+
+                    const rank =
+                        index + 1;
+
+
+                    const points =
+                        data.currentRankPoints[
+                            rank
+                        ] !== undefined
+
+                            ?
+
+                        data.currentRankPoints[
+                            rank
+                        ]
+
+                            :
+
+                        (
+                            demon.points || 0
+                        );
+
 
                     return {
 
                         rank:
-                            index + 1,
+                            rank,
 
                         name:
-                            name,
+                            demon.name,
+
+                        createdBy:
+                            demon.createdBy,
+
+                        verifiedBy:
+                            demon.verifiedBy,
+
+                        verification:
+                            demon.verification,
 
                         points:
-                            currentRankPoints[
-                                name
-                            ]
+                            Number(points),
+
+                        image:
+                            demon.image,
+
+                        victors:
+                            demon.victors || []
 
                     };
 
                 }
+            )
+            .filter(
+                function(item) {
+
+                    return item !== null;
+
+                }
+            );
+
+
+    const legacy =
+        data.historicalOrder
+            .map(
+                function(name) {
+
+                    const demon =
+                        findDemon(
+                            data.demons,
+                            name
+                        );
+
+
+                    if (!demon) {
+                        return null;
+                    }
+
+
+                    return {
+
+                        name:
+                            demon.name,
+
+                        createdBy:
+                            demon.createdBy,
+
+                        verifiedBy:
+                            demon.verifiedBy,
+
+                        verification:
+                            demon.verification,
+
+                        fallOff:
+                            demon.fallOff ||
+                            null,
+
+                        image:
+                            demon.image,
+
+                        historical:
+                            true
+
+                    };
+
+                }
+            )
+            .filter(
+                function(item) {
+
+                    return item !== null;
+
+                }
+            );
+
+
+    return {
+
+        site:
+            "FiDemonlist",
+
+        title:
+            "The Custom Geometry Dash Demonlist",
+
+        latestUpdated:
+            latestUpdated,
+
+        latestUpdatedFormatted:
+            new Date(
+                latestUpdated +
+                "T00:00:00"
+            ).toLocaleDateString(
+                "en-US",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
             ),
 
-        currentTop25IsExplicit:
-            true,
+        currentDemonCount:
+            current.length,
 
-        timeTravelSupported:
-            true,
+        legacyDemonCount:
+            legacy.length,
 
-        exactHistoricalSnapshots:
-            Object.keys(
-                snapshots
-            ).sort()
+        currentDemons:
+            current,
+
+        legacyDemons:
+            legacy
 
     };
 
+}
 
-    /*
-    Add static JSON into the page source.
-    */
 
-    const staticScript =
-        document.createElement(
-            "script"
+/* =====================================================
+   DISPLAY MACHINE DATA
+===================================================== */
+
+function renderMachineData(
+    data
+) {
+
+    const machineData =
+        createMachineData(
+            data
         );
 
-    staticScript.type =
-        "application/json";
 
-    staticScript.id =
-        "fiDemonlistStaticJSON";
-
-    staticScript.textContent =
+    document.getElementById(
+        "machineData"
+    ).textContent =
         JSON.stringify(
-            staticMachineData,
+            machineData,
             null,
             2
         );
 
-    document.body.appendChild(
-        staticScript
-    );
 
+    /*
+       Make the data available globally too.
+
+       This is useful for browser-based AI systems,
+       debugging, and other scripts.
+    */
+
+    window.fiDemonlist =
+        machineData;
 
 }
 
-catch (error) {
 
-    /*
-    =======================================================
-    ERROR HANDLING
-    =======================================================
-    */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-    const errorData = {
+function escapeHTML(
+    value
+) {
 
-        source:
-            "FiDemonlist",
+    if (
+        value === null ||
+        value === undefined
+    ) {
 
-        error:
-            true,
-
-        currentDate:
-            todayString,
-
-        message:
-            String(
-                error &&
-                error.message
-                    ? error.message
-                    : error
-            ),
-
-        fallbackTop25:
-            masterOrder.map(
-                function(name, index) {
-
-                    return {
-
-                        rank:
-                            index + 1,
-
-                        name:
-                            name,
-
-                        points:
-                            currentRankPoints[
-                                name
-                            ]
-
-                    };
-
-                }
-            )
-
-    };
-
-
-    const outputElement =
-        document.getElementById(
-            "output"
-        );
-
-
-    if (outputElement) {
-
-        outputElement.textContent =
-            JSON.stringify(
-                errorData,
-                null,
-                2
-            );
+        return "";
 
     }
 
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
 }
 
 
+/* =====================================================
+   JSON-LD
+===================================================== */
+
 /*
-===========================================================
-END
-===========================================================
+   Basic static structured information.
+
+   The actual detailed database is generated below
+   after index.html is loaded.
 */
+
+const jsonLD =
+    document.createElement(
+        "script"
+    );
+
+
+jsonLD.type =
+    "application/ld+json";
+
+
+jsonLD.textContent =
+    JSON.stringify(
+        {
+
+            "@context":
+                "https://schema.org",
+
+            "@type":
+                "WebPage",
+
+            name:
+                "FiDemonlist",
+
+            description:
+                "The Custom Geometry Dash Demonlist",
+
+            dateModified:
+                latestUpdated
+
+        }
+    );
+
+
+document.head.appendChild(
+    jsonLD
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadFiDemonlist();
+
+
 </script>
 
-</main>
 
 </body>
 </html>
