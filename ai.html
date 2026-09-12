@@ -2,332 +2,227 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>FiDemonlist AI</title>
 
     <meta
         name="description"
-        content="Machine-readable FiDemonlist data including the current Geometry Dash Demonlist and Legacy Demons."
+        content="FiDemonlist — Current Geometry Dash Demonlist and Legacy Demons."
     >
 
-    <meta
-        name="robots"
-        content="index, follow"
-    >
+    <meta name="robots" content="index, follow">
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            padding: 0;
-
-            background: #111111;
-            color: #ffffff;
-
+            background: #111;
+            color: #fff;
             font-family: Arial, sans-serif;
-
             line-height: 1.6;
         }
 
         header {
             background: #1b1b1b;
-
-            border-bottom:
-                2px solid #333333;
-
-            padding:
-                30px 20px;
-
+            border-bottom: 2px solid #333;
+            padding: 30px 20px;
             text-align: center;
         }
 
         header h1 {
             margin: 0;
-
             font-size: 38px;
         }
 
         header p {
-            margin:
-                8px 0 0;
-
-            color: #aaaaaa;
-
-            font-size: 15px;
+            margin: 8px 0 0;
+            color: #aaa;
         }
 
         .latest-updated {
             margin-top: 15px;
-
-            color: #ffffff;
-
-            font-size: 16px;
-
             font-weight: bold;
+            color: #fff;
         }
 
         .container {
             width: 100%;
-
             max-width: 1000px;
-
-            margin:
-                30px auto;
-
-            padding:
-                0 20px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
 
         .section h2 {
             margin-bottom: 10px;
-
             padding-bottom: 10px;
-
-            border-bottom:
-                1px solid #333333;
-
+            border-bottom: 1px solid #333;
             font-size: 28px;
         }
 
         .section-description {
-            color: #aaaaaa;
-
+            color: #aaa;
             margin-bottom: 25px;
         }
 
         .demon {
             background: #1c1c1c;
-
-            border:
-                1px solid #333333;
-
+            border: 1px solid #333;
             border-radius: 12px;
-
             padding: 20px;
-
             margin-bottom: 20px;
         }
 
-        .demon-rank {
-            color: #aaaaaa;
-
+        .rank {
+            color: #999;
             font-size: 14px;
-
-            margin-bottom: 5px;
         }
 
-        .demon-name {
+        .name {
             font-size: 25px;
-
             font-weight: bold;
-
-            margin-bottom: 12px;
+            margin: 4px 0 12px;
         }
 
         .info {
-            color: #aaaaaa;
-
+            color: #bbb;
             font-size: 15px;
-
             margin: 5px 0;
         }
 
         .points {
-            color: #ffffff;
-
-            font-size: 15px;
-
+            margin-top: 12px;
             font-weight: bold;
-
-            margin-top: 10px;
         }
 
         .victors {
-            margin-top: 15px;
-
-            padding-top: 15px;
-
-            border-top:
-                1px solid #333333;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid #333;
         }
 
         .victors-title {
             font-weight: bold;
-
             margin-bottom: 7px;
         }
 
         .victor {
-            color: #cccccc;
-
+            color: #ccc;
             font-size: 14px;
-
             margin: 3px 0;
         }
 
         .legacy {
             background: #181818;
-
-            border:
-                1px solid #333333;
-
+            border: 1px solid #333;
             border-radius: 12px;
-
             padding: 20px;
-
             margin-bottom: 15px;
         }
 
-        .legacy-name {
+        .legacy .name {
             font-size: 22px;
-
-            font-weight: bold;
-
-            margin-bottom: 10px;
         }
 
         .legacy-label {
-            color: #ffffff;
-
             font-weight: bold;
+            color: #fff;
         }
 
-        .empty {
-            background: #1c1c1c;
-
-            border:
-                1px solid #333333;
-
-            border-radius: 12px;
-
-            padding: 25px;
-
-            color: #888888;
-
-            text-align: center;
+        .machine-data {
+            background: #0b0b0b;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            color: #ccc;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow-x: auto;
         }
 
         footer {
+            border-top: 1px solid #333;
             margin-top: 50px;
-
             padding: 25px 20px;
-
-            border-top:
-                1px solid #333333;
-
-            color: #777777;
-
             text-align: center;
-
+            color: #777;
             font-size: 13px;
         }
 
         @media (max-width: 700px) {
-
             header h1 {
                 font-size: 30px;
             }
 
             .container {
-                padding:
-                    0 15px;
+                padding: 0 15px;
             }
 
-            .demon-name {
+            .name {
                 font-size: 22px;
             }
-
         }
-
     </style>
 </head>
 
-
 <body>
 
-
 <header>
-
-    <h1>
-        FiDemonlist
-    </h1>
+    <h1>FiDemonlist</h1>
 
     <p>
         The Custom Geometry Dash Demonlist
     </p>
 
-    <div
-        class="latest-updated"
-        id="latestUpdated"
-    >
+    <div class="latest-updated" id="latestUpdated">
         Latest Updated: September 12, 2026
     </div>
-
 </header>
 
 
 <div class="container">
 
-
-    <!-- =================================================
-         INTRODUCTION
-    ================================================== -->
+    <!-- ==============================
+         ABOUT
+    =============================== -->
 
     <section class="section">
 
-        <h2>
-            About FiDemonlist
-        </h2>
+        <h2>About FiDemonlist</h2>
 
         <p class="section-description">
-
             FiDemonlist is a custom Geometry Dash Demonlist.
-            This page is designed to provide clean,
-            machine-readable information for AI systems,
-            search engines, bots, and other automated systems.
-
+            This page provides machine-readable information
+            about the current list and Legacy Demons.
         </p>
 
         <p class="section-description">
-
-            The Current FiDemonlist contains the currently
-            ranked demons. Legacy Demons are demons that
-            were historically on the list but have since
-            fallen off.
-
+            Current demons are ranked from #1 downward.
+            Legacy Demons are former FiDemonlist demons that
+            have fallen off the current list.
         </p>
 
     </section>
 
 
-    <!-- =================================================
+    <!-- ==============================
          CURRENT LIST
-    ================================================== -->
+    =============================== -->
 
     <section class="section">
 
-        <h2>
-            Current FiDemonlist
-        </h2>
+        <h2>Current FiDemonlist</h2>
 
         <p class="section-description">
-
-            These are the demons currently ranked on
-            FiDemonlist.
-
+            The current FiDemonlist contains 26 ranked demons.
         </p>
 
         <div id="currentList"></div>
@@ -335,22 +230,17 @@
     </section>
 
 
-    <!-- =================================================
+    <!-- ==============================
          LEGACY DEMONS
-    ================================================== -->
+    =============================== -->
 
     <section class="section">
 
-        <h2>
-            Legacy Demons
-        </h2>
+        <h2>Legacy Demons</h2>
 
         <p class="section-description">
-
-            Legacy Demons are former FiDemonlist demons
-            that are no longer on the current list.
-            They have no current list points or current rank.
-
+            Legacy Demons are demons that were previously on
+            FiDemonlist but have fallen off the current list.
         </p>
 
         <div id="legacyList"></div>
@@ -358,69 +248,1225 @@
     </section>
 
 
-    <!-- =================================================
+    <!-- ==============================
          MACHINE READABLE DATA
-    ================================================== -->
+    =============================== -->
 
     <section class="section">
 
-        <h2>
-            Machine-Readable Information
-        </h2>
+        <h2>Machine-Readable Data</h2>
 
         <p class="section-description">
-
-            The information below is generated from the same
-            database used by the main FiDemonlist page.
-
+            Structured FiDemonlist information for AI systems,
+            search engines, and other automated systems.
         </p>
 
-        <pre
-            id="machineData"
-            style="
-                white-space: pre-wrap;
-                word-break: break-word;
-                background: #0b0b0b;
-                border: 1px solid #333333;
-                border-radius: 10px;
-                padding: 20px;
-                color: #cccccc;
-                font-size: 13px;
-                overflow-x: auto;
-            "
-        ></pre>
+        <pre id="machineData" class="machine-data"></pre>
 
     </section>
-
 
 </div>
 
 
 <footer>
-
     FiDemonlist — Custom Geometry Dash Demonlist
-
 </footer>
 
 
 <script>
 
-
 /* =====================================================
-   LATEST UPDATE
+   FI DEMONLIST SETTINGS
 ===================================================== */
 
-/*
-   Change this date whenever the FiDemonlist data is
-   updated.
+const latestUpdated = "2026-09-12";
 
-   Format:
-   YYYY-MM-DD
-*/
 
-const latestUpdated =
-    "2026-09-12";
+/* =====================================================
+   CURRENT DEMON DATA
+===================================================== */
 
+const currentDemons = [
+
+    {
+        rank: 1,
+        name: "Society",
+        points: 350.00,
+        createdBy: "Neomarbilan",
+        verifiedBy: "Wpopoff",
+        verification: "2026-06-20",
+        image: "Society.jpeg",
+        victors: [
+            "wPopoff 🇺🇸",
+            "Zoink 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 2,
+        name: "Thinking Space II",
+        points: 331.71,
+        createdBy: "CairoX",
+        verifiedBy: "Zoink",
+        verification: "2025-05-25",
+        image: "Thinking Space II.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "wPopoff 🇺🇸",
+            "Trick 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 3,
+        name: "Amethyst",
+        points: 313.42,
+        createdBy: "iMist",
+        verifiedBy: "Wpopoff",
+        verification: "2025-05-25",
+        image: "Amethyst.jpeg",
+        victors: [
+            "wPopoff 🇺🇸",
+            "Zoink 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 4,
+        name: "Flamewall",
+        points: 291.70,
+        createdBy: "Narwall",
+        verifiedBy: "Cuatrocientos",
+        verification: "2025-09-21",
+        image: "Flamewall.jpeg",
+        victors: [
+            "Cuatrocientos 🇪🇸",
+            "Zoink 🇺🇸",
+            "zLevii 🇳🇿"
+        ]
+    },
+
+    {
+        rank: 5,
+        name: "Tidal Wave",
+        points: 271.78,
+        createdBy: "OniLink",
+        verifiedBy: "Zoink",
+        verification: "2023-09-09",
+        image: "Tidal Wave.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "Trick 🇺🇸",
+            "wPopoff 🇺🇸",
+            "Taiago 🇵🇹",
+            "Netermind 🇺🇸",
+            "레전드아잉몰라요 🇰🇷"
+        ]
+    },
+
+    {
+        rank: 6,
+        name: "Green Bullet",
+        points: 253.53,
+        createdBy: "MinaY",
+        verifiedBy: "Nickname09",
+        verification: "2026-06-16",
+        image: "Green Bullet.jpeg",
+        victors: [
+            "Nickname09 🇷🇺"
+        ]
+    },
+
+    {
+        rank: 7,
+        name: "Orbit",
+        points: 236.80,
+        createdBy: "MindCap",
+        verifiedBy: "Zoink",
+        verification: "2026-02-10",
+        image: "Orbit.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "dovvin 🇵🇱",
+            "Thelifinof 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 8,
+        name: "Antarctic Lights",
+        points: 221.47,
+        createdBy: "declanlc",
+        verifiedBy: "Axinity",
+        verification: "2026-07-16",
+        image: "Antarctic Lights.jpeg",
+        victors: [
+            "Axinity 🇩🇰",
+            "weyolll3 🇪🇸"
+        ]
+    },
+
+    {
+        rank: 9,
+        name: "Nullscapes",
+        points: 207.42,
+        createdBy: "Kiba",
+        verifiedBy: "Zoink",
+        verification: "2024-09-04",
+        image: "Nullscapes.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "Spookkd 🇺🇸",
+            "whfyre 🇺🇦",
+            "Hover 🇦🇹",
+            "Theitha 🇵🇦",
+            "Cryostazz 🇫🇷",
+            "Benbotwyd 🇺🇸",
+            "SpaceRS 🇷🇸"
+        ]
+    },
+
+    {
+        rank: 10,
+        name: "Quanteuse Processing",
+        points: 194.54,
+        createdBy: "Renn241 and BlankB",
+        verifiedBy: "Zoink",
+        verification: "2024-12-31",
+        image: "Quanteuse Processing.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "dovvin 🇵🇱",
+            "Seregiusz 🇵🇱",
+            "Sharkyga 🇦🇺",
+            "Karkito 🇰🇷"
+        ]
+    },
+
+    {
+        rank: 11,
+        name: "BOOBAWAMBA",
+        points: 182.73,
+        createdBy: "Akunakunn",
+        verifiedBy: "Eastshark",
+        verification: "2024-10-05",
+        image: "BOOBAWAMBA.jpeg",
+        victors: [
+            "Eastshark 🇪🇸",
+            "Agonom 🇰🇷",
+            "Cbrem 🇬🇧",
+            "Zoink 🇺🇸",
+            "wPopoff 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 12,
+        name: "The Bloop",
+        points: 171.91,
+        createdBy: "murkkat",
+        verifiedBy: "Zoink",
+        verification: "2026-03-15",
+        image: "The Bloop.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "Nickname09 🇷🇺"
+        ]
+    },
+
+    {
+        rank: 13,
+        name: "Every End",
+        points: 161.99,
+        createdBy: "MindCap",
+        verifiedBy: "Hqmy",
+        verification: "2025-03-16",
+        image: "Every End.jpeg",
+        victors: [
+            "Hqmy 🇺🇸",
+            "Zoink 🇺🇸",
+            "Garbag 🇷🇺",
+            "Stefan Boss 🇷🇴",
+            "N3bulA 🇬🇧",
+            "PlusrMinus 🇺🇸",
+            "TFIBB 🇺🇸",
+            "Lanx 🇵🇱",
+            "Samot 🇦🇷",
+            "Bims 🇩🇪",
+            "dovvin 🇵🇱",
+            "Seturan 🇰🇷",
+            "wPopoff 🇺🇸",
+            "Forewa 🇷🇺",
+            "Brumik 🇨🇿",
+            "Hamsoo 🇰🇷",
+            "hstorm 🇺🇸",
+            "Thnnder 🇺🇸",
+            "Neuba 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 14,
+        name: "Penumbral",
+        points: 152.89,
+        createdBy: "nxhtrise",
+        verifiedBy: "w3rty",
+        verification: "2026-03-05",
+        image: "Penumbral.jpeg",
+        victors: [
+            "w3rty 🇷🇺",
+            "dovvin 🇵🇱",
+            "Zoink 🇺🇸",
+            "Sharkified 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 15,
+        name: "Silent Clubstep",
+        points: 144.56,
+        createdBy: "Sailent",
+        verifiedBy: "paqoe",
+        verification: "2022-07-12",
+        image: "Silent Clubstep.jpeg",
+        victors: [
+            "paqoe 🇺🇸",
+            "Zoink 🇺🇸",
+            "Doggie 🇺🇸",
+            "Trick 🇺🇸",
+            "Seturan 🇰🇷",
+            "zVision 🇺🇸",
+            "wPopoff 🇺🇸",
+            "Adri420 🇪🇸",
+            "Litoks 🇫🇷",
+            "Aless50 🇻🇪",
+            "freksolereal 🇨🇭",
+            "Diamond 🇦🇱",
+            "Albert 🇺🇸",
+            "MeQ8cNv43s6A 🇯🇵",
+            "niwox 🇫🇷",
+            "Triqz 🇺🇸",
+            "Netermind 🇺🇸",
+            "Juls 🇨🇦",
+            "Mixasuspa 🇷🇸",
+            "XBelugaX 🇪🇸",
+            "Luciid 🇺🇸",
+            "UNCLEBOGD4N 🇷🇺",
+            "[미소노 미카] 구아이 🇰🇷",
+            "whfyre 🇺🇦",
+            "NathanPatty 🇺🇸",
+            "Hover 🇦🇹",
+            "turtle 🇨🇦",
+            "thiagar 🇦🇷",
+            "songfilehub 🇺🇸",
+            "dovvin 🇵🇱",
+            "Horuszed 🇨🇱",
+            "Zephronox 🇨🇦",
+            "Flashl3ang 🇰🇷",
+            "ChopBlox 🇩🇪",
+            "eksdulgation 🇷🇺",
+            "agatha 🇭🇷",
+            "abb2k 🇮🇱",
+            "cc478 🇺🇸",
+            "HumbleGoat216 🇺🇦",
+            "carv 🇺🇸",
+            "Thnnder 🇺🇸",
+            "Sanni 🇫🇮",
+            "Cookie 🇺🇸",
+            "kosh 🇬🇪",
+            "zStucc 🇮🇹",
+            "Franklin 🇺🇸",
+            "hstorm 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 16,
+        name: "Ashley Wave Trials",
+        points: 136.92,
+        createdBy: "OddMod",
+        verifiedBy: "Zoink",
+        verification: "2024-11-02",
+        image: "Ashley Wave Trials.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "Cookie 🇺🇸",
+            "yolomodeboom 🇱🇹"
+        ]
+    },
+
+    {
+        rank: 17,
+        name: "Ultra Paracosm",
+        points: 129.92,
+        createdBy: "Renn241 and declanlc",
+        verifiedBy: "Wity",
+        verification: "2026-04-21",
+        image: "Ultra Paracosm.jpeg",
+        victors: [
+            "Wity 🇪🇸",
+            "Axinity 🇩🇰",
+            "Zoink 🇺🇸"
+        ]
+    },
+
+    {
+        rank: 18,
+        name: "Andromeda",
+        points: 123.50,
+        createdBy: "Insxne97",
+        verifiedBy: "Taiago",
+        verification: "2025-01-19",
+        image: "Andromeda.jpeg",
+        victors: [
+            "Taiago 🇵🇹",
+            "Zoink 🇺🇸",
+            "GuillExprex52 🇪🇸",
+            "Hqmy 🇺🇸",
+            "Jerpaa 🇫🇮",
+            "wPopoff 🇺🇸",
+            "VERTOP 🇷🇺",
+            "DibiiziCookie 🇧🇷",
+            "Laniakea 🇰🇷",
+            "ChopBlox 🇩🇪",
+            "dovvin 🇵🇱",
+            "Netermind 🇺🇸",
+            "Zeroxy 🇳🇴",
+            "cudby 🇨🇦",
+            "Slaughter 🇨🇦",
+            "DeividG 🇪🇸",
+            "Sharkified 🇺🇸",
+            "rediio 🇰🇷",
+            "Abdieldevil 🇵🇪",
+            "Pluntix 🇨🇿",
+            "Axinity 🇩🇰"
+        ]
+    },
+
+    {
+        rank: 19,
+        name: "KILLSTEALER",
+        points: 117.62,
+        createdBy: "Rynoxious and Asterion",
+        verifiedBy: "kloone",
+        verification: "2026-04-22",
+        image: "KILLSTEALER.jpeg",
+        victors: [
+            "kloone 🇫🇮",
+            "zLevii 🇳🇿"
+        ]
+    },
+
+    {
+        rank: 20,
+        name: "Subsuming Vortex",
+        points: 112.23,
+        createdBy: "SeptaGon7",
+        verifiedBy: "Cursed",
+        verification: "2025-09-10",
+        image: "Subsuming Vortex.jpeg",
+        victors: [
+            "Cursed 🇬🇧",
+            "Zoink 🇺🇸",
+            "LAMINGTON 🇦🇺",
+            "Rodmentor 🇨🇴",
+            "weyolll3 🇪🇸",
+            "wPopoff 🇺🇸",
+            "Beto 🇮🇱",
+            "manu 🇨🇱"
+        ]
+    },
+
+    {
+        rank: 21,
+        name: "Anathema",
+        points: 110.81,
+        createdBy: "nikrodox",
+        verifiedBy: "Whizkid05",
+        verification: "2024-11-20",
+        image: "Anathema.jpeg",
+        victors: [
+            "Whizkid05 🇬🇧",
+            "Zoink 🇺🇸",
+            "teraaa 🇰🇿",
+            "PoCle 🇰🇷",
+            "Netermind 🇺🇸",
+            "Serpentical 🇭🇺",
+            "Trick 🇺🇸",
+            "Gokill 🇵🇱",
+            "wPopoff 🇺🇸",
+            "Jif 🇺🇸",
+            "coubitic 🇫🇷",
+            "Nocturina 🇺🇸",
+            "Yuuwi 🇲🇽",
+            "kloone 🇫🇮",
+            "Mizukii 🇩🇪",
+            "Ronrjkw 🇺🇸",
+            "takma 🇷🇺",
+            "DibiiziCookie 🇧🇷",
+            "eksdulgation 🇷🇺",
+            "ItzDoVi 🇰🇿",
+            "Goanga 🇷🇴",
+            "zLevii 🇳🇿",
+            "Albert 🇺🇸",
+            "DreamyBull 🇩🇪"
+        ]
+    },
+
+    {
+        rank: 22,
+        name: "Avernus",
+        points: 109.39,
+        createdBy: "BoBoBoBoBoBoBo and Pockewindfish",
+        verifiedBy: "Zoink",
+        verification: "2023-03-22",
+        image: "Avernus.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "Diamond 🇦🇱",
+            "Trick 🇺🇸",
+            "wPopoff 🇺🇸",
+            "Abdieldevil 🇵🇪",
+            "Taiago 🇵🇹",
+            "Mizukii 🇩🇪",
+            "Netermind 🇺🇸",
+            "fallen 🇷🇺",
+            "Serpentical 🇭🇺",
+            "Wavyy 🇫🇷",
+            "Yumira 🇷🇺",
+            "Doggie 🇺🇸",
+            "misty 🇷🇺",
+            "turtle 🇨🇦",
+            "Johnlikediamond 🇺🇸",
+            "Jerpaa 🇫🇮",
+            "eternalluna 🇨🇳",
+            "Scoff 🇨🇦",
+            "TimsTeam 🇷🇺",
+            "craig0 🇺🇸",
+            "teraaa 🇰🇿",
+            "weyolll3 🇪🇸",
+            "eastshark 🇪🇸",
+            "kloone 🇫🇮",
+            "UNCLEBOGD4N 🇷🇺",
+            "Cookie 🇺🇸",
+            "kropka 🇵🇱",
+            "Sharkified 🇺🇸",
+            "GodGamer2442 🇬🇧",
+            "miguel6456 🇪🇸",
+            "SpaceRS 🇷🇸"
+        ]
+    },
+
+    {
+        rank: 23,
+        name: "Acheron",
+        points: 107.99,
+        createdBy: "ryamu",
+        verifiedBy: "Zoink",
+        verification: "2022-08-23",
+        image: "Acheron.jpeg",
+        victors: [
+            "Zoink 🇺🇸",
+            "Doggie 🇺🇸",
+            "Trick 🇺🇸",
+            "Zeroxy 🇳🇴",
+            "wPopoff 🇺🇸",
+            "OneAlphaHelix 🇺🇸",
+            "TheRealEandis 🇷🇺",
+            "Taiago 🇵🇹",
+            "RaeveZ 🇨🇴",
+            "Hover 🇦🇹",
+            "Light 🇷🇺",
+            "Mizukii 🇩🇪",
+            "Netermind 🇺🇸",
+            "Mikhail Krotov 🇷🇺",
+            "takma 🇷🇺",
+            "donley 🇨🇦",
+            "hstorm 🇺🇸",
+            "teraaa 🇰🇿",
+            "Gokill 🇵🇱",
+            "Paltadashg 🇨🇱",
+            "Ronrjkw 🇺🇸",
+            "SnowBallerr 🇦🇺",
+            "brite 🇮🇹",
+            "misty 🇷🇺",
+            "zThund3r 🇫🇷",
+            "Axinity 🇩🇰",
+            "RG 🇨🇦",
+            "Thnnder 🇺🇸",
+            "The_Bat0 🇷🇺",
+            "Scoff 🇨🇦",
+            "LOL123 🇸🇪",
+            "Goanga 🇷🇴",
+            "fallen 🇷🇺",
+            "Stefan Boss 🇷🇴",
+            "Hqmy 🇺🇸",
+            "Tunax 🇳🇴",
+            "TheRealMike 🇺🇸",
+            "zoe 🇺🇸",
+            "Kole 🇷🇸",
+            "Sharkified 🇺🇸",
+            "Unlucky2 🇩🇪",
+            "Serpentical 🇭🇺",
+            "Cursed 🇬🇧",
+            "it keeps your hands clean 🇺🇸",
+            "Kaza 🇷🇴",
+            "kloone 🇫🇮",
+            "NLShorty 🇨🇦",
+            "Breakcore 🇪🇪",
+            "MeQ8cNv43s6A 🇯🇵",
+            "ChopBlox 🇩🇪",
+            "Abdieldevil 🇵🇪",
+            "fluget 🇺🇦",
+            "Nordstrom 🇺🇸",
+            "littlegiggle 🇺🇸",
+            "rediio 🇰🇷",
+            "turtle 🇨🇦",
+            "KlimK 🇷🇺",
+            "DibiiziCookie 🇧🇷",
+            "Albert 🇺🇸",
+            "Joker 🇷🇺",
+            "xalval 🇷🇺",
+            "eastshark 🇪🇸",
+            "Ranian 🇮🇸",
+            "ColossalOrange 🇺🇸",
+            "sawyer 🇺🇸",
+            "UNCLEBOGD4N 🇷🇺",
+            "eternalluna 🇨🇳",
+            "Denni 🇨🇦",
+            "noxell 🇷🇺",
+            "FinnyP515 🇺🇸",
+            "SpaceRS 🇷🇸",
+            "zGamerdude 🇺🇸",
+            "Cookie 🇺🇸",
+            "Raffox 🇨🇴",
+            "Edward 🇬🇧",
+            "itzhealer 🇷🇺",
+            "HumbleGoat216 🇸🇪",
+            "maxer 🇷🇺",
+            "TimsTeam 🇷🇺",
+            "Syrcx 🇮🇱",
+            "karkito 🇰🇷",
+            "eksdulgation 🇷🇺",
+            "Technical 🇺🇸",
+            "tea 🇰🇷",
+            "RAASU 🇩🇪",
+            "Trolly1 🇺🇸",
+            "W1nda 🇷🇺",
+            "Flavyola64 🇧🇪",
+            "roma666 🇷🇺",
+            "weyolll3 🇪🇸",
+            "Komet01 🇵🇱",
+            "zLevii 🇳🇿",
+            "Twenty 🇨🇿",
+            "Ripplez 🇷🇴",
+            "Lake 🇬🇧",
+            "nebular 🇩🇪",
+            "Harhir 🇫🇮",
+            "VxMasTer 🇷🇴",
+            "Bigthunder556 🇺🇸",
+            "ffzer 🇷🇺",
+            "stevenxd42 🇲🇽",
+            "whfyre 🇺🇦",
+            "godiskdjei 🇬🇷",
+            "zStucc 🇮🇹",
+            "niwox 🇫🇷",
+            "Rybertrion 🇺🇸",
+            "Pleid 🇦🇺",
+            "mcrawford001 🇺🇸",
+            "Cryostazz 🇫🇷",
+            "wSharkiye 🇫🇷",
+            "Laysah 🇬🇧"
+        ]
+    },
+
+    {
+        rank: 24,
+        name: "Spectre",
+        points: 106.61,
+        createdBy: "xander",
+        verifiedBy: "PersonHuman42",
+        verification: "2024-10-05",
+        image: "Spectre.jpeg",
+        victors: [
+            "PersonHuman42 🇦🇺",
+            "Trick 🇺🇸",
+            "Netermind 🇺🇸",
+            "Thnnder 🇺🇸",
+            "Laysah 🇬🇧",
+            "Zoink 🇺🇸",
+            "Albert 🇺🇸",
+            "zLevii 🇳🇿",
+            "Stefan Boss 🇷🇴",
+            "wPopoff 🇺🇸",
+            "wwdonut 🇺🇸",
+            "SaturMan 🇷🇺",
+            "NLShorty 🇨🇦",
+            "eastshark 🇪🇸",
+            "weyolll3 🇪🇸",
+            "dovvin 🇵🇱",
+            "1rua 🇮🇪",
+            "lus 🇧🇷",
+            "strikk 🇧🇷",
+            "Bixeo 🇨🇱",
+            "PoCle 🇰🇷",
+            "YeldA 🇰🇷",
+            "vsce 🇲🇽",
+            "BigHoss 🇺🇸",
+            "karkito 🇰🇷"
+        ]
+    },
+
+    {
+        rank: 25,
+        name: "Menace",
+        points: 105.24,
+        createdBy: "Arraegen",
+        verifiedBy: "Whizkid05",
+        verification: "2024-07-14",
+        image: "Menace.jpeg",
+        victors: [
+            "Whizkid05 🇬🇧",
+            "Thnnder 🇺🇸",
+            "Zoink 🇺🇸",
+            "Netermind 🇺🇸",
+            "Dovi 🇷🇺",
+            "Flavyola64 🇧🇪",
+            "mariner 🇫🇮",
+            "bims 🇩🇪",
+            "Ahwiin [Unknown Country]",
+            "KrNati 🇦🇺",
+            "fuuturisticfire 🇺🇸",
+            "wPopoff 🇺🇸",
+            "Senatorias 🇵🇱",
+            "rediio 🇰🇷",
+            "kakol 🇵🇱"
+        ]
+    },
+
+    {
+        rank: 26,
+        name: "Abyss of Darkness",
+        points: 103.88,
+        createdBy: "Exen",
+        verifiedBy: "Cursed",
+        verification: "2022-04-03",
+        image: "Abyss of Darkness.jpeg",
+        victors: [
+            "Cursed 🇬🇧",
+            "Trick 🇺🇸",
+            "Zoink 🇺🇸",
+            "ViperVenom95 🇦🇺",
+            "Thnnder 🇺🇸",
+            "DoSh7t 🇲🇽",
+            "Doggie 🇺🇸",
+            "zThund3r 🇫🇷",
+            "Light 🇷🇺",
+            "Laniakea 🇰🇷",
+            "Stefan Boss 🇷🇴",
+            "wPopoff 🇺🇸",
+            "Nordstrom 🇺🇸",
+            "Mizukii 🇩🇪",
+            "Kole 🇷🇸",
+            "Netermind 🇺🇸",
+            "el tettor de las coneras 🇵🇪",
+            "Adri420 🇪🇸",
+            "DibiiziCookie 🇧🇷",
+            "Breakcore 🇪🇪",
+            "Seturan 🇰🇷",
+            "KenosSongReal 🇺🇸",
+            "PoCle 🇰🇷",
+            "SagerR 🇷🇺",
+            "wavedash 🇬🇧",
+            "rediio 🇰🇷",
+            "itzhealer 🇷🇺",
+            "Freezy 🇩🇪",
+            "Analitic 🇷🇺",
+            "abb2k 🇮🇱",
+            "Zeronium 🇨🇦",
+            "Diris 🇲🇽",
+            "noxell 🇷🇺",
+            "turtle 🇨🇦",
+            "l1nxxd 🇺🇦",
+            "maxer 🇷🇺",
+            "veyra 🇩🇪",
+            "imbeemed 🇷🇺",
+            "UNCLEBOGD4N 🇷🇺",
+            "Poly 🇹🇷",
+            "mariner 🇫🇮",
+            "TimsTeam 🇷🇺",
+            "ezdemon [Unknown Country]",
+            "eternalluna 🇨🇳",
+            "aidsen 🇺🇸",
+            "Biprex 🇬🇪",
+            "uzuudeen 🇷🇺",
+            "Lfz 🇸🇴"
+        ]
+    }
+
+];
+
+
+/* =====================================================
+   LEGACY DEMON DATA
+===================================================== */
+
+const legacyDemons = [
+
+    {
+        name: "Bloodlust",
+        createdBy: "Manix648",
+        verifiedBy: "Knobbelboy",
+        verification: "2018-02-20",
+        fallOff: "2025",
+        image: "Bloodlust.jpeg"
+    },
+
+    {
+        name: "Sonic Wave",
+        createdBy: "Cyclic",
+        verifiedBy: "Sunix",
+        verification: "2016-11-25",
+        fallOff: "2023",
+        image: "Sonic Wave.jpeg"
+    },
+
+    {
+        name: "Yatagarasu",
+        createdBy: "Riot and Viprin",
+        verifiedBy: "TrusTa",
+        verification: "2017-01-13",
+        fallOff: "2023",
+        image: "Yatagarasu.jpeg"
+    },
+
+    {
+        name: "Phobos",
+        createdBy: "GMTSean",
+        verifiedBy: "KrmaL",
+        verification: "2016-05-12",
+        fallOff: "2021-05-13",
+        image: "Phobos.jpeg"
+    },
+
+    {
+        name: "Sakupen Hell",
+        createdBy: "Noobas",
+        verifiedBy: "TrusTa",
+        verification: "2016-08-14",
+        fallOff: "2021-05-07",
+        image: "Sakupen Hell.jpeg"
+    },
+
+    {
+        name: "Betrayal of Fate",
+        createdBy: "Unknown",
+        verifiedBy: "Unknown",
+        verification: "9999-01-01",
+        fallOff: "9999-01-02",
+        image: "Betrayal of Fate.jpeg"
+    },
+
+    {
+        name: "Bloodbath",
+        createdBy: "Riot",
+        verifiedBy: "Riot",
+        verification: "2015-08-12",
+        fallOff: "2021-01-29",
+        image: "Bloodbath.jpeg"
+    },
+
+    {
+        name: "The Hell Factory",
+        createdBy: "TeamN2",
+        verifiedBy: "Powerbomb",
+        verification: "2015-12-28",
+        fallOff: "2020-09-04",
+        image: "The Hell Factory.jpeg"
+    },
+
+    {
+        name: "Down Bass",
+        createdBy: "Valyrie",
+        verifiedBy: "TheRealSneaky",
+        verification: "2016-08-25",
+        fallOff: "2020-12-23",
+        image: "Down Bass.jpeg"
+    },
+
+    {
+        name: "A Bizarre Phantasm",
+        createdBy: "TeamN2",
+        verifiedBy: "GoodSmile",
+        verification: "2016-04-11",
+        fallOff: "2020-09-21",
+        image: "A Bizarre Phantasm.jpeg"
+    },
+
+    {
+        name: "Conical Depression",
+        createdBy: "KrmaL",
+        verifiedBy: "KrmaL",
+        verification: "2016-03-10",
+        fallOff: "2020-11-01",
+        image: "Conical Depression.jpeg"
+    },
+
+    {
+        name: "Aftermath",
+        createdBy: "Unknown",
+        verifiedBy: "Unknown",
+        verification: "9999-01-01",
+        fallOff: "9999-01-02",
+        image: "Aftermath.jpeg"
+    },
+
+    {
+        name: "Plasma Pulse III",
+        createdBy: "Smokes and Giron",
+        verifiedBy: "Smokes",
+        verification: "2016-05-25",
+        fallOff: "2020-01-04",
+        image: "Plasma Pulse III.jpeg"
+    },
+
+    {
+        name: "Heartbeat",
+        createdBy: "KrmaL",
+        verifiedBy: "KrmaL",
+        verification: "2016-05-30",
+        fallOff: "2020-04-08",
+        image: "Heartbeat.jpeg"
+    },
+
+    {
+        name: "The Ultimate Phase",
+        createdBy: "Andromeda",
+        verifiedBy: "Andromeda",
+        verification: "2016-06-21",
+        fallOff: "2019-07-05",
+        image: "The Ultimate Phase.jpeg"
+    },
+
+    {
+        name: "Retention",
+        createdBy: "WOOGI1411",
+        verifiedBy: "WOOGI1411",
+        verification: "2016-04-08",
+        fallOff: "2019-11-10",
+        image: "Retention.jpeg"
+    },
+
+    {
+        name: "Red World Rebirth",
+        createdBy: "saRy and Neptune",
+        verifiedBy: "Riot",
+        verification: "2016-05-22",
+        fallOff: "2020-01-21",
+        image: "Red World Rebirth.jpeg"
+    },
+
+    {
+        name: "AcropoliX",
+        createdBy: "SoulsTRK",
+        verifiedBy: "SoulsTRK",
+        verification: "2016-04-28",
+        fallOff: "2019-12-31",
+        image: "AcropoliX.jpeg"
+    },
+
+    {
+        name: "Cataclysm",
+        createdBy: "Ggb0y",
+        verifiedBy: "Riot",
+        verification: "2016-01-15",
+        fallOff: "2019-09-02",
+        image: "Cataclysm.jpeg"
+    }
+
+];
+
+
+/* =====================================================
+   RENDER CURRENT LIST
+===================================================== */
+
+function renderCurrentList() {
+
+    const container =
+        document.getElementById("currentList");
+
+    container.innerHTML = "";
+
+    currentDemons.forEach(demon => {
+
+        const card =
+            document.createElement("article");
+
+        card.className = "demon";
+
+        card.innerHTML = `
+
+            <div class="rank">
+                Rank #${demon.rank}
+            </div>
+
+            <div class="name">
+                ${escapeHTML(demon.name)}
+            </div>
+
+            <div class="info">
+                <strong>Created By:</strong>
+                ${escapeHTML(demon.createdBy)}
+            </div>
+
+            <div class="info">
+                <strong>Verified By:</strong>
+                ${escapeHTML(demon.verifiedBy)}
+            </div>
+
+            <div class="info">
+                <strong>Verification Date:</strong>
+                ${escapeHTML(demon.verification)}
+            </div>
+
+            <div class="points">
+                List Points:
+                ${demon.points.toFixed(2)}
+            </div>
+
+            <div class="victors">
+
+                <div class="victors-title">
+                    Victors
+                </div>
+
+                ${
+                    demon.victors.length > 0
+
+                    ?
+
+                    demon.victors.map(victor => `
+
+                        <div class="victor">
+                            ${escapeHTML(victor)}
+                        </div>
+
+                    `).join("")
+
+                    :
+
+                    `
+                        <div class="victor">
+                            No recorded victors.
+                        </div>
+                    `
+                }
+
+            </div>
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   RENDER LEGACY LIST
+===================================================== */
+
+function renderLegacyList() {
+
+    const container =
+        document.getElementById("legacyList");
+
+    container.innerHTML = "";
+
+    legacyDemons.forEach(demon => {
+
+        const card =
+            document.createElement("article");
+
+        card.className = "legacy";
+
+        card.innerHTML = `
+
+            <div class="name">
+                ${escapeHTML(demon.name)}
+            </div>
+
+            <div class="info">
+                <span class="legacy-label">
+                    Created By:
+                </span>
+
+                ${escapeHTML(demon.createdBy)}
+            </div>
+
+            <div class="info">
+                <span class="legacy-label">
+                    Verified By:
+                </span>
+
+                ${escapeHTML(demon.verifiedBy)}
+            </div>
+
+            <div class="info">
+                <span class="legacy-label">
+                    Verification Date:
+                </span>
+
+                ${escapeHTML(demon.verification)}
+            </div>
+
+            <div class="info">
+                <span class="legacy-label">
+                    Fell Off:
+                </span>
+
+                ${escapeHTML(demon.fallOff)}
+            </div>
+
+            <div class="info">
+                <span class="legacy-label">
+                    Status:
+                </span>
+
+                Legacy Demon
+            </div>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   MACHINE-READABLE DATA
+===================================================== */
+
+function createMachineData() {
+
+    return {
+
+        site: "FiDemonlist",
+
+        title:
+            "The Custom Geometry Dash Demonlist",
+
+        latestUpdated:
+            latestUpdated,
+
+        currentDemonCount:
+            currentDemons.length,
+
+        legacyDemonCount:
+            legacyDemons.length,
+
+        currentDemons:
+            currentDemons,
+
+        legacyDemons:
+            legacyDemons
+
+    };
+
+}
+
+
+/* =====================================================
+   DISPLAY MACHINE DATA
+===================================================== */
+
+function renderMachineData() {
+
+    const data =
+        createMachineData();
+
+    document.getElementById(
+        "machineData"
+    ).textContent =
+        JSON.stringify(
+            data,
+            null,
+            2
+        );
+
+    /*
+       Make the structured data available globally.
+    */
+
+    window.fiDemonlist = data;
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   JSON-LD
+===================================================== */
+
+const jsonLD =
+    document.createElement("script");
+
+jsonLD.type =
+    "application/ld+json";
+
+jsonLD.textContent =
+    JSON.stringify({
+
+        "@context":
+            "https://schema.org",
+
+        "@type":
+            "WebPage",
+
+        "name":
+            "FiDemonlist",
+
+        "description":
+            "The Custom Geometry Dash Demonlist",
+
+        "dateModified":
+            latestUpdated
+
+    });
+
+document.head.appendChild(
+    jsonLD
+);
+
+
+/* =====================================================
+   START PAGE
+===================================================== */
 
 document.getElementById(
     "latestUpdated"
@@ -438,971 +1484,13 @@ document.getElementById(
     );
 
 
-/* =====================================================
-   SOURCE
-===================================================== */
+renderCurrentList();
 
-/*
-   The AI page reads the actual index.html database.
+renderLegacyList();
 
-   This means that when you add a new demon, victor,
-   creator, verifier, legacy demon, etc. to index.html,
-   ai.html automatically receives the same data.
-
-   Both files must be in the same folder.
-*/
-
-const INDEX_FILE =
-    "index.html";
-
-
-/* =====================================================
-   FETCH INDEX.HTML
-===================================================== */
-
-async function loadFiDemonlist() {
-
-    try {
-
-        const response =
-            await fetch(
-                INDEX_FILE,
-                {
-                    cache: "no-store"
-                }
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Could not load index.html."
-            );
-
-        }
-
-
-        const html =
-            await response.text();
-
-
-        const data =
-            extractDatabase(
-                html
-            );
-
-
-        if (!data) {
-
-            throw new Error(
-                "Could not find the FiDemonlist database in index.html."
-            );
-
-        }
-
-
-        renderCurrentList(
-            data
-        );
-
-
-        renderLegacyList(
-            data
-        );
-
-
-        renderMachineData(
-            data
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            error
-        );
-
-
-        document.getElementById(
-            "currentList"
-        ).innerHTML = `
-
-            <div class="empty">
-
-                Unable to load the FiDemonlist database.
-
-                <br><br>
-
-                Error:
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-
-        `;
-
-
-        document.getElementById(
-            "legacyList"
-        ).innerHTML = `
-
-            <div class="empty">
-
-                Legacy Demon data could not be loaded.
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   EXTRACT DATABASE
-===================================================== */
-
-function extractDatabase(
-    html
-) {
-
-    /*
-       Extract the demons array.
-    */
-
-    const demonsMatch =
-        html.match(
-            /const\s+demons\s*=\s*(\[[\s\S]*?\])\s*;\s*\/\*\s*={3,}/
-        );
-
-
-    /*
-       Extract current order.
-    */
-
-    const masterMatch =
-        html.match(
-            /const\s+masterOrder\s*=\s*(\[[\s\S]*?\])\s*;\s*\/\*\s*={3,}/
-        );
-
-
-    /*
-       Extract historical order.
-    */
-
-    const historicalMatch =
-        html.match(
-            /const\s+historicalOrder\s*=\s*(\[[\s\S]*?\])\s*;\s*\/\*\s*={3,}/
-        );
-
-
-    /*
-       Extract points.
-    */
-
-    const pointsMatch =
-        html.match(
-            /const\s+currentRankPoints\s*=\s*(\{[\s\S]*?\})\s*;\s*\/\*\s*={3,}/
-        );
-
-
-    if (
-        !demonsMatch ||
-        !masterMatch ||
-        !historicalMatch ||
-        !pointsMatch
-    ) {
-
-        return null;
-
-    }
-
-
-    try {
-
-        /*
-           The database inside index.html is JavaScript
-           object syntax.
-
-           We evaluate only these known database constants.
-        */
-
-        const demons =
-            Function(
-                '"use strict"; return (' +
-                demonsMatch[1] +
-                ");"
-            )();
-
-
-        const masterOrder =
-            Function(
-                '"use strict"; return (' +
-                masterMatch[1] +
-                ");"
-            )();
-
-
-        const historicalOrder =
-            Function(
-                '"use strict"; return (' +
-                historicalMatch[1] +
-                ");"
-            )();
-
-
-        const currentRankPoints =
-            Function(
-                '"use strict"; return (' +
-                pointsMatch[1] +
-                ");"
-            )();
-
-
-        return {
-
-            demons:
-                demons,
-
-            masterOrder:
-                masterOrder,
-
-            historicalOrder:
-                historicalOrder,
-
-            currentRankPoints:
-                currentRankPoints
-
-        };
-
-
-    } catch (error) {
-
-        console.error(
-            "Database parsing error:",
-            error
-        );
-
-
-        return null;
-
-    }
-
-}
-
-
-/* =====================================================
-   FIND DEMON
-===================================================== */
-
-function findDemon(
-    demons,
-    name
-) {
-
-    return demons.find(
-        function(demon) {
-
-            return demon.name === name;
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   CURRENT LIST
-===================================================== */
-
-function renderCurrentList(
-    data
-) {
-
-    const container =
-        document.getElementById(
-            "currentList"
-        );
-
-
-    container.innerHTML =
-        "";
-
-
-    data.masterOrder.forEach(
-        function(
-            name,
-            index
-        ) {
-
-            const demon =
-                findDemon(
-                    data.demons,
-                    name
-                );
-
-
-            if (!demon) {
-                return;
-            }
-
-
-            /*
-               The rank is determined by masterOrder.
-
-               This means Abyss of Darkness is correctly
-               #26 in the current list.
-            */
-
-            const rank =
-                index + 1;
-
-
-            const points =
-                data.currentRankPoints[
-                    rank
-                ] !== undefined
-
-                    ?
-
-                data.currentRankPoints[
-                    rank
-                ]
-
-                    :
-
-                (
-                    demon.points || 0
-                );
-
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "demon";
-
-
-            card.innerHTML = `
-
-                <div class="demon-rank">
-
-                    Rank #${rank}
-
-                </div>
-
-
-                <div class="demon-name">
-
-                    ${escapeHTML(
-                        demon.name
-                    )}
-
-                </div>
-
-
-                <div class="info">
-
-                    <strong>
-                        Created By:
-                    </strong>
-
-                    ${escapeHTML(
-                        demon.createdBy
-                    )}
-
-                </div>
-
-
-                <div class="info">
-
-                    <strong>
-                        Verified By:
-                    </strong>
-
-                    ${escapeHTML(
-                        demon.verifiedBy
-                    )}
-
-                </div>
-
-
-                <div class="info">
-
-                    <strong>
-                        Verification Date:
-                    </strong>
-
-                    ${escapeHTML(
-                        demon.verification
-                    )}
-
-                </div>
-
-
-                <div class="points">
-
-                    List Points:
-                    ${Number(points).toFixed(2)}
-
-                </div>
-
-
-                <div class="victors">
-
-                    <div class="victors-title">
-
-                        Victors
-
-                    </div>
-
-
-                    ${
-                        demon.victors &&
-                        demon.victors.length > 0
-
-                            ?
-
-                        demon.victors
-                            .map(
-                                function(victor) {
-
-                                    return `
-
-                                        <div class="victor">
-
-                                            ${escapeHTML(
-                                                victor.country
-                                            )}
-
-                                            ${escapeHTML(
-                                                victor.name
-                                            )}
-
-                                        </div>
-
-                                    `;
-
-                                }
-                            )
-                            .join("")
-
-                            :
-
-                        `
-
-                            <div class="victor">
-
-                                No recorded victors.
-
-                            </div>
-
-                        `
-                    }
-
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    if (
-        data.masterOrder.length === 0
-    ) {
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                No current demons found.
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   LEGACY LIST
-===================================================== */
-
-function renderLegacyList(
-    data
-) {
-
-    const container =
-        document.getElementById(
-            "legacyList"
-        );
-
-
-    container.innerHTML =
-        "";
-
-
-    data.historicalOrder.forEach(
-        function(name) {
-
-            const demon =
-                findDemon(
-                    data.demons,
-                    name
-                );
-
-
-            if (!demon) {
-                return;
-            }
-
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "legacy";
-
-
-            card.innerHTML = `
-
-                <div class="legacy-name">
-
-                    ${escapeHTML(
-                        demon.name
-                    )}
-
-                </div>
-
-
-                <div class="info">
-
-                    <span class="legacy-label">
-                        Created By:
-                    </span>
-
-                    ${escapeHTML(
-                        demon.createdBy
-                    )}
-
-                </div>
-
-
-                <div class="info">
-
-                    <span class="legacy-label">
-                        Verified By:
-                    </span>
-
-                    ${escapeHTML(
-                        demon.verifiedBy
-                    )}
-
-                </div>
-
-
-                <div class="info">
-
-                    <span class="legacy-label">
-                        Verification Date:
-                    </span>
-
-                    ${escapeHTML(
-                        demon.verification
-                    )}
-
-                </div>
-
-
-                <div class="info">
-
-                    <span class="legacy-label">
-                        Fell Off:
-                    </span>
-
-                    ${escapeHTML(
-                        demon.fallOff ||
-                        "Unknown"
-                    )}
-
-                </div>
-
-
-                <div class="info">
-
-                    <span class="legacy-label">
-                        Status:
-                    </span>
-
-                    Legacy Demon
-
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    if (
-        data.historicalOrder.length === 0
-    ) {
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                No Legacy Demons found.
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   MACHINE READABLE DATA
-===================================================== */
-
-function createMachineData(
-    data
-) {
-
-    const current =
-        data.masterOrder
-            .map(
-                function(name, index) {
-
-                    const demon =
-                        findDemon(
-                            data.demons,
-                            name
-                        );
-
-
-                    if (!demon) {
-                        return null;
-                    }
-
-
-                    const rank =
-                        index + 1;
-
-
-                    const points =
-                        data.currentRankPoints[
-                            rank
-                        ] !== undefined
-
-                            ?
-
-                        data.currentRankPoints[
-                            rank
-                        ]
-
-                            :
-
-                        (
-                            demon.points || 0
-                        );
-
-
-                    return {
-
-                        rank:
-                            rank,
-
-                        name:
-                            demon.name,
-
-                        createdBy:
-                            demon.createdBy,
-
-                        verifiedBy:
-                            demon.verifiedBy,
-
-                        verification:
-                            demon.verification,
-
-                        points:
-                            Number(points),
-
-                        image:
-                            demon.image,
-
-                        victors:
-                            demon.victors || []
-
-                    };
-
-                }
-            )
-            .filter(
-                function(item) {
-
-                    return item !== null;
-
-                }
-            );
-
-
-    const legacy =
-        data.historicalOrder
-            .map(
-                function(name) {
-
-                    const demon =
-                        findDemon(
-                            data.demons,
-                            name
-                        );
-
-
-                    if (!demon) {
-                        return null;
-                    }
-
-
-                    return {
-
-                        name:
-                            demon.name,
-
-                        createdBy:
-                            demon.createdBy,
-
-                        verifiedBy:
-                            demon.verifiedBy,
-
-                        verification:
-                            demon.verification,
-
-                        fallOff:
-                            demon.fallOff ||
-                            null,
-
-                        image:
-                            demon.image,
-
-                        historical:
-                            true
-
-                    };
-
-                }
-            )
-            .filter(
-                function(item) {
-
-                    return item !== null;
-
-                }
-            );
-
-
-    return {
-
-        site:
-            "FiDemonlist",
-
-        title:
-            "The Custom Geometry Dash Demonlist",
-
-        latestUpdated:
-            latestUpdated,
-
-        latestUpdatedFormatted:
-            new Date(
-                latestUpdated +
-                "T00:00:00"
-            ).toLocaleDateString(
-                "en-US",
-                {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric"
-                }
-            ),
-
-        currentDemonCount:
-            current.length,
-
-        legacyDemonCount:
-            legacy.length,
-
-        currentDemons:
-            current,
-
-        legacyDemons:
-            legacy
-
-    };
-
-}
-
-
-/* =====================================================
-   DISPLAY MACHINE DATA
-===================================================== */
-
-function renderMachineData(
-    data
-) {
-
-    const machineData =
-        createMachineData(
-            data
-        );
-
-
-    document.getElementById(
-        "machineData"
-    ).textContent =
-        JSON.stringify(
-            machineData,
-            null,
-            2
-        );
-
-
-    /*
-       Make the data available globally too.
-
-       This is useful for browser-based AI systems,
-       debugging, and other scripts.
-    */
-
-    window.fiDemonlist =
-        machineData;
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(
-    value
-) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================================
-   JSON-LD
-===================================================== */
-
-/*
-   Basic static structured information.
-
-   The actual detailed database is generated below
-   after index.html is loaded.
-*/
-
-const jsonLD =
-    document.createElement(
-        "script"
-    );
-
-
-jsonLD.type =
-    "application/ld+json";
-
-
-jsonLD.textContent =
-    JSON.stringify(
-        {
-
-            "@context":
-                "https://schema.org",
-
-            "@type":
-                "WebPage",
-
-            name:
-                "FiDemonlist",
-
-            description:
-                "The Custom Geometry Dash Demonlist",
-
-            dateModified:
-                latestUpdated
-
-        }
-    );
-
-
-document.head.appendChild(
-    jsonLD
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-loadFiDemonlist();
-
+renderMachineData();
 
 </script>
-
 
 </body>
 </html>
