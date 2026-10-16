@@ -905,11 +905,19 @@ const historicalOrder = [
 
 /* =====================================================
    TIME AGO
+
+   IMPORTANT:
+   Calculates verification age using the selected
+   Time Travel date instead of the real current date.
 ===================================================== */
 
-function getTimeAgo(date) {
-    const now = new Date();
-    const difference = now - date;
+function getTimeAgo(date, selectedDate) {
+    const now = new Date(selectedDate + "T00:00:00");
+    const difference = now.getTime() - date.getTime();
+
+    if (difference < 0) {
+        return "Not Verified Yet";
+    }
 
     const totalDays = Math.floor(
         difference / (1000 * 60 * 60 * 24)
@@ -992,7 +1000,7 @@ function getAvailableDemons(selectedDate) {
                 demonExists(demon, selectedDate);
         });
 
-    // FIX: today's demons always appear above historical demons.
+    // Today's demons always appear above historical demons.
     return [
         ...currentDemons,
         ...historicalDemons
@@ -1045,7 +1053,8 @@ function renderList(selectedDate) {
 
             <div class="info">
                 Verified: ${getTimeAgo(
-                    new Date(demon.verification + "T00:00:00")
+                    new Date(demon.verification + "T00:00:00"),
+                    selectedDate
                 )}
             </div>
         `;
