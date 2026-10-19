@@ -116,7 +116,8 @@
         }
 
         .apply-button,
-        .today-button {
+        .today-button,
+        .back-button {
             padding: 12px 18px;
             border-radius: 7px;
             font-weight: bold;
@@ -144,12 +145,35 @@
             background: #333333;
         }
 
+        .back-button {
+            border: 1px solid #444444;
+            background: #292929;
+            color: white;
+            margin-bottom: 22px;
+        }
+
+        .back-button:hover {
+            background: #383838;
+        }
+
         .time-travel-status {
             display: none;
             text-align: center;
             color: #aaaaaa;
             margin-bottom: 20px;
             font-size: 14px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin: 0 0 10px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #aaaaaa;
+            margin: 0 0 25px;
         }
 
         .demon {
@@ -199,6 +223,13 @@
             margin: 6px 0;
         }
 
+        .estimate-rank {
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
         .no-demons {
             display: none;
             text-align: center;
@@ -212,7 +243,7 @@
 
         @media (max-width: 700px) {
             header {
-                padding-bottom: 85px;
+                padding: 25px 12px 90px;
             }
 
             header h1 {
@@ -226,14 +257,20 @@
                 left: 0;
                 transform: none;
                 justify-content: center;
+                flex-wrap: wrap;
             }
 
             .header-button {
                 padding: 10px 13px;
+                font-size: 13px;
             }
 
             .image-container {
                 height: 220px;
+            }
+
+            .name {
+                font-size: 22px;
             }
         }
     </style>
@@ -249,48 +286,87 @@
         <button class="header-button" id="timeTravelButton">
             Time Travel
         </button>
+
+        <button class="header-button" id="upcomingLevelsButton">
+            Upcoming Levels
+        </button>
     </div>
 </header>
 
 <div class="container">
 
-    <div class="panel" id="timeTravelPanel">
-        <h2>Time Travel</h2>
+    <!-- MAIN DEMONLIST SECTION -->
 
-        <p class="panel-description">
-            Choose a date to see the FiDemonlist from that date.
-        </p>
+    <div id="mainSection">
 
-        <div class="panel-buttons">
-            <input
-                type="date"
-                id="datePicker"
-                class="date-input"
-            >
+        <div class="panel" id="timeTravelPanel">
+            <h2>Time Travel</h2>
 
-            <button class="apply-button" id="applyDate">
-                Travel
-            </button>
+            <p class="panel-description">
+                Choose a date to see the FiDemonlist from that date.
+            </p>
 
-            <button class="today-button" id="returnToday">
-                Today
-            </button>
+            <div class="panel-buttons">
+                <input
+                    type="date"
+                    id="datePicker"
+                    class="date-input"
+                >
+
+                <button class="apply-button" id="applyDate">
+                    Travel
+                </button>
+
+                <button class="today-button" id="returnToday">
+                    Today
+                </button>
+            </div>
         </div>
+
+        <div class="time-travel-status" id="timeTravelStatus"></div>
+
+        <input
+            id="search"
+            class="search"
+            type="text"
+            placeholder="Search demons..."
+        >
+
+        <div id="demonList"></div>
+
+        <div class="no-demons" id="noDemons">
+            No demons were on the list at this date.
+        </div>
+
     </div>
 
-    <div class="time-travel-status" id="timeTravelStatus"></div>
+    <!-- UPCOMING LEVELS SECTION -->
 
-    <input
-        id="search"
-        class="search"
-        type="text"
-        placeholder="Search demons..."
-    >
+    <div id="upcomingSection" style="display: none;">
 
-    <div id="demonList"></div>
+        <button class="back-button" id="goBackButton">
+            ← Go Back
+        </button>
 
-    <div class="no-demons" id="noDemons">
-        No demons were on the list at this date.
+        <h2 class="section-title">Upcoming Levels</h2>
+
+        <p class="section-description">
+            Levels that could enter the FiDemonlist in the future.
+        </p>
+
+        <input
+            id="upcomingSearch"
+            class="search"
+            type="text"
+            placeholder="Search upcoming levels..."
+        >
+
+        <div id="upcomingList"></div>
+
+        <div class="no-demons" id="noUpcomingLevels">
+            No upcoming levels found.
+        </div>
+
     </div>
 
 </div>
@@ -299,11 +375,12 @@
 
 /* =====================================================
    DEMON DATABASE
+
+   Keep your existing main-list database here.
+   All original entries are preserved below.
 ===================================================== */
 
 const demons = [
-
-    /* CURRENT DEMONS */
 
     {
         name: "Grief",
@@ -828,7 +905,6 @@ const demons = [
         historical: true,
         image: "Cataclysm.jpeg"
     }
-
 ];
 
 
@@ -922,11 +998,23 @@ const historicalOrder = [
 
 
 /* =====================================================
-   TIME AGO
+   UPCOMING LEVELS DATABASE
+===================================================== */
 
-   IMPORTANT:
-   Calculates verification age using the selected
-   Time Travel date instead of the real current date.
+const upcomingLevels = [
+    {
+        name: "Azure Flare",
+        createdBy: "ItsHybrid",
+        verifiedBy: "Diamond",
+        estimateRank: "#22",
+        image: "Azure Flare.jpeg"
+    },
+    
+];
+
+
+/* =====================================================
+   TIME AGO
 ===================================================== */
 
 function getTimeAgo(date, selectedDate) {
@@ -987,10 +1075,7 @@ function demonExists(demon, selectedDate) {
 
 
 /* =====================================================
-   AVAILABLE DEMONS
-
-   CURRENT DEMONS FIRST.
-   HISTORICAL DEMONS BELOW THEM.
+   GET AVAILABLE DEMONS
 ===================================================== */
 
 function getAvailableDemons(selectedDate) {
@@ -1018,7 +1103,6 @@ function getAvailableDemons(selectedDate) {
                 demonExists(demon, selectedDate);
         });
 
-    // Today's demons always appear above historical demons.
     return [
         ...currentDemons,
         ...historicalDemons
@@ -1027,7 +1111,7 @@ function getAvailableDemons(selectedDate) {
 
 
 /* =====================================================
-   RENDER LIST
+   RENDER MAIN LIST
 ===================================================== */
 
 function renderList(selectedDate) {
@@ -1080,13 +1164,111 @@ function renderList(selectedDate) {
         const image = card.querySelector(".demon-image");
 
         image.onerror = function() {
-            const container = image.parentElement;
-            container.innerHTML =
-                '<div class="placeholder">Image unavailable</div>';
+            image.replaceWith(
+                createPlaceholder("Image unavailable")
+            );
         };
 
         list.appendChild(card);
     });
+
+    applyMainSearch();
+}
+
+
+/* =====================================================
+   IMAGE PLACEHOLDER
+===================================================== */
+
+function createPlaceholder(message) {
+    const placeholder = document.createElement("div");
+
+    placeholder.className = "placeholder";
+    placeholder.textContent = message;
+
+    return placeholder;
+}
+
+
+/* =====================================================
+   RENDER UPCOMING LEVELS
+===================================================== */
+
+function renderUpcomingLevels() {
+    const list = document.getElementById("upcomingList");
+    const noLevels = document.getElementById("noUpcomingLevels");
+
+    list.innerHTML = "";
+
+    noLevels.style.display =
+        upcomingLevels.length === 0 ? "block" : "none";
+
+    upcomingLevels.forEach(function(level, index) {
+        const card = document.createElement("div");
+
+        card.className = "demon";
+        card.dataset.name = level.name;
+
+        const imageContainer = document.createElement("div");
+        imageContainer.className = "image-container";
+
+        const image = document.createElement("img");
+        image.className = "demon-image";
+        image.src = level.image || "";
+        image.alt = level.name;
+
+        image.onerror = function() {
+            image.replaceWith(
+                createPlaceholder("Image unavailable")
+            );
+        };
+
+        if (!level.image) {
+            image.replaceWith(
+                createPlaceholder("No image provided")
+            );
+        }
+
+        imageContainer.appendChild(image);
+
+        // If the image was replaced because it was missing,
+        // keep the placeholder inside the image container.
+        if (!level.image) {
+            imageContainer.innerHTML = "";
+            imageContainer.appendChild(
+                createPlaceholder("No image provided")
+            );
+        }
+
+        const name = document.createElement("div");
+        name.className = "name";
+        name.textContent = level.name;
+
+        const creator = document.createElement("div");
+        creator.className = "info";
+        creator.textContent =
+            "Created By: " + (level.createdBy || "Unknown");
+
+        const verifier = document.createElement("div");
+        verifier.className = "info";
+        verifier.textContent =
+            "Verified By: " + (level.verifier || "TBD");
+
+        const estimate = document.createElement("div");
+        estimate.className = "estimate-rank";
+        estimate.textContent =
+            "Estimate Rank: " + (level.estimateRank || "TBD");
+
+        card.appendChild(imageContainer);
+        card.appendChild(name);
+        card.appendChild(creator);
+        card.appendChild(verifier);
+        card.appendChild(estimate);
+
+        list.appendChild(card);
+    });
+
+    applyUpcomingSearch();
 }
 
 
@@ -1112,14 +1294,68 @@ datePicker.value = todayString;
 
 
 /* =====================================================
-   TIME TRAVEL PANEL
+   SECTION NAVIGATION
 ===================================================== */
+
+const mainSection = document.getElementById("mainSection");
+const upcomingSection = document.getElementById("upcomingSection");
 
 const timeTravelButton =
     document.getElementById("timeTravelButton");
 
 const timeTravelPanel =
     document.getElementById("timeTravelPanel");
+
+const upcomingLevelsButton =
+    document.getElementById("upcomingLevelsButton");
+
+const goBackButton =
+    document.getElementById("goBackButton");
+
+
+function showMainSection() {
+    upcomingSection.style.display = "none";
+    mainSection.style.display = "block";
+
+    upcomingLevelsButton.style.display = "";
+    timeTravelButton.style.display = "";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "auto"
+    });
+}
+
+
+function showUpcomingSection() {
+    mainSection.style.display = "none";
+    upcomingSection.style.display = "block";
+
+    timeTravelButton.style.display = "none";
+    upcomingLevelsButton.style.display = "none";
+
+    renderUpcomingLevels();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "auto"
+    });
+}
+
+
+upcomingLevelsButton.addEventListener("click", function() {
+    showUpcomingSection();
+});
+
+
+goBackButton.addEventListener("click", function() {
+    showMainSection();
+});
+
+
+/* =====================================================
+   TIME TRAVEL PANEL
+===================================================== */
 
 timeTravelButton.addEventListener("click", function() {
     timeTravelPanel.style.display =
@@ -1156,6 +1392,8 @@ function travelToDate(selectedDate) {
     }
 
     document.getElementById("search").value = "";
+
+    applyMainSearch();
 }
 
 
@@ -1181,11 +1419,13 @@ document.getElementById("returnToday").addEventListener("click", function() {
 
 
 /* =====================================================
-   SEARCH
+   MAIN LIST SEARCH
 ===================================================== */
 
-document.getElementById("search").addEventListener("input", function() {
-    const text = this.value.toLowerCase();
+const mainSearch = document.getElementById("search");
+
+function applyMainSearch() {
+    const searchText = mainSearch.value.toLowerCase().trim();
 
     const cards = document.querySelectorAll("#demonList .demon");
 
@@ -1193,8 +1433,47 @@ document.getElementById("search").addEventListener("input", function() {
         const name = card.dataset.name.toLowerCase();
 
         card.style.display =
-            name.includes(text) ? "block" : "none";
+            name.includes(searchText) ? "block" : "none";
     });
+}
+
+
+mainSearch.addEventListener("input", function() {
+    applyMainSearch();
+});
+
+
+/* =====================================================
+   UPCOMING LEVELS SEARCH
+===================================================== */
+
+const upcomingSearch = document.getElementById("upcomingSearch");
+
+function applyUpcomingSearch() {
+    const searchText = upcomingSearch.value.toLowerCase().trim();
+
+    const cards = document.querySelectorAll("#upcomingList .demon");
+
+    let visibleCount = 0;
+
+    cards.forEach(function(card) {
+        const name = card.dataset.name.toLowerCase();
+        const matches = name.includes(searchText);
+
+        card.style.display = matches ? "block" : "none";
+
+        if (matches) {
+            visibleCount++;
+        }
+    });
+
+    document.getElementById("noUpcomingLevels").style.display =
+        visibleCount === 0 ? "block" : "none";
+}
+
+
+upcomingSearch.addEventListener("input", function() {
+    applyUpcomingSearch();
 });
 
 
