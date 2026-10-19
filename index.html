@@ -1006,14 +1006,14 @@ const upcomingLevels = [
         name: "Lesopowal",
         createdBy: "Inex",
         verifier: "Bacon",
-        estimatedRank: "#15",
+        estimateRank: "#15",
         image: "Lesopowal.jpeg"
     },
     {
         name: "Azure Flare",
         createdBy: "ItsHybrid",
         verifier: "Diamond",
-        estimatedRank: "#22",
+        estimateRank: "#22",
         image: "Azure Flare.jpeg"
     },
     
@@ -1264,7 +1264,7 @@ function renderUpcomingLevels() {
         const estimate = document.createElement("div");
         estimate.className = "estimate-rank";
         estimate.textContent =
-            "Estimate Rank: " + (level.estimateRank || "TBD");
+            "Estimated Rank: " + (level.estimateRank || "TBD");
 
         card.appendChild(imageContainer);
         card.appendChild(name);
