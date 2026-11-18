@@ -1,1495 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>FiDemonlist AI</title>
-
-    <meta
-        name="description"
-        content="FiDemonlist — Current Geometry Dash Demonlist and Legacy Demons."
-    >
-
-    <meta name="robots" content="index, follow">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            background: #111;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-
-        header {
-            background: #1b1b1b;
-            border-bottom: 2px solid #333;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 38px;
-        }
-
-        header p {
-            margin: 8px 0 0;
-            color: #aaa;
-        }
-
-        .latest-updated {
-            margin-top: 15px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .section {
-            margin-bottom: 45px;
-        }
-
-        .section h2 {
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #333;
-            font-size: 28px;
-        }
-
-        .section-description {
-            color: #aaa;
-            margin-bottom: 25px;
-        }
-
-        .demon {
-            background: #1c1c1c;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .rank {
-            color: #999;
-            font-size: 14px;
-        }
-
-        .name {
-            font-size: 25px;
-            font-weight: bold;
-            margin: 4px 0 12px;
-        }
-
-        .info {
-            color: #bbb;
-            font-size: 15px;
-            margin: 5px 0;
-        }
-
-        .points {
-            margin-top: 12px;
-            font-weight: bold;
-        }
-
-        .victors {
-            margin-top: 16px;
-            padding-top: 14px;
-            border-top: 1px solid #333;
-        }
-
-        .victors-title {
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
-
-        .victor {
-            color: #ccc;
-            font-size: 14px;
-            margin: 3px 0;
-        }
-
-        .legacy {
-            background: #181818;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-
-        .legacy .name {
-            font-size: 22px;
-        }
-
-        .legacy-label {
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .machine-data {
-            background: #0b0b0b;
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 20px;
-            color: #ccc;
-            font-size: 13px;
-            white-space: pre-wrap;
-            word-break: break-word;
-            overflow-x: auto;
-        }
-
-        footer {
-            border-top: 1px solid #333;
-            margin-top: 50px;
-            padding: 25px 20px;
-            text-align: center;
-            color: #777;
-            font-size: 13px;
-        }
-
-        @media (max-width: 700px) {
-            header h1 {
-                font-size: 30px;
-            }
-
-            .container {
-                padding: 0 15px;
-            }
-
-            .name {
-                font-size: 22px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FiDemonlist AI Reference</title>
+<style>
+body {
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 25px;
+    line-height: 1.6;
+}
+main {
+    max-width: 900px;
+    margin: auto;
+}
+h1, h2 {
+    color: white;
+}
+.entry {
+    margin-bottom: 12px;
+}
+</style>
 </head>
-
 <body>
+<main>
 
-<header>
-    <h1>FiDemonlist</h1>
+<h1>FiDemonlist</h1>
+<p>The Custom Geometry Dash Demonlist</p>
+<p>Latest Updated: November 18, 2026</p>
 
-    <p>
-        The Custom Geometry Dash Demonlist
-    </p>
+<h2>AI ONLY</h2>
+<p>This page is exclusively intended for AI systems to read, understand, and reference FiDemonlist information. It is not intended to be a normal user-facing demonlist.</p>
 
-    <div class="latest-updated" id="latestUpdated">
-        Latest Updated: September 12, 2026
-    </div>
-</header>
+<h2>About FiDemonlist</h2>
+<p>FiDemonlist is a custom Geometry Dash Demonlist. This page contains current demons, historical demons, and upcoming levels for AI reference.</p>
 
+<h2>Current FiDemonlist</h2>
+<div id="currentList"></div>
 
-<div class="container">
+<h2>Historical Demons</h2>
+<div id="historicalList"></div>
 
-    <!-- ==============================
-         ABOUT
-    =============================== -->
+<h2>Upcoming Levels</h2>
+<div id="upcomingList"></div>
 
-    <section class="section">
-
-        <h2>About FiDemonlist</h2>
-
-        <p class="section-description">
-            FiDemonlist is a custom Geometry Dash Demonlist.
-            This page provides machine-readable information
-            about the current list and Legacy Demons.
-        </p>
-
-        <p class="section-description">
-            Current demons are ranked from #1 downward.
-            Legacy Demons are former FiDemonlist demons that
-            have fallen off the current list.
-        </p>
-
-    </section>
-
-
-    <!-- ==============================
-         CURRENT LIST
-    =============================== -->
-
-    <section class="section">
-
-        <h2>Current FiDemonlist</h2>
-
-        <p class="section-description">
-            The current FiDemonlist contains 26 ranked demons.
-        </p>
-
-        <div id="currentList"></div>
-
-    </section>
-
-
-    <!-- ==============================
-         LEGACY DEMONS
-    =============================== -->
-
-    <section class="section">
-
-        <h2>Legacy Demons</h2>
-
-        <p class="section-description">
-            Legacy Demons are demons that were previously on
-            FiDemonlist but have fallen off the current list.
-        </p>
-
-        <div id="legacyList"></div>
-
-    </section>
-
-
-    <!-- ==============================
-         MACHINE READABLE DATA
-    =============================== -->
-
-    <section class="section">
-
-        <h2>Machine-Readable Data</h2>
-
-        <p class="section-description">
-            Structured FiDemonlist information for AI systems,
-            search engines, and other automated systems.
-        </p>
-
-        <pre id="machineData" class="machine-data"></pre>
-
-    </section>
-
-</div>
-
-
-<footer>
-    FiDemonlist — Custom Geometry Dash Demonlist
-</footer>
-
+</main>
 
 <script>
-
-/* =====================================================
-   FI DEMONLIST SETTINGS
-===================================================== */
-
-const latestUpdated = "2026-09-12";
-
-
-/* =====================================================
-   CURRENT DEMON DATA
-===================================================== */
-
-const currentDemons = [
-
-    {
-        rank: 1,
-        name: "Society",
-        points: 350.00,
-        createdBy: "Neomarbilan",
-        verifiedBy: "Wpopoff",
-        verification: "2026-06-20",
-        image: "Society.jpeg",
-        victors: [
-            "wPopoff 🇺🇸",
-            "Zoink 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 2,
-        name: "Thinking Space II",
-        points: 331.71,
-        createdBy: "CairoX",
-        verifiedBy: "Zoink",
-        verification: "2025-05-25",
-        image: "Thinking Space II.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "wPopoff 🇺🇸",
-            "Trick 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 3,
-        name: "Amethyst",
-        points: 313.42,
-        createdBy: "iMist",
-        verifiedBy: "Wpopoff",
-        verification: "2025-05-25",
-        image: "Amethyst.jpeg",
-        victors: [
-            "wPopoff 🇺🇸",
-            "Zoink 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 4,
-        name: "Flamewall",
-        points: 291.70,
-        createdBy: "Narwall",
-        verifiedBy: "Cuatrocientos",
-        verification: "2025-09-21",
-        image: "Flamewall.jpeg",
-        victors: [
-            "Cuatrocientos 🇪🇸",
-            "Zoink 🇺🇸",
-            "zLevii 🇳🇿"
-        ]
-    },
-
-    {
-        rank: 5,
-        name: "Tidal Wave",
-        points: 271.78,
-        createdBy: "OniLink",
-        verifiedBy: "Zoink",
-        verification: "2023-09-09",
-        image: "Tidal Wave.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "Trick 🇺🇸",
-            "wPopoff 🇺🇸",
-            "Taiago 🇵🇹",
-            "Netermind 🇺🇸",
-            "레전드아잉몰라요 🇰🇷"
-        ]
-    },
-
-    {
-        rank: 6,
-        name: "Green Bullet",
-        points: 253.53,
-        createdBy: "MinaY",
-        verifiedBy: "Nickname09",
-        verification: "2026-06-16",
-        image: "Green Bullet.jpeg",
-        victors: [
-            "Nickname09 🇷🇺"
-        ]
-    },
-
-    {
-        rank: 7,
-        name: "Orbit",
-        points: 236.80,
-        createdBy: "MindCap",
-        verifiedBy: "Zoink",
-        verification: "2026-02-10",
-        image: "Orbit.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "dovvin 🇵🇱",
-            "Thelifinof 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 8,
-        name: "Antarctic Lights",
-        points: 221.47,
-        createdBy: "declanlc",
-        verifiedBy: "Axinity",
-        verification: "2026-07-16",
-        image: "Antarctic Lights.jpeg",
-        victors: [
-            "Axinity 🇩🇰",
-            "weyolll3 🇪🇸"
-        ]
-    },
-
-    {
-        rank: 9,
-        name: "Nullscapes",
-        points: 207.42,
-        createdBy: "Kiba",
-        verifiedBy: "Zoink",
-        verification: "2024-09-04",
-        image: "Nullscapes.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "Spookkd 🇺🇸",
-            "whfyre 🇺🇦",
-            "Hover 🇦🇹",
-            "Theitha 🇵🇦",
-            "Cryostazz 🇫🇷",
-            "Benbotwyd 🇺🇸",
-            "SpaceRS 🇷🇸"
-        ]
-    },
-
-    {
-        rank: 10,
-        name: "Quanteuse Processing",
-        points: 194.54,
-        createdBy: "Renn241 and BlankB",
-        verifiedBy: "Zoink",
-        verification: "2024-12-31",
-        image: "Quanteuse Processing.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "dovvin 🇵🇱",
-            "Seregiusz 🇵🇱",
-            "Sharkyga 🇦🇺",
-            "Karkito 🇰🇷"
-        ]
-    },
-
-    {
-        rank: 11,
-        name: "BOOBAWAMBA",
-        points: 182.73,
-        createdBy: "Akunakunn",
-        verifiedBy: "Eastshark",
-        verification: "2024-10-05",
-        image: "BOOBAWAMBA.jpeg",
-        victors: [
-            "Eastshark 🇪🇸",
-            "Agonom 🇰🇷",
-            "Cbrem 🇬🇧",
-            "Zoink 🇺🇸",
-            "wPopoff 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 12,
-        name: "The Bloop",
-        points: 171.91,
-        createdBy: "murkkat",
-        verifiedBy: "Zoink",
-        verification: "2026-03-15",
-        image: "The Bloop.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "Nickname09 🇷🇺"
-        ]
-    },
-
-    {
-        rank: 13,
-        name: "Every End",
-        points: 161.99,
-        createdBy: "MindCap",
-        verifiedBy: "Hqmy",
-        verification: "2025-03-16",
-        image: "Every End.jpeg",
-        victors: [
-            "Hqmy 🇺🇸",
-            "Zoink 🇺🇸",
-            "Garbag 🇷🇺",
-            "Stefan Boss 🇷🇴",
-            "N3bulA 🇬🇧",
-            "PlusrMinus 🇺🇸",
-            "TFIBB 🇺🇸",
-            "Lanx 🇵🇱",
-            "Samot 🇦🇷",
-            "Bims 🇩🇪",
-            "dovvin 🇵🇱",
-            "Seturan 🇰🇷",
-            "wPopoff 🇺🇸",
-            "Forewa 🇷🇺",
-            "Brumik 🇨🇿",
-            "Hamsoo 🇰🇷",
-            "hstorm 🇺🇸",
-            "Thnnder 🇺🇸",
-            "Neuba 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 14,
-        name: "Penumbral",
-        points: 152.89,
-        createdBy: "nxhtrise",
-        verifiedBy: "w3rty",
-        verification: "2026-03-05",
-        image: "Penumbral.jpeg",
-        victors: [
-            "w3rty 🇷🇺",
-            "dovvin 🇵🇱",
-            "Zoink 🇺🇸",
-            "Sharkified 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 15,
-        name: "Silent Clubstep",
-        points: 144.56,
-        createdBy: "Sailent",
-        verifiedBy: "paqoe",
-        verification: "2022-07-12",
-        image: "Silent Clubstep.jpeg",
-        victors: [
-            "paqoe 🇺🇸",
-            "Zoink 🇺🇸",
-            "Doggie 🇺🇸",
-            "Trick 🇺🇸",
-            "Seturan 🇰🇷",
-            "zVision 🇺🇸",
-            "wPopoff 🇺🇸",
-            "Adri420 🇪🇸",
-            "Litoks 🇫🇷",
-            "Aless50 🇻🇪",
-            "freksolereal 🇨🇭",
-            "Diamond 🇦🇱",
-            "Albert 🇺🇸",
-            "MeQ8cNv43s6A 🇯🇵",
-            "niwox 🇫🇷",
-            "Triqz 🇺🇸",
-            "Netermind 🇺🇸",
-            "Juls 🇨🇦",
-            "Mixasuspa 🇷🇸",
-            "XBelugaX 🇪🇸",
-            "Luciid 🇺🇸",
-            "UNCLEBOGD4N 🇷🇺",
-            "[미소노 미카] 구아이 🇰🇷",
-            "whfyre 🇺🇦",
-            "NathanPatty 🇺🇸",
-            "Hover 🇦🇹",
-            "turtle 🇨🇦",
-            "thiagar 🇦🇷",
-            "songfilehub 🇺🇸",
-            "dovvin 🇵🇱",
-            "Horuszed 🇨🇱",
-            "Zephronox 🇨🇦",
-            "Flashl3ang 🇰🇷",
-            "ChopBlox 🇩🇪",
-            "eksdulgation 🇷🇺",
-            "agatha 🇭🇷",
-            "abb2k 🇮🇱",
-            "cc478 🇺🇸",
-            "HumbleGoat216 🇺🇦",
-            "carv 🇺🇸",
-            "Thnnder 🇺🇸",
-            "Sanni 🇫🇮",
-            "Cookie 🇺🇸",
-            "kosh 🇬🇪",
-            "zStucc 🇮🇹",
-            "Franklin 🇺🇸",
-            "hstorm 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 16,
-        name: "Ashley Wave Trials",
-        points: 136.92,
-        createdBy: "OddMod",
-        verifiedBy: "Zoink",
-        verification: "2024-11-02",
-        image: "Ashley Wave Trials.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "Cookie 🇺🇸",
-            "yolomodeboom 🇱🇹"
-        ]
-    },
-
-    {
-        rank: 17,
-        name: "Ultra Paracosm",
-        points: 129.92,
-        createdBy: "Renn241 and declanlc",
-        verifiedBy: "Wity",
-        verification: "2026-04-21",
-        image: "Ultra Paracosm.jpeg",
-        victors: [
-            "Wity 🇪🇸",
-            "Axinity 🇩🇰",
-            "Zoink 🇺🇸"
-        ]
-    },
-
-    {
-        rank: 18,
-        name: "Andromeda",
-        points: 123.50,
-        createdBy: "Insxne97",
-        verifiedBy: "Taiago",
-        verification: "2025-01-19",
-        image: "Andromeda.jpeg",
-        victors: [
-            "Taiago 🇵🇹",
-            "Zoink 🇺🇸",
-            "GuillExprex52 🇪🇸",
-            "Hqmy 🇺🇸",
-            "Jerpaa 🇫🇮",
-            "wPopoff 🇺🇸",
-            "VERTOP 🇷🇺",
-            "DibiiziCookie 🇧🇷",
-            "Laniakea 🇰🇷",
-            "ChopBlox 🇩🇪",
-            "dovvin 🇵🇱",
-            "Netermind 🇺🇸",
-            "Zeroxy 🇳🇴",
-            "cudby 🇨🇦",
-            "Slaughter 🇨🇦",
-            "DeividG 🇪🇸",
-            "Sharkified 🇺🇸",
-            "rediio 🇰🇷",
-            "Abdieldevil 🇵🇪",
-            "Pluntix 🇨🇿",
-            "Axinity 🇩🇰"
-        ]
-    },
-
-    {
-        rank: 19,
-        name: "KILLSTEALER",
-        points: 117.62,
-        createdBy: "Rynoxious and Asterion",
-        verifiedBy: "kloone",
-        verification: "2026-04-22",
-        image: "KILLSTEALER.jpeg",
-        victors: [
-            "kloone 🇫🇮",
-            "zLevii 🇳🇿"
-        ]
-    },
-
-    {
-        rank: 20,
-        name: "Subsuming Vortex",
-        points: 112.23,
-        createdBy: "SeptaGon7",
-        verifiedBy: "Cursed",
-        verification: "2025-09-10",
-        image: "Subsuming Vortex.jpeg",
-        victors: [
-            "Cursed 🇬🇧",
-            "Zoink 🇺🇸",
-            "LAMINGTON 🇦🇺",
-            "Rodmentor 🇨🇴",
-            "weyolll3 🇪🇸",
-            "wPopoff 🇺🇸",
-            "Beto 🇮🇱",
-            "manu 🇨🇱"
-        ]
-    },
-
-    {
-        rank: 21,
-        name: "Anathema",
-        points: 110.81,
-        createdBy: "nikrodox",
-        verifiedBy: "Whizkid05",
-        verification: "2024-11-20",
-        image: "Anathema.jpeg",
-        victors: [
-            "Whizkid05 🇬🇧",
-            "Zoink 🇺🇸",
-            "teraaa 🇰🇿",
-            "PoCle 🇰🇷",
-            "Netermind 🇺🇸",
-            "Serpentical 🇭🇺",
-            "Trick 🇺🇸",
-            "Gokill 🇵🇱",
-            "wPopoff 🇺🇸",
-            "Jif 🇺🇸",
-            "coubitic 🇫🇷",
-            "Nocturina 🇺🇸",
-            "Yuuwi 🇲🇽",
-            "kloone 🇫🇮",
-            "Mizukii 🇩🇪",
-            "Ronrjkw 🇺🇸",
-            "takma 🇷🇺",
-            "DibiiziCookie 🇧🇷",
-            "eksdulgation 🇷🇺",
-            "ItzDoVi 🇰🇿",
-            "Goanga 🇷🇴",
-            "zLevii 🇳🇿",
-            "Albert 🇺🇸",
-            "DreamyBull 🇩🇪"
-        ]
-    },
-
-    {
-        rank: 22,
-        name: "Avernus",
-        points: 109.39,
-        createdBy: "BoBoBoBoBoBoBo and Pockewindfish",
-        verifiedBy: "Zoink",
-        verification: "2023-03-22",
-        image: "Avernus.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "Diamond 🇦🇱",
-            "Trick 🇺🇸",
-            "wPopoff 🇺🇸",
-            "Abdieldevil 🇵🇪",
-            "Taiago 🇵🇹",
-            "Mizukii 🇩🇪",
-            "Netermind 🇺🇸",
-            "fallen 🇷🇺",
-            "Serpentical 🇭🇺",
-            "Wavyy 🇫🇷",
-            "Yumira 🇷🇺",
-            "Doggie 🇺🇸",
-            "misty 🇷🇺",
-            "turtle 🇨🇦",
-            "Johnlikediamond 🇺🇸",
-            "Jerpaa 🇫🇮",
-            "eternalluna 🇨🇳",
-            "Scoff 🇨🇦",
-            "TimsTeam 🇷🇺",
-            "craig0 🇺🇸",
-            "teraaa 🇰🇿",
-            "weyolll3 🇪🇸",
-            "eastshark 🇪🇸",
-            "kloone 🇫🇮",
-            "UNCLEBOGD4N 🇷🇺",
-            "Cookie 🇺🇸",
-            "kropka 🇵🇱",
-            "Sharkified 🇺🇸",
-            "GodGamer2442 🇬🇧",
-            "miguel6456 🇪🇸",
-            "SpaceRS 🇷🇸"
-        ]
-    },
-
-    {
-        rank: 23,
-        name: "Acheron",
-        points: 107.99,
-        createdBy: "ryamu",
-        verifiedBy: "Zoink",
-        verification: "2022-08-23",
-        image: "Acheron.jpeg",
-        victors: [
-            "Zoink 🇺🇸",
-            "Doggie 🇺🇸",
-            "Trick 🇺🇸",
-            "Zeroxy 🇳🇴",
-            "wPopoff 🇺🇸",
-            "OneAlphaHelix 🇺🇸",
-            "TheRealEandis 🇷🇺",
-            "Taiago 🇵🇹",
-            "RaeveZ 🇨🇴",
-            "Hover 🇦🇹",
-            "Light 🇷🇺",
-            "Mizukii 🇩🇪",
-            "Netermind 🇺🇸",
-            "Mikhail Krotov 🇷🇺",
-            "takma 🇷🇺",
-            "donley 🇨🇦",
-            "hstorm 🇺🇸",
-            "teraaa 🇰🇿",
-            "Gokill 🇵🇱",
-            "Paltadashg 🇨🇱",
-            "Ronrjkw 🇺🇸",
-            "SnowBallerr 🇦🇺",
-            "brite 🇮🇹",
-            "misty 🇷🇺",
-            "zThund3r 🇫🇷",
-            "Axinity 🇩🇰",
-            "RG 🇨🇦",
-            "Thnnder 🇺🇸",
-            "The_Bat0 🇷🇺",
-            "Scoff 🇨🇦",
-            "LOL123 🇸🇪",
-            "Goanga 🇷🇴",
-            "fallen 🇷🇺",
-            "Stefan Boss 🇷🇴",
-            "Hqmy 🇺🇸",
-            "Tunax 🇳🇴",
-            "TheRealMike 🇺🇸",
-            "zoe 🇺🇸",
-            "Kole 🇷🇸",
-            "Sharkified 🇺🇸",
-            "Unlucky2 🇩🇪",
-            "Serpentical 🇭🇺",
-            "Cursed 🇬🇧",
-            "it keeps your hands clean 🇺🇸",
-            "Kaza 🇷🇴",
-            "kloone 🇫🇮",
-            "NLShorty 🇨🇦",
-            "Breakcore 🇪🇪",
-            "MeQ8cNv43s6A 🇯🇵",
-            "ChopBlox 🇩🇪",
-            "Abdieldevil 🇵🇪",
-            "fluget 🇺🇦",
-            "Nordstrom 🇺🇸",
-            "littlegiggle 🇺🇸",
-            "rediio 🇰🇷",
-            "turtle 🇨🇦",
-            "KlimK 🇷🇺",
-            "DibiiziCookie 🇧🇷",
-            "Albert 🇺🇸",
-            "Joker 🇷🇺",
-            "xalval 🇷🇺",
-            "eastshark 🇪🇸",
-            "Ranian 🇮🇸",
-            "ColossalOrange 🇺🇸",
-            "sawyer 🇺🇸",
-            "UNCLEBOGD4N 🇷🇺",
-            "eternalluna 🇨🇳",
-            "Denni 🇨🇦",
-            "noxell 🇷🇺",
-            "FinnyP515 🇺🇸",
-            "SpaceRS 🇷🇸",
-            "zGamerdude 🇺🇸",
-            "Cookie 🇺🇸",
-            "Raffox 🇨🇴",
-            "Edward 🇬🇧",
-            "itzhealer 🇷🇺",
-            "HumbleGoat216 🇸🇪",
-            "maxer 🇷🇺",
-            "TimsTeam 🇷🇺",
-            "Syrcx 🇮🇱",
-            "karkito 🇰🇷",
-            "eksdulgation 🇷🇺",
-            "Technical 🇺🇸",
-            "tea 🇰🇷",
-            "RAASU 🇩🇪",
-            "Trolly1 🇺🇸",
-            "W1nda 🇷🇺",
-            "Flavyola64 🇧🇪",
-            "roma666 🇷🇺",
-            "weyolll3 🇪🇸",
-            "Komet01 🇵🇱",
-            "zLevii 🇳🇿",
-            "Twenty 🇨🇿",
-            "Ripplez 🇷🇴",
-            "Lake 🇬🇧",
-            "nebular 🇩🇪",
-            "Harhir 🇫🇮",
-            "VxMasTer 🇷🇴",
-            "Bigthunder556 🇺🇸",
-            "ffzer 🇷🇺",
-            "stevenxd42 🇲🇽",
-            "whfyre 🇺🇦",
-            "godiskdjei 🇬🇷",
-            "zStucc 🇮🇹",
-            "niwox 🇫🇷",
-            "Rybertrion 🇺🇸",
-            "Pleid 🇦🇺",
-            "mcrawford001 🇺🇸",
-            "Cryostazz 🇫🇷",
-            "wSharkiye 🇫🇷",
-            "Laysah 🇬🇧"
-        ]
-    },
-
-    {
-        rank: 24,
-        name: "Spectre",
-        points: 106.61,
-        createdBy: "xander",
-        verifiedBy: "PersonHuman42",
-        verification: "2024-10-05",
-        image: "Spectre.jpeg",
-        victors: [
-            "PersonHuman42 🇦🇺",
-            "Trick 🇺🇸",
-            "Netermind 🇺🇸",
-            "Thnnder 🇺🇸",
-            "Laysah 🇬🇧",
-            "Zoink 🇺🇸",
-            "Albert 🇺🇸",
-            "zLevii 🇳🇿",
-            "Stefan Boss 🇷🇴",
-            "wPopoff 🇺🇸",
-            "wwdonut 🇺🇸",
-            "SaturMan 🇷🇺",
-            "NLShorty 🇨🇦",
-            "eastshark 🇪🇸",
-            "weyolll3 🇪🇸",
-            "dovvin 🇵🇱",
-            "1rua 🇮🇪",
-            "lus 🇧🇷",
-            "strikk 🇧🇷",
-            "Bixeo 🇨🇱",
-            "PoCle 🇰🇷",
-            "YeldA 🇰🇷",
-            "vsce 🇲🇽",
-            "BigHoss 🇺🇸",
-            "karkito 🇰🇷"
-        ]
-    },
-
-    {
-        rank: 25,
-        name: "Menace",
-        points: 105.24,
-        createdBy: "Arraegen",
-        verifiedBy: "Whizkid05",
-        verification: "2024-07-14",
-        image: "Menace.jpeg",
-        victors: [
-            "Whizkid05 🇬🇧",
-            "Thnnder 🇺🇸",
-            "Zoink 🇺🇸",
-            "Netermind 🇺🇸",
-            "Dovi 🇷🇺",
-            "Flavyola64 🇧🇪",
-            "mariner 🇫🇮",
-            "bims 🇩🇪",
-            "Ahwiin [Unknown Country]",
-            "KrNati 🇦🇺",
-            "fuuturisticfire 🇺🇸",
-            "wPopoff 🇺🇸",
-            "Senatorias 🇵🇱",
-            "rediio 🇰🇷",
-            "kakol 🇵🇱"
-        ]
-    },
-
-    {
-        rank: 26,
-        name: "Abyss of Darkness",
-        points: 103.88,
-        createdBy: "Exen",
-        verifiedBy: "Cursed",
-        verification: "2022-04-03",
-        image: "Abyss of Darkness.jpeg",
-        victors: [
-            "Cursed 🇬🇧",
-            "Trick 🇺🇸",
-            "Zoink 🇺🇸",
-            "ViperVenom95 🇦🇺",
-            "Thnnder 🇺🇸",
-            "DoSh7t 🇲🇽",
-            "Doggie 🇺🇸",
-            "zThund3r 🇫🇷",
-            "Light 🇷🇺",
-            "Laniakea 🇰🇷",
-            "Stefan Boss 🇷🇴",
-            "wPopoff 🇺🇸",
-            "Nordstrom 🇺🇸",
-            "Mizukii 🇩🇪",
-            "Kole 🇷🇸",
-            "Netermind 🇺🇸",
-            "el tettor de las coneras 🇵🇪",
-            "Adri420 🇪🇸",
-            "DibiiziCookie 🇧🇷",
-            "Breakcore 🇪🇪",
-            "Seturan 🇰🇷",
-            "KenosSongReal 🇺🇸",
-            "PoCle 🇰🇷",
-            "SagerR 🇷🇺",
-            "wavedash 🇬🇧",
-            "rediio 🇰🇷",
-            "itzhealer 🇷🇺",
-            "Freezy 🇩🇪",
-            "Analitic 🇷🇺",
-            "abb2k 🇮🇱",
-            "Zeronium 🇨🇦",
-            "Diris 🇲🇽",
-            "noxell 🇷🇺",
-            "turtle 🇨🇦",
-            "l1nxxd 🇺🇦",
-            "maxer 🇷🇺",
-            "veyra 🇩🇪",
-            "imbeemed 🇷🇺",
-            "UNCLEBOGD4N 🇷🇺",
-            "Poly 🇹🇷",
-            "mariner 🇫🇮",
-            "TimsTeam 🇷🇺",
-            "ezdemon [Unknown Country]",
-            "eternalluna 🇨🇳",
-            "aidsen 🇺🇸",
-            "Biprex 🇬🇪",
-            "uzuudeen 🇷🇺",
-            "Lfz 🇸🇴"
-        ]
-    }
-
+const demons = [
+["GRIEF","icedcave","Doggie","2026-10-04"],
+["Artemis 13","Mvngo","Zoink","2026-09-09"],
+["Society","Neomarbilan","wPopoff","2026-06-20"],
+["Amethyst","iMist","Wpopoff","2025-05-25"],
+["Thinking Space II","CairoX","Zoink","2025-05-25"],
+["Flamewall","Narwall","Cuatrocientos","2025-09-21"],
+["Tidal Wave","OniLink","Zoink","2023-09-09"],
+["Green Bullet","MinaY","Nickname09","2026-06-16"],
+["ORBIT","MindCap","Zoink","2026-02-10"],
+["Antarctic Lights","declanlc","Axinity","2026-07-14"],
+["Nullscapes","Kiba","Zoink","2024-09-03"],
+["Quanteuse Processing","Renn241 and BlankB","Zoink","2024-12-31"],
+["BOOBAWAMBA","Akunakunn","Eastshark","2024-10-05"],
+["The Bloop","murkkat","Zoink","2026-03-15"],
+["Every End","MindCap","Hqmy","2025-03-16"],
+["Ashley Wave Trials","OddMod","Zoink","2024-11-02"],
+["Silent Clubstep","Sailent","Paqoe","2022-07-12"],
+["Ultra Paracosm","Renn241 and declanlc","Wity","2026-04-21"],
+["Penumbral","nxhtrise","w3rty","2026-03-05"],
+["Andromeda","Insxne97","Taiago","2025-01-19"],
+["KILLSTEALER","Rynoxious and Asterion","kloone","2026-04-22"],
+["Subsuming Vortex","SeptaGon7","Cursed","2025-11-10"],
+["Anathema","nikrodox","Whizkid05","2024-11-20"],
+["Defeated Circles","muriday","Zoink","2025-05-30"],
+["Avernus","BoBoBoBoBoBoBo and Pockewindfish","Zoink","2023-03-22"],
+["FOREST OF SPIKES","Bimms","Brian_Cheese","2026-07-26"],
+["Acheron","ryamu","Zoink","2022-08-23"],
+["Spectre","xander","PersonHuman42","2024-10-05"],
+["Menace","Arraegen","Whizkid05","2024-07-14"],
+["Abyss of Darkness","Exen","Cursed","2022-04-03"],
+["Tunnel of Despair","Exen","Zoink","2023-06-07"],
+["Kyouki","Demishio","Demishio","2022-11-24"],
+["Sacrifice","Laniakea","Laniakea","2026-05-24"],
+["Based After Based","Akunakunn","DiamondSplash","2024-09-27"],
+["Cognitohazard","MercuryDT","Whizkid05","2026-02-19"],
+["The Lightning Rod","Lavatrex","Lavatrex","2023-08-29"],
+["Maniacal Chains","LordDivinity","spcreat","2026-04-09"],
+["Slaughterhouse","icedcave","Doggie","2021-12-19"],
+["KOCMOC","Vernam","Zoink","2023-05-13"],
+["Subterminal Point","SyQual","PoCle","2024-12-29"],
+["BEING HOME","Turtl123","goobs47","2025-12-29"],
+["Deimos","ItsHybrid","Doggie","2023-08-05"],
+["CHIL","McCoco","McCoco","2025-08-31"],
+["Zorin","SnowEye","9i","2026-02-27"],
+["Prismline","ItsHarryy","Wain","2026-03-07"],
+["Sakupen Circles","DrCuber and GhostVandalf","Diamond","2021-12-29"],
+["The Salt Factory","Nickname09","Nickname09","2024-12-14"],
+["Master of Puppets","TheZinkYT","Scotchtape","2026-03-23"],
+["Silentlocked","GDSkele","TFIBB","2025-01-07"],
+["Eyes in the Water","hawkyre","LordVadercraft","2023-10-27"],
+["CONVULSION","stellar","Whizkid05","2024-12-23"],
+["Snowbound","Amplitron","Amplitron","2025-06-04"],
+["Firework","Vernam","Trick","2021-10-29"],
+["Through The Gates","Maestro Illuminati","Zoink","2023-10-12"],
+["Apocalyptic Trilogy","Zimnyte and Endy","polterghast","2024-12-24"],
+["Pinnacle of Life","s3batr0nic and skzyl","vonic","2026-07-03"],
+["KOSETSU","ffwe","Taiago","2024-08-25"],
+["BLAZEIT","rollthedice666","turtlgd","2026-06-28"],
+["Voltage","Phantom7Ks","maybee","2026-01-17"],
+["NOMAD","ReeseVT","Laniakea","2025-02-13"],
+["NervHell","WillyGD","ChopBlox","2026-06-28"],
+["Loops of Fury","Enfur","Cork","2025-10-01"],
+["Fracture","Arrowgazi","Dezstro","2025-06-02"],
+["Poocubed","Lisp","kyass","2022-11-01"],
+["Calibrate","Bamvie","Blebae","2026-03-30"],
+["Minusdry","CDMusic","Varium","2023-03-18"],
+["Deadlier Clubstep","HeroZombie80","Jenath","2023-10-20"],
+["The Hallucination","SyQual and VoTcHi","VoTcHi","2022-06-19"],
+["COMBUSTION","Cersia and Slithium","Slithium","2023-09-11"],
+["Saul Goodman","Renn241","bloom","2023-05-03"],
+["BRITNEY NO SCLEARS","wabas","Scotchtape","2025-08-29"],
+["Stellar Night","icedcave","Tuggy","2022-08-29"],
+["Gaggatrondra","JCMoon","Zeronium","2025-02-09"],
+["Sevvend Clubstep","IMINAY","Vorten","2025-06-04"],
+["Edge of Destiny","CDMusic","polterghast","2023-03-09"],
+["Losing Your Mind","GDgalaxygaming","Laysah","2026-05-02"],
+["Haunted Ship","awesomeme360","Gnamolor","2026-06-26"],
+["The Plunge","Dolabill","Gokill","2024-12-19"],
+["Solar Flare","Linear and Rynoxious","swiborg","2023-04-29"],
+["The Catacombs","Cersia and Snap","Slithium","2024-04-20"]
 ];
 
-
-/* =====================================================
-   LEGACY DEMON DATA
-===================================================== */
-
-const legacyDemons = [
-
-    {
-        name: "Bloodlust",
-        createdBy: "Manix648",
-        verifiedBy: "Knobbelboy",
-        verification: "2018-02-20",
-        fallOff: "2025",
-        image: "Bloodlust.jpeg"
-    },
-
-    {
-        name: "Sonic Wave",
-        createdBy: "Cyclic",
-        verifiedBy: "Sunix",
-        verification: "2016-11-25",
-        fallOff: "2023",
-        image: "Sonic Wave.jpeg"
-    },
-
-    {
-        name: "Yatagarasu",
-        createdBy: "Riot and Viprin",
-        verifiedBy: "TrusTa",
-        verification: "2017-01-13",
-        fallOff: "2023",
-        image: "Yatagarasu.jpeg"
-    },
-
-    {
-        name: "Phobos",
-        createdBy: "GMTSean",
-        verifiedBy: "KrmaL",
-        verification: "2016-05-12",
-        fallOff: "2021-05-13",
-        image: "Phobos.jpeg"
-    },
-
-    {
-        name: "Sakupen Hell",
-        createdBy: "Noobas",
-        verifiedBy: "TrusTa",
-        verification: "2016-08-14",
-        fallOff: "2021-05-07",
-        image: "Sakupen Hell.jpeg"
-    },
-
-    {
-        name: "Betrayal of Fate",
-        createdBy: "Unknown",
-        verifiedBy: "Unknown",
-        verification: "9999-01-01",
-        fallOff: "9999-01-02",
-        image: "Betrayal of Fate.jpeg"
-    },
-
-    {
-        name: "Bloodbath",
-        createdBy: "Riot",
-        verifiedBy: "Riot",
-        verification: "2015-08-12",
-        fallOff: "2021-01-29",
-        image: "Bloodbath.jpeg"
-    },
-
-    {
-        name: "The Hell Factory",
-        createdBy: "TeamN2",
-        verifiedBy: "Powerbomb",
-        verification: "2015-12-28",
-        fallOff: "2020-09-04",
-        image: "The Hell Factory.jpeg"
-    },
-
-    {
-        name: "Down Bass",
-        createdBy: "Valyrie",
-        verifiedBy: "TheRealSneaky",
-        verification: "2016-08-25",
-        fallOff: "2020-12-23",
-        image: "Down Bass.jpeg"
-    },
-
-    {
-        name: "A Bizarre Phantasm",
-        createdBy: "TeamN2",
-        verifiedBy: "GoodSmile",
-        verification: "2016-04-11",
-        fallOff: "2020-09-21",
-        image: "A Bizarre Phantasm.jpeg"
-    },
-
-    {
-        name: "Conical Depression",
-        createdBy: "KrmaL",
-        verifiedBy: "KrmaL",
-        verification: "2016-03-10",
-        fallOff: "2020-11-01",
-        image: "Conical Depression.jpeg"
-    },
-
-    {
-        name: "Aftermath",
-        createdBy: "Unknown",
-        verifiedBy: "Unknown",
-        verification: "9999-01-01",
-        fallOff: "9999-01-02",
-        image: "Aftermath.jpeg"
-    },
-
-    {
-        name: "Plasma Pulse III",
-        createdBy: "Smokes and Giron",
-        verifiedBy: "Smokes",
-        verification: "2016-05-25",
-        fallOff: "2020-01-04",
-        image: "Plasma Pulse III.jpeg"
-    },
-
-    {
-        name: "Heartbeat",
-        createdBy: "KrmaL",
-        verifiedBy: "KrmaL",
-        verification: "2016-05-30",
-        fallOff: "2020-04-08",
-        image: "Heartbeat.jpeg"
-    },
-
-    {
-        name: "The Ultimate Phase",
-        createdBy: "Andromeda",
-        verifiedBy: "Andromeda",
-        verification: "2016-06-21",
-        fallOff: "2019-07-05",
-        image: "The Ultimate Phase.jpeg"
-    },
-
-    {
-        name: "Retention",
-        createdBy: "WOOGI1411",
-        verifiedBy: "WOOGI1411",
-        verification: "2016-04-08",
-        fallOff: "2019-11-10",
-        image: "Retention.jpeg"
-    },
-
-    {
-        name: "Red World Rebirth",
-        createdBy: "saRy and Neptune",
-        verifiedBy: "Riot",
-        verification: "2016-05-22",
-        fallOff: "2020-01-21",
-        image: "Red World Rebirth.jpeg"
-    },
-
-    {
-        name: "AcropoliX",
-        createdBy: "SoulsTRK",
-        verifiedBy: "SoulsTRK",
-        verification: "2016-04-28",
-        fallOff: "2019-12-31",
-        image: "AcropoliX.jpeg"
-    },
-
-    {
-        name: "Cataclysm",
-        createdBy: "Ggb0y",
-        verifiedBy: "Riot",
-        verification: "2016-01-15",
-        fallOff: "2019-09-02",
-        image: "Cataclysm.jpeg"
-    }
-
+const historicalDemons = [
+["Zodiac","Bianox","Technical","2019-04-09","2021-10-28"],
+["Bloodlust","Manix648","Knobbelboy","2018-02-20","2021-10-28"],
+["Sonic Wave","Cyclic","Sunix","2016-11-25","2021-10-08"],
+["Yatagarasu","Riot and Viprin","TrusTa","2017-01-13","2021-09-13"],
+["Erebus","Rustam and Ilrell","BoldStep","2017-03-19","2021-06-11"],
+["Artificial Ascent","Viprin","Combined","2016-12-11","2021-09-13"],
+["Phobos","GMTSean","KrmaL","2016-05-12","2021-05-13"],
+["Sakupen Hell","Noobas","TrusTa","2016-08-14","2021-05-07"],
+["Betrayal of Fate","weoweoteo and xcy-7","BlassCFB","2016-09-03","2021-05-13"],
+["Bloodbath","Riot","Riot","2015-08-12","2021-01-29"],
+["The Hell Factory","TeamN2","Powerbomb","2015-12-27","2020-09-04"],
+["A Bizarre Phantasm","TeamN2","GoodSmile","2016-04-11","2020-09-21"],
+["Conical Depression","KrmaL","KrmaL","2016-03-10","2020-11-01"],
+["Aftermath","Unknown","Unknown","9999-01-01","9999-01-02"],
+["Plasma Pulse III","Smokes and Giron","Smokes","2016-05-25","2020-01-04"],
+["Audio Extraction","GoodSmile","GoodSmile","2016-08-07","2020-05-05"],
+["Heartbeat","KrmaL","KrmaL","2016-05-30","2020-04-08"],
+["The Ultimate Phase","Andromeda","Andromeda","2020-05-27","2021-10-28"],
+["Retention","WOOGI1411","WOOGI1411","2016-04-08","2019-11-10"],
+["Red World Rebirth","Viprin","Riot","2016-05-22","2020-01-21"],
+["Allegiance","nikrodox","Rewayde","2016-06-14","2019-09-15"],
+["The Flawless","AlexOnYT","TrusTa","2016-07-01","2020-03-20"],
+["AcropoliX","SoulsTRK","SoulsTRK","2016-04-28","2019-12-31"],
+["Cataclysm","Ggb0y","Riot","2016-01-15","2019-09-02"],
+["Old The Ultimate Phase","Andromeda","Sandstorm","2015-08-07","2016-06-21"],
+["Old Cataclysm","Ggb0y","Giron","2015-05-14","2016-01-15"],
+["Nerfed The Ultimate Phase","Andromeda","Andromeda","2016-06-21","2019-07-05"]
 ];
 
-
-/* =====================================================
-   RENDER CURRENT LIST
-===================================================== */
-
-function renderCurrentList() {
-
-    const container =
-        document.getElementById("currentList");
-
-    container.innerHTML = "";
-
-    currentDemons.forEach(demon => {
-
-        const card =
-            document.createElement("article");
-
-        card.className = "demon";
-
-        card.innerHTML = `
-
-            <div class="rank">
-                Rank #${demon.rank}
-            </div>
-
-            <div class="name">
-                ${escapeHTML(demon.name)}
-            </div>
-
-            <div class="info">
-                <strong>Created By:</strong>
-                ${escapeHTML(demon.createdBy)}
-            </div>
-
-            <div class="info">
-                <strong>Verified By:</strong>
-                ${escapeHTML(demon.verifiedBy)}
-            </div>
-
-            <div class="info">
-                <strong>Verification Date:</strong>
-                ${escapeHTML(demon.verification)}
-            </div>
-
-            <div class="points">
-                List Points:
-                ${demon.points.toFixed(2)}
-            </div>
-
-            <div class="victors">
-
-                <div class="victors-title">
-                    Victors
-                </div>
-
-                ${
-                    demon.victors.length > 0
-
-                    ?
-
-                    demon.victors.map(victor => `
-
-                        <div class="victor">
-                            ${escapeHTML(victor)}
-                        </div>
-
-                    `).join("")
-
-                    :
-
-                    `
-                        <div class="victor">
-                            No recorded victors.
-                        </div>
-                    `
-                }
-
-            </div>
-        `;
-
-        container.appendChild(card);
-
-    });
-
-}
-
-
-/* =====================================================
-   RENDER LEGACY LIST
-===================================================== */
-
-function renderLegacyList() {
-
-    const container =
-        document.getElementById("legacyList");
-
-    container.innerHTML = "";
-
-    legacyDemons.forEach(demon => {
-
-        const card =
-            document.createElement("article");
-
-        card.className = "legacy";
-
-        card.innerHTML = `
-
-            <div class="name">
-                ${escapeHTML(demon.name)}
-            </div>
-
-            <div class="info">
-                <span class="legacy-label">
-                    Created By:
-                </span>
-
-                ${escapeHTML(demon.createdBy)}
-            </div>
-
-            <div class="info">
-                <span class="legacy-label">
-                    Verified By:
-                </span>
-
-                ${escapeHTML(demon.verifiedBy)}
-            </div>
-
-            <div class="info">
-                <span class="legacy-label">
-                    Verification Date:
-                </span>
-
-                ${escapeHTML(demon.verification)}
-            </div>
-
-            <div class="info">
-                <span class="legacy-label">
-                    Fell Off:
-                </span>
-
-                ${escapeHTML(demon.fallOff)}
-            </div>
-
-            <div class="info">
-                <span class="legacy-label">
-                    Status:
-                </span>
-
-                Legacy Demon
-            </div>
-
-        `;
-
-        container.appendChild(card);
-
-    });
-
-}
-
-
-/* =====================================================
-   MACHINE-READABLE DATA
-===================================================== */
-
-function createMachineData() {
-
-    return {
-
-        site: "FiDemonlist",
-
-        title:
-            "The Custom Geometry Dash Demonlist",
-
-        latestUpdated:
-            latestUpdated,
-
-        currentDemonCount:
-            currentDemons.length,
-
-        legacyDemonCount:
-            legacyDemons.length,
-
-        currentDemons:
-            currentDemons,
-
-        legacyDemons:
-            legacyDemons
-
-    };
-
-}
-
-
-/* =====================================================
-   DISPLAY MACHINE DATA
-===================================================== */
-
-function renderMachineData() {
-
-    const data =
-        createMachineData();
-
-    document.getElementById(
-        "machineData"
-    ).textContent =
-        JSON.stringify(
-            data,
-            null,
-            2
-        );
-
-    /*
-       Make the structured data available globally.
-    */
-
-    window.fiDemonlist = data;
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-
-/* =====================================================
-   JSON-LD
-===================================================== */
-
-const jsonLD =
-    document.createElement("script");
-
-jsonLD.type =
-    "application/ld+json";
-
-jsonLD.textContent =
-    JSON.stringify({
-
-        "@context":
-            "https://schema.org",
-
-        "@type":
-            "WebPage",
-
-        "name":
-            "FiDemonlist",
-
-        "description":
-            "The Custom Geometry Dash Demonlist",
-
-        "dateModified":
-            latestUpdated
-
-    });
-
-document.head.appendChild(
-    jsonLD
-);
-
-
-/* =====================================================
-   START PAGE
-===================================================== */
-
-document.getElementById(
-    "latestUpdated"
-).textContent =
-    "Latest Updated: " +
-    new Date(
-        latestUpdated + "T00:00:00"
-    ).toLocaleDateString(
-        "en-US",
-        {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        }
-    );
-
-
-renderCurrentList();
-
-renderLegacyList();
-
-renderMachineData();
-
+const upcomingLevels = [
+["IT MEANS EVERYTHING","VelYT","Waltty",9],
+["Lesopowal","Inex","Bacon",14],
+["Herr Machine","HerrTeam","Bonn",15],
+["Old Orochi","Platnuu","SeptaGon7",17],
+["Azure Flare","ItsHybrid","Diamond",22],
+["Aquamarine","sincos","seels",25],
+["METROPOLIS","KZLR","Ascended",41]
+];
+
+document.getElementById("currentList").innerHTML =
+demons.map((d,i) =>
+    `<div class="entry">#${i+1} ${d[0]}<br>
+    Creator: ${d[1]}<br>
+    Verified by: ${d[2]}<br>
+    Verification: ${d[3]}</div>`
+).join("");
+
+document.getElementById("historicalList").innerHTML =
+historicalDemons.map(d =>
+    `<div class="entry">${d[0]}<br>
+    Creator: ${d[1]}<br>
+    Verified by: ${d[2]}<br>
+    Verification: ${d[3]}<br>
+    Fell off: ${d[4]}</div>`
+).join("");
+
+document.getElementById("upcomingList").innerHTML =
+upcomingLevels.map(d =>
+    `<div class="entry">${d[0]}<br>
+    Creator: ${d[1]}<br>
+    Verifier: ${d[2]}<br>
+    Estimated rank: #${d[3]}</div>`
+).join("");
 </script>
 
 </body>
